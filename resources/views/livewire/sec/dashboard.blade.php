@@ -14,7 +14,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('disbursements') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -32,7 +32,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('liquidations') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -50,7 +50,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('coafs') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -68,7 +68,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('pocs') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -86,7 +86,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('coprs') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -104,7 +104,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('communications') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -122,7 +122,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('travel-orders') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -140,7 +140,7 @@
             <div class="flex -mt-px divide-x divide-gray-200">
                 
                 <div class="flex flex-1 w-0 -ml-px">
-                <a href="" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
+                <a href="{{ route('others') }}" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
