@@ -27,6 +27,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -58,4 +59,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function disbursement_vouchers(){
+        return $this->hasMany('App\Models\DisbursementVoucher');
+    }
+
+    public function role(){
+        return $this->belongsTo('App\Models\Roles');
+    }
+
+    public function departments(){  
+        return $this->belongsTo('App\Models\Departments', 'department_id');
+    }
+
+    public function positions(){
+        return $this->belongsTo('App\Models\Positions', 'position_id');
+    }
 }
