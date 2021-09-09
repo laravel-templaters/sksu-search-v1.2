@@ -1,14 +1,12 @@
 <div>
   <div class="bg-transparent">
-      <iframe
-      width="600"
-      height="450"
-      style="border:0"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAcHTBwZCSYSgrMGyomjvt3bBm3764dylY
-        &q=Space+Needle,Seattle+WA" class="flex rounded-lg shadow-2xl">
-    </iframe>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d416.5512258600152!2d124.61934817425964!3d6.656161850856572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sph!4v1631147566185!5m2!1sen!2sph" 
+    width="600" 
+    height="450" 
+    style="border:0;" 
+    allowfullscreen=""
+    loading="lazy"></iframe>
   </div>
 
 </div>
