@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CreateDVWrapperController;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,8 +69,7 @@ Route::get('/disbursements/reimbursement', function () {
 
 Route::get('redirects', 'App\Http\Controllers\HomeController@index');
 
-//char rourtes\
+//for create dv dont delete
 
-Route::get('/cdv', function () {
-    return view('test');
-});
+Route::get('/cdv/2y10XGG0AJ7EyQj1tWaGwP4O-JexZBpCtK8-{id}gCyDNDF8n-Nq3QVjN1BzzXS', [CreateDVWrapperController::class, 'show'])->name('cdv');
+

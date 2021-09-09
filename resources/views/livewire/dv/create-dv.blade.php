@@ -45,6 +45,41 @@
 
 
                             {{-- step 2 --}}
+
+                            <li class="relative overflow-hidden lg:flex-1">
+                                <div class="overflow-hidden border border-t-0 border-gray-200 rounded-b-md lg:border-0">
+                                    <!-- Upcoming Step -->
+                                    <a href="#" class="group" wire:click.prevent="setsignatory({{1}})">
+                                       <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
+                                        <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
+                                            <span class="flex-shrink-0">
+                                                <span
+                                                    class="flex items-center justify-center w-10 h-10 border-2 border-gray-300 rounded-full">
+                                                    <span class="text-gray-500">02</span>
+                                                </span>
+                                            </span>
+                                            <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
+                                                <span
+                                                    class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Upload Related Documents</span>
+                                                <span class="text-sm font-medium text-gray-500">Please upload PDF files only</span>
+                                            </span>
+                                        </span>
+                                    </a>
+
+                                    <!-- Separator -->
+                                    <div class="absolute inset-0 top-0 left-0 hidden w-3 lg:block" aria-hidden="true">
+                                        <svg class="w-full h-full text-gray-300" viewBox="0 0 12 82" fill="none"
+                                            preserveAspectRatio="none">
+                                            <path d="M0.5 0V31L10.5 41L0.5 51V82" stroke="currentcolor"
+                                                vector-effect="non-scaling-stroke" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </li>
+
+                            {{-- step 3 --}}
+                            
+
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
@@ -54,7 +89,7 @@
                                             <span class="flex-shrink-0">
                                                 <span
                                                     class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-blue-53">
-                                                    <span class="text-blue-900">02</span>
+                                                    <span class="text-blue-900">03</span>
                                                 </span>
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
@@ -75,25 +110,24 @@
                                     </div>
                                 </div>
                             </li>
-
-
-                            {{-- step 3 --}}
+                            {{-- step 4  --}}
+                            
                             <li class="relative overflow-hidden lg:flex-1">
-                                <div class="overflow-hidden border border-t-0 border-gray-200 rounded-b-md lg:border-0">
-                                    <!-- Upcoming Step -->
-                                    <a href="#" class="group">
-                                       <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
+                                <div class="overflow-hidden border border-gray-200 lg:border-0">
+                                    <!-- Current Step -->
+                                    <a href="#" aria-current="step" wire:click.prevent="validateForm(2)">
+                                        <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 <span
-                                                    class="flex items-center justify-center w-10 h-10 border-2 border-gray-300 rounded-full">
-                                                    <span class="text-gray-500">03</span>
+                                                    class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-blue-53">
+                                                    <span class="text-blue-900">04</span>
                                                 </span>
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
                                                 <span
-                                                    class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Preview</span>
-                                                <span class="text-sm font-medium text-gray-500">Penatibus eu quis ante.</span>
+                                                    class="text-xs font-bold tracking-wide uppercase text-blue-53">Preview</span>
+                                                <span class="text-sm font-medium text-gray-500">Review and confirm information for <voucher></voucher></span>
                                             </span>
                                         </span>
                                     </a>
@@ -108,6 +142,7 @@
                                     </div>
                                 </div>
                             </li>
+
                         </ol>
                     </nav>
                 </div>
@@ -325,15 +360,49 @@
                 </div>
 
 
-                {{-- 2nd step Signatories --}}
+                {{-- 2nd step upload --}}
 
+                  <div class="">
+                    {{-- <div class="px-4 py-5 sm:px-6">
+                        <!-- Content goes here -->
+                        <!-- We use less vertical padding on card headers on desktop than on body sections -->
+                    </div> --}}
+                    <div x-cloak x-show="isstep3open" class="px-4 py-5 overflow-hidden sm:p-6" 
+                    x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                    x-transition:enter-start="translate-x-full"
+                    x-transition:enter-end="translate-x-0">
+                           <div class="bg-white rounded-md">
+                            <div class="px-4 py-8 mx-auto max-w-7xl">
+                                <div class="space-y-12">
+
+
+
+                                    {{-- make form for medialib here--}}
+
+
+
+
+                                    
+                                </div>
+                            </div>
+                            </div>
+
+                    </div>
+                    {{-- <div class="px-4 py-4 sm:px-6">
+                        <!-- Content goes here -->
+                        <!-- We use less vertical padding on card footers at all sizes than on headers or body sections -->
+                    </div> --}}
+                </div>
+
+
+                {{-- 3rd --}}
 
                 <div class="">
                     {{-- <div class="px-4 py-5 sm:px-6">
                         <!-- Content goes here -->
                         <!-- We use less vertical padding on card headers on desktop than on body sections -->
                     </div> --}}
-                    <div x-cloak x-show="isstep2open" class="px-4 py-5 overflow-hidden sm:p-6" 
+                    <div x-cloak x-show="isstep3open" class="px-4 py-5 overflow-hidden sm:p-6" 
                     x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                     x-transition:enter-start="translate-x-full"
                     x-transition:enter-end="translate-x-0">
@@ -391,12 +460,12 @@
 
 
 
-                {{-- 3rd --}}
+                {{-- 4th --}}
 
                 <div class="">
 
                     {{-- outermost wrapper --}}
-                    <div id="dvPrint" class="grid w-full h-full grid-cols-8 bg-white border-2 border-black" x-cloak x-show="isstep3open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                    <div id="dvPrint" class="grid w-full h-full grid-cols-8 bg-white border-2 border-black" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                     x-transition:enter-start="translate-x-full"
                     x-transition:enter-end="translate-x-0">
 

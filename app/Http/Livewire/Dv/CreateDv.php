@@ -8,6 +8,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 class CreateDv extends Component
 {
+    public $category_id;
     //panels
     public $isstep1open = true;
     public $isstep2open = false;
@@ -43,6 +44,7 @@ class CreateDv extends Component
      public $i = 1;
      //var for signatory
      public $sig_id;
+     
 
 
     public function render()
