@@ -34,7 +34,7 @@
         </a>
     </nav>
 
-    <div class="flex p-2 rounded-md">
+    <div class="flex px-2 rounded-md">
         <template x-if="lt">
            @livewire('disbursement.cash-advances.local-travel')
         </template>
