@@ -66,3 +66,9 @@ Route::get('/disbursements/reimbursement', function () {
 })->name('reimbursements');
 
 Route::get('redirects', 'App\Http\Controllers\HomeController@index');
+
+//char rourtes\
+
+Route::get('/cdv', function () {
+    return view('test');
+});
