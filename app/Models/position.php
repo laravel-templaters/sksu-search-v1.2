@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class position extends Model
 {
-    use HasFactory;
-    public function user(){
-        return $this->hasOne('App\Models\User');
-    }
+       //Change table name
+       protected $table = "positions";
+       //Change Primary Key
+       protected $primaryKey = 'id';
+      
+          use HasFactory;
+      
+          public function user(){
+              return $this->hasOne('App\Models\User');
+          }
 }
