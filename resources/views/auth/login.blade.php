@@ -18,7 +18,7 @@
             <div>
                 <x-jet-label for="username" value="{{ __('Username') }}" />
                 <x-jet-input id="username" class="block w-full mt-1 placeholder-opacity-50 lowercase placeholder-primary-text-alt" type="text" name="username" placeholder="Username Here" required autofocus />
-            </div>
+            </div>  
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
