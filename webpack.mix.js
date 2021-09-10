@@ -1,3 +1,4 @@
+
 const mix = require('laravel-mix');
 
 /*
@@ -16,6 +17,13 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-import'),
         require('tailwindcss'),
     ]);
+
+    mix.override((webpackConfig) => {
+        webpackConfig.resolve.modules = [
+            "node_modules",
+            __dirname + "/vendor/spatie/laravel-medialibrary-pro/resources/js",
+        ];
+    });
 
 if (mix.inProduction()) {
     mix.version();
