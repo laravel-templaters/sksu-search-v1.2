@@ -18,6 +18,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "simplesoftwareio/simple-qrcode": "^4.2"
+        "spatie/laravel-medialibrary": "^9.0.0",
+        "spatie/laravel-medialibrary-pro": "^1.0.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -65,6 +67,12 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.spatie.be"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

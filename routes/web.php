@@ -73,3 +73,5 @@ Route::get('redirects', 'App\Http\Controllers\HomeController@index');
 
 Route::get('/cdv/2y10XGG0AJ7EyQj1tWaGwP4O-JexZBpCtK8-{id}gCyDNDF8n-Nq3QVjN1BzzXS', [CreateDVWrapperController::class, 'show'])->name('cdv');
 
+//for media library dont delete also hehe
+Route::mediaLibrary();
