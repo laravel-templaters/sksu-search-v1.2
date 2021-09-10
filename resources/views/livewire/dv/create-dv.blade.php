@@ -1,4 +1,4 @@
-<div class="p-0 m-0" x-data ="{newDV : @entangle('newDV') ,step1finished : @entangle('step1finished'), step2finished : @entangle('step2finished'), step3finished : @entangle('step3finished')}">
+<div class="p-0 m-0" x-data ="{newDV : @entangle('newDV') ,isstep4open : @entangle('isstep4open') ,step1finished : @entangle('step1finished'), step2finished : @entangle('step2finished'), step3finished : @entangle('step3finished')}">
     <div class="" x-data="{ isstep1open : @entangle('isstep1open'),isstep2open : @entangle('isstep2open'),isstep3open : @entangle('isstep3open')}">
             {{-- steps --}}
                 <div class="bg-white lg:border-b lg:border-gray-100">
@@ -83,7 +83,7 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
-                                    <a href="#" aria-current="step" wire:click.prevent="validateForm(2)">
+                                    <a href="#" aria-current="step" wire:click.prevent="validateForm(3)">
                                         <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
@@ -115,7 +115,7 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
-                                    <a href="#" aria-current="step" wire:click.prevent="validateForm(2)">
+                                    <a href="#" aria-current="step" wire:click.prevent="validateForm(4)">
                                         <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
@@ -367,7 +367,7 @@
                         <!-- Content goes here -->
                         <!-- We use less vertical padding on card headers on desktop than on body sections -->
                     </div> --}}
-                    <div x-cloak x-show="isstep3open" class="px-4 py-5 overflow-hidden sm:p-6" 
+                    <div x-cloak x-show="isstep2open" class="px-4 py-5 overflow-hidden sm:p-6" 
                     x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                     x-transition:enter-start="translate-x-full"
                     x-transition:enter-end="translate-x-0">
@@ -462,19 +462,24 @@
 
                 {{-- 4th --}}
 
-                <div class="">
+                <div class="p-2">
 
                     {{-- outermost wrapper --}}
-                    <div id="dvPrint" class="grid w-full h-full grid-cols-8 bg-white border-2 border-black" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                    <div id="dvPrint" class="grid w-full h-full grid-cols-8 bg-white border-4 border-black" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                     x-transition:enter-start="translate-x-full"
                     x-transition:enter-end="translate-x-0">
+                    
 
                         {{-- G1 header part --}}
                         <div class="col-span-8">
                             <div class="grid grid-cols-8 grid-rows-4">
                                 {{-- logo --}}
-                                <div class="col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black">
-                                LOGO and QR GOES HERE
+                                <div class="flex justify-between col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black">
+                                <div><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="w-auto h-20"></div>
+                                <div class="grid grid-rows-2 my-auto mr-3">
+                                <div class="object-top px-0 mx-auto">{!! QrCode::size(75)->gradient( 120, 0, 150, 100, 200, 150, 'horizontal')->margin(2)->generate((string)$dvno_temp); !!}</div>
+                                    <div><span class="font-medium text-black text-md">Dv No.{{$dvno_temp}}</span></div>
+                                </div>
                                 </div>
                                 {{-- dV --}}
                                 <div class="col-span-6 col-start-1 row-span-1 row-start-4 text-center border-2 border-black">
@@ -487,7 +492,6 @@
                                 {{-- Date and DV no --}}
                                 <div class="col-span-2 col-start-7 row-span-2 border-2 border-black">
                                     <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">Date:</span>
-                                    <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">DV No:</span>
                                 </div>
                                 
                             </div>
@@ -495,7 +499,7 @@
                     
                     </div>
 
-                    <input  type="button" class="inline-flex items-center px-4 py-2 mt-3 ml-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  x-cloak x-show="isstep3open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                    <input  type="button" class="inline-flex items-center px-4 py-2 mt-3 ml-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                     x-transition:enter-start="translate-x-full"
                     x-transition:enter-end="translate-x-0" onclick="printDiv('dvPrint')" value = "Print DV"/>
                   

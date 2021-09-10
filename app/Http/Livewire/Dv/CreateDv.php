@@ -13,10 +13,12 @@ class CreateDv extends Component
     public $isstep1open = true;
     public $isstep2open = false;
     public $isstep3open = false;
+    public $isstep4open = false;
     public $newDV = true;
     public $step1finished = false;
     public $step2finished = false;
     public $step3finished = false;
+    public $step4finished = false;
 
     //variable forsearch
     public $searchuser;
@@ -45,6 +47,8 @@ class CreateDv extends Component
      //var for signatory
      public $sig_id;
      
+     //mock variables
+     public $dvno_temp = 101294159841091;
 
 
     public function render()
@@ -153,6 +157,9 @@ class CreateDv extends Component
 
             case 3:
                 $this->openstep3();
+
+            case 4:
+                $this->openstep4();
             break;
             
         }
@@ -171,6 +178,7 @@ class CreateDv extends Component
         
         $this->isstep2open = false;
         $this->isstep3open = false;
+        $this->isstep4open = false;
         $this->isstep1open = true;
     }
     
@@ -178,13 +186,21 @@ class CreateDv extends Component
         
         $this->step1finished = true;
         $this->isstep1open = false;
+        $this->isstep4open = false;
         $this->isstep3open = false;
         $this->isstep2open = true;
     }
 
     public function openstep3(){
         $this->isstep1open = false;
+        $this->isstep4open = false;
         $this->isstep3open = true;
+        $this->isstep2open = false;
+    }
+    public function openstep4(){
+        $this->isstep1open = false;
+        $this->isstep4open = true;
+        $this->isstep3open = false;
         $this->isstep2open = false;
     }
     
