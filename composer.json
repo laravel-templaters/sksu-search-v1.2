@@ -10,16 +10,17 @@
     "require": {
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "~6",
         "jantinnerezo/livewire-alert": "^2.1",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.3",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "simplesoftwareio/simple-qrcode": "~4",
         "spatie/laravel-medialibrary": "^9.0.0",
-        "spatie/laravel-medialibrary-pro": "^1.0.0"
+        "spatie/laravel-medialibrary-pro": "^1.0.0",
+        "simplesoftwareio/simple-sms": "3.1.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
