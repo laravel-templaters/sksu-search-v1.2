@@ -21,7 +21,7 @@
                    <div x-data="{openCA:false, openRe:false }">
                         <h3 class="p-2 text-black rounded-md text-md hover:bg-gray-600 hover:text-white" x-on:click="openCA = !openCA ">Cash Advances</h3>
                         <div class="grid flex-col grid-cols-1 p-3 ml-3 bg-gray-400 rounded-md " x-cloak x-show="openCA">
-                            <a href="" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">Local Travel</a>
+                            <a href="{{route('cdv', ['id' => '2'])}}" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">Local Travel</a>
                             <a href="" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">Foreign Travel</a>
                             <a href="" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">Activity, Program, Project, ETC.</a>
                             <a href="" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">Payroll</a>

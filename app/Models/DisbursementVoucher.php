@@ -31,4 +31,8 @@ class DisbursementVoucher extends Model
     public function related_document(){
         return $this->hasMany('App\Models\RelatedDocument');
     }
+
+    public function dv_type(){
+        return $this->hasMany('App\Models\DVType');
+    }
 }
