@@ -15,11 +15,15 @@
         @livewireStyles
 
         <!-- Scripts -->
+        <style>
+        [x-cloak] { display: none !important; }
+        </style>
         
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
+    
     <body class="font-sans">
-        <div class="min-h-screen bg-gradient-to-b from-primary-bg via-primary-bg to-primary-text">
+        <div class="min-h-screen bg-gradient-to-b from-primary-bg-alt via-primary-bg-alt to-primary-text">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
