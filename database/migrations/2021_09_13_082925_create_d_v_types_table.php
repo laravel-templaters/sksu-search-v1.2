@@ -16,7 +16,6 @@ class CreateDVTypesTable extends Migration
         Schema::create('dv_types', function (Blueprint $table) {
             $table->id();
             $table->string('dv_type');
-            $table->foreignId('dv_category_id');
             $table->timestamps();
         });
     }

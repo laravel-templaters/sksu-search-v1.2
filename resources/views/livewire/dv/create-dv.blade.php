@@ -247,8 +247,7 @@
                                                 <label for="dv_type" class="block text-sm font-medium text-gray-700">DV Type</label>
                                                 <select wire:model="dv_type_id" 
                                                     class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                                                    <option value="1">Payroll</option>
-                                                    <option value="2">Travel Order</option>
+                                                    <option value="1">{{$dv_type_id->dv_type}}</option>
                                                 </select>
                                             </div>
 
@@ -272,7 +271,7 @@
                                                                 @error('responsibility_center.0')
                                                                 <span class="text-sm text-red-500">{{$message}}</span>
                                                                 @enderror
-                                                        </div>
+                                                        </div> 
                                                         <div class="col-span-1 m-2">
                                                             <label for="first-name" class="block text-sm font-medium text-gray-700">MFO/PAP</label>
                                                             <input type="text" wire:model="mfo_pap.0" 

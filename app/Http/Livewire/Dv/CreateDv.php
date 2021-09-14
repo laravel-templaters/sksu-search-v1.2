@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Dv;
 
 use App\Models\User;
+use App\Models\DVType;
 use App\Models\Particular;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -53,12 +54,14 @@ class CreateDv extends Component
 
     public function render()
     {
+
         $this ->searchedsignatories = User::whereRaw("(lower(first_name) like '%".strtolower($this->searchsignatory) ."%' or lower(middle_name) like '%".strtolower($this->searchsignatory)."%' or lower(last_name) like '%".strtolower($this->searchsignatory)."%') and role_id = 2")
-        ->get();
-
+        ->get();  
         $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+        $this->dv_type_id = DVType::where('id', '=',  $this->category_id)->first();
 
-        return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories);
+        return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories)
+        ->with('dv_type_id', $this->dv_type_id);
        
     }
 

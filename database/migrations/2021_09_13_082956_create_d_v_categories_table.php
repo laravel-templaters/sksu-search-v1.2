@@ -16,7 +16,7 @@ class CreateDVCategoriesTable extends Migration
         Schema::create('dv_categories', function (Blueprint $table) {
             $table->id();
             $table->string('dv_category');
-            $table->foreignId('dv_sub_category_id');
+            $table->foreignId('dv_type_id');
             $table->timestamps();
         });
     }
