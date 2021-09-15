@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Dv;
 
 use App\Models\User;
 use App\Models\DVType;
+use App\Models\DVCategory;
+use App\Models\DVSubCategory;
 use App\Models\Particular;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +39,10 @@ class CreateDv extends Component
     public $user_id;
     public $mode_of_payment;
     public $dv_type_id;
+    public $dv_type;
     public $dv_category_id;
+    public $dv_category;
+    public $dv_sub_category_id;
 
     //for particulars
      public $entry, $responsibility_center, $mfo_pap, $amount;
@@ -58,8 +63,13 @@ class CreateDv extends Component
         $this ->searchedsignatories = User::whereRaw("(lower(first_name) like '%".strtolower($this->searchsignatory) ."%' or lower(middle_name) like '%".strtolower($this->searchsignatory)."%' or lower(last_name) like '%".strtolower($this->searchsignatory)."%') and role_id = 2")
         ->get();  
         $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
-        $this->dv_type_id = DVType::where('id', '=',  $this->category_id)->first();
 
+        //Pass to DV
+        $this->dv_sub_category_id = DVSubCategory::where('id', '=',  $this->category_id)->first();
+        $this->dv_category_id = $this->dv_sub_category_id->dv_category_id;
+        $this->dv_category = DVCategory::where('id', '=',  $this->dv_category_id)->first();
+        $this->dv_type_id = $this->dv_category->dv_type_id;
+        $this->dv_type = DVType::where('id', '=',  $this->dv_type_id)->first();
         return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories)
         ->with('dv_type_id', $this->dv_type_id);
        
@@ -96,7 +106,7 @@ class CreateDv extends Component
 
     //methods Store Particulars START -----------
      public $dv_id=1;
-
+ 
      public function storeParticulars(){
 
                 $validatedDate = $this->validate([
@@ -160,7 +170,7 @@ class CreateDv extends Component
 
             case 3:
                 $this->openstep3();
-
+            break;
             case 4:
                 $this->openstep4();
             break;
@@ -178,7 +188,11 @@ class CreateDv extends Component
     }
 
     public function openstep1(){
-        
+        $this->step1finished = false;
+        $this->step2finished = false;
+        $this->step3finished = false;
+        $this->step4finished = false;
+
         $this->isstep2open = false;
         $this->isstep3open = false;
         $this->isstep4open = false;
@@ -188,6 +202,10 @@ class CreateDv extends Component
     public function openstep2(){
         
         $this->step1finished = true;
+        $this->step2finished = false;
+        $this->step3finished = false;
+        $this->step4finished = false;
+
         $this->isstep1open = false;
         $this->isstep4open = false;
         $this->isstep3open = false;
@@ -195,12 +213,24 @@ class CreateDv extends Component
     }
 
     public function openstep3(){
+
+        $this->step1finished = true;
+        $this->step2finished = true;
+        $this->step3finished = false;
+        $this->step4finished = false;
+
         $this->isstep1open = false;
         $this->isstep4open = false;
         $this->isstep3open = true;
         $this->isstep2open = false;
     }
     public function openstep4(){
+
+        $this->step1finished = true;
+        $this->step2finished = true;
+        $this->step3finished = true;
+        $this->step4finished = false;
+
         $this->isstep1open = false;
         $this->isstep4open = true;
         $this->isstep3open = false;

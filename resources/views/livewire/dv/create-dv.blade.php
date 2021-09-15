@@ -10,31 +10,28 @@
                                 <div class="overflow-hidden border border-b-0 border-gray-200 rounded-t-md lg:border-0">
                                     <!-- step 1-->
                                     <a href="#" class="group" wire:click.prevent="validateForm(1)">
-                                        <span x-bind:class="isstep1open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                        <span x-bind:class="isstep1open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
                                             aria-hidden="true"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium">
                                              <span class="flex-shrink-0">
                                                    @if($step1finished)
-                                                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-54">
-                                                        <!-- Heroicon name: solid/check -->
-                                                        <h1 class="hidden">{{$step1finished}}</h1>
-                                                            <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                                    clip-rule="evenodd" />
-                                                            </svg>
-                                                        </span>
-                                                    @elseif(!$step1finished && $isstep1open)
+                                                   <span class="w-10 h-10 flex items-center justify-center bg-secondary-bg rounded-full">
+                                                    <!-- Heroicon name: solid/check -->
+                                                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                  </span>
+                                                        
+                                                    @elseif(!$step1finished)
                                                         <h1 class="hidden">{{$step1finished}}</h1>
                                                         <span
-                                                        class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-blue-53">
-                                                        <span class="text-blue-900">01</span>
+                                                        class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg">
+                                                        <span class="text-secondary-bg">01</span>
                                                     </span>
                                                     @endif     
                                             </span>                                     
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
-                                                <span class="text-xs font-bold tracking-wide uppercase text-blue-54">DV Main
+                                                <span x-bind:class="isstep1open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">DV Main
                                                     Information Form</span>
                                                 <span class="text-sm font-medium text-gray-400">Fill up the form for DV.</span>
                                             </span>
@@ -49,18 +46,28 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-t-0 border-gray-200 rounded-b-md lg:border-0">
                                     <!-- Upcoming Step -->
-                                    <a href="#" class="group" wire:click.prevent="setsignatory({{1}})">
-                                       <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
+                                    {{-- setsignatory({{1}}) --}}
+                                    <a href="#" class="group" wire:click.prevent="validateForm(2)">
+                                       <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
+                                                @if($step2finished)
+                                                <span class="w-10 h-10 flex items-center justify-center bg-secondary-bg rounded-full">
+                                                    <!-- Heroicon name: solid/check -->
+                                                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                  </span>
+                                                  @elseif(!$step2finished)
                                                 <span
-                                                    class="flex items-center justify-center w-10 h-10 border-2 border-gray-300 rounded-full">
-                                                    <span class="text-gray-500">02</span>
+                                                x-bind:class="isstep2open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
+                                                    <span x-bind:class="isstep2open ? 'text-secondary-bg' : 'text-gray-400'">02</span>
                                                 </span>
+                                                @endif   
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
                                                 <span
-                                                    class="text-xs font-semibold tracking-wide text-gray-500 uppercase">Upload Related Documents</span>
+                                                x-bind:class="isstep2open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Upload Related Documents</span>
                                                 <span class="text-sm font-medium text-gray-500">Please upload PDF files only</span>
                                             </span>
                                         </span>
@@ -84,17 +91,26 @@
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
                                     <a href="#" aria-current="step" wire:click.prevent="validateForm(3)">
-                                        <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
+                                        <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
+                                                @if($step3finished)
+                                                <span class="w-10 h-10 flex items-center justify-center bg-secondary-bg rounded-full">
+                                                    <!-- Heroicon name: solid/check -->
+                                                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                                    </svg>
+                                                  </span>
+                                                @elseif(!$step3finished)
                                                 <span
-                                                    class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-blue-53">
-                                                    <span class="text-blue-900">03</span>
+                                                x-bind:class="isstep3open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
+                                                    <span x-bind:class="isstep3open ? 'text-secondary-bg' : 'text-gray-400'">03</span>
                                                 </span>
+                                                @endif
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
                                                 <span
-                                                    class="text-xs font-bold tracking-wide uppercase text-blue-53">Signatory</span>
+                                                x-bind:class="isstep3open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Signatory</span>
                                                 <span class="text-sm font-medium text-gray-500">Choose Signatory</span>
                                             </span>
                                         </span>
@@ -116,17 +132,17 @@
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
                                     <a href="#" aria-current="step" wire:click.prevent="validateForm(4)">
-                                        <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-blue-53 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
+                                        <span x-bind:class="isstep4open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 <span
-                                                    class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-blue-53">
-                                                    <span class="text-blue-900">04</span>
+                                                x-bind:class="isstep4open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
+                                                    <span x-bind:class="isstep4open ? 'text-secondary-bg' : 'text-gray-400'">04</span>
                                                 </span>
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
                                                 <span
-                                                    class="text-xs font-bold tracking-wide uppercase text-blue-53">Preview</span>
+                                                x-bind:class="isstep4open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Preview</span>
                                                 <span class="text-sm font-medium text-gray-500">Review and confirm information for <voucher></voucher></span>
                                             </span>
                                         </span>
@@ -236,9 +252,7 @@
                                                 <label for="dv_category" class="block text-sm font-medium text-gray-700">DV Category</label>
                                                 <select wire:model="dv_category_id" 
                                                     class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                                                    <option value="1">Cash Advance</option>
-                                                    <option value="2">Purchase Order</option>
-                                                    <option value="3">Other Payments</option>
+                                                    <option value="1">{{$dv_category->dv_category}}</option>
                                                 </select>
                                             </div>
 
@@ -247,7 +261,7 @@
                                                 <label for="dv_type" class="block text-sm font-medium text-gray-700">DV Type</label>
                                                 <select wire:model="dv_type_id" 
                                                     class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                                                    <option value="1">{{$dv_type_id->dv_type}}</option>
+                                                    <option value="1">{{$dv_type->dv_type}}</option>
                                                 </select>
                                             </div>
 
@@ -373,15 +387,15 @@
                            <div class="bg-white rounded-md">
                             <div class="px-4 py-8 mx-auto max-w-7xl">
                                 <div class="space-y-12">
-
-                                    <form method="POST" wire:submit.prevent="submit">
+                                    <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-blue-54 focus:ring-indigo-500 focus:border-indigo-500" wire:click.prevent="validateForm(3)"> Proceed </button>
+                                    {{-- <form method="POST" wire:submit.prevent="submit">
    
                                         <input id="name" wire:model.debounce.500ms="name">
                                     
                                         <x-media-library-attachment name="myUpload" />
                                     
                                         <button type="submit">Submit</button>
-                                    </form>
+                                    </form> --}}
 
                                     {{-- make form for medialib here--}}
 
