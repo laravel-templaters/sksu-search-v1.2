@@ -15,7 +15,7 @@
                                         <span class="flex items-start px-6 py-5 text-sm font-medium">
                                              <span class="flex-shrink-0">
                                                    @if($step1finished)
-                                                   <span class="w-10 h-10 flex items-center justify-center bg-secondary-bg rounded-full">
+                                                   <span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
                                                     <!-- Heroicon name: solid/check -->
                                                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -53,7 +53,7 @@
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 @if($step2finished)
-                                                <span class="w-10 h-10 flex items-center justify-center bg-secondary-bg rounded-full">
+                                                <span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
                                                     <!-- Heroicon name: solid/check -->
                                                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -96,7 +96,7 @@
                                         aria-hidden="true"></span>                                        <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 @if($step3finished)
-                                                <span class="w-10 h-10 flex items-center justify-center bg-secondary-bg rounded-full">
+                                                <span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
                                                     <!-- Heroicon name: solid/check -->
                                                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -386,26 +386,48 @@
                     x-transition:enter-start="translate-x-full"
                     x-transition:enter-end="translate-x-0">
                            <div class="bg-white rounded-md">
-                            <div class="px-4 py-8 mx-auto max-w-7xl">
-                                <div class="space-y-12">
-                                    <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-blue-54 focus:ring-indigo-500 focus:border-indigo-500" wire:click.prevent="validateForm(3)"> Proceed </button>
-                                    {{-- <form method="POST" wire:submit.prevent="submit">
-   
-                                        <input id="name" wire:model.debounce.500ms="name">
-                                    
-                                        <x-media-library-attachment name="myUpload" />
-                                    
-                                        <button type="submit">Submit</button>
-                                    </form> --}}
+                                {{-- 
+                                    <div class="space-y-12">
+                                        <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-blue-54 focus:ring-indigo-500 focus:border-indigo-500" wire:click.prevent="validateForm(3)"> Proceed </button>
+                                        {{-- <form method="POST" wire:submit.prevent="submit">
+    
+                                            <input id="name" wire:model.debounce.500ms="name">
+                                        
+                                            <x-media-library-attachment name="myUpload" />
+                                        
+                                            <button type="submit">Submit</button>
+                                        </form> --}}
 
-                                    {{-- make form for medialib here--}}
-
-
+                                        {{-- make form for medialib here--
 
 
-                                    
-                                </div>
-                            </div>
+
+
+                                        
+                                    </div>
+                                </div> --}}
+                                <div class="px-4 py-8 mx-auto max-w-7xl">
+                                <h3 class="mb-5 text-4xl font-extrabold drop-shadow-lg">Documents required : </h3>
+                                        <div class="mx-auto overflow-hidden bg-white border border-gray-300 rounded-md">
+                                            <ul role="list" class="">
+                                            
+                                                <li class="flex justify-start px-6 py-4">
+
+                                                    <div class="flex">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 my-auto" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="flex">
+                                                        <h3 class="my-auto uppercase">asd</h3>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-blue-54 focus:ring-indigo-500 focus:border-indigo-500" wire:click.prevent="validateForm(3)"> Proceed </button>
+                                    </div>
+
                             </div>
 
                     </div>
@@ -462,7 +484,7 @@
 
                                     @else
 
-                                        <p class="text-gray-500 text-md">wala ko may nakita. sadt</p>
+                                        <p class="text-gray-500 text-md">The system found no one with '{{$searchsignatory}}' on his/her name (╯°□°）╯︵ ┻━┻</p>
 
                                     @endif
 
@@ -496,15 +518,18 @@
                             <div class="grid grid-cols-8 grid-rows-4">
                                 {{-- logo --}}
                                 <div class="flex justify-between col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black">
-                                <div><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="w-auto h-20"></div>
-                                <div class="grid grid-rows-2 my-auto mr-3">
-                                <div class="object-top px-0 mx-auto">{!! QrCode::size(75)->gradient( 120, 0, 150, 100, 200, 150, 'horizontal')->margin(2)->generate((string)$dvno_temp); !!}</div>
-                                    <div><span class="font-medium text-black text-md">Dv No.{{$dvno_temp}}</span></div>
-                                </div>
+                                    <div class="pl-6 my-auto"><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="w-auto h-20"></div>
+                                    <div class="grid grid-rows-4 mr-3">
+                                        <div class="row-span-3 px-0 mx-auto my-auto ">{!! QrCode::size(65)->margin(2)->generate((string)$dvno_temp); !!}
+                                        </div>
+                                        <div class="row-span-1">
+                                            <span class="font-medium text-black text-md">Dv No.{{$dvno_temp}}</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 {{-- dV --}}
                                 <div class="col-span-6 col-start-1 row-span-1 row-start-4 text-center border-2 border-black">
-                                    <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">Disbursement Voucher</span>
+                                    <span class="mx-auto my-auto font-sans font-extrabold text-black uppercase text-md">Disbursement Voucher</span>
                                 </div>
                                 {{-- fund cluster --}}
                                 <div class="col-span-2 col-start-7 row-span-2 border-2 border-black">
@@ -512,7 +537,10 @@
                                 </div>
                                 {{-- Date and DV no --}}
                                 <div class="col-span-2 col-start-7 row-span-2 border-2 border-black">
-                                    <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">Date:</span>
+                                    <div class="grid grid-rows-2 text-left"> 
+                                        <span class="row-span-1 ml-2 font-sans font-extrabold text-black uppercase text-md">Date:</span>
+                                        <span class="row-span-1 mx-auto font-sans text-lg font-extrabold text-black uppercase">2021-12-31</span>
+                                    </div>
                                 </div>
                                 
                             </div>

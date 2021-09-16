@@ -8,23 +8,40 @@
         {{-- loop here for type --}}
         @foreach ($types as $type)
            <h3 class="hidden">{{Illuminate\Support\Facades\Hash::make('aasd'.$dv_type_id = $type->id)}}</h3>
-            <li class="flex flex-col col-span-1 text-left bg-white rounded-md shadow-sm" x-data="{showMe : false}">
-                <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
-                    <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
-                    <div class="flex">
-                       <button > <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-transparent text-primary-text" id="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
-                        </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="p-3 ml-3 bg-gray-200 rounded-md " x-cloak x-show="showMe">
-                {{-- loop category here --}}
-                @php
+           @php
                 if(isset($dv_type_id)){
                     $categories = App\Models\DVCategory::where('dv_type_id', '=', $dv_type_id)->get();
                 }
-                @endphp
+            @endphp
+            <li class="flex flex-col col-span-1 text-left bg-white rounded-md shadow-sm" x-data="{showMe : false}">
+                @if($categories->count()>0)
+                    <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
+                        <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
+                        <div class="flex">
+                        <button > <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-transparent text-primary-text" id="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                            </svg>
+                            </button>
+                        </div>
+                    </div>
+                @else
+                    <a href="">
+                        <div class="flex justify-between min-w-full p-3">
+                            <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
+                            <div class="flex">
+                            <button > <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 my-auto text-transparent text-primary-text" id="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
+                                </svg>
+                                </button>
+                            </div>
+                        </div>    
+                    </a>            
+                @endif
+
+                
+                <div class="p-3 ml-3 bg-gray-200 rounded-md " x-cloak x-show="showMe">
+                {{-- loop category here --}}
+                
                  @foreach ($categories as $category)
                   <h3 class="hidden">{{Illuminate\Support\Facades\Hash::make('aasd'.$dv_category_id = $category->id)}}</h3>
                    <div x-data="{openCA:false}">
