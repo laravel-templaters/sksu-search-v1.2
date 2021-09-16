@@ -539,8 +539,9 @@
                                 <div class="col-span-2 col-start-7 row-span-2 border-2 border-black">
                                     <div class="grid grid-rows-2 text-left"> 
                                         <span class="row-span-1 ml-2 font-sans font-extrabold text-black uppercase text-md">Date:</span>
-                                        <span class="row-span-1 mx-auto font-sans text-lg font-extrabold text-black uppercase">2021-12-31</span>
+                                        <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">Date: {!! date('F d, Y', strtotime($date)) !!}</span>
                                     </div>
+                                    
                                 </div>
                                 
                             </div>

@@ -17,6 +17,10 @@ class DVCategory extends Model
         return $this->belongsTo('App\Models\DVType');
     }
 
+    public function dv_type_sorters(){
+        return $this->belongsTo('App\Models\DVTypeSorter');
+    }
+
     public function dv_sub_categories(){
         return $this->hasMany('App\Models\DVSubCategory');
     }

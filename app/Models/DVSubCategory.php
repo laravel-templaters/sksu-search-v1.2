@@ -13,6 +13,10 @@ class DVSubCategory extends Model
 
     use HasFactory;
 
+    public function dv_type_sorters(){
+        return $this->belongsTo('App\Models\DVTypeSorter');
+    }
+
     public function dv_categories(){
         return $this->belongsTo('App\Models\DVCategory');
     }
