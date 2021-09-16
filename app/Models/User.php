@@ -63,6 +63,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\DisbursementVoucher');
     }
 
+    public function travel_order(){
+        return $this->belongsTo('App\Models\TravelOrder');
+    }
+
     public function role(){
         return $this->belongsTo('App\Models\Roles');
     }

@@ -16,6 +16,10 @@ class DisbursementVoucher extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function dv_travel_order_pivot(){
+        return $this->belongsTo('App\Models\DVTravelOrderPivot');
+    }
+
     public function mop(){
         return $this->hasOne('App\Models\ModeOfPayment');
     }

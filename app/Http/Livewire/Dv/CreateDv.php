@@ -9,9 +9,11 @@ use App\Models\DVSubCategory;
 use App\Models\Particular;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 class CreateDv extends Component
 {
     public $category_id;
+    public $date;
     //panels
     public $isstep1open = true;
     public $isstep2open = false;
@@ -63,7 +65,7 @@ class CreateDv extends Component
         $this ->searchedsignatories = User::whereRaw("(lower(first_name) like '%".strtolower($this->searchsignatory) ."%' or lower(middle_name) like '%".strtolower($this->searchsignatory)."%' or lower(last_name) like '%".strtolower($this->searchsignatory)."%') and role_id = 2")
         ->get();  
         $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
-
+        $this->date = Carbon::now();
         //Pass to DV
         $this->dv_sub_category_id = DVSubCategory::where('id', '=',  $this->category_id)->first();
         $this->dv_category_id = $this->dv_sub_category_id->dv_category_id;

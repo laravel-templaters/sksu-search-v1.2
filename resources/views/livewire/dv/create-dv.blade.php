@@ -512,7 +512,7 @@
                                 </div>
                                 {{-- Date and DV no --}}
                                 <div class="col-span-2 col-start-7 row-span-2 border-2 border-black">
-                                    <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">Date:</span>
+                                    <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">Date: {!! date('F d, Y', strtotime($date)) !!}</span>
                                 </div>
                                 
                             </div>
