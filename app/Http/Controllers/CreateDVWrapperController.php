@@ -46,7 +46,7 @@ class CreateDVWrapperController extends Controller
     public function show($id,$sorter)
     {
         $cat_id = $id;
-        $sort = $sorter;
+        $sort = $sorter; 
         return view('create-dv-wrapper')->with('sorter_val',$sort)->with('cat_id',$cat_id);
     }
 

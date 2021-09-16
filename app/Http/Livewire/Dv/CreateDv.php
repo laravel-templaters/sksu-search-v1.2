@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\DVType;
 use App\Models\DVCategory;
 use App\Models\DVSubCategory;
+use App\Models\ModeOfPayment;
 use App\Models\Particular;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -48,15 +49,19 @@ class CreateDv extends Component
     public $dv_sub_category_id;
     public $voucher_type;
 
+    public $mode_id;
+
     //for particulars
      public $entry, $responsibility_center, $mfo_pap, $amount;
      //for dynamic input fields
      public $updateMode = false;
      public $inputs = [];
      public $i = 1;
+     public $total;
      //var for signatory
      public $sig_id;
      
+
      //mock variables
      public $dvno_temp = 101294159841091;
 
@@ -67,6 +72,7 @@ class CreateDv extends Component
         $this ->searchedsignatories = User::whereRaw("(lower(first_name) like '%".strtolower($this->searchsignatory) ."%' or lower(middle_name) like '%".strtolower($this->searchsignatory)."%' or lower(last_name) like '%".strtolower($this->searchsignatory)."%') and role_id = 2")
         ->get();  
         $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+        $this->mode_of_payment = DB::table('mode_of_payments')->get();
         $this->date = Carbon::now();
 
         if(isset($this->category_id))
@@ -84,6 +90,10 @@ class CreateDv extends Component
                             break;
             }
         }
+
+        //get total of particulars
+        
+        
         
         //Pass to DV
         $this->dv_sub_category_id = DVSubCategory::where('id', '=',  $this->category_id)->first();
@@ -144,7 +154,8 @@ class CreateDv extends Component
                     ]
                 );
 
-            foreach ($this->entry as $key => $value) {
+            foreach ($this->entry as $key => $value) { 
+
                 //Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);
                 $particulars = new Particular;
                 $particulars->disbursement_voucher_id = $this->dv_id;
@@ -175,11 +186,21 @@ class CreateDv extends Component
         //         'showConfirmButton' =>  false, 
         //   ]);
      }
+     
 
 
     //methods Store Particulars  END-----------
 
     public function validateForm($to){
+
+        $this->total = 0;
+
+        foreach ($this->entry as $key => $value) { 
+            $this->total += floatval($this->amount[$key]);
+        }
+
+        
+        //$this->total = $this->total/2;
         
         switch ($to) {
             case 1:
