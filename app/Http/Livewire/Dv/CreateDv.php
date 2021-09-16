@@ -195,9 +195,11 @@ class CreateDv extends Component
 
         $this->total = 0;
 
+       if(isset($this->entry)){
         foreach ($this->entry as $key => $value) { 
             $this->total += floatval($this->amount[$key]);
         }
+       }
 
         
         //$this->total = $this->total/2;

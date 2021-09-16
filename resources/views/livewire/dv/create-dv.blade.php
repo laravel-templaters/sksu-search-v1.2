@@ -548,31 +548,48 @@
                                         <tbody class="text-sm border-2 border-black">
                                                      
                                                     <tr>
-                                                        <td class="whitespace-normal border-2 border-black ">
-                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="entry.0">
+                                                        <td class="whitespace-normal border-2 border-black">
+                                                            @if(isset($entry['0']))
+                                                            {{$entry['0']}}
+                                                            @endif
                                                         </td>
                                                         <td class="border-2 border-black ">
-                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="responsibility_center.0"></td>
+                                                            @if(isset($responsibility_center['0']))
+                                                            {{$responsibility_center['0']}}
+                                                            @endif
+                                                             </td>
                                                         <td class="border-2 border-black ">
-                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="mfo_pap.0"></td>
+                                                            @if(isset($mfo_pap['0']))
+                                                            {{$mfo_pap['0']}}
+                                                            @endif
                                                         </td>
                                                         <td class="text-right border-2 border-black ">
-                                                            <input type="text" class="min-w-full text-right border-transparent" disabled wire:model="amount.0"></td>
+                                                             @if(isset($amount['0']))
+                                                            {{$amount['0']}}
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                     @foreach ($inputs as $key => $value)  
                                                     <tr>
                                                         <td class="whitespace-normal border-2 border-black ">
-                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="entry.{{$value}}">
+                                                           @if(isset($entry[(string)$value]))
+                                                            {{$entry[(string)$value]}}
+                                                            @endif
                                                         </td>
                                                         <td class="border-2 border-black ">
-                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="responsibility_center.{{$value}}"></td>
+                                                            @if(isset($responsibility_center[(string)$value]))
+                                                            {{$responsibility_center[(string)$value]}}
+                                                            @endif
                                                         </td>
                                                         <td class="border-2 border-black ">
-                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="mfo_pap.{{$value}}"></td>
+                                                            @if(isset($mfo_pap[(string)$value]))
+                                                            {{$mfo_pap[(string)$value]}}
+                                                            @endif
                                                             </td>
                                                         <td class="text-right border-2 border-black ">
-                                                            <input type="text" class="min-w-full text-right border-transparent" disabled wire:model="amount.{{$value}}"></td>
+                                                            @if(isset($amount[(string)$value]))
+                                                            {{$amount[(string)$value]}}
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                     @endforeach
