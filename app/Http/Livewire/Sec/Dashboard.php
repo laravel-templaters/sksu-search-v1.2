@@ -30,7 +30,7 @@ class Dashboard extends Component
                 return view('livewire.sec.dashboard')->with('types', $types)->with('categories', $categories)->with('sub_categories', $sub_categories);
                
 
-            }
+            } 
             else{
                 
                 $categories = DVCategory::where('dv_type_id', '=', $dv_type_id)->get();

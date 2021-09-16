@@ -46,6 +46,7 @@ class CreateDv extends Component
     public $dv_category_id;
     public $dv_category;
     public $dv_sub_category_id;
+    public $voucher_type;
 
     //for particulars
      public $entry, $responsibility_center, $mfo_pap, $amount;
@@ -67,6 +68,25 @@ class CreateDv extends Component
         ->get();  
         $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
         $this->date = Carbon::now();
+
+        if(isset($this->category_id))
+        {
+            switch($this->sorter)
+            {
+                case '1':
+                    $this->voucher_type = (DVType::where('id', '=',  $this->category_id)->first())->dv_type;
+                    break;
+                    case '2':
+                        $this->voucher_type = (DVCategory::where('id', '=',  $this->category_id)->first())->dv_category;    
+                        break;
+                        case '3':
+                            $this->voucher_type = (DVSubCategory::where('id', '=',  $this->category_id)->first())->dv_sub_category;     
+                            break;
+            }
+                 
+
+        }
+
         //Pass to DV
         $this->dv_sub_category_id = DVSubCategory::where('id', '=',  $this->category_id)->first();
         $this->dv_category_id = $this->dv_sub_category_id->dv_category_id;
