@@ -48,7 +48,8 @@
                                     <!-- Upcoming Step -->
                                     {{-- setsignatory({{1}}) --}}
                                     <a href="#" class="group" wire:click.prevent="validateForm(2)">
-                                       <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
+                                        <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                        aria-hidden="true"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 @if($step2finished)
@@ -91,8 +92,8 @@
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
                                     <a href="#" aria-current="step" wire:click.prevent="validateForm(3)">
-                                        <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
-                                        <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
+                                        <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                        aria-hidden="true"></span>                                        <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 @if($step3finished)
                                                 <span class="w-10 h-10 flex items-center justify-center bg-secondary-bg rounded-full">
@@ -132,8 +133,8 @@
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
                                     <a href="#" aria-current="step" wire:click.prevent="validateForm(4)">
-                                        <span x-bind:class="isstep4open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"></span>
-                                        <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
+                                        <span x-bind:class="isstep4open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                        aria-hidden="true"></span>                                        <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 <span
                                                 x-bind:class="isstep4open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
