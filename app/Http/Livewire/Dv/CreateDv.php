@@ -83,10 +83,8 @@ class CreateDv extends Component
                             $this->voucher_type = (DVSubCategory::where('id', '=',  $this->category_id)->first())->dv_sub_category;     
                             break;
             }
-                 
-
         }
-
+        
         //Pass to DV
         $this->dv_sub_category_id = DVSubCategory::where('id', '=',  $this->category_id)->first();
         $this->dv_category_id = $this->dv_sub_category_id->dv_category_id;

@@ -23,13 +23,13 @@ class DVCategorySeeder extends Seeder
                 'dv_type_id'=> 1,
                 ]);
                 
-                DB::table('dv_categories')->insert([
-                    'dv_category'=> 'Cash Advances',
-                    'dv_type_id'=> 2,
-                    ]);
-                    DB::table('dv_categories')->insert([
-                        'dv_category'=> 'Reimbursements',
-                        'dv_type_id'=> 2,
-                        ]);
+                // DB::table('dv_categories')->insert([
+                //     'dv_category'=> 'Cash Advances',
+                //     'dv_type_id'=> 2,
+                //     ]);
+                //     DB::table('dv_categories')->insert([
+                //         'dv_category'=> 'Reimbursements',
+                //         'dv_type_id'=> 2,
+                //         ]);
     }
 }

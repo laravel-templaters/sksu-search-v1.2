@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateDVWrapperController;
+use App\Http\Controllers\RoutingController;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -72,7 +73,7 @@ Route::get('redirects', 'App\Http\Controllers\HomeController@index');
 //for create dv dont delete
 
 Route::get('/cdv/2y10XGG0AJ7EyQj1tWaGwP4O-Jex{id}ZBpCtK8-{sorter}gCyDNDF8n-Nq3QVjN1BzzXS', [CreateDVWrapperController::class, 'show'])->name('cdv');
-
+Route::get('/travel-order/3z21YHH1BK8FzRk2uXbHxQ5P-Kfy{id}ACqDuL9-hDzEOEG9o-Or4RWkO2CaaYT', [RoutingController::class, 'show'])->name('travel-order');
 //for media library dont delete also hehe
 Route::mediaLibrary();
 

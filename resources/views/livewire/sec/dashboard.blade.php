@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 @else
-                    <a href="">
+                    <a href="{{route('travel-order', ['id' => $dv_type_id])}}">
                         <div class="flex justify-between min-w-full p-3">
                             <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
                             <div class="flex">
