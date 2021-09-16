@@ -249,21 +249,11 @@
                                             </div>
 
                                             {{-- DV Category --}}
-                                            <div class="col-span-2">
-                                                <label for="dv_category" class="block text-sm font-medium text-gray-700">DV Category</label>
-                                                <select wire:model="dv_category_id" 
-                                                    class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                                                    <option value="1">{{$dv_category->dv_category}}</option>
-                                                </select>
-                                            </div>
-
-                                            {{-- DV Type --}}
-                                            <div class="col-span-2">
-                                                <label for="dv_type" class="block text-sm font-medium text-gray-700">DV Type</label>
-                                                <select wire:model="dv_type_id" 
-                                                    class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                                                    <option value="1">{{$dv_type->dv_type}}</option>
-                                                </select>
+                                            <div class="col-span-4">
+                                                <label for="dv_category" class="block text-sm font-medium text-gray-700">Voucher Type</label>
+                                                <input type="text"
+                                                    class="block w-full px-3 py-2 mt-1 uppercase bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" disabled value="diri isulod">
+                                                
                                             </div>
 
                                             <div class="col-span-6">
@@ -517,7 +507,7 @@
                         <div class="col-span-8">
                             <div class="grid grid-cols-8 grid-rows-4">
                                 {{-- logo --}}
-                                <div class="flex justify-between col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black">
+                                <div class="flex justify-between col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-collapse border-black">
                                     <div class="pl-6 my-auto"><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="w-auto h-20"></div>
                                     <div class="grid grid-rows-4 mr-3">
                                         <div class="row-span-3 px-0 mx-auto my-auto ">{!! QrCode::size(65)->margin(2)->generate((string)$dvno_temp); !!}
@@ -539,10 +529,49 @@
                                 <div class="col-span-2 col-start-7 row-span-2 border-2 border-black">
                                     <div class="grid grid-rows-2 text-left"> 
                                         <span class="row-span-1 ml-2 font-sans font-extrabold text-black uppercase text-md">Date:</span>
-                                        <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">Date: {!! date('F d, Y', strtotime($date)) !!}</span>
+                                        <span class="mx-auto font-sans font-extrabold text-black uppercase text-md">{!! date('F d, Y', strtotime($date)) !!}</span>
                                     </div>
                                     
                                 </div>
+                            {{-- table for particulars --}}
+                            <div class="col-span-8">
+                                <table class="min-w-full border-2 border-collapse border-black table-fixed">
+                                    <thead class="border-2 border-collapse border-black">
+                                        <tr class="bg-gray-400 border-2 border-collapse border-black">
+                                            <th class='w-2/5 uppercase border-2 border-collapse border-black'>Particulars</th>
+                                            <th class='w-1/5 uppercase border-2 border-collapse border-black'>responsibility center</th>
+                                            <th class='w-1/5 uppercase border-2 border-collapse border-black'>mfo/pap</th>
+                                            <th class='w-1/5 uppercase border-2 border-collapse border-black'>amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border-2 border-collapse border-black">
+
+                                            <tr>
+                                                <td class="whitespace-normal border-2 border-collapse border-black ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</td>
+                                                <td class="border-2 border-collapse border-black"></td>
+                                                <td class="border-2 border-collapse border-black"></td>
+                                                <td class="text-right border-2 border-collapse border-black">1000.00</td>
+                                            </tr>
+
+                                    </tbody>
+                                    <tfoot class="border-2 border-collapse border-black">
+                                        <tr>
+                                            <td class="border-2 border-r-0 border-collapse border-black"></td>
+                                            <td class=""></td>
+                                            <td class="text-center uppercase ">AMount Due</td>
+                                            <td class="text-right border-2 border-collapse border-black">1000.00</td>
+                                        </tr>                                    
+                                    </tfoot>
+
+                                </table>
+                            </div>
+                             {{-- table for particulars end--}}
+                             {{-- signatory A--}}
+                            <div class ="col-span-8">
+                                <div class="grid grid-cols-5 grid-rows-3 border-2 border-collapse border-black">
+                                    div.col-span-5.row-span-1
+                                </div>
+                            </div>
                                 
                             </div>
                         </div>

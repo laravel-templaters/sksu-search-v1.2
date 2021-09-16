@@ -43,10 +43,11 @@ class CreateDVWrapperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */ 
-    public function show($id)
+    public function show($id,$sorter)
     {
         $cat_id = $id;
-        return view('create-dv-wrapper', compact('cat_id'));
+        $sort = $sorter;
+        return view('create-dv-wrapper')->with('sorter_val',$sort)->with('cat_id',$cat_id);
     }
 
     /**

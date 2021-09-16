@@ -54,7 +54,7 @@
                             }
                         @endphp
                                     @foreach ($sub_categories as $sub_category)
-                                        <a href="{{route('cdv', ['id' => $sub_category->id])}}" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">{{$sub_category->dv_sub_category}}</a>
+                                        <a href="{{route('cdv', ['id' => $sub_category->id, 'sorter' => '3'])}}" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">{{$sub_category->dv_sub_category}}</a>
                                     {{-- sub cat only a end--}}
                                     @endforeach 
                         </div>

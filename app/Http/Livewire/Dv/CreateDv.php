@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 class CreateDv extends Component
 {
     public $category_id;
+    public $sorter;
     public $date;
     //panels
     public $isstep1open = true;

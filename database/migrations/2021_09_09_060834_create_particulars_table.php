@@ -17,8 +17,8 @@ class CreateParticularsTable extends Migration
             $table->increments('id');
             $table->foreignId('disbursement_voucher_id');
             $table->string('entry');
-            $table->string('responsibility_center');
-            $table->string('mfo_pap');
+            $table->string('responsibility_center')->nullable();
+            $table->string('mfo_pap')->nullable();
             $table->string('amount');
             $table->timestamps();
         });
