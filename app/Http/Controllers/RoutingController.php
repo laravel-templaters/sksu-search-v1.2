@@ -54,7 +54,7 @@ class RoutingController extends Controller
         }else if($id == 2){
             return view('travelorder.travel-order-wrapper');
         }else if($id == 3){
-            
+            return view('travelorder.travel-order-wrapper');
          }
     }
 

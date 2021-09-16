@@ -241,10 +241,11 @@
                                             {{-- mode of payment --}}
                                             <div class="col-span-2">
                                                 <label for="mode_of_payment" class="block text-sm font-medium text-gray-700">Mode Of Payment</label>
-                                                <select wire:model="mode_of_payment" 
+                                                <select wire:model="mode_id" 
                                                     class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
-                                                    <option value="1">Cash</option>
-                                                    <option value="2">Check</option>
+                                                    @foreach ($mode_of_payment as $payment)
+                                                    <option value="{{$payment->id}}">{{$payment->mode_of_payment}}</option>       
+                                                    @endforeach
                                                 </select>
                                             </div>
 
@@ -545,19 +546,43 @@
                                             </tr>
                                         </thead>
                                         <tbody class="text-sm border-2 border-black">
+                                                     
                                                     <tr>
-                                                        <td class="whitespace-normal border-2 border-black "></td>
-                                                        <td class="border-2 border-black "></td>
-                                                        <td class="border-2 border-black "></td>
-                                                        <td class="text-right border-2 border-black "></td>
+                                                        <td class="whitespace-normal border-2 border-black ">
+                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="entry.0">
+                                                        </td>
+                                                        <td class="border-2 border-black ">
+                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="responsibility_center.0"></td>
+                                                        <td class="border-2 border-black ">
+                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="mfo_pap.0"></td>
+                                                        </td>
+                                                        <td class="text-right border-2 border-black ">
+                                                            <input type="text" class="min-w-full text-right border-transparent" disabled wire:model="amount.0"></td>
+                                                        </td>
                                                     </tr>
+                                                    @foreach ($inputs as $key => $value)  
+                                                    <tr>
+                                                        <td class="whitespace-normal border-2 border-black ">
+                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="entry.{{$value}}">
+                                                        </td>
+                                                        <td class="border-2 border-black ">
+                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="responsibility_center.{{$value}}"></td>
+                                                        </td>
+                                                        <td class="border-2 border-black ">
+                                                            <input type="text" class="min-w-full border-transparent" disabled wire:model="mfo_pap.{{$value}}"></td>
+                                                            </td>
+                                                        <td class="text-right border-2 border-black ">
+                                                            <input type="text" class="min-w-full text-right border-transparent" disabled wire:model="amount.{{$value}}"></td>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
                                         </tbody>
                                         <tfoot class="border-2 border-black ">
                                             <tr>
                                                 <td class="border-2 border-r-0 border-black "></td>
                                                 <td class=""></td>
-                                                <td class="text-center uppercase ">AMount Due</td>
-                                                <td class="text-right border-2 border-black ">1200.00</td>
+                                                <td class="text-center uppercase ">Amount Due</td>
+                                                <td class="text-right border-2 border-black ">{{$total}}</td>
                                             </tr>                                    
                                         </tfoot>
 
@@ -687,7 +712,7 @@
                                         </div>
                                         <div class="col-span-2 col-start-5 row-span-1 text-center border border-black">
                                             <span class="font-extrabold">Name Here</span>
-                                        </div>
+                                        </div> 
                                         <div class="col-span-1 col-start-1 row-span-1 border border-black">
                                             <span class="my-auto ml-2">Position</span>
                                         </div>
