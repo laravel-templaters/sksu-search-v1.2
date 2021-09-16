@@ -546,10 +546,10 @@
                                         </thead>
                                         <tbody class="text-sm border-2 border-black">
                                                     <tr>
-                                                        <td class="whitespace-normal border-2 border-black ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</td>
+                                                        <td class="whitespace-normal border-2 border-black "></td>
                                                         <td class="border-2 border-black "></td>
                                                         <td class="border-2 border-black "></td>
-                                                        <td class="text-right border-2 border-black ">1000.00</td>
+                                                        <td class="text-right border-2 border-black "></td>
                                                     </tr>
                                         </tbody>
                                         <tfoot class="border-2 border-black ">
@@ -557,7 +557,7 @@
                                                 <td class="border-2 border-r-0 border-black "></td>
                                                 <td class=""></td>
                                                 <td class="text-center uppercase ">AMount Due</td>
-                                                <td class="text-right border-2 border-black ">1000.00</td>
+                                                <td class="text-right border-2 border-black ">1200.00</td>
                                             </tr>                                    
                                         </tfoot>
 
