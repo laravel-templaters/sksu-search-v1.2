@@ -611,8 +611,13 @@
                                     <div class="grid grid-cols-5 grid-rows-4 border-2 border-black ">
                                         <div class="col-span-5 row-span-1 text-sm text-left"><span class="border-b border-r border-black ">&nbsp;A.&nbsp;</span> Certified: Expenses/Cash Advance necessary, lawful and incurred under my direct supervision
                                         </div>
-                                        <div class="col-span-3 col-start-2 row-span-1 row-start-3 font-bold text-center border-b border-black">Reynaldo H. Dalayap JR. PhD.</div>
-                                        <div class="col-span-3 col-start-2 row-span-1 row-start-4 font-semibold text-center">Vice President for Finance</div>
+                                        @if(isset($signatory))
+                                        <div class="col-span-3 col-start-2 row-span-1 row-start-3 font-bold text-center border-b border-black">{{$signatory->first_name}} {{ \Illuminate\Support\Str::limit($signatory->middle_name, 1, $end='.') }} {{$signatory->last_name}}</div>
+                                        {{-- {{$responsibility_center[(string)$value]}} --}}
+                                        @endif
+                                        @if(isset($position))
+                                        <div class="col-span-3 col-start-2 row-span-1 row-start-4 font-semibold text-center">{{$position->position_name}} for {{$department->department_name}}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 {{-- signatory A--}}

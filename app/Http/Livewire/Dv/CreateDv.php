@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Dv;
 
 use App\Models\User;
+use App\Models\position;
+use App\Models\Department;
 use App\Models\DVType;
 use App\Models\DVCategory;
 use App\Models\DVSubCategory;
@@ -60,6 +62,9 @@ class CreateDv extends Component
      public $total;
      //var for signatory
      public $sig_id;
+     public $signatory;
+     public $position;
+     public $department;
      
 
      //mock variables
@@ -108,6 +113,11 @@ class CreateDv extends Component
 
     public function setsignatory($id){
         $this->sig_id = $id;
+        
+        $this->signatory = User::where('id', '=', $this->sig_id)->first();
+        $this->position = position::where('id', '=',  $this->signatory->position_id)->first();
+        $this->department = Department::where('id', '=',  $this->signatory->department_id)->first();
+
         $this->validateForm(3);
     }
 
