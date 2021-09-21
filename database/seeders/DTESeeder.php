@@ -15,71 +15,88 @@ class DTESeeder extends Seeder
     public function run()
     {
         DB::table('dtes')->insert([
-            'amount'=> 'Region I',
-            'region'=>'1500']);
+            'amount'=> '1500',
+            'region'=>'REGION I (ILOCOS REGION)',
+            'region_code' => '01']);
 
             DB::table('dtes')->insert([
-                'amount'=> 'Region II',
-                'region'=>'1500']);
+                'amount'=> '1500',
+                'region'=>'REGION II (CAGAYAN VALLEY)',
+                'region_code' => '02']);
         
                 DB::table('dtes')->insert([
-                    'amount'=> 'Region III',
-                    'region'=>'1500']);
+                    'amount'=> '1500',
+                    'region'=>'REGION III (CENTRAL LUZON)',
+                    'region_code' => '03']);
                     
                     DB::table('dtes')->insert([
-                        'amount'=> 'Region IV-A',
-                        'region'=>'2200']);
+                        'amount'=> '2200',
+                        'region'=>'REGION IV-A (CALABARZON)',
+                        'region_code' => '04']);
                         
                         DB::table('dtes')->insert([
-                            'amount'=> 'Region IV-B',
-                            'region'=>'2200']);
+                            'amount'=> '2200',
+                            'region'=>'REGION IV-B (MIMAROPA)',
+                            'region_code' => '17']);
                             
                             DB::table('dtes')->insert([
-                                'amount'=> 'Region V',
-                                'region'=>'1500']);
+                                'amount'=> '1500',
+                                'region'=>'REGION V (BICOL REGION)',
+                                'region_code' => '05']);
                                 
                                 DB::table('dtes')->insert([
-                                    'amount'=> 'Region VI',
-                                    'region'=>'1800']);
+                                    'amount'=> '1800',
+                                    'region'=>'REGION VI (WESTERN VISAYAS)',
+                                    'region_code' => '06']);
                                 
                                     DB::table('dtes')->insert([
-                                        'amount'=> 'Region VII',
-                                        'region'=>'1800']);
+                                        'amount'=> '1800',
+                                        'region'=>'REGION VII (CENTRAL VISAYAS)',
+                                        'region_code' => '07']);
                                     
                                         DB::table('dtes')->insert([
-                                            'amount'=> 'Region VIII',
-                                            'region'=>'1500']);
+                                            'amount'=> '1500',
+                                            'region'=>'REGION VIII (EASTERN VISAYAS)',
+                                            'region_code' => '08']);
                                             
                                             DB::table('dtes')->insert([
-                                                'amount'=> 'Region IX',
-                                                'region'=>'1500']);
+                                                'amount'=> '1500',
+                                                'region'=>'REGION IX (ZAMBOANGA PENINSULA)',
+                                                'region_code' => '09']);
                                             
                                                 DB::table('dtes')->insert([
-                                                    'amount'=> 'Region X',
-                                                    'region'=>'1800']);
+                                                    'amount'=> '1800',
+                                                    'region'=>'REGION X (NORTHERN MINDANAO)',
+                                                    'region_code' => '10']);
                                                     
                                                     DB::table('dtes')->insert([
-                                                        'amount'=> 'Region XI',
-                                                        'region'=>'1800']);
+                                                        'amount'=> '1800',
+                                                        'region'=>'REGION XI (DAVAO REGION)',
+                                                        'region_code' => '11']);
                                                    
                                                         DB::table('dtes')->insert([
-                                                            'amount'=> 'Region XII',
-                                                            'region'=>'1500']);
+                                                            'amount'=> '1500',
+                                                            'region'=>'REGION XII (SOCCSKSARGEN)',
+                                                            'region_code' => '12']);
                                                     
                                                             DB::table('dtes')->insert([
-                                                                'amount'=> 'Region XIII',
-                                                                'region'=>'1500']);
+                                                                'amount'=> '2200',
+                                                                'region'=>'NATIONAL CAPITAL REGION (NCR)',
+                                                                'region_code' => '13']);
                                                            
                                                                 DB::table('dtes')->insert([
-                                                                    'amount'=> 'BARMM',
-                                                                    'region'=>'1500']);
+                                                                    'amount'=> '1800',
+                                                                    'region'=>'CORDILLERA ADMINISTRATIVE REGION (CAR)',
+                                                                    'region_code' => '14']);
                                                                 
                                                                     DB::table('dtes')->insert([
-                                                                        'amount'=> 'CAR',
-                                                                        'region'=>'1800']);
+                                                                        'amount'=> '1500',
+                                                                        'region'=>'BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)',
+                                                                        'region_code' => '15']);
                                                                   
                                                                         DB::table('dtes')->insert([
-                                                                            'amount'=> 'NCR',
-                                                                            'region'=>'2200']);    
+                                                                            'amount'=> '1500',
+                                                                            'region'=>'REGION XIII (Caraga)',
+                                                                            'region_code' => '16']);    
     }
 }

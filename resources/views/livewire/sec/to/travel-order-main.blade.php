@@ -85,7 +85,7 @@
                         <div class="col-span-1 col-start-2 row-span-1 row-start-1 mt-1">
                             
                             <div class="relative flex items-start">
-                                <input wire:model="has_registration" id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">                            
+                                <input value="0" wire:model="has_registration" id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">                            
                                 <div class="my-auto ml-3 text-sm">
                                     <label for="comments" class="font-medium text-gray-700">Has Registration</label>
                                 </div>
@@ -145,7 +145,7 @@
                         </div> 
                         <div class="col-span-1">
                             <h3 class="ml-1 text-sm text-gray-300 ">Per Diem</h3>
-                            <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" value="{{isset($per_diem) ? $per_diem['region'] : ""}}" disabled>
+                            <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" value="{{isset($per_diem) ? '₱ '.number_format($per_diem['amount'],2) : ""}}" disabled>
                         </div>
                         
                         <div class="col-span-3 gap-2 p-2 bg-gray-300 rounded-md">

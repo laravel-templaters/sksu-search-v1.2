@@ -17,6 +17,7 @@ class CreateDtesTable extends Migration
             $table->id();
             $table->string('amount');
             $table->string('region');
+            $table->string('region_code');
             $table->timestamps();
         });
     }
