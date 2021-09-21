@@ -38,29 +38,31 @@
                     </label>
                     <div class="col-span-1 row-span-1 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Region</h3>
-                        <select id="country" name="country" autocomplete="country" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                        <option>Region I</option>
-                        <option>Region II</option>
-                        <option>Region III</option>
-                        <option>Region IV</option>
+                        <select wire:model="region_codes" id="country" name="country" autocomplete="country" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            <option selected>--SELECT REGION--</option>
+                        @foreach ($regions as $region)                    
+                         <option value="{{$region->region_code}}">{{$region->region_description}}</option>
+                         @endforeach
+                        
                         </select>
                     </div>
                     <div class="col-span-1 row-span-1 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Province</h3>
-                        <select  class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                        <option>Province 1</option>
-                        <option>Province 2</option>
-                        <option>Province 3</option>
-                        <option>Province 4</option>
+                        <select wire:model="province_codes" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            <option selected>--SELECT PROVINCE--</option>
+                        @foreach ($provinces as $province)
+                        <option value="{{$province->province_code}}">{{$province->province_description}}</option>
+                        @endforeach
+
                         </select>
                     </div>
                     <div class="col-span-1 col-start-2 row-span-1 row-start-2 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">City / Municipality</h3>
                         <select  class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                        <option>City / Municipality 1</option>
-                        <option>City / Municipality 2</option>
-                        <option>City / Municipality 3</option>
-                        <option>City / Municipality 4</option>
+                            <option selected>--SELECT CITY/MUNICIPALITY--</option>
+                            @foreach ($cities as $city)   
+                            <option value="{{$city->city_municipality_code}}">{{$city->city_municipality_description}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-span-1 col-start-3 row-span-1 row-start-2 mt-1">
