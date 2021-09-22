@@ -54,7 +54,10 @@ class TravelOrderMain extends Component
 
     public function submit()
     {
-      
+
+        $reg = Region::where("region_code", "=",  $this->region_codes)->first();
+        $prov = Province::where("province_code", "=",  $this->province_codes)->first();
+        $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
 
          $this->validate([
             'users_id' => 'required',
@@ -66,25 +69,15 @@ class TravelOrderMain extends Component
 
          $travel_order = new TravelOrder;
          $travel_order->purpose = $this->purpose;
-         $travel_order->philippine_regions_id =  isset($this->region_codes) ? $this->region_codes : "1";
-         $travel_order->philippine_provinces_id = $this->province_codes;
-         $travel_order->philippine_cities_id = $this->city_codes;
+         $travel_order->philippine_regions_id =  $reg['id'];
+         $travel_order->philippine_provinces_id = $prov['id'];
+         $travel_order->philippine_cities_id = $cit['id'];
          $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
          $travel_order->user_id = $this->users_id;
          $travel_order->dv_type_sorter_id = "1";
-         $travel_order->dte_id =  $this->region_codes;
+         $travel_order->dte_id =  $reg['id'];
          $travel_order->save();
 
-  
-        TravelOrder::create([
-            'purpose' =>  $this->purpose,
-            'philippine_regions_id' =>$this->region_codes,
-            'philippine_provinces_id' => $this->province_codes,
-            'philippine_cities_id' => $this->city_codes,
-            'has_registration' => isset($this->has_registration) ? "1" : "0",
-            'user_id' => $this->users_id,
-            'dv_type_sorter_id' => "1"
-        ]);
 
                 $this->alert('success', 'Successfully Added!', [
                 'background' => '#ccffcc',
@@ -98,13 +91,11 @@ class TravelOrderMain extends Component
                 'showCancelButton' =>  false, 
                 'showConfirmButton' =>  false, 
           ]);
+    }
 
-
-        // if(isset($this->has_registration))
-        // {
-        //     dd($this->users_id,  $this->purpose, $this->region_codes, $this->province_codes, $this->city_codes);
-        // }
-
+    public function clearFields()
+    {
+        
     }
 
 

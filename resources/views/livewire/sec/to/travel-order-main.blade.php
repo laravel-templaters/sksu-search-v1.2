@@ -34,6 +34,7 @@
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
                         <textarea wire:model="purpose" id="about" name="about" rows="3" class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                         <p class="mt-2 text-sm text-gray-500"><span class="font-extrabold text-indigo-600">NOTE:</span> This will also serve as the entry for your disbursement voucher in the future.</p>
+                        @error('purpose') <span class="error text-red-700">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
