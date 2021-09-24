@@ -105,12 +105,129 @@
         <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
             <div>
                 <h3 class="text-3xl font-medium leading-6 text-gray-900">
-            Itinerary
+                Itinerary
                 </h3>
                 <p class="max-w-2xl mt-1 text-sm text-gray-500">
                 itinerary for each day will be entered here
                 </p>
-            </div>           
+            </div>
+            
+                <div class="flex flex-col">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200" id="itineraryTable">
+                        <thead class="bg-gray-50">
+                            <tr>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Date
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Place to be visited
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Departure Time
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Arrival Time
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Mode of Trans.
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Trans. Exp
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Per Diem
+                            </th><th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Others
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Covered by Registration
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Total
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Odd row -->
+                            <tr class="bg-white">
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td  class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                {{$diems}}
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                Jane Cooper
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                           
+                            </tr>
+
+                            <!-- Even row -->
+                            <tr class="bg-gray-200">
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td  class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                {{$diems}}
+                            </td>
+                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                Jane Cooper
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                
+                            </td>
+                            </tr>
+
+                            <!-- More people... -->
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+                </div>
+          
         </div>
 
     </div>
