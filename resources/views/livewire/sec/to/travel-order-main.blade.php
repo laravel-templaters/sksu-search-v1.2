@@ -1,6 +1,6 @@
 <div class="m-4 bg-white rounded-md">
 
-    <form class="p-5 space-y-8 divide-y divide-gray-200">
+    <form class="p-5 space-y-8 divide-y divide-gray-200"  wire:submit.prevent="submit">
     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
             <div>
@@ -18,7 +18,12 @@
                         Name
                     </label>
                     <div class="col-span-1 mt-1">
-                        <input type="text" name="username" id="username" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 rounded-r-md sm:text-sm" placeholder="Applicant Name">
+                        <select wire:model="users_id" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            <option selected>--SELECT USER--</option>
+                            @foreach ($users as $user)   
+                            <option value="{{$user->id}}">{{$user->first_name}} {{ \Illuminate\Support\Str::limit($user->middle_name, 1, $end='.') }} {{$user->last_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -27,8 +32,9 @@
                         Purpose
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <textarea id="about" name="about" rows="3" class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                        <textarea wire:model="purpose" id="about" name="about" rows="3" class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                         <p class="mt-2 text-sm text-gray-500"><span class="font-extrabold text-indigo-600">NOTE:</span> This will also serve as the entry for your disbursement voucher in the future.</p>
+                        @error('purpose') <span class="error text-red-700">{{ $message }}</span> @enderror
                     </div>
                 </div>
 
@@ -38,29 +44,31 @@
                     </label>
                     <div class="col-span-1 row-span-1 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Region</h3>
-                        <select id="country" name="country" autocomplete="country" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                        <option>Region I</option>
-                        <option>Region II</option>
-                        <option>Region III</option>
-                        <option>Region IV</option>
+                        <select wire:model="region_codes" id="country" name="country" autocomplete="country" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            <option selected>--SELECT REGION--</option>
+                        @foreach ($regions as $region)                    
+                         <option value="{{$region->region_code}}">{{$region->region_description}}</option>
+                         @endforeach
+                        
                         </select>
                     </div>
                     <div class="col-span-1 row-span-1 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Province</h3>
-                        <select  class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                        <option>Province 1</option>
-                        <option>Province 2</option>
-                        <option>Province 3</option>
-                        <option>Province 4</option>
+                        <select wire:model="province_codes" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            <option selected>--SELECT PROVINCE--</option>
+                        @foreach ($provinces as $province)
+                        <option value="{{$province->province_code}}">{{$province->province_description}}</option>
+                        @endforeach
+
                         </select>
                     </div>
                     <div class="col-span-1 col-start-2 row-span-1 row-start-2 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">City / Municipality</h3>
-                        <select  class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                        <option>City / Municipality 1</option>
-                        <option>City / Municipality 2</option>
-                        <option>City / Municipality 3</option>
-                        <option>City / Municipality 4</option>
+                        <select wire:model="city_codes" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            <option selected>--SELECT CITY/MUNICIPALITY--</option>
+                            @foreach ($cities as $city)   
+                            <option value="{{$city->city_municipality_code}}">{{$city->city_municipality_description}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-span-1 col-start-3 row-span-1 row-start-2 mt-1">
@@ -78,7 +86,7 @@
                         <div class="col-span-1 col-start-2 row-span-1 row-start-1 mt-1">
                             
                             <div class="relative flex items-start">
-                                <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">                            
+                                <input value="0" wire:model="has_registration" id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">                            
                                 <div class="my-auto ml-3 text-sm">
                                     <label for="comments" class="font-medium text-gray-700">Has Registration</label>
                                 </div>
@@ -138,7 +146,7 @@
                         </div> 
                         <div class="col-span-1">
                             <h3 class="ml-1 text-sm text-gray-300 ">Per Diem</h3>
-                            <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" disabled>
+                            <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" value="{{isset($per_diem) ? '₱ '.number_format($per_diem['amount'],2) : ""}}" disabled>
                         </div>
                         
                         <div class="col-span-3 gap-2 p-2 bg-gray-300 rounded-md">

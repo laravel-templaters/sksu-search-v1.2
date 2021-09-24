@@ -10,7 +10,7 @@ class TravelOrder extends Model
     protected $table = "travel_orders";
     //Change Primary Key
     protected $primaryKey = 'id';
-
+    protected $fillable = ['purpose'];
     use HasFactory;
 
     public function itenerary(){
