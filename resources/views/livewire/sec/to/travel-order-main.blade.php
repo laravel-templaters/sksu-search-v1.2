@@ -113,14 +113,14 @@
             </div>
             
                 <div class="flex flex-col">
-                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="my-2 overflow-x-auto ">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200" id="itineraryTable">
+                    <div class="border-b border-gray-200 shadow sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200 table-fixed" id="itineraryTable">
                         <thead class="bg-gray-50">
                             <tr>
                             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                Date
+                                Date (yyyy/mm/dd)
                             </th>
                             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Place to be visited
@@ -152,76 +152,149 @@
                         </thead>
                         <tbody>
                             <!-- Odd row -->
-                            <tr class="bg-white">
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                            <tr class="break-all bg-white" >
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td  class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    {{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : ""}}
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="breakfast" aria-describedby="breakfast-description" name="breakfast" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="breakfast" class="font-medium text-gray-700">Breakfast</label>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="lunch" aria-describedby="lunch-description" name="lunch" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="lunch" class="font-medium text-gray-700">Lunch</label>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="dinner" aria-describedby="dinner-description" name="dinner" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="dinner" class="font-medium text-gray-700">Dinner</label>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="lodging" aria-describedby="lodging-description" name="lodging" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="lodging" class="font-medium text-gray-700">Lodging</label>
+                                            </div>
+                                        </div>
                                 
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                </div>
                                 
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td  class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                {{$diems}}
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                Jane Cooper
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    
+                                </td>
                            
                             </tr>
 
                             <!-- Even row -->
                             <tr class="bg-gray-200">
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    
+                                </td>
+                                <td  class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    {{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : ""}}
+                                </td>
+                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="breakfast" aria-describedby="breakfast-description" name="breakfast" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="breakfast" class="font-medium text-gray-700">Breakfast</label>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="lunch" aria-describedby="lunch-description" name="lunch" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="lunch" class="font-medium text-gray-700">Lunch</label>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="dinner" aria-describedby="dinner-description" name="dinner" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="dinner" class="font-medium text-gray-700">Dinner</label>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start col-span-1 ">
+                                            <div class="flex items-center h-5">
+                                                <input id="lodging" aria-describedby="lodging-description" name="lodging" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="lodging" class="font-medium text-gray-700">Lodging</label>
+                                            </div>
+                                        </div>
                                 
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                </div>
                                 
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td  class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                {{$diems}}
-                            </td>
-                            <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                Jane Cooper
-                            </td>
-                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                
-                            </td>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    
+                                </td>
                             </tr>
 
                             <!-- More people... -->
                         </tbody>
+                        <tfoot class="bg-gray-100">
+                        <button x-on:click></button>
+                        </tfoot>
                         </table>
                     </div>
                     </div>
