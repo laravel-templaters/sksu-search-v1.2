@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-primary-text bg-opacity-90">
+<nav x-data="{ open: false }" class="py-2 bg-secondary-bg drop-shadow-md bg-opacity-70">
     <!-- Primary Navigation Menu -->
     <div class="px-2 mx-auto max-w-7xl">
         <div class="flex justify-between h-16">

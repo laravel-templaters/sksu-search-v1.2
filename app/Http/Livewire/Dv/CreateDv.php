@@ -118,7 +118,7 @@ class CreateDv extends Component
         $this->position = position::where('id', '=',  $this->signatory->position_id)->first();
         $this->department = Department::where('id', '=',  $this->signatory->department_id)->first();
 
-        $this->validateForm(3);
+        $this->validateForm(4);
     }
 
     //dynamic input field methods START ----------

@@ -1,7 +1,7 @@
 <div class = "p-5">
         
         <div class="items-center mx-auto mb-5 text-center">
-            <h3 class="font-sans text-4xl font-extrabold text-primary-text drop-shadow-md">SELECT TRANSACTION</h3>
+            <h3 class="font-sans text-4xl font-extrabold text-primary-bg drop-shadow-md">SELECT TRANSACTION</h3>
         </div>
 
         <ul role="list" class="grid grid-cols-1 gap-3">
