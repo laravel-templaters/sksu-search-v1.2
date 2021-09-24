@@ -148,6 +148,9 @@
                             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Total
                             </th>
+                            <th scope="col" class="px-6 py-3">
+                                <span class="sr-only">Edit</span>
+                            </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -292,8 +295,9 @@
 
                             <!-- More people... -->
                         </tbody>
+                        
                         <tfoot class="bg-gray-100">
-                        <button x-on:click></button>
+                        <button wire:click.prevent="removesub({{$keySub}})" ></button>
                         </tfoot>
                         </table>
                     </div>
@@ -321,3 +325,32 @@
 
 
 
+ @foreach($inputsSub as $keySub => $subValue)
+                                <div class="grid grid-cols-2 gap-2 p-2 mt-2 border border-gray-700 rounded-md">
+                                    <div class="col-span-2">
+                                        <h3 class="ml-1 text-sm text-gray-600 ">Place to be visited</h3>
+                                        <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                    </div>
+                                    <div class="col-span-1">
+                                        <h3 class="ml-1 text-sm text-gray-600 ">Departure Time</h3>
+                                        <input type="time" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                    </div>
+                                    <div class="col-span-1">
+                                        <h3 class="ml-1 text-sm text-gray-600 ">Arrival Time</h3>
+                                        <input type="time" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                    </div>
+                                    <div class="col-span-1">
+                                        <h3 class="ml-1 text-sm text-gray-600 ">Mode Of Transport</h3>
+                                        <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                    </div>
+                                    <div class="col-span-1">
+                                        <h3 class="ml-1 text-sm text-gray-600 ">Transportation Expense</h3>
+                                        <div class="grid grid-cols-9 gap-1">
+                                            <input type="number" class="block min-w-full col-span-7 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                            <button class="col-span-2 m-1 text-center text-white bg-red-600 rounded-md " wire:click.prevent="removesub({{$keySub}})" >
+                                            REMOVE ENTRY
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
