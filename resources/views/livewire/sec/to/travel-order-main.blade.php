@@ -83,7 +83,7 @@
                         Registration Fee
                     </label>
                     
-                        <div class="col-span-1 col-start-2 row-span-1 row-start-1 mt-1">
+                        <div class="col-span-1 col-start-2 row-span-1 row-start-1 mt-1"> 
                             
                             <div class="relative flex items-start">
                                 <input value="0" wire:model="has_registration" id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">                            
@@ -110,77 +110,114 @@
                 <p class="max-w-2xl mt-1 text-sm text-gray-500">
                 itinerary for each day will be entered here
                 </p>
+        <div class ="mt-5 flex">            
+            <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">From</label>
+            <input wire:model="date_from" type="date" name="date_from" id="date_from" class="block w-48 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
             </div>
-            
+
+            <span class ="mx-2">_</span>
+
+            <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">To</label>
+            <input wire:model="date_to" type="date" name="date_to" id="date_to" class="block w-48 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
+            </div>
+        </div>
+        <button wire:click="generateDays" type="button" class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Generate
+          </button>
+            </div>
+            <div wire:loading wire:target="generateDays">
+                Loading...
+            </div>
+                @if($showDays)
+                @foreach ($gen as $g)
                 <div class="flex flex-col">
-                <div class="my-2 overflow-x-auto ">
+                <div class="my-2 overflow-x-auto">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                     <div class="border-b border-gray-200 shadow sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200 table-fixed" id="itineraryTable">
                         <thead class="bg-gray-50">
                             <tr>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                Date (yyyy/mm/dd)
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                Date ({{Carbon\Carbon::createFromFormat('Y-m-d', $g)->format('Y')}})
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                 Place to be visited
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                 Departure Time
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                 Arrival Time
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                 Mode of Trans.
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                 Trans. Exp
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                 Per Diem
-                            </th><th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            </th><th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                 Others
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            {{-- <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Covered by Registration
-                            </th>
+                            </th> --}}
                             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Total
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Breakfast
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Lunch
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Dinner
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Lodging
+                            </th>
+                            {{-- <th scope="col" class="px-6 py-3"> --}}
                                 <span class="sr-only">Edit</span>
                             </th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Odd row -->
+                            {{-- add ROW!! --}}
+                            {{-- @foreach($inputs as $key => $value) --}}
                             <tr class="break-all bg-white">
-                                    <td  class="px-6 py-4 text-sm font-medium text-gray-900 break-all " >
-                                        <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent">
+                                    <td contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " >
+                                        {{Carbon\Carbon::createFromFormat('Y-m-d', $g)->format('M')}} . {{Carbon\Carbon::createFromFormat('Y-m-d', $g)->format('d')}}
+                                        {{-- <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent"> --}}
                                     </td>
-                                <td contenteditable='true'class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    asdfadfsghsdfghdfd
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                     {{-- <input type="text" class="min-w-24 min-h-full border-transparent"> --}}
+                                     <input type="text" name="name" id="name" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+
                                     </td>
-                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    
-                                </td>
-                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    
-                                </td>
-                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    
-                                </td>
-                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    
-                                </td>
-                                <td  class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    {{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : ""}}
-                                </td>
-                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    <input type="time" class="min-w-full min-h-full border-transparent">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                    <input type="time" class="min-w-full min-h-full border-transparent">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    <input type="text" name="name" id="name" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    <input type="number" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                </td>
+                                <td  class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="text" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : ""}}">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="number" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                </td>
+                                {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                     <div class="grid grid-cols-1 gap-2">
                                         <div class="flex items-start col-span-1"> 
                                             <div class="flex items-center h-5">
@@ -217,15 +254,15 @@
                                 
                                 </div>
                                 
-                                </td>
-                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                </td> --}}
+                                {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
                                     
-                                </td>
+                                </td> --}}
                            
                             </tr>
 
                             <!-- Even row -->
-                            <tr class="bg-gray-200">
+                            {{--<tr class="bg-gray-200">
                                 <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                     
                                 </td>
@@ -250,7 +287,7 @@
                                 <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 ">
                                     
                                 </td>
-                                <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                     <div class="grid grid-cols-1 gap-2">
                                         <div class="flex items-start col-span-1 ">
                                             <div class="flex items-center h-5">
@@ -291,21 +328,37 @@
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
                                     
                                 </td>
-                            </tr>
+                            </tr> --}}
 
-                            <!-- More people... -->
+ 
                         </tbody>
-                        
-                        <tfoot class="bg-gray-100">
-                        <button wire:click.prevent="addmain({{$i}})" > ADD ROW</button><button class="m-5" wire:click.prevent="checkModel()" > Chefcka</button>
+                        {{-- @endforeach --}}
+                        {{-- <tfoot class="bg-gray-100 display:block">
+                        <button wire:click.prevent="addmain({{$i}})" > ADD ROWS</button><button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
                         {{$frick}}
-                        </tfoot>
+                        </tfoot> --}}
                         </table>
                     </div>
+
+                    <div>
+                        <button class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="addmain({{$i}})" > ADD ROWS</button>
+                        {{-- <button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
+                        {{$frick}} --}}
+                    </div>
                     </div>
                 </div>
                 </div>
-          
+                @endforeach
+                @elseif($err_from_to)
+                <div wire.loading.remove class="mt-5">
+                <span class ="text-red-400">Please fill out all fields.</span>
+                </div>
+                @elseif($err_diff)
+                <div wire.loading.remove class="mt-5">
+                    <span class ="text-red-400">Invalid Dates.</span>
+                    </div>
+                @endif
+             
         </div>
 
     </div>

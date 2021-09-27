@@ -2,16 +2,24 @@
 
 namespace App\Http\Livewire\Sec\To;
 
+use DatePeriod;
+use DateTime;
+use DateInterval;
+
 use Livewire\Component;
 use App\Models\Region;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\User;
-use App\Models\TravelOrder;
+use App\Models\TravelOrder;  
 use App\Models\Dte;
+use Carbon\Carbon;
 
 class TravelOrderMain extends Component
 {
+
+
+
     public $users_id;
     public $user;
     public $purpose;
@@ -31,8 +39,19 @@ class TravelOrderMain extends Component
     public $inputs = [];
     public $i = 1;
     //variables for mock
-    public $frick ="aasdas";
+    public $frick ="hey";
+
+    //variables for date_from and date_to
+    public $date_from;
+    public $date_to;
+    public $diff;
+
+
+    public $showDays = false;
+    public $err_from_to = false;
+    public $err_diff = false;
     
+    public $gen = [];
 
     public function render()
     {
@@ -98,6 +117,8 @@ class TravelOrderMain extends Component
 
     //methods on main field
     public function addmain($i){
+        // dd($i);
+
         $i = $i + 1;
         $this->i = $i;
         array_push($this->inputs ,$i);
@@ -120,5 +141,62 @@ class TravelOrderMain extends Component
             'showConfirmButton' =>  false, 
       ]);
     }
+
+    public function generateDays()
+    {
+
+        if(is_null($this->date_from) || is_null($this->date_to))
+        {
+           
+            $this->err_diff = false;
+            $this->err_from_to = true;
+        }else{
+            $from = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d');
+            $to = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d');
+            $this->diff = $to - $from;
+            if($this->date_to < $this->date_from)
+            {
+               // dd( $from = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('M'));
+                $this->err_from_to = false;
+                $this->err_diff = true;
+            }else{
+                
+                TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+               // dd($this->gen);
+
+                $this->showDays = true;
+            }  
+        }
+        
+    }
+
+    function createDateRangeArray($strDateFrom,$strDateTo)
+{
+    // takes two dates formatted as YYYY-MM-DD and creates an
+    // inclusive array of the dates between the from and to dates.
+
+    // could test validity of dates here but I'm already doing
+    // that in the main script
+
+    $this->gen = [];
+
+    $iDateFrom = strtotime($strDateFrom);
+    $iDateTo = strtotime($strDateTo);
+    // $iDateFrom = mktime(1, 0, 0, substr($strDateFrom, 5, 2), substr($strDateFrom, 8, 2), substr($strDateFrom, 0, 4));
+    // $iDateTo = mktime(1, 0, 0, substr($strDateTo, 5, 2), substr($strDateTo, 8, 2), substr($strDateTo, 0, 4));
+
+    if ($iDateTo >= $iDateFrom) {
+        array_push($this->gen, date('Y-m-d', $iDateFrom)); // first entry
+        while ($iDateFrom<$iDateTo) {
+            $iDateFrom += 86400; // add 24 hours
+            array_push($this->gen, date('Y-m-d', $iDateFrom));
+        }
+    }
+
+    //  dd($this->gen);
+    return $this->gen;
+}
+
+  
     
 }
