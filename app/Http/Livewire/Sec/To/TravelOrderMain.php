@@ -28,9 +28,10 @@ class TravelOrderMain extends Component
 
     //variables for Main
     public $updateMode = false;
-    public $inputsMain = [];
+    public $inputs = [];
     public $i = 1;
-    //variables for Sub
+    //variables for mock
+    public $frick ="aasdas";
     
 
     public function render()
@@ -99,12 +100,25 @@ class TravelOrderMain extends Component
     public function addmain($i){
         $i = $i + 1;
         $this->i = $i;
-        array_push($this->inputsMain ,$i);
+        array_push($this->inputs ,$i);
     }
     public function removemain($i)
     {
-        unset($this->inputsMain[$i]);
+        unset($this->inputs[$i]);
     }
-
+    public function checkModel(){
+        $this->alert('success', 'Successfully Added!', [
+            'background' => '#ccffcc',
+            'padding' => '0.5rem',
+            'position' =>  'top-end', 
+            'timer' =>  2500,  
+            'toast' =>  true, 
+            'text' =>  $this->frick, 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+      ]);
+    }
     
 }

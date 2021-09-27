@@ -155,13 +155,13 @@
                         </thead>
                         <tbody>
                             <!-- Odd row -->
-                            <tr class="break-all bg-white" >
-                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    
-                                </td>
-                                <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    
-                                </td>
+                            <tr class="break-all bg-white">
+                                    <td  class="px-6 py-4 text-sm font-medium text-gray-900 break-all " >
+                                        <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent">
+                                    </td>
+                                <td contenteditable='true'class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    asdfadfsghsdfghdfd
+                                    </td>
                                 <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                     
                                 </td>
@@ -182,7 +182,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                     <div class="grid grid-cols-1 gap-2">
-                                        <div class="flex items-start col-span-1 ">
+                                        <div class="flex items-start col-span-1"> 
                                             <div class="flex items-center h-5">
                                                 <input id="breakfast" aria-describedby="breakfast-description" name="breakfast" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                                             </div>
@@ -297,7 +297,8 @@
                         </tbody>
                         
                         <tfoot class="bg-gray-100">
-                        <button wire:click.prevent="removesub({{$keySub}})" ></button>
+                        <button wire:click.prevent="addmain({{$i}})" > ADD ROW</button><button class="m-5" wire:click.prevent="checkModel()" > Chefcka</button>
+                        {{$frick}}
                         </tfoot>
                         </table>
                     </div>
@@ -325,32 +326,3 @@
 
 
 
- @foreach($inputsSub as $keySub => $subValue)
-                                <div class="grid grid-cols-2 gap-2 p-2 mt-2 border border-gray-700 rounded-md">
-                                    <div class="col-span-2">
-                                        <h3 class="ml-1 text-sm text-gray-600 ">Place to be visited</h3>
-                                        <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                    </div>
-                                    <div class="col-span-1">
-                                        <h3 class="ml-1 text-sm text-gray-600 ">Departure Time</h3>
-                                        <input type="time" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                    </div>
-                                    <div class="col-span-1">
-                                        <h3 class="ml-1 text-sm text-gray-600 ">Arrival Time</h3>
-                                        <input type="time" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                    </div>
-                                    <div class="col-span-1">
-                                        <h3 class="ml-1 text-sm text-gray-600 ">Mode Of Transport</h3>
-                                        <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                    </div>
-                                    <div class="col-span-1">
-                                        <h3 class="ml-1 text-sm text-gray-600 ">Transportation Expense</h3>
-                                        <div class="grid grid-cols-9 gap-1">
-                                            <input type="number" class="block min-w-full col-span-7 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                            <button class="col-span-2 m-1 text-center text-white bg-red-600 rounded-md " wire:click.prevent="removesub({{$keySub}})" >
-                                            REMOVE ENTRY
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
