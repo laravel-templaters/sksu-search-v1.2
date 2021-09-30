@@ -112,14 +112,14 @@
                 </p>
         <div class ="mt-5 flex">            
             <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">From</label>
+            <label for="date_from" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">From</label>
             <input wire:model="date_from" type="date" name="date_from" id="date_from" class="block w-48 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
             </div>
 
             <span class ="mx-2">_</span>
 
             <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label for="name" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">To</label>
+            <label for="date_to" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">To</label>
             <input wire:model="date_to" type="date" name="date_to" id="date_to" class="block w-48 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
             </div>
         </div>
@@ -134,7 +134,7 @@
                 @foreach ($gen as $g)
                 <div class="flex flex-col">
                 <div class="my-2 overflow-x-auto">
-                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="inline-block min-w-full py-2 align-middle sm:px-2 lg:px-2">
                     <div class="border-b border-gray-200 shadow sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200 table-fixed" id="itineraryTable">
                         <thead class="bg-gray-50">
@@ -165,7 +165,7 @@
                             {{-- <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Covered by Registration
                             </th> --}}
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                            <th scope="col" class="px-6 py-3 text-xs font-extrabold tracking-wider text-left text-gray-800 uppercase">
                                 Total
                             </th>
                             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -196,26 +196,26 @@
                                     </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                      {{-- <input type="text" class="min-w-24 min-h-full border-transparent"> --}}
-                                     <input type="text" name="name" id="name" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                     <input type="text" name="place" id="place" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
 
                                     </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input type="time" class="min-w-full min-h-full border-transparent">
+                                    <input type="time" name="departure_time" id="departure_time" class="min-w-full min-h-full border-transparent">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                    <input type="time" class="min-w-full min-h-full border-transparent">
+                                    <input type="time" name="arrival_time" id="arrival_time"class="min-w-full min-h-full border-transparent">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input type="text" name="name" id="name" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input type="text" name="mot" id="mot" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input type="number" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
-                                </td>
-                                <td  class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="text" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : ""}}">
+                                    <input type="number" name="travel_expense" id="travel_expense" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="number" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input type="text" name="per_diem" id="per_diem" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : "0.00"}}">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="number" name="others" id="others" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                 </td>
                                 {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                     <div class="grid grid-cols-1 gap-2">
