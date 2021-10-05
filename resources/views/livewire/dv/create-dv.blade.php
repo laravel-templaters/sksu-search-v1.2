@@ -253,7 +253,7 @@
 
                                             {{-- DV Category --}}
                                             <div class="col-span-4">
-                                                <label for="dv_category" class="block text-sm font-medium text-gray-700">Voucher Type</label>
+                                                <label for="dv_category" class="block text-sm font-medium text-gray-700">Voucher Type</label> 
                                                 <input type="text"
                                                    wire:model="voucher_type" class="block w-full px-3 py-2 mt-1 uppercase bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" disabled>
                                                 
@@ -401,9 +401,13 @@
                                 </div> --}}
                                 <div class="px-4 py-8 mx-auto max-w-7xl">
                                 <h3 class="mb-5 text-4xl font-extrabold drop-shadow-lg">Documents required : </h3>
+                                @if ($related_docs->count() > 0)
                                         <div class="mx-auto overflow-hidden bg-white border border-gray-300 rounded-md">
-                                            <ul role="list" class="">
                                             
+                                            <ul role="list" class="">
+                                                
+                                                @foreach ($related_docs as $doc)
+
                                                 <li class="flex justify-start px-6 py-4">
 
                                                     <div class="flex">
@@ -412,12 +416,17 @@
                                                         </svg>
                                                     </div>
                                                     <div class="flex">
-                                                        <h3 class="my-auto uppercase">asd</h3>
+                                                        <h3 class="my-auto uppercase">{{$doc->related_docs}}</h3>
                                                     </div>
-                                                </li>
-
+                                                </li>                             
+                                                @endforeach
+                                                
                                             </ul>
+                                           
                                         </div>
+                                        @else
+                                        <h1>No documents here</h1>
+                                        @endif 
                                         <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-blue-54 focus:ring-indigo-500 focus:border-indigo-500" wire:click.prevent="validateForm(3)"> Proceed </button>
                                     </div>
 

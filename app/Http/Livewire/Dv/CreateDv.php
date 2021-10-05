@@ -9,6 +9,7 @@ use App\Models\DVType;
 use App\Models\DVCategory;
 use App\Models\DVSubCategory;
 use App\Models\ModeOfPayment;
+use App\Models\RelatedDoc;
 use App\Models\Particular;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +51,8 @@ class CreateDv extends Component
     public $dv_category;
     public $dv_sub_category_id;
     public $voucher_type;
+    public $voucher;
+    public $related_docs;
 
     public $mode_id;
 
@@ -86,14 +89,18 @@ class CreateDv extends Component
             {
                 case '1':
                     $this->voucher_type = (DVType::where('id', '=',  $this->category_id)->first())->dv_type;
+                    $this->voucher = DVType::where('id', '=',  $this->category_id)->first();
                     break;
                     case '2':
-                        $this->voucher_type = (DVCategory::where('id', '=',  $this->category_id)->first())->dv_category;    
+                        $this->voucher_type = (DVCategory::where('id', '=',  $this->category_id)->first())->dv_category;
+                        $this->voucher = DVCategory::where('id', '=',  $this->category_id)->first();     
                         break;
                         case '3':
-                            $this->voucher_type = (DVSubCategory::where('id', '=',  $this->category_id)->first())->dv_sub_category;     
+                            $this->voucher_type = (DVSubCategory::where('id', '=',  $this->category_id)->first())->dv_sub_category;
+                            $this->voucher = DVSubCategory::where('id', '=',  $this->category_id)->first();      
                             break;
             }
+            // dd($this->voucher->id);
         }
 
         //get total of particulars
@@ -106,9 +113,10 @@ class CreateDv extends Component
         $this->dv_category = DVCategory::where('id', '=',  $this->dv_category_id)->first();
         $this->dv_type_id = $this->dv_category->dv_type_id;
         $this->dv_type = DVType::where('id', '=',  $this->dv_type_id)->first();
+        $this->related_docs = RelatedDoc::where('dv_sub_category_id', '=', $this->voucher->id)->get();
         return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories)
-        ->with('dv_type_id', $this->dv_type_id);
-       
+        ->with('dv_type_id', $this->dv_type_id)->with('related_docs' , $this->related_docs);
+
     }
 
     public function setsignatory($id){

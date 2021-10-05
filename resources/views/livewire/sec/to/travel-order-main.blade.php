@@ -188,8 +188,9 @@
                         <tbody>
                             <!-- Odd row -->
                             {{-- add ROW!! --}}
+
                             {{-- @foreach($inputs as $key => $value) --}}
-                            <tr class="break-all bg-white">
+                            <tr class="break-all bg-white ">
                                     <td contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " >
                                         {{Carbon\Carbon::createFromFormat('Y-m-d', $g)->format('M')}} . {{Carbon\Carbon::createFromFormat('Y-m-d', $g)->format('d')}}
                                         {{-- <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent"> --}}
@@ -216,6 +217,12 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
                                     <input type="number" name="others" id="others" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="number" name="total" id="total" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="checkbox" name="breakfast" id="breakfast" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                                 </td>
                                 {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                     <div class="grid grid-cols-1 gap-2">
@@ -262,7 +269,7 @@
                             </tr>
 
                             <!-- Even row -->
-                            {{--<tr class="bg-gray-200">
+                            {{-- <tr class="bg-gray-200">
                                 <td contenteditable='true' class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                     
                                 </td>
@@ -332,7 +339,9 @@
 
  
                         </tbody>
+
                         {{-- @endforeach --}}
+
                         {{-- <tfoot class="bg-gray-100 display:block">
                         <button wire:click.prevent="addmain({{$i}})" > ADD ROWS</button><button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
                         {{$frick}}
