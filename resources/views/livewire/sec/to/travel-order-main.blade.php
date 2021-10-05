@@ -123,7 +123,7 @@
             <input wire:model="date_to" type="date" name="date_to" id="date_to" class="block w-48 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
             </div>
         </div>
-        <button wire:click="generateDays" type="button" class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button wire:click="generateDays" wire:loading.attr="disabled" type="button" class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Generate
           </button>
             </div>
@@ -132,7 +132,7 @@
             </div>
                 @if($showDays)
                 @foreach ($gen as $g)
-                <div class="flex flex-col">
+                <div class="flex flex-col" wire:init="generateDays">
                 <div class="my-2 overflow-x-auto">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-2 lg:px-2">
                     <div class="border-b border-gray-200 shadow sm:rounded-lg">
@@ -223,6 +223,15 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
                                     <input type="checkbox" name="breakfast" id="breakfast" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="checkbox" name="lunch" id="lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="checkbox" name="dinner" id="dinner" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
+                                    <input type="checkbox" name="lodging" id="lodging" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                                 </td>
                                 {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                     <div class="grid grid-cols-1 gap-2">

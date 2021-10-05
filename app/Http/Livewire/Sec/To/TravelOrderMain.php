@@ -147,7 +147,7 @@ class TravelOrderMain extends Component
 
         if(is_null($this->date_from) || is_null($this->date_to))
         {
-           
+            $this->showDays = false;
             $this->err_diff = false;
             $this->err_from_to = true;
         }else{
@@ -157,14 +157,14 @@ class TravelOrderMain extends Component
             if($this->date_to < $this->date_from)
             {
                // dd( $from = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('M'));
+               $this->showDays = false;
                 $this->err_from_to = false;
                 $this->err_diff = true;
-            }else{
-                
-                
+            }else{     
                 // dd($this->gen);
 
-                $this->showDays = true;
+                
+
                 TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
             }  
         }
@@ -195,7 +195,7 @@ class TravelOrderMain extends Component
     // }
 
     //   dd($this->gen);
-
+    $this->showDays = true;
     return $this->gen;
 }
 
