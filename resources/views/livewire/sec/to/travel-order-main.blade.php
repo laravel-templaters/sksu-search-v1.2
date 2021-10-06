@@ -132,7 +132,8 @@
             </div>
                 @if($showDays)
                 @foreach ($gen as $g)
-                <div class="flex flex-col" wire:init="generateDays">
+
+                <div wire:key="{{$g}}" class="flex flex-col" wire:init="generateDays">
                 <div class="my-2 overflow-x-auto">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-2 lg:px-2">
                     <div class="border-b border-gray-200 shadow sm:rounded-lg">
@@ -189,49 +190,49 @@
                             <!-- Odd row -->
                             {{-- add ROW!! --}}
 
-                            {{-- @foreach($inputs as $key => $value) --}}
+                            @foreach($input as $key => $value)
                             <tr class="break-all bg-white ">
-                                    <td contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " >
+                                    <td wire:model='input.{{$key}}.date' contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " >
                                         {{Carbon\Carbon::createFromFormat('Y-m-d', $g)->format('M')}} . {{Carbon\Carbon::createFromFormat('Y-m-d', $g)->format('d')}}
                                         {{-- <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent"> --}}
                                     </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                      {{-- <input type="text" class="min-w-24 min-h-full border-transparent"> --}}
-                                     <input type="text" name="place" id="place" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                     <input wire:model='input.{{$key}}.place' type="text" name="place" id="place" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
 
                                     </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input type="time" name="departure_time" id="departure_time" class="min-w-full min-h-full border-transparent">
+                                    <input wire:model='input.{{$key}}.dep_time' type="time" name="departure_time" id="departure_time" class="min-w-full min-h-full border-transparent">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                    <input type="time" name="arrival_time" id="arrival_time"class="min-w-full min-h-full border-transparent">
+                                    <input wire:model='input.{{$key}}.arr_time' type="time" name="arrival_time" id="arrival_time"class="min-w-full min-h-full border-transparent">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input type="text" name="mot" id="mot" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input wire:model='input.{{$key}}.mot' type="text" name="mot" id="mot" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input type="number" name="travel_expense" id="travel_expense" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input wire:model='input.{{$key}}.trans_exp' type="number" name="travel_expense" id="travel_expense" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="text" name="per_diem" id="per_diem" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : "0.00"}}">
+                                    <input wire:model='input.{{$key}}.per_diem' type="text" name="per_diem" id="per_diem" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : "0.00"}}">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="number" name="others" id="others" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input wire:model='input.{{$key}}.others' type="number" name="others" id="others" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="number" name="total" id="total" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input wire:model='input.{{$key}}.total' type="number" name="total" id="total" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="checkbox" name="breakfast" id="breakfast" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="breakfast" id="breakfast" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="checkbox" name="lunch" id="lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <input wire:model='input.{{$key}}.lunch' type="checkbox" name="lunch" id="lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="checkbox" name="dinner" id="dinner" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <input wire:model='input.{{$key}}.dinner' type="checkbox" name="dinner" id="dinner" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input type="checkbox" name="lodging" id="lodging" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <input wire:model='input.{{$key}}.lodging' type="checkbox" name="lodging" id="lodging" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
                                 </td>
                                 {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900">
                                     <div class="grid grid-cols-1 gap-2">
@@ -349,7 +350,7 @@
  
                         </tbody>
 
-                        {{-- @endforeach --}}
+                        @endforeach
 
                         {{-- <tfoot class="bg-gray-100 display:block">
                         <button wire:click.prevent="addmain({{$i}})" > ADD ROWS</button><button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
@@ -359,7 +360,8 @@
                     </div>
 
                     <div>
-                        <button class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="addmain({{$i}})" > ADD ROWS</button>
+                        <button class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+                        wire:click.prevent="addmain({{$i}})" > ADD ROWS</button>
                         {{-- <button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
                         {{$frick}} --}}
                     </div>
@@ -367,6 +369,7 @@
                 </div>
                 </div>
                 @endforeach
+
                 @elseif($err_from_to)
                 <div wire.loading.remove class="mt-5">
                 <span class ="text-red-400">Please fill out all fields.</span>

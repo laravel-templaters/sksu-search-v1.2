@@ -53,6 +53,23 @@ class TravelOrderMain extends Component
     
     public $gen = [];
 
+
+    public $input = [[
+        "date" => "",
+        "place" => "",
+        "dep_time" => "",
+        "arr_time" => "",
+        "mot" => "",
+        "trans_exp" => "",
+        "per_diem" => "",
+        "others" => "",
+        "total" => "",
+        "breakfast" => "",
+        "lunch" => "",
+        "dinner" => "",
+        "lodging" => "",
+ ],];
+
     public function render()
     {
         $this->user = User::get();
@@ -118,14 +135,17 @@ class TravelOrderMain extends Component
     //methods on main field
     public function addmain($i){
         // dd($i);
-
+        
         $i = $i + 1;
         $this->i = $i;
-        array_push($this->inputs ,$i);
+  
+            array_push($this->input ,$i);
+        
+       
     }
     public function removemain($i)
     {
-        unset($this->inputs[$i]);
+        unset($this->input[$i]);
     }
     public function checkModel(){
         $this->alert('success', 'Successfully Added!', [
@@ -144,8 +164,7 @@ class TravelOrderMain extends Component
 
     public function generateDays()
     {
-
-        if(is_null($this->date_from) || is_null($this->date_to))
+             if(is_null($this->date_from) || is_null($this->date_to))
         {
             $this->showDays = false;
             $this->err_diff = false;
@@ -163,22 +182,25 @@ class TravelOrderMain extends Component
             }else{     
                 // dd($this->gen);
 
-                
+                    TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                    $this->showDays = true;
 
-                TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
             }  
-        }
-        
+        }   
     }
 
+ 
+
+
+
     function createDateRangeArray($strDateFrom,$strDateTo)
-{
+    {
     // takes two dates formatted as YYYY-MM-DD and creates an
     // inclusive array of the dates between the from and to dates.
 
     // could test validity of dates here but I'm already doing
     // that in the main script
-
+    
     $this->gen = [];
 
     $iDateFrom = strtotime($strDateFrom);
@@ -186,18 +208,17 @@ class TravelOrderMain extends Component
     // $iDateFrom = mktime(1, 0, 0, substr($strDateFrom, 5, 2), substr($strDateFrom, 8, 2), substr($strDateFrom, 0, 4));
     // $iDateTo = mktime(1, 0, 0, substr($strDateTo, 5, 2), substr($strDateTo, 8, 2), substr($strDateTo, 0, 4));
 
-    // if ($iDateTo >= $iDateFrom) {
         array_push($this->gen, date('Y-m-d', $iDateFrom)); // first entry
         while ($iDateFrom<$iDateTo) {
             $iDateFrom += 86400; // add 24 hours
             array_push($this->gen, date('Y-m-d', $iDateFrom));
         }
-    // }
+
 
     //   dd($this->gen);
-    $this->showDays = true;
+    
     return $this->gen;
-}
+    }
 
   
     
