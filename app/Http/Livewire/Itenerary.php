@@ -32,10 +32,15 @@ class Itenerary extends Component
         "lodging" => "",
  ],];
 
-    public function mount($gen)
+    public function mount($gen, $per_diem)
     {
         $this->gen = $gen;
-
+        $this->per_diem = $per_diem;
+       
+    //     $this->input = [[
+    //         "per_diem" => isset($this->per_diem) ? number_format($this->per_diem['amount'],2) : ""
+    //  ],];
+      
     }
 
     public function render()
@@ -77,15 +82,19 @@ class Itenerary extends Component
                 $this->err_diff = true;
             }else{     
                 // dd($this->gen);
-
+              
                     TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                    
                     $this->showDays = true;
 
             }  
         }   
     }
 
+   
+
  
+    
 
 
 
@@ -115,4 +124,6 @@ class Itenerary extends Component
     
     return $this->gen;
     }
+
+
 }

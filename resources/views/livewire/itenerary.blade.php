@@ -80,7 +80,7 @@
                             <input wire:model='input.{{$key}}.trans_exp' type="number" name="travel_expense" id="travel_expense" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.per_diem' type="text" name="per_diem" id="per_diem" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : "0.00"}}">
+                            <input type="text" name="per_diem" id="per_diem" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem['amount']) ? ''.number_format($per_diem['amount'],2) : "0.00"}}">
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
                             <input wire:model='input.{{$key}}.others' type="number" name="others" id="others" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
@@ -225,8 +225,8 @@
                 </table>
             </div>
 
-            <div>
-                <button class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+            <div class="flex">
+                <button class="mt-2 mr-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
                 wire:click.prevent="addmain({{$i}})" > ADD ROWS</button>
                 {{-- <button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
                 {{$frick}} --}}
@@ -234,4 +234,8 @@
             </div>
         </div>
         </div>
+       
 </div>
+
+
+
