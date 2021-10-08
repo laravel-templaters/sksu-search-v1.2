@@ -12,52 +12,90 @@ class Itenerary extends Component
     public $date_to;
     public $diff;
     public $per_diem;
+    public $temp_diem=array();
+    public $final_diem;
 
 
     public $showDays = false;
 
-    public $input = [[
+    
+    public $input = [
+        [
         "date" => "",
         "place" => "",
         "dep_time" => "",
         "arr_time" => "",
         "mot" => "",
         "trans_exp" => "",
-        "per_diem" => "",
+        "per_diem"=>"",
         "others" => "",
         "total" => "",
         "breakfast" => "",
         "lunch" => "",
         "dinner" => "",
         "lodging" => "",
- ],];
+        'raw_diem'=>"",
+        ],
+                    ];
 
     public function mount($gen, $per_diem)
     {
         $this->gen = $gen;
         $this->per_diem = $per_diem;
-       
-    //     $this->input = [[
-    //         "per_diem" => isset($this->per_diem) ? number_format($this->per_diem['amount'],2) : ""
-    //  ],];
+        if(isset($this->per_diem)){
+            if(!isset($this->temp_diem[0])){
+                $this->temp_diem[0]=$this->per_diem['amount'];
+            }   
+        }else{
+            if(!isset($this->temp_diem[0])){
+                $this->temp_diem[0]=$this->per_diem['amount'];
+            }  
+        }
+        
+        $this->input[1]['raw_diem'] =  $this->temp_diem[0];
+        $this->input[1]['per_diem'] =  number_format($this->temp_diem[0],2);
+        $this->input = [[
+            "per_diem" => isset($this->per_diem) ? number_format($this->per_diem['amount'],2) : ""
+     ],];
       
     }
 
     public function render()
-    {
+    {   
+        
+        // dd($this->input);
+        
         return view('livewire.itenerary');
+       
+        
     }
 
-    public function addmain($i){
+    
+
+    public function addmain(){
         // dd($i);
         
-        $i = $i + 1;
-        $this->i = $i;
-  
-            array_push($this->input ,$i);
         
-       
+        $this->i= $this->i+1;
+        array_push($this->input,array(
+            "date" => "",
+            "place" => "",
+            "dep_time" => "",
+            "arr_time" => "",
+            "mot" => "",
+            "trans_exp" => "",
+            "per_diem"=>number_format($this->temp_diem[0],2),
+            "others" => "",
+            "total" => "",
+            "breakfast" => "",
+            "lunch" => "",
+            "dinner" => "",
+            "lodging" => "",
+            'raw_diem'=>  (string)$this->temp_diem[0],
+        ));
+        
     }
+
     public function removemain($i)
     {
         unset($this->input[$i]);
@@ -125,5 +163,66 @@ class Itenerary extends Component
     return $this->gen;
     }
 
+    function ComputeDiem($key,$type){
+        
+        switch ($type) {
+            case 'breakfast':
+                if($this->input[intval($key)]['breakfast']==1){
+                    
+                    $addition = $this->temp_diem[0] * 0.1;
+                    $this->input[intval($key)]['raw_diem'] = ((float)$this->input[intval($key)]['raw_diem']) - $addition;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }else{
+                   
+                    $deduction = $this->temp_diem[0] * 0.1;
+                    $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }
+                break;
+            case 'lunch':
+                if($this->input[intval($key)]['lunch']==1){
+                   
+                    $addition = $this->temp_diem[0] * 0.1;
+                    $this->input[intval($key)]['raw_diem'] = ((float)$this->input[intval($key)]['raw_diem']) - $addition;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }else{
+                   
+                    $deduction = $this->temp_diem[0] * 0.1;
+                    $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }
+                break;
+            case 'dinner':
+                if($this->input[intval($key)]['dinner']==1){
+                    
+                    $addition = $this->temp_diem[0] * 0.1;
+                    $this->input[intval($key)]['raw_diem'] = ((float)$this->input[intval($key)]['raw_diem']) - $addition;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }else{
+                   
+                    $deduction = $this->temp_diem[0] * 0.1;
+                    $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }
+                break;
+            case 'lodging':
+                if($this->input[intval($key)]['lodging']==1){
+                   
+                    $addition = $this->temp_diem[0] * 0.5;
+                    $this->input[intval($key)]['raw_diem'] = ((float)$this->input[intval($key)]['raw_diem']) - $addition;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }else{
+                   
+                    $deduction = $this->temp_diem[0] * 0.5;
+                    $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
+                    $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
+                }
+                break;
+            
+           
+        }
+    }
+    
+    
 
 }

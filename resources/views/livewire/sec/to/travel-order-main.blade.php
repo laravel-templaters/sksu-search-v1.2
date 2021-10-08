@@ -134,7 +134,7 @@
 
                 @foreach ($gen as $g)
                  {{-- @livewire('itenerary', ['gen' => $g], key($g)) --}}
-                 @include('wrappers.itinerary-daily-wrapper)
+                 @include('wrappers.itinerary-daily-wrapper')
                 @endforeach
 
 
