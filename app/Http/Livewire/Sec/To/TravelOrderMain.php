@@ -154,13 +154,15 @@ class TravelOrderMain extends Component
             'position' =>  'top-end', 
             'timer' =>  2500,  
             'toast' =>  true, 
-            'text' =>  $this->frick, 
+            'text' => "hello", 
             'confirmButtonText' =>  'Ok', 
             'cancelButtonText' =>  'Cancel', 
             'showCancelButton' =>  false, 
             'showConfirmButton' =>  false, 
       ]);
     }
+
+
 
     public function generateDays()
     {
@@ -184,9 +186,10 @@ class TravelOrderMain extends Component
 
                     TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
                     $this->showDays = true;
-
+ 
             }  
-        }   
+        }
+
     }
 
  

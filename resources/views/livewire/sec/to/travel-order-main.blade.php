@@ -131,10 +131,12 @@
                 Loading...
             </div>
                 @if($showDays)
+
                 @foreach ($gen as $g)
                  {{-- @livewire('itenerary', ['gen' => $g], key($g)) --}}
-                 @include('wrappers.itinerary-daily-wrapper')
+                 @include('wrappers.itinerary-daily-wrapper)
                 @endforeach
+
 
                 @elseif($err_from_to)
                 <div wire.loading.remove class="mt-5">
