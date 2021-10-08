@@ -1,0 +1,1 @@
+ @livewire('itenerary', ['gen' => $g], key($g))

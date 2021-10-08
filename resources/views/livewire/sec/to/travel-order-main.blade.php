@@ -1,4 +1,4 @@
-<div class="m-4 bg-white rounded-md">
+<div class="m-4 rounded-md bg-secondary-bg-alt ">
 
     <form class="p-5 space-y-8 divide-y divide-gray-200"  wire:submit.prevent="submit">
     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -110,17 +110,17 @@
                 <p class="max-w-2xl mt-1 text-sm text-gray-500">
                 itinerary for each day will be entered here
                 </p>
-        <div class ="mt-5 flex">            
-            <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label for="date_from" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">From</label>
-            <input wire:model="date_from" type="date" name="date_from" id="date_from" class="block w-48 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
+        <div class ="flex mt-5">            
+            <div class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label for="date_from" class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-secondary-bg-alt -top-2 left-2 ">From</label>
+            <input wire:model="date_from" type="date" name="date_from" id="date_from" class="block w-48 p-1 text-gray-900 placeholder-gray-500 border-0 rounded-md focus:ring-0 sm:text-sm">
             </div>
 
-            <span class ="mx-2">_</span>
+            <span class ="mx-2 my-auto text-3xl">-</span>
 
-            <div class="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label for="date_to" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">To</label>
-            <input wire:model="date_to" type="date" name="date_to" id="date_to" class="block w-48 border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm">
+            <div class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label for="date_to" class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 -top-2 left-2 bg-secondary-bg-alt">To</label>
+            <input wire:model="date_to" type="date" name="date_to" id="date_to" class="block w-48 p-1 text-gray-900 placeholder-gray-500 border-0 rounded-md focus:ring-0 sm:text-sm">
             </div>
         </div>
         <button wire:click.prevent="generateDays" wire:loading.attr="disabled" type="button" class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -132,8 +132,8 @@
             </div>
                 @if($showDays)
                 @foreach ($gen as $g)
-                @livewire('itenerary', ['gen' => $g], key($g))
-               
+                 {{-- @livewire('itenerary', ['gen' => $g], key($g)) --}}
+                 @include('wrappers.itinerary-daily-wrapper')
                 @endforeach
 
                 @elseif($err_from_to)
@@ -155,7 +155,7 @@
         <button type="button" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Cancel
         </button>
-        <button type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-bg-alt hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Save
         </button>
         </div>

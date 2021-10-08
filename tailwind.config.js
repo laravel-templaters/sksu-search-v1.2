@@ -18,6 +18,7 @@ module.exports = {
                 "primary-bg": "#283618",
                 "primary-bg-alt": "#606c38",
                 "secondary-bg": "#bc6c25",
+                "secondary-bg-alt": "#f5d1a9",
                 "primary-text": "#dda15e",
                 "primary-text-alt": "#dc2f02",
                 "secondary-text": "#fefae0",

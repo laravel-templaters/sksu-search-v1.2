@@ -7,7 +7,7 @@
                 <thead class="bg-gray-50">
                     <tr>
                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                        Date ({{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('Y')}})
+                        Date ({{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('Y')}}) 
                     </th>
                     <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                         Place to be visited
@@ -63,42 +63,140 @@
                                 {{-- <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent"> --}}
                             </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                             {{-- <input type="text" class="min-w-24 min-h-full border-transparent"> --}}
-                             <input wire:model='input.{{$key}}.place' type="text" name="place" id="place" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
-
+                             {{-- <input type="text" class="min-h-full border-transparent min-w-24"> --}}
+                             <input wire:model.debounce='input.{{$key}}.place' type="text" name="input.{{$key}}.place" id="input.{{$key}}.place" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                             @if(isset($input[intval($key)]['place']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['place']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.place");
+                                
+                             </script>
+                             @endif
                             </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                            <input wire:model='input.{{$key}}.dep_time' type="time" name="departure_time" id="departure_time" class="min-w-full min-h-full border-transparent">
+                            <input wire:model.debounce='input.{{$key}}.dep_time' type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
+
+                            @if(isset($input[intval($key)]['dep_time']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['dep_time']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.dep_time");
+                                
+                             </script>
+                             @endif
+                             
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                            <input wire:model='input.{{$key}}.arr_time' type="time" name="arrival_time" id="arrival_time"class="min-w-full min-h-full border-transparent">
+                            <input wire:model='input.{{$key}}.arr_time' type="time" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
+
+                            @if(isset($input[intval($key)]['arr_time']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['arr_time']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.arr_time");
+                                
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                            <input wire:model='input.{{$key}}.mot' type="text" name="mot" id="mot" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                            <input wire:model='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot" id="input.{{$key}}.mot" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+
+                            @if(isset($input[intval($key)]['mot']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['mot']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.mot");
+                                
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                            <input wire:model='input.{{$key}}.trans_exp' type="number" name="travel_expense" id="travel_expense" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                            <input wire:model='input.{{$key}}.trans_exp' type="number" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                            
+                            @if(isset($input[intval($key)]['trans_exp']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['trans_exp']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.trans_exp");
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.per_diem' type="text" name="per_diem" id="per_diem" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : "0.00"}}">
+                            <input wire:model='input.{{$key}}.per_diem' type="text" name="input.{{$key}}.per_diem" id="input.{{$key}}.per_diem" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" value="{{isset($per_diem) ? ''.number_format($per_diem['amount'],2) : "0.00"}}">
+                            
+                            @if(isset($input[intval($key)]['per_diem']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['per_diem']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.per_diem");
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.others' type="number" name="others" id="others" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                            <input wire:model='input.{{$key}}.others' type="number" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                            
+                            @if(isset($input[intval($key)]['others']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['others']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.others");
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.total' type="number" name="total" id="total" class="w-24 block  border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                            <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            
+                            @if(isset($input[intval($key)]['breakfast']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['breakfast']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.breakfast");
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="breakfast" id="breakfast" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <input wire:model='input.{{$key}}.lunch' type="checkbox" name="input.{{$key}}.lunch" id="input.{{$key}}.lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                
+                            @if(isset($input[intval($key)]['lunch']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['lunch']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.lunch");
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.lunch' type="checkbox" name="lunch" id="lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <input wire:model='input.{{$key}}.dinner' type="checkbox" name="input.{{$key}}.dinner" id="input.{{$key}}.dinner" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                
+                            @if(isset($input[intval($key)]['dinner']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['dinner']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.dinner");
+                             </script>
+                             @endif
+
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.dinner' type="checkbox" name="dinner" id="dinner" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <input wire:model='input.{{$key}}.lodging' type="checkbox" name="input.{{$key}}.lodging"" id="input.{{$key}}.lodging"" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            
+                            @if(isset($input[intval($key)]['lodging']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['lodging']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.lodging");
+                             </script>
+                             @endif
+
                         </td>
+                        
                         <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                            <input wire:model='input.{{$key}}.lodging' type="checkbox" name="lodging" id="lodging" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            <input wire:model='input.{{$key}}.total' type="number" name="input.{{$key}}.total" id="input.{{$key}}.total" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                            
+                            @if(isset($input[intval($key)]['total']))
+                             <h1 class="" style="display:none;">{{$input[intval($key)]['total']}}</h1>
+                             <script>
+                                var itExist = !!document.getElementById("input.{{$key}}.total");
+                             </script>
+                             @endif
+
                         </td>
                         {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900">
                             <div class="grid grid-cols-1 gap-2">
