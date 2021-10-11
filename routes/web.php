@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
  
 Route::get('/sec', function () {
-    return view('profile.show');
+    return view('dashboard');
 })->name('sec');
 
 Route::get('/disbursements', function () {

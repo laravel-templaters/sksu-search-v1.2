@@ -52,11 +52,11 @@ class Itenerary extends Component
             }  
         }
         
-        $this->input[1]['raw_diem'] =  $this->temp_diem[0];
-        $this->input[1]['per_diem'] =  number_format($this->temp_diem[0],2);
-        $this->input = [[
-            "per_diem" => isset($this->per_diem) ? number_format($this->per_diem['amount'],2) : ""
-     ],];
+        $this->input[0]['raw_diem'] =  $this->temp_diem[0];
+        $this->input[0]['per_diem'] =  number_format($this->temp_diem[0],2);
+    //     $this->input = [[
+    //         "per_diem" => isset($this->per_diem) ? number_format($this->per_diem['amount'],2) : ""
+    //  ],];
       
     }
 
@@ -119,7 +119,6 @@ class Itenerary extends Component
                 $this->err_from_to = false;
                 $this->err_diff = true;
             }else{     
-                // dd($this->gen);
               
                     TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
                     

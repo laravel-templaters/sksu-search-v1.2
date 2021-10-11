@@ -555,7 +555,7 @@
                                                 <th class='w-1/5 uppercase border-2 border-black '>amount</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="text-sm border-2 border-black">
+                                        <tbody class="text-xs border-2 border-black">
                                                      
                                                     <tr>
                                                         <td class="whitespace-normal border-2 border-black">
@@ -609,7 +609,7 @@
                                                 <td class="border-2 border-r-0 border-black "></td>
                                                 <td class=""></td>
                                                 <td class="text-center uppercase ">Amount Due</td>
-                                                <td class="text-right border-2 border-black ">{{$total}}</td>
+                                                <td class="text-xs text-right border-2 border-black">{{$total}}</td>
                                             </tr>                                    
                                         </tfoot>
 
@@ -680,7 +680,7 @@
                                     </table>
                                 </div>
                                  {{-- accounting entry end--}}
-                                <div class="col-span-8 border-2 border-black">
+                                <div class="col-span-8 border-2 border-collapse border-black">
                                     <div class="grid grid-cols-6 grid-rows-9">
                                         {{-- cd --}}
                                         <div class="col-span-3 col-start-1 row-span-1 row-start-1 border-r-2 border-black">
@@ -772,7 +772,7 @@
                                             <span class="font-extrabold"></span>
                                         </div>
                                     </div>
-                                    <div class="grid grid-cols-8 col-span-8 grid-rows-4 border border-black">
+                                    <div class="grid grid-cols-8 col-span-8 border border-black grid-rows-10">
                                         <div class="col-span-7 row-span-1 text-xs border border-black">
                                             <span class="font-bold border-t border-b border-r border-black ">&nbsp;E.&nbsp;</span>
                                             Reciept of Payment
