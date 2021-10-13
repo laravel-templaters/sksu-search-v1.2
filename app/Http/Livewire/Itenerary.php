@@ -86,6 +86,7 @@ class Itenerary extends Component
     }
 
     
+    
 
     public function addmain(){
         // dd($i);
@@ -237,6 +238,27 @@ class Itenerary extends Component
         }
     }
     
+    //test for saving
+    public $listeners = [
+        'showAlert'
+    ];
+
+    public function showAlert($key){
+        
+        $this->alert('success', 'EMIT FROM PARENT LOLS'. $key, [
+            'background' => '#ccffcc',
+            'padding' => '0.5rem',
+            'position' =>  'top-end', 
+            'timer' =>  2500,  
+            'toast' =>  true, 
+            'text' =>  '', 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+      ]);
+
+    }
     
 
 }

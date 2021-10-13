@@ -118,18 +118,20 @@ class TravelOrderMain extends Component
          $travel_order->save();
 
 
-                $this->alert('success', 'Successfully Added!', [
-                'background' => '#ccffcc',
-                'padding' => '0.5rem',
-                'position' =>  'top-end', 
-                'timer' =>  2500,  
-                'toast' =>  true, 
-                'text' =>  '', 
-                'confirmButtonText' =>  'Ok', 
-                'cancelButtonText' =>  'Cancel', 
-                'showCancelButton' =>  false, 
-                'showConfirmButton' =>  false, 
-          ]);
+          $this->emit('showAlert',$travel_order->id);
+          
+          $this->alert('success', 'Successfully Added!', [
+            'background' => '#ccffcc',
+            'padding' => '0.5rem',
+            'position' =>  'top-end', 
+            'timer' =>  2500,  
+            'toast' =>  true, 
+            'text' =>  '', 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+      ]);
     }
 
     public function clearFields()
