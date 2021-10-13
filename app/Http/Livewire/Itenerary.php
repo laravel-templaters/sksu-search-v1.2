@@ -3,6 +3,9 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+
+// use App\Models\Itenerary;
 
 class Itenerary extends Component
 {
@@ -43,6 +46,7 @@ class Itenerary extends Component
     {
         $this->gen = $gen;
         $this->per_diem = $per_diem;
+
 
         if($this->per_diem != "0.00")
         {
@@ -240,23 +244,76 @@ class Itenerary extends Component
     
     //test for saving
     public $listeners = [
-        'showAlert'
+        'storeItenerary'
     ];
 
-    public function showAlert($key){
+    // public function showAlert($key){
         
-        $this->alert('success', 'EMIT FROM PARENT LOLS'. $key, [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' =>  '', 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
+    //     $this->alert('success', 'EMIT FROM PARENT LOLS'. $key, [
+    //         'background' => '#ccffcc',
+    //         'padding' => '0.5rem',
+    //         'position' =>  'top-end', 
+    //         'timer' =>  2500,  
+    //         'toast' =>  true, 
+    //         'text' =>  '', 
+    //         'confirmButtonText' =>  'Ok', 
+    //         'cancelButtonText' =>  'Cancel', 
+    //         'showCancelButton' =>  false, 
+    //         'showConfirmButton' =>  false, 
+    //   ]);
+
+    // }
+
+    public function storeItenerary($trans_id)
+    {
+
+        // $validatedDate = $this->validate([
+        //     'input.*.place' => 'required',
+        //     'input.*.dep_time' => 'required',
+        //     'input.*.arr_time' => 'required',
+        //     'input.*.mot' => 'required',
+        //     'input.*.trans_exp' => 'required',
+        //     'input.*.others' => 'required',
+        //     'input.*.total' => 'required',
+        // ],
+        // [
+        //     'input.*.place' => 'This field is required',
+        //     'input.*.dep_time' => 'This field is required',
+        //     'input.*.arr_time' => 'This field is required',
+        //     'input.*.mot' => 'This field is required',
+        //     'input.*.trans_exp' => 'This field is required',
+        //     'input.*.others' => 'This field is required',
+        //     'input.*.total' => 'This field is required',
+
+        // ]
+        // );
+
+        foreach ($this->input as $key => $value) {
+           //$dates = \Carbon\Carbon::createFromFormat('M. d',  $this->input[$key]['date'])->format('Y-m-d');
+//dd( $this->input[$key]['date'] );
+             DB::table('iteneraries')->insert(
+                 array('is_breakfast_covered' => $this->input[$key]['breakfast'] == 1 ? '1' : '0', 
+                        'is_lunch_covered' => $this->input[$key]['lunch'] == 1 ? '1' : '0', 
+                        'is_dinner_covered' => $this->input[$key]['dinner'] == 1 ? '1' : '0', 
+                        'is_lodging_covered' => $this->input[$key]['lodging'] == 1 ? '1' : '0', 
+                        'date' =>'2001/01/01', 
+                        'perdiem' => $this->input[$key]['per_diem'], 
+                        'travel_order_id' => $trans_id));
+
+
+                        return back();
+                        
+            //Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);
+            // $itenerary = new App\Models\Itenerary;
+            // $itenerary->is_breakfast_covered = $this->input[$key]['breakfast'] == 1 ? '1' : '0';
+            // $itenerary->is_lunch_covered = $this->input[$key]['lunch'] == 1 ? '1' : '0';
+            // $itenerary->is_dinner_covered = $this->input[$key]['dinner'] == 1 ? '1' : '0';
+            // $itenerary->is_lodging_covered = $this->input[$key]['lodging'] == 1 ? '1' : '0';
+            // $itenerary->date = $this->input[$key]['date'];
+            // $itenerary->perdiem = $this->input[$key]['per_diem'];
+            // $itenerary->travel_order_id = $trans_id;
+            // $itenerary->save();
+        }
 
     }
     

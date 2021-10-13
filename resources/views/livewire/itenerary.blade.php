@@ -64,7 +64,7 @@ $this->per_diem = $per_diem;
                             @foreach($input as $key => $value)
                             <tr class="p-2 break-all bg-white">
                                     <td wire:model='input.{{$key}}.date' contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " >
-                                        {{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('M')}} . {{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('d')}}
+                                        {{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('M. d')}}
                                         {{-- <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent"> --}}
                                     </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">

@@ -118,7 +118,8 @@ class TravelOrderMain extends Component
          $travel_order->save();
 
 
-          $this->emit('showAlert',$travel_order->id);
+        // $this->emit('showAlert',$travel_order->id);
+           $this->emit('storeItenerary',$travel_order->id);
           
           $this->alert('success', 'Successfully Added!', [
             'background' => '#ccffcc',
