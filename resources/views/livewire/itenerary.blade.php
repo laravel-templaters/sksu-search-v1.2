@@ -149,7 +149,7 @@ $this->per_diem = $per_diem;
 
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast" class="w-4 h-4 mx-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'breakfast')" >
+                                    <input wire:model.lazy='input.{{$key}}.breakfast' type="checkbox" name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast" class="w-4 h-4 mx-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'breakfast')" >
                                     
                                     @if(isset($input[intval($key)]['breakfast']))
                                     <h1 class="" style="display:none;">{{$input[intval($key)]['breakfast']}}</h1>
@@ -249,7 +249,6 @@ $this->per_diem = $per_diem;
                                 </td> --}}
                         
                             </tr>
-
                             <!-- Even row -->
 
                             @endforeach

@@ -146,6 +146,10 @@
                 <div wire.loading.remove class="mt-5">
                     <span class ="text-red-400">Invalid Dates.</span>
                     </div>
+                    @elseif($err_diem)
+                <div wire.loading.remove class="mt-5">
+                    <span class ="text-red-400">Pick Region.</span>
+                    </div>
                 @endif
              
         </div>

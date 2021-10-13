@@ -50,6 +50,7 @@ class TravelOrderMain extends Component
     public $showDays = false;
     public $err_from_to = false;
     public $err_diff = false;
+    public $err_diem = false;
     
     public $gen = [];
 
@@ -83,6 +84,11 @@ class TravelOrderMain extends Component
         return view('livewire.sec.to.travel-order-main')->with('regions', $this->region)->with('provinces',  $this->province)
         ->with('cities',  $this->city)->with('users', $this->user)->with('diems', $this->per_diem);
     }
+
+    // public function mount($err_per_diem)
+    // {
+        
+    // }
 
 
     public function submit()
@@ -166,11 +172,12 @@ class TravelOrderMain extends Component
 
     public function generateDays()
     {
-             if(is_null($this->date_from) || is_null($this->date_to))
+        if(is_null($this->date_from) || is_null($this->date_to))
         {
             $this->showDays = false;
             $this->err_diff = false;
             $this->err_from_to = true;
+            $this->err_diem = false;
         }else{
             $from = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d');
             $to = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d');
@@ -181,8 +188,16 @@ class TravelOrderMain extends Component
                $this->showDays = false;
                 $this->err_from_to = false;
                 $this->err_diff = true;
-            }else{     
-                // dd($this->gen);
+                $this->err_diem = false;
+            }else if($this->per_diem == null)
+            {
+                $this->showDays = false;
+                $this->err_from_to = false;
+                $this->err_diff = false;
+                $this->err_diem = true;
+            }
+            else{     
+                // dd( $this->per_diem);
 
                     TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
                     $this->showDays = true;

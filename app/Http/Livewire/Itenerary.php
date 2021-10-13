@@ -14,6 +14,7 @@ class Itenerary extends Component
     public $per_diem;
     public $temp_diem=array();
     public $final_diem;
+    public $isSet_per_diem = false;
 
 
     public $showDays = false;
@@ -42,18 +43,32 @@ class Itenerary extends Component
     {
         $this->gen = $gen;
         $this->per_diem = $per_diem;
-        if(isset($this->per_diem)){
+
+        if($this->per_diem != "0.00")
+        {
             if(!isset($this->temp_diem[0])){
                 $this->temp_diem[0]=$this->per_diem['amount'];
-            }   
-        }else{
-            if(!isset($this->temp_diem[0])){
-                $this->temp_diem[0]=$this->per_diem['amount'];
+
+                $this->input[0]['raw_diem'] =  $this->temp_diem[0];
+                $this->input[0]['per_diem'] =  number_format($this->temp_diem[0],2);
             }  
+        }else{
+            //whatodo...
+            $this->isSet_per_diem = true;
+            
         }
+
+        // if(isset($this->per_diem)){
+        //     if(!isset($this->temp_diem[0])){
+        //         $this->temp_diem[0]=$this->per_diem['amount'];
+        //     }   
+        // }else{
+        //     if(!isset($this->temp_diem[0])){
+        //         $this->temp_diem[0]=$this->per_diem['amount'];
+        //     }  
+        // }
         
-        $this->input[0]['raw_diem'] =  $this->temp_diem[0];
-        $this->input[0]['per_diem'] =  number_format($this->temp_diem[0],2);
+
     //     $this->input = [[
     //         "per_diem" => isset($this->per_diem) ? number_format($this->per_diem['amount'],2) : ""
     //  ],];
@@ -65,7 +80,7 @@ class Itenerary extends Component
         
         // dd($this->input);
         
-        return view('livewire.itenerary');
+        return view('livewire.itenerary')->with(['isset_per_diem' => $this->isSet_per_diem]);
        
         
     }
