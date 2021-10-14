@@ -16,26 +16,101 @@ class RelatedDocSeeder extends Seeder
     {
         //first
          DB::table('related_docs')->insert([
-            'related_docs'=> 'Related Docs for this Sub Category 1',
+            'related_docs'=> 'TRAVEL ORDER',
             'dv_sub_category_id'=> 1,
             ]);
             DB::table('related_docs')->insert([
-                'related_docs'=> 'Related Docs for this Sub Category 2',
+                'related_docs'=> 'REQUEST LETTER',
                 'dv_sub_category_id'=> 1,
                 ]);
                 DB::table('related_docs')->insert([
-                    'related_docs'=> 'Related Docs for this Sub Category 3',
+                    'related_docs'=> 'OTHERS',
                     'dv_sub_category_id'=> 1,
                     ]);
 
          //second
          DB::table('related_docs')->insert([
-            'related_docs'=> 'Related Docs for this Sub Category (1)',
+            'related_docs'=> 'TRAVEL ORDER',
             'dv_sub_category_id'=> 2,
             ]);
             DB::table('related_docs')->insert([
-                'related_docs'=> 'Related Docs for this Sub Category (2)',
+                'related_docs'=> 'REQUEST LETTER',
                 'dv_sub_category_id'=> 2,
-                ]);          
+                ]);
+          
+          //third
+          DB::table('related_docs')->insert([
+            'related_docs'=> 'TRAVEL ORDER',
+            'dv_sub_category_id'=> 3,
+            ]);
+            DB::table('related_docs')->insert([
+                'related_docs'=> 'REQUEST LETTER',
+                'dv_sub_category_id'=> 3,
+                ]);
+                
+          //fourth
+          DB::table('related_docs')->insert([
+            'related_docs'=> 'TRAVEL ORDER',
+            'dv_sub_category_id'=> 4,
+            ]);
+            DB::table('related_docs')->insert([
+                'related_docs'=> 'REQUEST LETTER',
+                'dv_sub_category_id'=> 4,
+                ]);
+
+           //fifth
+          DB::table('related_docs')->insert([
+            'related_docs'=> 'TRAVEL ORDER',
+            'dv_sub_category_id'=> 5,
+            ]);
+            DB::table('related_docs')->insert([
+                'related_docs'=> 'REQUEST LETTER',
+                'dv_sub_category_id'=> 5,
+                ]); 
+                
+         //sixth
+         DB::table('related_docs')->insert([
+            'related_docs'=> 'TRAVEL ORDER',
+            'dv_sub_category_id'=> 6,
+            ]);
+            DB::table('related_docs')->insert([
+                'related_docs'=> 'REQUEST LETTER',
+                'dv_sub_category_id'=> 6,
+                ]);
+                DB::table('related_docs')->insert([
+                    'related_docs'=> 'OTHERS',
+                    'dv_sub_category_id'=> 6,
+                    ]); 
+                    
+                    
+          //seventh
+          DB::table('related_docs')->insert([
+            'related_docs'=> 'TRAVEL ORDER',
+            'dv_sub_category_id'=> 7,
+            ]);
+            DB::table('related_docs')->insert([
+                'related_docs'=> 'REQUEST LETTER',
+                'dv_sub_category_id'=> 7,
+                ]);  
+                
+        //eighth
+        DB::table('related_docs')->insert([
+            'related_docs'=> 'TRAVEL ORDER',
+            'dv_sub_category_id'=> 8,
+            ]);
+            DB::table('related_docs')->insert([
+                'related_docs'=> 'REQUEST LETTER',
+                'dv_sub_category_id'=> 8,
+                ]);
+                
+        //ninth
+        DB::table('related_docs')->insert([
+            'related_docs'=> 'TRAVEL ORDER',
+            'dv_sub_category_id'=> 9,
+            ]);
+            DB::table('related_docs')->insert([
+                'related_docs'=> 'REQUEST LETTER',
+                'dv_sub_category_id'=> 9,
+                ]);        
     }
 }
