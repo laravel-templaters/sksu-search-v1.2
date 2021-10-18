@@ -1,7 +1,7 @@
-<div class="p-0 m-0" x-data ="{newDV : @entangle('newDV') ,isstep4open : @entangle('isstep4open') ,step1finished : @entangle('step1finished'), step2finished : @entangle('step2finished'), step3finished : @entangle('step3finished')}">
+<div class="p-0 m-0" x-data ="{newDV : @entangle('newDV') ,isstep4open : @entangle('isstep4open') ,step1finished : @entangle('step1finished'), step2finished : @entangle('step2finished'), step3finished : @entangle('step3finished'), step4finished : @entangle('step4finished')}">
     <div class="" x-data="{ isstep1open : @entangle('isstep1open'),isstep2open : @entangle('isstep2open'),isstep3open : @entangle('isstep3open')}">
             {{-- steps --}}
-                <div class="bg-white lg:border-b lg:border-gray-100">
+                <div class="bg-primary-bg lg:border-b lg:border-gray-100">
                     <nav class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8" aria-label="Progress">
                         <ol role="list"
                             class="overflow-hidden rounded-md lg:flex lg:border-l lg:border-r lg:border-gray-200 lg:rounded-none">
@@ -17,7 +17,7 @@
                                                    @if($step1finished)
                                                    <span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
                                                     <!-- Heroicon name: solid/check -->
-                                                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <svg class="w-6 h-6 text-secondary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                                     </svg>
                                                   </span>
@@ -25,13 +25,13 @@
                                                     @elseif(!$step1finished)
                                                         <h1 class="hidden">{{$step1finished}}</h1>
                                                         <span
-                                                        class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg">
-                                                        <span class="text-secondary-bg">01</span>
+                                                        class="flex items-center justify-center w-10 h-10 border-2 rounded-full border-primary-text">
+                                                        <span class="text-primary-text">01</span>
                                                     </span>
                                                     @endif     
                                             </span>                                     
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
-                                                <span x-bind:class="isstep1open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">DV Main
+                                                <span x-bind:class="isstep1open ? 'text-xs font-bold tracking-wide uppercase text-primary-text' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">DV Main
                                                     Information Form</span>
                                                 <span class="text-sm font-medium text-gray-400">Fill up the form for DV.</span>
                                             </span>
@@ -55,21 +55,21 @@
                                                 @if($step2finished)
                                                 <span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
                                                     <!-- Heroicon name: solid/check -->
-                                                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <svg class="w-6 h-6 text-secondary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                                     </svg>
                                                   </span>
                                                   @elseif(!$step2finished)
                                                 <span
-                                                x-bind:class="isstep2open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
-                                                    <span x-bind:class="isstep2open ? 'text-secondary-bg' : 'text-gray-400'">02</span>
+                                                x-bind:class="isstep2open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-primary-text' : step2finished ?'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg':'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
+                                                    <span x-bind:class="isstep2open ? 'text-primary-text' : 'text-gray-400'">02</span>
                                                 </span>
                                                 @endif   
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
                                                 <span
-                                                x-bind:class="isstep2open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Upload Related Documents</span>
-                                                <span class="text-sm font-medium text-gray-500">Please upload PDF files only</span>
+                                                x-bind:class="isstep2open ? 'text-xs font-bold tracking-wide uppercase text-primary-text' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Upload Related Documents</span>
+                                                <span class="text-sm font-medium text-gray-400">Please upload PDF files only</span>
                                             </span>
                                         </span>
                                     </a>
@@ -91,7 +91,7 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
-                                    <a href="#" aria-current="step" wire:click.prevent="validateForm(3)">
+                                    <a href="#" class="group" aria-current="step" wire:click.prevent="validateForm(3)">
                                         <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
                                         aria-hidden="true"></span> 
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
@@ -99,21 +99,21 @@
                                                 @if($step3finished)
                                                 <span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
                                                     <!-- Heroicon name: solid/check -->
-                                                    <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <svg class="w-6 h-6 text-secondary-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                                     </svg>
                                                   </span>
                                                 @elseif(!$step3finished)
                                                 <span
-                                                x-bind:class="isstep3open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
-                                                    <span x-bind:class="isstep3open ? 'text-secondary-bg' : 'text-gray-400'">03</span>
+                                                x-bind:class="isstep3open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-primary-text' : step3finished ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
+                                                    <span x-bind:class="isstep3open ? 'text-primary-text' : 'text-gray-400'">03</span>
                                                 </span>
                                                 @endif
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
                                                 <span
-                                                x-bind:class="isstep3open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Signatory</span>
-                                                <span class="text-sm font-medium text-gray-500">Choose Signatory</span>
+                                                x-bind:class="isstep3open ? 'text-xs font-bold tracking-wide uppercase text-primary-text' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Signatory</span>
+                                                <span class="text-sm font-medium text-gray-400">Choose Signatory</span>
                                             </span>
                                         </span>
                                     </a>
@@ -133,20 +133,20 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
-                                    <a href="#" aria-current="step" wire:click.prevent="validateForm(4)">
+                                    <a href="#" class="group" aria-current="step" wire:click.prevent="validateForm(4)">
                                         <span x-bind:class="isstep4open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
                                         aria-hidden="true"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
                                                 <span
-                                                x-bind:class="isstep4open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
-                                                    <span x-bind:class="isstep4open ? 'text-secondary-bg' : 'text-gray-400'">04</span>
+                                                x-bind:class="isstep4open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : step4finished ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
+                                                    <span x-bind:class="isstep4open ? 'text-primary-text' : 'text-gray-400'">04</span>
                                                 </span>
                                             </span>
                                             <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
                                                 <span
-                                                x-bind:class="isstep4open ? 'text-xs font-bold tracking-wide uppercase text-black' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Preview</span>
-                                                <span class="text-sm font-medium text-gray-500">Review and confirm information for <voucher></voucher></span>
+                                                x-bind:class="isstep4open ? 'text-xs font-bold tracking-wide uppercase text-primary-text' : 'text-xs font-bold tracking-wide uppercase text-gray-400'">Preview</span>
+                                                <span class="text-sm font-medium text-gray-400">Review and confirm information for <voucher></voucher></span>
                                             </span>
                                         </span>
                                     </a>

@@ -13,7 +13,7 @@
                     $categories = App\Models\DVCategory::where('dv_type_id', '=', $dv_type_id)->get();
                 }
             @endphp
-            <li class="flex flex-col col-span-1 text-left bg-white rounded-md shadow-sm" x-data="{showMe : false}">
+            <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-primary-bg" x-data="{showMe : false}">
                 @if($categories->count()>0)
                     <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
                         <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
@@ -39,14 +39,14 @@
                 @endif
 
                 
-                <div class="p-3 ml-3 bg-gray-200 rounded-md " x-cloak x-show="showMe">
+                <div class="p-3 mt-1 mb-1 ml-3 mr-1 rounded-md bg-primary-text " x-cloak x-show="showMe">
                 {{-- loop category here --}}
                 
                  @foreach ($categories as $category)
                   <h3 class="hidden">{{Illuminate\Support\Facades\Hash::make('aasd'.$dv_category_id = $category->id)}}</h3>
                    <div x-data="{openCA:false}">
-                        <h3 class="p-2 text-black rounded-md text-md hover:bg-gray-600 hover:text-white" x-on:click="openCA = !openCA ">{{$category->dv_category}}</h3>
-                        <div class="grid flex-col grid-cols-1 p-3 ml-3 bg-gray-400 rounded-md " x-cloak x-show="openCA">
+                        <h3 class="p-2 rounded-md text-primary-bg text-md hover:bg-primary-bg hover:text-secondary-text" x-on:click="openCA = !openCA ">{{$category->dv_category}}</h3>
+                        <div class="grid flex-col grid-cols-1 p-3 ml-3 rounded-md bg-primary-bg-alt " x-cloak x-show="openCA">
                         {{-- sub cat only a --}}
                         @php
                             if(isset($dv_type_id)){
@@ -54,7 +54,7 @@
                             }
                         @endphp
                                     @foreach ($sub_categories as $sub_category)
-                                        <a href="{{route('cdv', ['id' => $sub_category->id, 'sorter' => '3'])}}" class="p-2 text-black rounded-md text-md hover:bg-gray-800 hover:text-white">{{$sub_category->dv_sub_category}}</a>
+                                        <a href="{{route('cdv', ['id' => $sub_category->id, 'sorter' => '3'])}}" class="p-2 rounded-md text-secondary-text text-md hover:bg-gray-300 hover:text-primary-bg">{{$sub_category->dv_sub_category}}</a>
                                     {{-- sub cat only a end--}}
                                     @endforeach 
                         </div>

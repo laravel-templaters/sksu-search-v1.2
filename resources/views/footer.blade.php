@@ -1,4 +1,4 @@
-<footer class="bg-transparent">
+<footer class="bottom-0 absolut bg-primary-text">
   <div class="flex items-center justify-between px-4 py-12 mx-auto max-w-7xl sm:px-6">
     <div class="flex justify-center space-x-6 md:order-2">
       <a href="https://www.facebook.com/gabz.icawalo" class="text-gray-500 hover:text-gray-500">

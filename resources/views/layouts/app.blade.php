@@ -39,7 +39,7 @@
             <main class="bg-transparent">
                 {{ $slot }}
             </main>
-           @include('footer')
+         
         </div>
 
         @stack('modals')
@@ -47,5 +47,6 @@
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <x-livewire-alert::scripts />
+          @include('footer')
     </body>
 </html>
