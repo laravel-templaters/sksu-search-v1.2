@@ -9,8 +9,9 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-b-0 border-gray-200 rounded-t-md lg:border-0">
                                     <!-- step 1-->
-                                    <a href="#" class="group" wire:click.prevent="validateForm(1)">
-                                        <span x-bind:class="isstep1open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                    {{-- wire:click.prevent="validateForm(1)" --}}
+                                    <div class="group" >
+                                        <span x-bind:class="isstep1open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent  lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
                                             aria-hidden="true"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium">
                                              <span class="flex-shrink-0">
@@ -36,7 +37,7 @@
                                                 <span class="text-sm font-medium text-gray-400">Fill up the form for DV.</span>
                                             </span>
                                         </span>
-                                    </a>
+                                    </div>
                                 </div>
                             </li>
 
@@ -47,8 +48,9 @@
                                 <div class="overflow-hidden border border-t-0 border-gray-200 rounded-b-md lg:border-0">
                                     <!-- Upcoming Step -->
                                     {{-- setsignatory({{1}}) --}}
-                                    <a href="#" class="group" wire:click.prevent="validateForm(2)">
-                                        <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                    {{-- wire:click.prevent="validateForm(2)" --}}
+                                    <div class="group" >
+                                        <span x-bind:class="isstep2open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent  lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
                                         aria-hidden="true"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
@@ -72,7 +74,7 @@
                                                 <span class="text-sm font-medium text-gray-400">Please upload PDF files only</span>
                                             </span>
                                         </span>
-                                    </a>
+                                    </div>
 
                                     <!-- Separator -->
                                     <div class="absolute inset-0 top-0 left-0 hidden w-3 lg:block" aria-hidden="true">
@@ -91,8 +93,9 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
-                                    <a href="#" class="group" aria-current="step" wire:click.prevent="validateForm(3)">
-                                        <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                     {{-- wire:click.prevent="validateForm(3)" --}}
+                                    <div class="group" aria-current="step">
+                                        <span x-bind:class="isstep3open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent  lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
                                         aria-hidden="true"></span> 
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
@@ -116,7 +119,7 @@
                                                 <span class="text-sm font-medium text-gray-400">Choose Signatory</span>
                                             </span>
                                         </span>
-                                    </a>
+                                    </div>
 
                                     <!-- Separator -->
                                     <div class="absolute inset-0 top-0 left-0 hidden w-3 lg:block" aria-hidden="true">
@@ -133,8 +136,9 @@
                             <li class="relative overflow-hidden lg:flex-1">
                                 <div class="overflow-hidden border border-gray-200 lg:border-0">
                                     <!-- Current Step -->
-                                    <a href="#" class="group" aria-current="step" wire:click.prevent="validateForm(4)">
-                                        <span x-bind:class="isstep4open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-400 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
+                                    {{-- wire:click.prevent="validateForm(4)"> --}}
+                                    <div href="#" class="group" aria-current="step" >
+                                        <span x-bind:class="isstep4open ? 'absolute top-0 left-0 w-1 h-full bg-secondary-bg lg:w-full lg:h-1 lg:bottom-0 lg:top-auto' : 'absolute top-0 left-0 w-1 h-full bg-transparent  lg:w-full lg:h-1 lg:bottom-0 lg:top-auto'"
                                         aria-hidden="true"></span>
                                         <span class="flex items-start px-6 py-5 text-sm font-medium lg:pl-9">
                                             <span class="flex-shrink-0">
@@ -149,7 +153,7 @@
                                                 <span class="text-sm font-medium text-gray-400">Review and confirm information for <voucher></voucher></span>
                                             </span>
                                         </span>
-                                    </a>
+                                    </div>
 
                                     <!-- Separator -->
                                     <div class="absolute inset-0 top-0 left-0 hidden w-3 lg:block" aria-hidden="true">
@@ -228,7 +232,7 @@
                                                     name</label>
                                                 <input type="text" wire:model="fn" name="first-name" id="first-name" autocomplete="given-name"
                                                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" disabled >
-                                                    @error('first_name')
+                                                    @error('fn')
                                                     <span class="text-sm text-red-500">{{$message}}</span>
                                                     @enderror
                                             </div>
@@ -238,6 +242,9 @@
                                                     name</label>
                                                 <input type="text" wire:model="ln" name="last-name" id="last-name" autocomplete="family-name"
                                                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" disabled>
+                                                    @error('ln')
+                                                    <span class="text-sm text-red-500">{{$message}}</span>
+                                                    @enderror
                                             </div>
 
                                             {{-- mode of payment --}}
@@ -344,13 +351,13 @@
                                                     @endforeach
                                                     {{-- loops HERE end --}}
                                                     {{-- add button --}}
-                                                    <button class="col-span-3 col-start-4 m-2 text-gray-800 rounded-full hover:bg-indigo-600 bg-blue-52" wire:click.prevent="add({{$i}})"><span class="m-2 text-sm font-extrabold">ADD ENTRY</span>
+                                                    <button class="col-span-3 col-start-4 m-2 text-gray-800 rounded-full hover:bg-primary-bg-alt hover:text-secondary-text" wire:click.prevent="add({{$i}})"><span class="m-2 text-sm font-extrabold">ADD ENTRY</span>
                                                     </button>
                                                 </div>
                                             </div>
                                             
                                             <div class="justify-end col-span-4 col-start-2" >
-                                            <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-blue-54 focus:ring-indigo-500 focus:border-indigo-500" wire:click.prevent="validateForm(2)"> Proceed </button>
+                                                <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-primary-bg text-secondary-bg-alt hover:bg-primary-text hover:text-primary-bg" wire:click.prevent="validateStep1()"> Next </button>
                                                 
                                                 
                                             </div>
@@ -421,12 +428,20 @@
                                                 </li>                             
                                                 @endforeach
                                             </ul>
+                                            <div class="m-2"><span class="text-indigo-600 text-md">Note: Click proceed if documents required for your disbursement voucher is <strong class="font-bold uppercase text-md text-primary-text-alt">compiled and ready for submission</strong></span></div>
                                            
                                         </div>
                                         @else
                                         <h1>No documents here</h1>
                                         @endif 
-                                        <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-blue-54 focus:ring-indigo-500 focus:border-indigo-500" wire:click.prevent="validateForm(3)"> Proceed </button>
+                                        <div class="grid grid-cols-9 m-3">
+                                            <div class="justify-end col-span-3 col-start-1" >
+                                                    <button class="block w-full py-2 mt-3 text-lg bg-gray-200 border-gray-300 rounded-lg shadow-sm text-primary-bg hover:bg-primary-text hover:text-primary-bg" wire:click.prevent="openstep1()"> Previous </button>
+                                            </div>
+                                            <div class="justify-end col-span-3 col-start-7" >
+                                                    <button class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-primary-bg text-secondary-bg-alt hover:bg-primary-text hover:text-primary-bg" wire:click.prevent="openstep3()"> Next </button>
+                                            </div>
+                                        </div>
                                     </div>
 
                             </div>
@@ -451,48 +466,54 @@
                     x-transition:enter-start="translate-x-full"
                     x-transition:enter-end="translate-x-0">
                            <div class="bg-white rounded-md">
-                            <div class="px-4 py-8 mx-auto max-w-7xl">
-                                <div class="space-y-12">
-                                <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
-                                    <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Select Signatory</h2>
-                                    <p class="text-xl text-gray-500">Please select appropriate signatory for your Disbursement voucher application. You may start by searching...</p>
+                                <div class="px-4 py-8 mx-auto max-w-7xl">
+                                    <div class="space-y-12">
+                                        <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+                                            <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Select Signatory</h2>
+                                            <p class="text-xl text-gray-500">Please select appropriate signatory for your Disbursement voucher application. You may start by searching...</p>
+                                        </div>
+                                        <input class="w-1/2 p-2 text-sm border-gray-500 rounded-lg" type="text" wire:model.debounce.500ms="searchsignatory" placeholder="Search here...">
+                                        <ul role="list" class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+
+                                            @if($searchedsignatories->count() > 0)
+
+                                            @foreach($searchedsignatories as $searchedsignatory)
+
+                                                <li>
+                                                    <div class="space-y-4">
+                                                        <button class="space-y-2 rounded-lg hover:ring-blue-500 hover:ring-4" wire:click.prevent="setsignatory({{$searchedsignatory->id}})">
+                                                            <div class="aspect-w-3 aspect-h-2">
+                                                                <img class="object-cover rounded-lg shadow-lg " src="{{asset($searchedsignatory->profile_photo_url)}}" alt="n/a">
+                                                            </div>
+
+                                                            <div class="space-y-2">
+                                                            <div class="space-y-1 text-lg font-medium leading-6">
+                                                                <h3>{{$searchedsignatory->first_name}} {{$searchedsignatory->middle_name}}  {{$searchedsignatory->last_name}}</h3>
+                                                                <p class="text-indigo-600">Department Name</p>
+                                                            </div>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </li>
+
+                                                @endforeach
+
+                                            @else
+
+                                                <p class="text-gray-500 text-md">The system found no one with '{{$searchsignatory}}' on his/her name (╯°□°）╯︵ ┻━┻</p>
+
+                                            @endif
+
+                                            <!-- More people... -->
+                                        </ul>
+                                    </div>
+                                    <div class="grid grid-cols-9 mt-4">
+                                                <div class="justify-end col-span-3 col-start-4" >
+                                                        <button class="block w-full py-2 mt-3 text-lg bg-gray-200 border-gray-300 rounded-lg shadow-sm text-primary-bg hover:bg-primary-text hover:text-primary-bg" wire:click.prevent="openstep2()"> Previous</button>
+                                                </div>
+                                    </div>
                                 </div>
-                            <input class="w-1/2 p-2 text-sm border-gray-500 rounded-lg" type="text" wire:model.debounce.500ms="searchsignatory" placeholder="Search here...">
-                                <ul role="list" class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
-
-                                  @if($searchedsignatories->count() > 0)
-
-                                     @foreach($searchedsignatories as $searchedsignatory)
-
-                                        <li>
-                                            <div class="space-y-4">
-                                                <button class="space-y-2 rounded-lg hover:ring-blue-500 hover:ring-4" wire:click.prevent="setsignatory({{$searchedsignatory->id}})">
-                                                    <div class="aspect-w-3 aspect-h-2">
-                                                        <img class="object-cover rounded-lg shadow-lg " src="{{asset($searchedsignatory->profile_photo_url)}}" alt="n/a">
-                                                    </div>
-
-                                                    <div class="space-y-2">
-                                                    <div class="space-y-1 text-lg font-medium leading-6">
-                                                        <h3>{{$searchedsignatory->first_name}} {{$searchedsignatory->middle_name}}  {{$searchedsignatory->last_name}}</h3>
-                                                        <p class="text-indigo-600">Department Name</p>
-                                                    </div>
-                                                    </div>
-                                                </button>
-                                            </div>
-                                        </li>
-
-                                        @endforeach
-
-                                    @else
-
-                                        <p class="text-gray-500 text-md">The system found no one with '{{$searchsignatory}}' on his/her name (╯°□°）╯︵ ┻━┻</p>
-
-                                    @endif
-
-                                    <!-- More people... -->
-                                </ul>
-                                </div>
-                            </div>
+                                
                             </div>
 
                     </div>
@@ -781,7 +802,7 @@
                                             <span class="ml-2">Official Receipt No. & Date/Other Documents</span>
                                         </div>
                                         
-                                        <div class="col-span-1 row-span-1 row-start-2 border border-black text-md"><span class="ml-2">Check/ADA No. :</span></div>
+                                        <div class="col-span-1 row-span-1 row-start-2 text-xs border border-black"><span class="ml-2">Check/ADA No. :</span></div>
                                         <div class="col-span-1 row-span-1 row-start-3 border border-black text-md"><span class="ml-2">Signature :</span></div>
                                         <div class="col-span-2 col-start-2 row-span-1 row-start-2 border border-black"></div>
                                         <div class="col-span-2 col-start-2 row-span-1 row-start-3 border border-black"></div>
@@ -802,11 +823,21 @@
                         </div>
                     
                     </div>
+                     <div class="grid grid-cols-9 mt-4">
+                             <div class="justify-end col-span-3 col-start-1" >
+                                    <button class="block w-full py-2 mt-3 text-lg bg-gray-200 border-gray-300 rounded-lg shadow-sm text-primary-bg hover:bg-primary-bg hover:text-primary-text" wire:click.prevent="openstep3()"  x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                                    x-transition:enter-start="translate-x-full"
+                                    x-transition:enter-end="translate-x-0"> Previous </button>
+                             </div>
+                             <div class="justify-end col-span-4 col-start-7" >
+                                    <input  type="button" class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-primary-bg text-secondary-bg-alt hover:bg-primary-text-alt hover:text-primary-bg" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                                    x-transition:enter-start="translate-x-full"
+                                    x-transition:enter-end="translate-x-0" onclick="printDiv('dvPrint')" value = "Print DV"/>
+                             </div>
+                    </div>
 
-                    <input  type="button" class="inline-flex items-center px-4 py-2 mt-3 ml-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
-                    x-transition:enter-start="translate-x-full"
-                    x-transition:enter-end="translate-x-0" onclick="printDiv('dvPrint')" value = "Print DV"/>
-                  
+                    
+
                         
                      
                     
