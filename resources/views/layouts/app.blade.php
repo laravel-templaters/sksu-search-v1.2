@@ -22,7 +22,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     
-    <body class="font-sans">
+    <body class="font-sans bg-primary-text" >
         <div class="min-h-screen bg-primary-text">
             @livewire('navigation-menu')
 
@@ -41,12 +41,12 @@
             </main>
          
         </div>
-
+           @include('footer')
         @stack('modals')
         @stack('scripts')
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <x-livewire-alert::scripts />
-          @include('footer')
+       
     </body>
 </html>

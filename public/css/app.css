@@ -1157,6 +1157,9 @@ select {
 .z-50 {
 	z-index: 50;
 }
+.z-10 {
+	z-index: 10;
+}
 .col-span-6 {
 	grid-column: span 6 / span 6;
 }
@@ -1404,6 +1407,9 @@ select {
 .h-full {
 	height: 100%;
 }
+.h-screen {
+	height: 100vh;
+}
 .min-h-screen {
 	min-height: 100vh;
 }
@@ -1475,6 +1481,9 @@ select {
 }
 .w-24 {
 	width: 6rem;
+}
+.w-screen {
+	width: 100vw;
 }
 .min-w-0 {
 	min-width: 0px;
@@ -1574,6 +1583,9 @@ select {
 }
 .cursor-pointer {
 	cursor: pointer;
+}
+.cursor-wait {
+	cursor: wait;
 }
 .list-inside {
 	list-style-position: inside;
@@ -1965,6 +1977,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(156, 163, 175, var(--tw-bg-opacity));
 }
+.bg-gray-600 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
@@ -1973,6 +1989,15 @@ select {
 }
 .bg-opacity-75 {
 	--tw-bg-opacity: 0.75;
+}
+.bg-opacity-30 {
+	--tw-bg-opacity: 0.3;
+}
+.bg-opacity-40 {
+	--tw-bg-opacity: 0.4;
+}
+.bg-opacity-20 {
+	--tw-bg-opacity: 0.2;
 }
 .bg-gradient-to-r {
 	background-image: linear-gradient(to right, var(--tw-gradient-stops));
@@ -2639,6 +2664,10 @@ select {
 .hover\:text-primary-text-alt:hover {
 	--tw-text-opacity: 1;
 	color: rgba(220, 47, 2, var(--tw-text-opacity));
+}
+.hover\:text-gray-600:hover {
+	--tw-text-opacity: 1;
+	color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
 .hover\:ring-4:hover {
 	--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);

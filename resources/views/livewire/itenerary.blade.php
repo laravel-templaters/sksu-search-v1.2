@@ -2,8 +2,9 @@
 <?php
 $this->per_diem = $per_diem;
 ?>
-
+ 
     <div class="flex flex-col" wire:init="generateDays">
+    
         <div class="my-2 overflow-x-auto">
             <div class="inline-block min-w-full p-2 py-2 align-middle rounded-md sm:px-2 lg:px-2">
                 <div class="border-b border-gray-200 rounded-md shadow ">
@@ -149,8 +150,8 @@ $this->per_diem = $per_diem;
 
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast" class="disable-btn w-4 h-4 mx-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click.debounce.1000ms="ComputeDiem({{$key}},'breakfast')" >
-                                    
+                                    <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast" class="w-4 h-4 mx-auto text-indigo-600 border-gray-300 rounded disable-btn focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'breakfast')" >
+                                   
                                     @if(isset($input[intval($key)]['breakfast']))
                                     <h1 class="" style="display:none;">{{$input[intval($key)]['breakfast']}}</h1>
                                     
@@ -271,17 +272,8 @@ $this->per_diem = $per_diem;
                 </div>
             </div>
         </div>
-        <script>
-            $('#bfast').on('click',function(){
-                console.log("hey");
-        // let a common class(disable-btn) for each button which should be disabled for on second
-        // $('.disable-btn').prop('disabled',true);
-        // setTimeout(function(){
-        //    // enable click after 1 second
-        //    $('.disable-btn').prop('disabled',false);
-        // },1000); // 1 second delay
-    });
-        </script>
+        <div wire:loading wire:target="ComputeDiem" class="fixed top-0 left-0 w-screen h-screen bg-gray-600 cursor-wait bg-opacity-20">
+</div>
     </div>
        
 </div>
