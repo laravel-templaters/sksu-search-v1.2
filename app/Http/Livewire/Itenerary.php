@@ -21,7 +21,7 @@ class Itenerary extends Component
 
 
     public $showDays = false;
-
+    public $isDisabled = 'enabled';
     
     public $input = [
         [
@@ -81,7 +81,7 @@ class Itenerary extends Component
 
     public function render()
     {   
-        
+ 
         // dd($this->input);
         
         return view('livewire.itenerary')->with(['isset_per_diem' => $this->isSet_per_diem]);
@@ -182,12 +182,15 @@ class Itenerary extends Component
     return $this->gen;
     }
 
+
+
     function ComputeDiem($key,$type){
-        
+
+
+
         switch ($type) {
             case 'breakfast':
                 if($this->input[intval($key)]['breakfast']==1){
-                    
                     $addition = $this->temp_diem[0] * 0.1;
                     $this->input[intval($key)]['raw_diem'] = ((float)$this->input[intval($key)]['raw_diem']) - $addition;
                     $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
