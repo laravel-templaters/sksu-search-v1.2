@@ -71,7 +71,7 @@ $this->per_diem = $per_diem;
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                     {{-- <input type="text" class="min-h-full border-transparent min-w-24"> --}}
                                     <input wire:model.debounce='input.{{$key}}.place' type="text" name="input.{{$key}}.place" id="input.{{$key}}.place" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm"
-                                    wire:click="ComputeDiem({{$key}},'rat coding')">
+                                    >
                                     @if(isset($input[intval($key)]['place']))
                                     <h1 class="" style="display:none;">{{$input[intval($key)]['place']}}</h1>
                                     <script>
@@ -117,7 +117,7 @@ $this->per_diem = $per_diem;
 
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input wire:model='input.{{$key}}.trans_exp' type="number" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input wire:model='input.{{$key}}.trans_exp' type="number" min="0" wire:keydown.enter="ComputeDiem({{$key}}, 'trans_exp')"  oninput="validity.valid||(value='');" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" placeholder="0.00" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                     
                                     @if(isset($input[intval($key)]['trans_exp']))
                                     <h1 class="" style="display:none;">{{$input[intval($key)]['trans_exp']}}</h1>
@@ -139,7 +139,7 @@ $this->per_diem = $per_diem;
 
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input wire:model='input.{{$key}}.others' type="number" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <input wire:model='input.{{$key}}.others' type="number" min="0" wire:keydown.enter="ComputeDiem({{$key}}, 'others')" oninput="validity.valid||(value='');" name="input.{{$key}}.others" id="input.{{$key}}.others" placeholder="0.00" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                     
                                     @if(isset($input[intval($key)]['others']))
                                     <h1 class="" style="display:none;">{{$input[intval($key)]['others']}}</h1>
@@ -185,7 +185,7 @@ $this->per_diem = $per_diem;
 
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input wire:model='input.{{$key}}.lodging' type="checkbox" name="input.{{$key}}.lodging"" id="input.{{$key}}.lodging"" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'lodging')" >
+                                    <input wire:model='input.{{$key}}.lodging' type="checkbox" name="input.{{$key}}.lodging" id="input.{{$key}}.lodging" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'lodging')" >
                                     
                                     @if(isset($input[intval($key)]['lodging']))
                                     <h1 class="" style="display:none;">{{$input[intval($key)]['lodging']}}</h1>
@@ -197,7 +197,7 @@ $this->per_diem = $per_diem;
                                 </td>
                                 
                                 <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                    <input wire:model='input.{{$key}}.total' type="number" name="input.{{$key}}.total" id="input.{{$key}}.total" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" readonly>
+                                    <input wire:model='input.{{$key}}.total' type="text" name="input.{{$key}}.total" id="input.{{$key}}.total" placeholder="0.00" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" readonly>
                                     
                                     @if(isset($input[intval($key)]['total']))
                                     <h1 class="" style="display:none;">{{$input[intval($key)]['total']}}</h1>
@@ -265,8 +265,8 @@ $this->per_diem = $per_diem;
                 </div>  
 
                 <div class="flex">
-                    <button class="mt-2 mr-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
-                    wire:click.prevent="addmain()" > ADD ROWS</button>
+                    <a class="cursor-pointer mt-2 mr-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+                    wire:click.prevent="addmain()" > ADD ROWS</a>
                     {{-- <button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
                     {{$frick}} --}}
                 </div>
