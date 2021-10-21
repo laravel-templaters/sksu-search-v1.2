@@ -11,6 +11,7 @@ use App\Models\DVSubCategory;
 use App\Models\ModeOfPayment;
 use App\Models\RelatedDoc;
 use App\Models\Particular;
+use App\Models\TravelOrder;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -29,6 +30,7 @@ class CreateDv extends Component
     public $step2finished = false;
     public $step3finished = false;
     public $step4finished = false;
+    public $showToModal = false;
 
     //variable forsearch
     public $searchuser;
@@ -54,6 +56,14 @@ class CreateDv extends Component
     public $voucher;
     public $related_docs;
 
+    //for to only
+    public $searchto;
+    public $searchedto;
+    public $travelorderid;
+    public $modaltopurpose;
+    public $modaltoowner;
+    public $modaltoid;
+
     public $mode_id;
 
     //for particulars
@@ -76,10 +86,17 @@ class CreateDv extends Component
 
     public function render()
     {
+        if(isset($this->searchto)){
+            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
+            // $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%' or lower(place_to_go) like '%".strtolower($this->searchto)."%'")->orderBy('created_at');
+        }
+        if (isset($this->searchuser)) {
+            $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+        }
 
         $this ->searchedsignatories = User::whereRaw("(lower(first_name) like '%".strtolower($this->searchsignatory) ."%' or lower(middle_name) like '%".strtolower($this->searchsignatory)."%' or lower(last_name) like '%".strtolower($this->searchsignatory)."%') and role_id = 2")
         ->get();  
-        $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+        
         $this->mode_of_payment = DB::table('mode_of_payments')->get();
         $this->date = Carbon::now();
 
@@ -233,6 +250,33 @@ class CreateDv extends Component
         }
     }
 
+    public function sTOid($id,$import){
+        if ($import) {
+            $this->travelorderid=$id;
+            $touid=TravelOrder::find($id);
+            $this->entry[0]=$touid->purpose;
+            $this->user_id=$touid->user_id;
+            $names=User::where('id',$this->user_id)->get();
+            foreach($names as $name){
+                $this->fn=$name->first_name;
+                $this->ln=$name->last_name;
+            }
+            $this->showToModal = false;
+        }else{
+            $this->modaltoid = $id;
+            $this->travelorderid=$id;
+            $touid=TravelOrder::find($id);
+            $this->modaltopurpose = $touid->purpose;
+            $names=User::where('id',$touid->user_id)->get();
+            foreach($names as $name){
+                $fullname = strtoupper($name->first_name.' '.$name->last_name);
+                $this->modaltoowner = $fullname;
+            }
+          
+            $this->showToModal = true;
+        }
+        
+    }
     public function openstep1(){
         $this->step1finished = false;
         $this->isstep2open = false;

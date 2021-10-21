@@ -1,4 +1,4 @@
-<div class="p-0 m-0" x-data ="{newDV : @entangle('newDV') ,isstep4open : @entangle('isstep4open') ,step1finished : @entangle('step1finished'), step2finished : @entangle('step2finished'), step3finished : @entangle('step3finished'), step4finished : @entangle('step4finished')}">
+<div class="p-0 m-0" x-data ="{newDV : @entangle('newDV') ,isstep4open : @entangle('isstep4open') ,step1finished : @entangle('step1finished'), step2finished : @entangle('step2finished'), step3finished : @entangle('step3finished'), step4finished : @entangle('step4finished'),showToModal : @entangle('showToModal')}">
     <div class="" x-data="{ isstep1open : @entangle('isstep1open'),isstep2open : @entangle('isstep2open'),isstep3open : @entangle('isstep3open')}">
             {{-- steps --}}
                 <div class="bg-primary-bg lg:border-b lg:border-gray-100">
@@ -193,32 +193,64 @@
                     x-transition:leave-start="-translate-x-0" x-transition:leave-end="-translate-x-full">
                         <div class="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
                             <div class="grid grid-cols-3 gap-6 divide-x-2 divide-gray-300">
-                                <div class="space-y-2 md:col-span-1">
-                                    <h3 class="text-xl font-medium leading-6 text-gray-900">Disbursement Voucher</h3>
-                                    <p class="mt-1 text-sm text-gray-500">
-                                    </p>
-                                    <input class="p-2 text-sm border-gray-500 rounded-lg" type="text" wire:model.debounce.500ms="searchuser" placeholder="Search here first...">
-                                    <div class="grid grid-cols-3 gap-2 px-2 pt-2 mx-auto">
-                                       @if($searchedusers->count() > 0) 
-                                            @foreach($searchedusers as $searcheduser)
-                                            <div class="col-span-1 space-x-1">
-                                                <button class="" wire:click="sUid({{$searcheduser->id}})">
-                                                <img src="{{asset($searcheduser->profile_photo_url)}}" class="w-20 h-20 mx-auto rounded-full lg:w-24 lg:h-24">
-                                                <p class="mt-1 text-sm text-blue-53">
-                                                {{$searcheduser->first_name}} {{$searcheduser->middle_name}}  {{$searcheduser->last_name}} 
-                                                </p>                                        
-                                                </button>
-                                            </div>                                    
-                                            @endforeach
-                                        @else
-                                            <div class="col-span-3">
-                                                <p class="mt-1 text-sm text-gray-500">
-                                                No Employee found with '{{$searchuser}}'
-                                                </p>
-                                            </div>
-                                        @endif
+                                @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
+                                    <div class="space-y-2 md:col-span-1">
+                                        <h3 class="text-xl font-medium leading-6 text-gray-900">Disbursement Voucher</h3>
+                                        <br>
+                                        <p class="mt-1 text-sm text-gray-500">
+                                            Import Travel Order
+                                        </p>
+                                        <input class="p-2 text-sm border-gray-500 rounded-lg" type="text" wire:model.debounce.500ms="searchto" placeholder="Search Purpose Here">
+                                        <div class="grid grid-cols-1 gap-2 px-2 pt-2 mx-auto">
+                                            @if(isset($searchedto)==true)
+                                                @if($searchedto->count() > 0) 
+                                                    @foreach($searchedto as $to)
+                                                    <div class="break-normal">
+                                                        <button class="text-left " wire:click="sTOid({{$to->id}},false)">
+                                                         <p class="mt-1 text-sm text-blue-53">
+                                                        {{$to->purpose}}
+                                                        </p>                                        
+                                                        </button>
+                                                    </div>                                    
+                                                    @endforeach
+                                                @else
+                                                    <div class="col-span-3">
+                                                        <p class="mt-1 text-sm text-gray-500">
+                                                        No Travel order with purpose '{{$searchto}}' found ... 
+                                                        </p>
+                                                    </div>
+                                                @endif
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="space-y-2 md:col-span-1">
+                                        <h3 class="text-xl font-medium leading-6 text-gray-900">Disbursement Voucher</h3>
+                                        <p class="mt-1 text-sm text-gray-500">
+                                        </p>
+                                        <input class="p-2 text-sm border-gray-500 rounded-lg" type="text" wire:model.debounce.500ms="searchuser" placeholder="Search here first...">
+                                        <div class="grid grid-cols-3 gap-2 px-2 pt-2 mx-auto">
+                                        @if($searchedusers->count() > 0) 
+                                                @foreach($searchedusers as $searcheduser)
+                                                <div class="col-span-1 space-x-1">
+                                                    <button class="" wire:click="sUid({{$searcheduser->id}})">
+                                                    <img src="{{asset($searcheduser->profile_photo_url)}}" class="w-20 h-20 mx-auto rounded-full lg:w-24 lg:h-24">
+                                                    <p class="mt-1 text-sm text-blue-53">
+                                                    {{$searcheduser->first_name}} {{$searcheduser->middle_name}}  {{$searcheduser->last_name}} 
+                                                    </p>                                        
+                                                    </button>
+                                                </div>                                    
+                                                @endforeach
+                                            @else
+                                                <div class="col-span-3">
+                                                    <p class="mt-1 text-sm text-gray-500">
+                                                    No Employee found with '{{$searchuser}}'
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-span-2 pl-2 mt-0">
                                 {{-- form here --}}
                                     <form action="#" method=""> 
@@ -263,7 +295,7 @@
                                                 <label for="dv_category" class="block text-sm font-medium text-gray-700">Voucher Type</label> 
                                                 <input type="text"
                                                    wire:model="voucher_type" class="block w-full px-3 py-2 mt-1 uppercase bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" disabled>
-                                                
+                                    
                                             </div>
 
                                             <div class="col-span-6">
@@ -616,7 +648,7 @@
                                                            @if(isset($entry[(string)$value]))
                                                             {{$entry[(string)$value]}}
                                                             @endif
-                                                        </td>
+                                                         </td>
                                                         <td class="border-2 border-black ">
                                                             @if(isset($responsibility_center[(string)$value]))
                                                             {{$responsibility_center[(string)$value]}}
@@ -855,6 +887,80 @@
 
                 </div>
 
+
+<div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="showToModal" >
+  <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+    <!--
+      Background overlay, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0"
+        To: "opacity-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+    <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true"
+    x-cloak x-show="showToModal" 
+    x-transition:enter="transform transition ease-out duration-300"
+    x-transition:enter-start="translate-x-full"
+    x-transition:enter-end="translate-x-0"></div>
+
+    <!-- This element is to trick the browser into centering the modal contents. -->
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+    <!--
+      Modal panel, show/hide based on modal state.
+
+      Entering: "ease-out duration-300"
+        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        To: "opacity-100 translate-y-0 sm:scale-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100 translate-y-0 sm:scale-100"
+        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    -->
+    <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+    x-cloak x-show="showToModal" 
+    x-transition:enter="ease-out duration-300"
+    x-transition:enter-start="opacity-0 translate-y-4"
+    x-transition:enter-end="opacity-100 translate-y-0 "
+    x-transition:leave="ease-in duration-200"
+    x-transition:leave-start="opacity-100 translate-y-0"
+    x-transition:leave-end="opacity-0 translate-y-4 ">
+      <div>
+        <div class="flex items-center justify-center w-12 h-12 mx-auto bg-green-100 rounded-full">
+          <!-- Heroicon name: outline/check -->
+          
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="mt-3 text-center sm:mt-5">
+          <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">
+            Travel Order Information
+          </h3>
+          <div class="mt-2">
+            <p class="text-left text-gray-500 text-md">
+            Applied By: <span class="font-semibold text-gray-700">{{$modaltoowner}}</span>
+            </p>
+            <p class="text-sm text-gray-700">
+            {{$modaltopurpose}}
+            </p>
+            
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+        <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm" wire:click="sTOid({{$modaltoid}},true)">
+          Import Travel Order
+        </button>
+        <button type="button" class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm" x-on:click="showToModal = ! showToModal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
