@@ -126,7 +126,7 @@ class CreateDv extends Component
         $this->position = position::where('id', '=',  $this->signatory->position_id)->first();
         $this->department = Department::where('id', '=',  $this->signatory->department_id)->first();
 
-        $this->validateForm(4);
+        $this->openstep4();
     }
 
     //dynamic input field methods START ----------
@@ -158,19 +158,7 @@ class CreateDv extends Component
  
      public function storeParticulars(){
 
-                $validatedDate = $this->validate([
-                        'entry.0' => 'required',
-                        'amount.0' => 'required',
-                        'entry.*' => 'required',
-                        'amount.*' => 'required',
-                    ],
-                    [
-                        'entry.0.required' => 'Entry field is required',
-                        'amount.0.required' => 'Amount field is required',
-                        'entry.*.required' => 'Entry field is required',
-                        'amount.*.required' => 'Amount field is required',
-                    ]
-                );
+                
 
             foreach ($this->entry as $key => $value) { 
 
@@ -213,11 +201,7 @@ class CreateDv extends Component
 
         $this->total = 0;
 
-       if(isset($this->entry)){
-        foreach ($this->entry as $key => $value) { 
-            $this->total += floatval($this->amount[$key]);
-        }
-       }
+       
 
         
         //$this->total = $this->total/2;
@@ -251,23 +235,16 @@ class CreateDv extends Component
 
     public function openstep1(){
         $this->step1finished = false;
-        $this->step2finished = false;
-        $this->step3finished = false;
-        $this->step4finished = false;
-
         $this->isstep2open = false;
         $this->isstep3open = false;
         $this->isstep4open = false;
         $this->isstep1open = true;
+
     }
     
     public function openstep2(){
-        
         $this->step1finished = true;
         $this->step2finished = false;
-        $this->step3finished = false;
-        $this->step4finished = false;
-
         $this->isstep1open = false;
         $this->isstep4open = false;
         $this->isstep3open = false;
@@ -275,28 +252,57 @@ class CreateDv extends Component
     }
 
     public function openstep3(){
-
-        $this->step1finished = true;
         $this->step2finished = true;
         $this->step3finished = false;
-        $this->step4finished = false;
-
         $this->isstep1open = false;
         $this->isstep4open = false;
         $this->isstep3open = true;
         $this->isstep2open = false;
     }
     public function openstep4(){
-
-        $this->step1finished = true;
-        $this->step2finished = true;
+        
         $this->step3finished = true;
         $this->step4finished = false;
-
         $this->isstep1open = false;
         $this->isstep4open = true;
         $this->isstep3open = false;
         $this->isstep2open = false;
+    }
+
+    public function validateParticulars(){
+
+        $validatedDate = $this->validate([
+            'entry.0' => 'required',
+            'amount.0' => 'required',
+            'entry.*' => 'required',
+            'amount.*' => 'required',
+        ],
+        [
+            'entry.0.required' => 'Entry field is required',
+            'amount.0.required' => 'Amount field is required',
+            'entry.*.required' => 'Entry field is required',
+            'amount.*.required' => 'Amount field is required',
+        ]
+        
+        );
+    return true;
+    }
+
+    public function validateStep1(){
+    
+        // validate here
+        // if(isset($this->entry)){
+            if ($this->validate(['fn'=>'required','ln'=>'required'],['fn.required'=> 'Please select payee from the left side panel', 'ln.required'=> 'Please select payee from the left side panel'])) {
+                
+            
+            if ($this->validateParticulars()) {
+                
+                $this->step1finished = true;
+                $this->openstep2();
+            } 
+        }   
+        // }
+    
     }
     
 

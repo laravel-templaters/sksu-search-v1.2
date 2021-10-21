@@ -21,6 +21,7 @@ class Itenerary extends Component
 
 
     public $showDays = false;
+    public $total;
 
     
     public $input = [
@@ -81,7 +82,7 @@ class Itenerary extends Component
 
     public function render()
     {   
-        
+ 
         // dd($this->input);
         
         return view('livewire.itenerary')->with(['isset_per_diem' => $this->isSet_per_diem]);
@@ -150,7 +151,7 @@ class Itenerary extends Component
 
    
 
- 
+
     
 
 
@@ -182,12 +183,17 @@ class Itenerary extends Component
     return $this->gen;
     }
 
+    function test($key)
+    {
+  
+  
+    }
+
     function ComputeDiem($key,$type){
-        
+        $switchk = false;
         switch ($type) {
             case 'breakfast':
                 if($this->input[intval($key)]['breakfast']==1){
-                    
                     $addition = $this->temp_diem[0] * 0.1;
                     $this->input[intval($key)]['raw_diem'] = ((float)$this->input[intval($key)]['raw_diem']) - $addition;
                     $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
@@ -197,6 +203,8 @@ class Itenerary extends Component
                     $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
                     $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
                 }
+
+                $switchk = true;
                 break;
             case 'lunch':
                 if($this->input[intval($key)]['lunch']==1){
@@ -210,6 +218,7 @@ class Itenerary extends Component
                     $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
                     $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
                 }
+                $switchk = true;
                 break;
             case 'dinner':
                 if($this->input[intval($key)]['dinner']==1){
@@ -223,6 +232,7 @@ class Itenerary extends Component
                     $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
                     $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
                 }
+                $switchk = true;
                 break;
             case 'lodging':
                 if($this->input[intval($key)]['lodging']==1){
@@ -236,10 +246,26 @@ class Itenerary extends Component
                     $this->input[intval($key)]['raw_diem'] = $this->input[intval($key)]['raw_diem'] + $deduction;
                     $this->input[intval($key)]['per_diem'] =  number_format($this->input[intval($key)]['raw_diem'],2);
                 }
-                break;
-            
+                $switchk = true;
+                break;       
            
         }
+
+                $trans = $this->input[intval($key)]['trans_exp'];
+                $others = $this->input[intval($key)]['others'];
+                if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0) && $this->input[intval($key)]['per_diem'] == "")
+                {
+                    $this->input[intval($key)]['total'] = "0.00";
+        
+                }else if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0))
+                {
+                    $this->total = ((float)$this->input[intval($key)]['raw_diem']);
+                    $this->input[intval($key)]['total'] = number_format($this->total,2);
+                }
+                else{
+                    $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']) + ((float)$this->input[intval($key)]['raw_diem']);
+                    $this->input[intval($key)]['total'] = number_format($this->total,2);
+                }
     }
     
     //test for saving
