@@ -530,22 +530,32 @@
                 <div class="p-2">
 
                         {{-- outermost wrapper --}}
-                        <div id="dvPrint" class="grid w-full h-full grid-cols-8 bg-white border-4 border-black" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                        <div id="dvPrint" class="grid w-full h-full grid-cols-8 font-serif border-4 border-black bg-z" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                         x-transition:enter-start="translate-x-full"
                         x-transition:enter-end="translate-x-0">
                     
 
                             {{-- G1 header part --}}
-                            <div class="col-span-8 ">
+                            <div class="col-span-8">
                                 <div class="grid grid-cols-8 grid-rows-4">
                                     {{-- logo --}}
-                                    <div class="flex justify-between col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black ">
-                                        <div class="pl-6 my-auto"><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="w-auto h-20"></div>
-                                        <div class="grid grid-rows-4 mr-3">
-                                            <div class="row-span-3 px-0 mx-auto my-auto ">{!! QrCode::size(65)->margin(2)->generate((string)$dvno_temp); !!}
+                                    <div class="col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black ">
+                                        <div class="grid grid-cols-10 grid-rows-5 gap-2 m-2">
+                                            <div class="col-span-3 col-start-1 row-span-3 row-start-1 pl-6 text-right">
+                                                <img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="object-scale-down w-20 h-full mx-auto">
                                             </div>
-                                            <div class="row-span-1">
-                                                <span class="font-medium text-black text-md">Dv No.{{$dvno_temp}}</span>
+                                            <div class="col-span-3 col-start-1 row-span-2 row-start-1 pl-6 text-right">
+                                                
+                                            </div>
+                                            <div class="col-span-4 col-start-4 row-span-2 row-start-1 text-left"><span class="text-green-600 uppercase font-bold-text-md">Sultan Kudarat State University</span></div>
+                                            <div class="col-span-3 col-start-8 row-span-5 row-start-1 mr-3 ">
+                                            
+                                                {!! QrCode::size(100)->margin(2)->generate((string)$dvno_temp); !!}
+{{--                                                 
+                                                <div class="row-span-1">
+                                                    <span class="font-medium text-black text-md">Dv No.{{$dvno_temp}}</span>
+                                                </div> --}}
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -802,7 +812,7 @@
                                             <span class="ml-2">Official Receipt No. & Date/Other Documents</span>
                                         </div>
                                         
-                                        <div class="col-span-1 row-span-1 row-start-2 text-xs border border-black"><span class="ml-2">Check/ADA No. :</span></div>
+                                        <div class="col-span-1 row-span-1 row-start-2 text-xs border border-black "><span class="ml-2">Check/ADA No. :</span></div>
                                         <div class="col-span-1 row-span-1 row-start-3 border border-black text-md"><span class="ml-2">Signature :</span></div>
                                         <div class="col-span-2 col-start-2 row-span-1 row-start-2 border border-black"></div>
                                         <div class="col-span-2 col-start-2 row-span-1 row-start-3 border border-black"></div>
