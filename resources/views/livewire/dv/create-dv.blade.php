@@ -230,24 +230,28 @@
                                         </p>
                                         <input class="p-2 text-sm border-gray-500 rounded-lg" type="text" wire:model.debounce.500ms="searchuser" placeholder="Search here first...">
                                         <div class="grid grid-cols-3 gap-2 px-2 pt-2 mx-auto">
-                                        @if($searchedusers->count() > 0) 
-                                                @foreach($searchedusers as $searcheduser)
-                                                <div class="col-span-1 space-x-1">
-                                                    <button class="" wire:click="sUid({{$searcheduser->id}})">
-                                                    <img src="{{asset($searcheduser->profile_photo_url)}}" class="w-20 h-20 mx-auto rounded-full lg:w-24 lg:h-24">
-                                                    <p class="mt-1 text-sm text-blue-53">
-                                                    {{$searcheduser->first_name}} {{$searcheduser->middle_name}}  {{$searcheduser->last_name}} 
-                                                    </p>                                        
-                                                    </button>
-                                                </div>                                    
-                                                @endforeach
-                                            @else
-                                                <div class="col-span-3">
-                                                    <p class="mt-1 text-sm text-gray-500">
-                                                    No Employee found with '{{$searchuser}}'
-                                                    </p>
-                                                </div>
-                                            @endif
+                                         @if(isset($searchedusers)==true)
+                                            @if($searchedusers->count() > 0) 
+                                                    @foreach($searchedusers as $searcheduser)
+                                                    <div class="col-span-1 space-x-1">
+                                                        <button class="" wire:click="sUid({{$searcheduser->id}})">
+                                                        <img src="{{asset($searcheduser->profile_photo_url)}}" class="w-20 h-20 mx-auto rounded-full lg:w-24 lg:h-24">
+                                                        <p class="mt-1 text-sm text-blue-53">
+                                                        {{$searcheduser->first_name}} {{$searcheduser->middle_name}}  {{$searcheduser->last_name}} 
+                                                        </p>                                        
+                                                        </button>
+                                                    </div>                                    
+                                                    @endforeach
+                                                @else
+                                                    <div class="col-span-3">
+                                                        <p class="mt-1 text-sm text-gray-500">
+                                                        No Employee found with '{{$searchuser}}'
+                                                        </p>
+                                                    </div>
+                                                @endif
+                                            
+                                            
+                                        @endif
                                         </div>
                                     </div>
                                 @endif
