@@ -61,14 +61,14 @@ $this->per_diem = $per_diem;
 
                         @foreach($input as $key => $value)
                             <tr class="p-2 break-all">
-                                    <td wire:model='input.{{$key}}.date' contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " >
+                                    <td wire:model='input.{{$key}}.date' contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " disabled >
+                                     <h1 class="" style="display:none;">{{$input[$key]['date']=date('Y/m/d',strtotime( $gen))}}</h1>
                                         {{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('M. d')}}
                                         {{-- <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent"> --}}
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                         {{-- <input type="text" class="min-h-full border-transparent min-w-24"> --}}
-                                        <input wire:model.debounce='input.{{$key}}.place' type="text" name="input.{{$key}}.place" id="input.{{$key}}.place" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm"
-                                        wire:click="fix()">
+                                        <input wire:model.debounce='input.{{$key}}.place' type="text" name="input.{{$key}}.place" id="input.{{$key}}.place" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                         @if(isset($input[intval($key)]['place']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['place']}}</h1>
                                         <script>
@@ -76,7 +76,7 @@ $this->per_diem = $per_diem;
                                             
                                         </script>
                                         @endif
-                                        </td>
+                                    </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                         <input wire:model.debounce='input.{{$key}}.dep_time' type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
 
@@ -114,7 +114,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model='input.{{$key}}.trans_exp' type="number" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                        <input wire:model.lazy='input.{{$key}}.trans_exp' type="number" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:leave="ComputeDiem({{$key}},'doesntmatter')">
                                         
                                         @if(isset($input[intval($key)]['trans_exp']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['trans_exp']}}</h1>
@@ -136,7 +136,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model='input.{{$key}}.others' type="number" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                        <input wire:model.lazy='input.{{$key}}.others' type="number" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                         
                                         @if(isset($input[intval($key)]['others']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['others']}}</h1>
@@ -157,17 +157,17 @@ $this->per_diem = $per_diem;
                                         </script>
                                         @endif
 
-                                </td>
-                                <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                  <input wire:model='input.{{$key}}.lunch' type="checkbox" name="input.{{$key}}.lunch" id="input.{{$key}}.lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'lunch')" >
-                                    
-                                        @if(isset($input[intval($key)]['lunch']))
-                                        <h1 class="" style="display:none;">{{$input[intval($key)]['lunch']}}</h1>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
+                                    <input wire:model='input.{{$key}}.lunch' type="checkbox" name="input.{{$key}}.lunch" id="input.{{$key}}.lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'lunch')" >
                                         
-                                        <script>
-                                            var itExist = !!document.getElementById("input.{{$key}}.lunch");
-                                        </script>
-                                        @endif
+                                            @if(isset($input[intval($key)]['lunch']))
+                                            <h1 class="" style="display:none;">{{$input[intval($key)]['lunch']}}</h1>
+                                            
+                                            <script>
+                                                var itExist = !!document.getElementById("input.{{$key}}.lunch");
+                                            </script>
+                                            @endif
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
@@ -194,7 +194,7 @@ $this->per_diem = $per_diem;
                                     </td>
                                     
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model='input.{{$key}}.total' type="number" name="input.{{$key}}.total" id="input.{{$key}}.total" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" readonly>
+                                        <input wire:model='input.{{$key}}.total' type="text" name="input.{{$key}}.total" id="input.{{$key}}.total" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" readonly>
                                         
                                         @if(isset($input[intval($key)]['total']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['total']}}</h1>
@@ -204,52 +204,9 @@ $this->per_diem = $per_diem;
                                         @endif
 
                                     </td>
-                                    {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                        <div class="grid grid-cols-1 gap-2">
-                                            <div class="flex items-start col-span-1"> 
-                                                <div class="flex items-center h-5">
-                                                    <input id="breakfast" aria-describedby="breakfast-description" name="breakfast" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                                                </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="breakfast" class="font-medium text-gray-700">Breakfast</label>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-start col-span-1 ">
-                                                <div class="flex items-center h-5">
-                                                    <input id="lunch" aria-describedby="lunch-description" name="lunch" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                                                </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="lunch" class="font-medium text-gray-700">Lunch</label>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-start col-span-1 ">
-                                                <div class="flex items-center h-5">
-                                                    <input id="dinner" aria-describedby="dinner-description" name="dinner" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                                                </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="dinner" class="font-medium text-gray-700">Dinner</label>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-start col-span-1 ">
-                                                <div class="flex items-center h-5">
-                                                    <input id="lodging" aria-describedby="lodging-description" name="lodging" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                                                </div>
-                                                <div class="ml-3 text-sm">
-                                                    <label for="lodging" class="font-medium text-gray-700">Lodging</label>
-                                                </div>
-                                            </div>
-                                    
-                                    </div>
-                                    
-                                    </td> --}}
-                                    {{-- <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        
-                                    </td> --}}
                             
                             </tr>
                             
-                            <!-- Even row -->
-
                          @endforeach
                       
 
