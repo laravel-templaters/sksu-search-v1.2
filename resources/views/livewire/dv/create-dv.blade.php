@@ -943,8 +943,8 @@
             <p class="text-left text-gray-500 text-md">
             Applied By: <span class="font-semibold text-gray-700">{{$modaltoowner}}</span>
             </p>
-            <p class="text-sm text-gray-700">
-            {{$modaltopurpose}}
+            <p class="mt-1 text-sm text-left text-gray-500">
+            Purpose:  <span class="font-semibold text-gray-700">{{$modaltopurpose}}</span>
             </p>
             
           </div>
