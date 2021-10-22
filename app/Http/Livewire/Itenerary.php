@@ -84,7 +84,15 @@ class Itenerary extends Component
     {   
  
         // dd($this->input);
-        
+        if (isset($this->input)) {
+            foreach ($this->input as $key => $value) {
+                if (isset($this->input[$key]['trans_exp'])||isset($this->input[$key]['per_diem'])||isset($this->input[$key]['others'])) {
+                        $this->ComputeDiem($key,'ratcoding');
+                        
+                }
+            }
+
+        }
         return view('livewire.itenerary')->with(['isset_per_diem' => $this->isSet_per_diem]);
        
         
@@ -266,6 +274,7 @@ class Itenerary extends Component
                     $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']) + ((float)$this->input[intval($key)]['raw_diem']);
                     $this->input[intval($key)]['total'] = number_format($this->total,2);
                 }
+
     }
     
     //test for saving
@@ -317,19 +326,20 @@ class Itenerary extends Component
         foreach ($this->input as $key => $value) {
            //$dates = \Carbon\Carbon::createFromFormat('M. d',  $this->input[$key]['date'])->format('Y-m-d');
 //dd( $this->input[$key]['date'] );
+            //dd($this->input[$key]['date']);
              DB::table('iteneraries')->insert(
                  array('is_breakfast_covered' => $this->input[$key]['breakfast'] == 1 ? '1' : '0', 
                         'is_lunch_covered' => $this->input[$key]['lunch'] == 1 ? '1' : '0', 
                         'is_dinner_covered' => $this->input[$key]['dinner'] == 1 ? '1' : '0', 
                         'is_lodging_covered' => $this->input[$key]['lodging'] == 1 ? '1' : '0', 
-                        'date' =>'2001/01/01', 
+                        'date' =>$this->input[$key]['date'],
                         'perdiem' => $this->input[$key]['per_diem'], 
                         'travel_order_id' => $trans_id));
 
 
                         return back();
                         
-            //Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);
+            // Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);
             // $itenerary = new App\Models\Itenerary;
             // $itenerary->is_breakfast_covered = $this->input[$key]['breakfast'] == 1 ? '1' : '0';
             // $itenerary->is_lunch_covered = $this->input[$key]['lunch'] == 1 ? '1' : '0';
