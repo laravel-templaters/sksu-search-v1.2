@@ -61,8 +61,8 @@ $this->per_diem = $per_diem;
 
                         @foreach($input as $key => $value)
                             <tr class="p-2 break-all">
-                                    <td wire:model='input.{{$key}}.date' contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " disabled >
-                                     <h1 class="" style="display:none;">{{$input[$key]['date']=date('Y/m/d',strtotime( $gen))}}</h1>
+                                    <td contenteditable='false' class="px-2 py-4 text-sm font-medium text-gray-900 break-all " disabled >
+                                     <h1 class="" style="display:none;">{{$this->input[intval($key)]['date']=Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('Y-m-d')}}</h1>
                                         {{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('M. d')}}
                                         {{-- <input type="text" wire:model="frick" class="min-w-full min-h-full border-transparent"> --}}
                                     </td>

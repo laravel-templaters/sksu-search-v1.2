@@ -88,6 +88,7 @@ class Itenerary extends Component
             foreach ($this->input as $key => $value) {
                 if (isset($this->input[$key]['trans_exp'])||isset($this->input[$key]['per_diem'])||isset($this->input[$key]['others'])) {
                         $this->ComputeDiem($key,'ratcoding');
+                        
                 }
             }
 
@@ -325,6 +326,7 @@ class Itenerary extends Component
         foreach ($this->input as $key => $value) {
            //$dates = \Carbon\Carbon::createFromFormat('M. d',  $this->input[$key]['date'])->format('Y-m-d');
 //dd( $this->input[$key]['date'] );
+            //dd($this->input[$key]['date']);
              DB::table('iteneraries')->insert(
                  array('is_breakfast_covered' => $this->input[$key]['breakfast'] == 1 ? '1' : '0', 
                         'is_lunch_covered' => $this->input[$key]['lunch'] == 1 ? '1' : '0', 
