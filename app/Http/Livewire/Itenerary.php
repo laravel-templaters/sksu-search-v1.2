@@ -113,14 +113,14 @@ class Itenerary extends Component
             "arr_time" => "",
             "mot" => "",
             "trans_exp" => "",
-            "per_diem"=>number_format($this->temp_diem[0],2),
+            "per_diem"=>"",
             "others" => "",
             "total" => "",
             "breakfast" => "",
             "lunch" => "",
             "dinner" => "",
             "lodging" => "",
-            'raw_diem'=>  (string)$this->temp_diem[0],
+            'raw_diem'=> "",
         ));
         
     }
@@ -259,6 +259,7 @@ class Itenerary extends Component
            
         }
 
+               if ($key == 0 || $key == "0") {
                 $trans = $this->input[intval($key)]['trans_exp'];
                 $others = $this->input[intval($key)]['others'];
                 if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0) && $this->input[intval($key)]['per_diem'] == "")
@@ -274,6 +275,24 @@ class Itenerary extends Component
                     $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']) + ((float)$this->input[intval($key)]['raw_diem']);
                     $this->input[intval($key)]['total'] = number_format($this->total,2);
                 }
+                   
+               }else{
+                $trans = $this->input[intval($key)]['trans_exp'];
+                $others = $this->input[intval($key)]['others'];
+                if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0))
+                {
+                    $this->input[intval($key)]['total'] = "0.00";
+        
+                }else if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0))
+                {
+                    $this->total = 0.0;
+                    $this->input[intval($key)]['total'] = number_format($this->total,2);
+                }
+                else{
+                    $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']);
+                    $this->input[intval($key)]['total'] = number_format($this->total,2);
+                }
+               }
 
     }
     
