@@ -24,6 +24,7 @@ class TravelOrderMain extends Component
     public $user;
     public $purpose;
     public $has_registration;
+    public $registration_amt;
     public $per_diem;
 
     //variables for place
@@ -53,6 +54,8 @@ class TravelOrderMain extends Component
     public $err_diem = false;
     
     public $gen = [];
+
+    public $finalTotal;
 
 
     public $input = [[
@@ -105,6 +108,7 @@ class TravelOrderMain extends Component
             'province_codes' => 'required',
             'city_codes' => 'required',
          ]);
+         //message sang error
 
          $travel_order = new TravelOrder;
          $travel_order->purpose = $this->purpose;
@@ -241,6 +245,28 @@ class TravelOrderMain extends Component
     return $this->gen;
     }
 
-  
+
+    //for final total
+
+    public $listeners = [
+        'calculatetotalfromothers'=>'finalTotalCalculation',
+    ];
+
+    public $subTotal;
+    public function TotalCalculation(){
+        if ($this->has_registration == true) {
+            
+        $this->finalTotal = $this->subTotal= $this->registration_amt;
+        $this->emit('sendTotalVal');
+        } else {
+            $this->finalTotal = $this->subTotal = 0.0;
+        $this->emit('sendTotalVal');
+        }
+        
+    }
+    public function finalTotalCalculation($value){
+        $this->subTotal += $value;
+        $this->finalTotal = $this->subTotal;
+    }
     
 }

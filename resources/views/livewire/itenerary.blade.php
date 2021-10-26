@@ -213,7 +213,7 @@ $this->per_diem = $per_diem;
                                     </td>
                                     
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model='input.{{$key}}.total' type="text" name="input.{{$key}}.total" id="input.{{$key}}.total" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" readonly>
+                                        <input wire:model='input.{{$key}}.total' type="text" name="input.{{$key}}.total" id="input.{{$key}}.total"  class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" readonly>
                                         
                                         @if(isset($input[intval($key)]['total']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['total']}}</h1>

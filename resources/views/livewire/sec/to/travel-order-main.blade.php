@@ -86,16 +86,31 @@
                         <div class="col-span-1 col-start-2 row-span-1 row-start-1 mt-1"> 
                             
                             <div class="relative flex items-start">
-                                <input value="0" wire:model="has_registration" id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">                            
+                                <input wire:model="has_registration" id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">                            
                                 <div class="my-auto ml-3 text-sm">
                                     <label for="comments" class="font-medium text-gray-700">Has Registration</label>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="col-span-1 col-start-3 row-span-1 row-start-1 mt-1">
-                            <h3 class="ml-1 text-sm text-gray-600 ">Registration Amount</h3>
-                            <input type="text" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                        <div class="col-span-1 col-start-3 row-span-1 row-start-1 mt-1" x-data="{hovered : false}">
+                            <div class="flex>
+                                <h3 class="inline ml-1 text-sm text-gray-600">Registration Amount                                
+                                </h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 text-blue-600" @mouseover = "hovered = true" @mouseleave="hovered=false" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                    </svg>
+                            </div>
+                            
+                            
+                            
+                            @if($has_registration==false)
+                            <input type="number" wire:model.lazy ="registration_amt" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" readonly>
+                            @else
+                            <input type="number" wire:model.lazy ="registration_amt" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm " >
+                            @endif
+                             <h3 x-show="hovered" x-cloak class="text-xs text-indigo-500">If amount is not 0 and "has Registration" checkbox is not checked. Registration amount will not be included in the grand total</h3>
+                           
                         </div>
                     
                 </div>   
@@ -131,12 +146,16 @@
                 Loading...
             </div>
                 @if($showDays)
+                
 
                 @foreach ($gen as $g)
                  {{-- @livewire('itenerary', ['gen' => $g], key($g)) --}}
                  @include('wrappers.itinerary-daily-wrapper')
                 @endforeach
-
+                
+                @if(isset($gen))
+                    <div class="relative min-w-full my-4 ml-4 mr-7"><div class="absolute right-0 pr-12 bg-white mr-7"><button class="mx-3 text-sm font-bold uppercase px 4 bg-primary-bg-alt text-primary-text" wire:click="TotalCalculation">Calculate</button> <span class="text-lg font-extrabold text-gray-900">TOTAL:</span><span class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div></div>
+                @endif
 
                 @elseif($err_from_to)
                 <div wire.loading.remove class="mt-5">
@@ -156,7 +175,7 @@
 
     </div>
 
-    <div class="pt-5">
+    <div class="pt-8">
         <div class="flex justify-end">
         <button type="button" class="px-4 py-2 font-bold bg-white border border-gray-300 rounded-md shadow-sm text-md text-primary-bg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Cancel
