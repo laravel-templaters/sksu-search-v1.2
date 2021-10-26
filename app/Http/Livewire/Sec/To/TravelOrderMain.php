@@ -98,13 +98,20 @@ class TravelOrderMain extends Component
         $prov = Province::where("province_code", "=",  $this->province_codes)->first();
         $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
 
-         $this->validate([
+        $this->validate([
             'users_id' => 'required',
             'purpose' => 'required',
             'region_codes' => 'required',
             'province_codes' => 'required',
             'city_codes' => 'required',
-         ]);
+             ],
+            [
+            'users_id.required' => 'The name field is required.',
+            'purpose.required' => 'The purpose field is required.',
+            'region_codes.required' => 'The region field is required.',
+            'province_codes.required' => 'The province field is required.',
+            'city_codes.required' => 'The city field is required.',   
+            ]);
 
          $travel_order = new TravelOrder;
          $travel_order->purpose = $this->purpose;

@@ -18,12 +18,15 @@
                         Name
                     </label>
                     <div class="col-span-1 mt-1">
-                        <select wire:model="users_id" class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                        <div class="grid grid-rows-1">
+                        <select wire:model="users_id"class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                             <option selected>--SELECT USER--</option>
                             @foreach ($users as $user)   
                             <option value="{{$user->id}}">{{$user->first_name}} {{ \Illuminate\Support\Str::limit($user->middle_name, 1, $end='.') }} {{$user->last_name}}</option>
                             @endforeach
                         </select>
+                        @error('users_id') <span class="text-red-700 error mt-2">{{ $message }}</span> @enderror
+                    </div>
                     </div>
                 </div>
 
@@ -51,6 +54,7 @@
                          @endforeach
                         
                         </select>
+                        @error('region_codes') <span class="text-red-700 error mt-3">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-span-1 row-span-1 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Province</h3>
@@ -61,6 +65,7 @@
                         @endforeach
 
                         </select>
+                        @error('province_codes') <span class="text-red-700 error mt-3">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-span-1 col-start-2 row-span-1 row-start-2 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">City / Municipality</h3>
@@ -70,6 +75,7 @@
                             <option value="{{$city->city_municipality_code}}">{{$city->city_municipality_description}}</option>
                             @endforeach
                         </select>
+                        @error('city_codes') <span class="text-red-700 error mt-3">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-span-1 col-start-3 row-span-1 row-start-2 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Others</h3>
