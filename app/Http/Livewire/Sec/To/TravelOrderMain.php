@@ -143,14 +143,14 @@ class TravelOrderMain extends Component
               'showConfirmButton' =>  false, 
         ]);
         }else{
-            $this->alert('error', 'TOTAL UNCALCULATED', [
-                'textcolor' =>'#ffffff',
+            $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
                 'background' => '#ffffff',
-                'padding' => '0.5rem',
+                'padding' => '2rem',
+                'backdrop' => true,
                 'position' =>  'center', 
-                'timer' =>  2500,  
-                'toast' =>  true, 
-                'text' =>  'Press the "CALCULATE" button to get grand total', 
+                'timer' =>  4500,  
+                'toast' =>  false, 
+                'text' =>  'Press "Calculate" button before saving...  Thank You!', 
                 'confirmButtonText' =>  'Ok', 
                 'cancelButtonText' =>  'Cancel', 
                 'showCancelButton' =>  false, 
@@ -186,18 +186,18 @@ class TravelOrderMain extends Component
         unset($this->input[$i]);
     }
     public function checkModel(){
-        $this->alert('success', 'Successfully Added!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' => "hello", 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
+    //     $this->alert('success', 'Successfully Added!', [
+    //         'background' => '#ccffcc',
+    //         'padding' => '0.5rem',
+    //         'position' =>  'top-end', 
+    //         'timer' =>  2500,  
+    //         'toast' =>  true, 
+    //         'text' => "hello", 
+    //         'confirmButtonText' =>  'Ok', 
+    //         'cancelButtonText' =>  'Cancel', 
+    //         'showCancelButton' =>  false, 
+    //         'showConfirmButton' =>  false, 
+    //   ]);
     }
 
 
