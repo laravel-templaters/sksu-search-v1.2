@@ -25,7 +25,7 @@
                             <option value="{{$user->id}}">{{$user->first_name}} {{ \Illuminate\Support\Str::limit($user->middle_name, 1, $end='.') }} {{$user->last_name}}</option>
                             @endforeach
                         </select>
-                        @error('users_id') <span class="text-red-700 error mt-2">{{ $message }}</span> @enderror
+                        @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
                     </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                          @endforeach
                         
                         </select>
-                        @error('region_codes') <span class="text-red-700 error mt-3">{{ $message }}</span> @enderror
+                        @error('region_codes') <span class="mt-3 text-red-700 error">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-span-1 row-span-1 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Province</h3>
@@ -65,7 +65,7 @@
                         @endforeach
 
                         </select>
-                        @error('province_codes') <span class="text-red-700 error mt-3">{{ $message }}</span> @enderror
+                        @error('province_codes') <span class="mt-3 text-red-700 error">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-span-1 col-start-2 row-span-1 row-start-2 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">City / Municipality</h3>
@@ -75,7 +75,7 @@
                             <option value="{{$city->city_municipality_code}}">{{$city->city_municipality_description}}</option>
                             @endforeach
                         </select>
-                        @error('city_codes') <span class="text-red-700 error mt-3">{{ $message }}</span> @enderror
+                        @error('city_codes') <span class="mt-3 text-red-700 error">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-span-1 col-start-3 row-span-1 row-start-2 mt-1">
                         <h3 class="ml-1 text-sm text-gray-600 ">Others</h3>
@@ -160,7 +160,7 @@
                 @endforeach
                 
                 @if(isset($gen))
-                    <div class="relative min-w-full my-4 ml-4 mr-7"><div class="absolute right-0 pr-12 bg-white mr-7"><button class="mx-3 text-sm font-bold uppercase px 4 bg-primary-bg-alt text-primary-text" wire:click="TotalCalculation">Calculate</button> <span class="text-lg font-extrabold text-gray-900">TOTAL:</span><span class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div></div>
+                    <div class="relative min-w-full my-4 ml-4 mr-7"><div class="absolute right-0 pr-12 bg-white mr-7"><button class="pl-3 pr-2 my-auto text-sm font-bold uppercase bg-white border-2 border-r-0 hover:bg-primary-bg-alt hover:text-secondary-bg-alt rounded-l-md border-primary-bg-alt text-secondary-bg" wire:click="TotalCalculation">Calculate</button> <span class="font-extrabold text-gray-900 text-md">TOTAL:</span><span class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div></div>
                 @endif
 
                 @elseif($err_from_to)

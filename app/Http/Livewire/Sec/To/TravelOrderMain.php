@@ -115,34 +115,53 @@ class TravelOrderMain extends Component
             'province_codes.required' => 'The province field is required.',
             'city_codes.required' => 'The city field is required.',   
             ]);
-
-         $travel_order = new TravelOrder;
-         $travel_order->purpose = $this->purpose;
-         $travel_order->philippine_regions_id =  $reg['id'];
-         $travel_order->philippine_provinces_id = $prov['id'];
-         $travel_order->philippine_cities_id = $cit['id'];
-         $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
-         $travel_order->user_id = $this->users_id;
-         $travel_order->dv_type_sorter_id = "1";
-         $travel_order->dte_id =  $reg['id'];
-         $travel_order->save();
+        if (isset($this->finalTotal)) {
+            $travel_order = new TravelOrder;
+            $travel_order->purpose = $this->purpose;
+            $travel_order->philippine_regions_id =  $reg['id'];
+            $travel_order->philippine_provinces_id = $prov['id'];
+            $travel_order->philippine_cities_id = $cit['id'];
+            $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+            $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+            $travel_order->total = $this->finalTotal;
+            $travel_order->user_id = $this->users_id;
+            $travel_order->dv_type_sorter_id = "1";
+            $travel_order->dte_id =  $reg['id'];
+            $travel_order->save();  
+            $this->emit('storeItenerary',$travel_order->id);
+          
+            $this->alert('success', 'Successfully Added!', [
+              'background' => '#ccffcc',
+              'padding' => '0.5rem',
+              'position' =>  'top-end', 
+              'timer' =>  2500,  
+              'toast' =>  true, 
+              'text' =>  '', 
+              'confirmButtonText' =>  'Ok', 
+              'cancelButtonText' =>  'Cancel', 
+              'showCancelButton' =>  false, 
+              'showConfirmButton' =>  false, 
+        ]);
+        }else{
+            $this->alert('error', 'TOTAL UNCALCULATED', [
+                'textcolor' =>'#ffffff',
+                'background' => '#ffffff',
+                'padding' => '0.5rem',
+                'position' =>  'center', 
+                'timer' =>  2500,  
+                'toast' =>  true, 
+                'text' =>  'Press the "CALCULATE" button to get grand total', 
+                'confirmButtonText' =>  'Ok', 
+                'cancelButtonText' =>  'Cancel', 
+                'showCancelButton' =>  false, 
+                'showConfirmButton' =>  false, 
+          ]);
+        }
+        
 
 
         // $this->emit('showAlert',$travel_order->id);
-           $this->emit('storeItenerary',$travel_order->id);
-          
-          $this->alert('success', 'Successfully Added!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' =>  '', 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
+        
     }
 
     public function clearFields()
