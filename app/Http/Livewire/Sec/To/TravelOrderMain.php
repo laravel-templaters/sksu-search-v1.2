@@ -204,6 +204,7 @@ class TravelOrderMain extends Component
 
     public function generateDays()
     {
+        $this->finalTotal = $this->subTotal= 0.0;
         if(is_null($this->date_from) || is_null($this->date_to))
         {
             $this->showDays = false;

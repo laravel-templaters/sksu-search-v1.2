@@ -309,8 +309,15 @@
                                                     <div class="grid grid-cols-3 col-span-9 border-2 border-gray-400 rounded-md shadow-sm ">
                                                         <div class="col-span-3 m-2">
                                                             <label for="first-name" class="block text-sm font-medium text-gray-700">Entry</label>
-                                                            <input type="text" wire:model="entry.0" 
+
+                                                            @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
+                                                                <input type="text" wire:model="entry.0" 
+                                                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" readonly>
+                                                            @else
+                                                                <input type="text" wire:model="entry.0" 
                                                                 class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
+                                                            @endif
+                                                            
                                                                 @error('entry.0')
                                                                 <span class="text-sm text-red-500">{{$message}}</span>
                                                                 @enderror
@@ -333,8 +340,14 @@
                                                         </div>
                                                         <div class="col-span-1 m-2">
                                                             <label for="first-name" class="block text-sm font-medium text-gray-700">Amount</label>
-                                                            <input type="number" wire:model="amount.0" 
+                                                            @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
+                                                                <input type="number" wire:model="amount.0" 
+                                                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" readonly>
+
+                                                            @else
+                                                                <input type="number" wire:model="amount.0" 
                                                                 class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                            @endif
                                                                 @error('amount.0')
                                                                 <span class="text-sm text-red-500">{{$message}}</span>
                                                                 @enderror
@@ -387,8 +400,12 @@
                                                     @endforeach
                                                     {{-- loops HERE end --}}
                                                     {{-- add button --}}
-                                                    <button class="col-span-3 col-start-4 m-2 text-gray-800 rounded-full hover:bg-primary-bg-alt hover:text-secondary-text" wire:click.prevent="add({{$i}})"><span class="m-2 text-sm font-extrabold">ADD ENTRY</span>
-                                                    </button>
+                                                     @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
+                                                     @else
+                                                        <button class="col-span-3 col-start-4 m-2 text-gray-800 rounded-full hover:bg-primary-bg-alt hover:text-secondary-text" wire:click.prevent="add({{$i}})"><span class="m-2 text-sm font-extrabold">ADD ENTRY</span>
+                                                        </button>
+                                                     @endif
+                                                    
                                                 </div>
                                             </div>
                                             
@@ -576,15 +593,15 @@
                                 <div class="grid grid-cols-8 grid-rows-4">
                                     {{-- logo --}}
                                     <div class="col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black ">
-                                        <div class="grid grid-cols-10 grid-rows-5 gap-2 m-2">
-                                            <div class="col-span-3 col-start-1 row-span-3 row-start-1 pl-6 text-right">
+                                        <div class="grid grid-cols-10 grid-rows-5 m-2">
+                                            <div class="col-span-2 col-start-1 row-span-3 row-start-1 pl-6 text-right">
                                                 <img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="object-scale-down w-20 h-full mx-auto">
                                             </div>
                                             <div class="col-span-3 col-start-1 row-span-2 row-start-1 pl-6 text-right">
                                                 
                                             </div>
-                                            <div class="col-span-4 col-start-4 row-span-2 row-start-1 text-left"><span class="text-green-600 uppercase font-bold-text-md">Sultan Kudarat State University</span></div>
-                                            <div class="col-span-3 col-start-8 row-span-5 row-start-1 mr-3 ">
+                                            <div class="col-span-4 col-start-4 row-span-2 row-start-1 text-left"><span class="text-sm font-bold text-green-600 uppercase">Sultan Kudarat State University</span></div>
+                                            <div class="col-span-1 col-start-10 row-span-5 row-start-1 mr-3 ">
                                             
                                                 {!! QrCode::size(100)->margin(2)->generate((string)$dvno_temp); !!}
 {{--                                                 
