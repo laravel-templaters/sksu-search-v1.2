@@ -1,5 +1,5 @@
 <div class="m-4 bg-white rounded-md">
-
+                                                                                         {{-- implicit submission --}}
     <form class="p-5 space-y-8 divide-y divide-gray-200"  wire:submit.prevent="submit" onkeydown="return event.key != 'Enter';">
     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
