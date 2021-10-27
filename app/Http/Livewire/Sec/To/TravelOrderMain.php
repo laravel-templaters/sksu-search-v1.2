@@ -292,7 +292,7 @@ class TravelOrderMain extends Component
     }
     public function finalTotalCalculation($value){
         $this->subTotal += $value;
-        $this->finalTotal = $this->subTotal;
+        $this->finalTotal = number_format($this->subTotal,2);
     }
     
 }

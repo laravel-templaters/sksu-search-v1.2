@@ -28,7 +28,8 @@ class AddRegistrationAmountColumnToTravelOrdersTable extends Migration
     {
         Schema::table('travel_orders', function (Blueprint $table) {
             $table->dropColumn('registration_amount');
-            $table->dropColumn('total');
+             $table->dropColumn('registration_amount');
+             
         });
     }
 }

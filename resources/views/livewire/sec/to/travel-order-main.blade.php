@@ -1,6 +1,6 @@
 <div class="m-4 bg-white rounded-md">
 
-    <form class="p-5 space-y-8 divide-y divide-gray-200"  wire:submit.prevent="submit">
+    <form class="p-5 space-y-8 divide-y divide-gray-200"  wire:submit.prevent="submit" onkeydown="return event.key != 'Enter';">
     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
             <div>
@@ -160,7 +160,7 @@
                 @endforeach
                 
                 @if(isset($gen))
-                    <div class="relative min-w-full my-4 ml-4 mr-7"><div class="absolute right-0 pr-12 bg-white mr-7"><button class="pl-3 pr-2 my-auto text-sm font-bold uppercase bg-white border-2 border-r-0 hover:bg-primary-bg-alt hover:text-secondary-bg-alt rounded-l-md border-primary-bg-alt text-secondary-bg" wire:click="TotalCalculation">Calculate</button> <span class="font-extrabold text-gray-900 text-md">TOTAL:</span><span class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div></div>
+                    <div class="relative min-w-full my-4 ml-4 mr-7"><div class="absolute right-0 pr-12 bg-white mr-7"><a class="pl-3 pr-2 my-auto text-sm font-bold uppercase bg-white border-2 border-r-0 hover:bg-primary-bg-alt hover:text-secondary-bg-alt rounded-l-md border-primary-bg-alt text-secondary-bg" wire:click="TotalCalculation">Calculate</a> <span class="font-extrabold text-gray-900 text-md">TOTAL:</span><span class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div></div>
                 @endif
 
                 @elseif($err_from_to)
@@ -192,7 +192,6 @@
         </div>
     </div>
     </form>
-
 </div>
 
 
