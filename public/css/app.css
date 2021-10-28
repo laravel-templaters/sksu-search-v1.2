@@ -1199,17 +1199,17 @@ select {
 .col-start-7 {
 	grid-column-start: 7;
 }
-.col-start-8 {
-	grid-column-start: 8;
+.col-start-10 {
+	grid-column-start: 10;
 }
 .col-start-5 {
 	grid-column-start: 5;
 }
+.col-start-8 {
+	grid-column-start: 8;
+}
 .col-start-3 {
 	grid-column-start: 3;
-}
-.col-start-10 {
-	grid-column-start: 10;
 }
 .row-span-3 {
 	grid-row: span 3 / span 3;
@@ -1498,6 +1498,9 @@ select {
 .w-screen {
 	width: 100vw;
 }
+.w-2\/6 {
+	width: 33.333333%;
+}
 .min-w-0 {
 	min-width: 0px;
 }
@@ -1639,14 +1642,14 @@ select {
 .grid-rows-1 {
 	grid-template-rows: repeat(1, minmax(0, 1fr));
 }
-.grid-rows-3 {
-	grid-template-rows: repeat(3, minmax(0, 1fr));
-}
 .flex-col {
 	flex-direction: column;
 }
 .flex-wrap {
 	flex-wrap: wrap;
+}
+.flex-nowrap {
+	flex-wrap: nowrap;
 }
 .items-start {
 	align-items: flex-start;

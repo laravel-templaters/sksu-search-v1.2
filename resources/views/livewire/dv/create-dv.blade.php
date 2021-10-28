@@ -592,8 +592,8 @@
                             <div class="col-span-8">
                                 <div class="grid grid-cols-8 grid-rows-4">
                                     {{-- logo --}}
-                                    <div class="col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black ">
-                                        <div class="grid grid-cols-10 grid-rows-5 m-2">
+                                    <div class="grid grid-cols-6 col-span-6 col-start-1 row-span-3 row-start-1 border-2 border-black">
+                                        {{-- <div class="grid grid-cols-10 grid-rows-5 m-2">
                                             <div class="col-span-2 col-start-1 row-span-3 row-start-1 pl-6 text-right">
                                                 <img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="object-scale-down w-20 h-full mx-auto">
                                             </div>
@@ -604,12 +604,25 @@
                                             <div class="col-span-1 col-start-10 row-span-5 row-start-1 mr-3 ">
                                             
                                                 {!! QrCode::size(100)->margin(2)->generate((string)$dvno_temp); !!}
-{{--                                                 
-                                                <div class="row-span-1">
-                                                    <span class="font-medium text-black text-md">Dv No.{{$dvno_temp}}</span>
-                                                </div> --}}
-                                                
+
                                             </div>
+                                        </div> --}}
+                                        <div class="col-span-2 pt-2">
+                                            <div class="text-center">
+                                                <img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png" alt="sksu logo" class="object-scale-down w-20 h-full mx-auto">
+                                                <span class="text-xs text-center text-black">SKSU Works for Success!</span><br>
+                                                <span class="font-bold text-center text-black text-md"> ISO 9001:2015</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-3 pt-2 ">
+                                            <div class="space-y-2 text-left flex-nowrap">
+                                                <span class="block text-lg font-bold text-green-600 uppercase">SULTAN KUDARAT STATE UNIVERSITY</span>
+                                                <span class="block text-black text-md">ACCESS, EJC Montilla, 9800 City of Tacurong</span>
+                                                <span class="block text-black text-md">Province of Sultan Kudarat</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 pt-2">
+                                            <div class="m-3"> {!! QrCode::size(100)->margin(2)->generate((string)$dvno_temp); !!}</div>
                                         </div>
                                     </div>
                                     {{-- dV --}}
@@ -821,13 +834,13 @@
                                         </div>
                                         {{-- accountant name --}}
                                         <div class="col-span-2 col-start-2 row-span-1 text-center border border-black">
-                                            <span class="font-extrabold">Name Here</span>
+                                            <span class="font-extrabold uppercase">JESHER Y. PALOMARIA, CPA</span>
                                         </div>
                                         <div class="col-span-1 col-start-4 row-span-1 border border-black">
                                             <span class="ml-2">Printed Name</span>
                                         </div>
                                         <div class="col-span-2 col-start-5 row-span-1 text-center border border-black">
-                                            <span class="font-extrabold">Name Here</span>
+                                            <span class="font-extrabold">ROLANDO F. HECHANOVA, PhD</span>
                                         </div> 
                                         <div class="col-span-1 col-start-1 row-span-1 border border-black">
                                             <span class="my-auto ml-2">Position</span>
