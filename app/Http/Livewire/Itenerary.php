@@ -23,6 +23,7 @@ class Itenerary extends Component
     public $showDays = false;
     public $total;
 
+    public $finalTotalperDay;
     
     public $input = [
         [
@@ -40,6 +41,7 @@ class Itenerary extends Component
         "dinner" => "",
         "lodging" => "",
         'raw_diem'=>"",
+        'raw-total'=>0.0,
         ],
                     ];
 
@@ -113,17 +115,20 @@ class Itenerary extends Component
             "arr_time" => "",
             "mot" => "",
             "trans_exp" => "",
-            "per_diem"=>number_format($this->temp_diem[0],2),
+            "per_diem"=>"",
             "others" => "",
             "total" => "",
             "breakfast" => "",
             "lunch" => "",
             "dinner" => "",
             "lodging" => "",
-            'raw_diem'=>  (string)$this->temp_diem[0],
+            'raw_diem'=> "",
+            'raw-total'=>0.0,
         ));
         
     }
+
+  
 
     public function removemain($i)
     {
@@ -259,29 +264,70 @@ class Itenerary extends Component
            
         }
 
+               if ($key == 0 || $key == "0") {
                 $trans = $this->input[intval($key)]['trans_exp'];
                 $others = $this->input[intval($key)]['others'];
                 if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0) && $this->input[intval($key)]['per_diem'] == "")
                 {
+                    
+                    $this->input[intval($key)]['raw_total'] = 0.0;
                     $this->input[intval($key)]['total'] = "0.00";
         
                 }else if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0))
                 {
                     $this->total = ((float)$this->input[intval($key)]['raw_diem']);
+                    $this->input[intval($key)]['raw_total'] = $this->total;
                     $this->input[intval($key)]['total'] = number_format($this->total,2);
                 }
                 else{
                     $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']) + ((float)$this->input[intval($key)]['raw_diem']);
+                    $this->input[intval($key)]['raw_total'] = $this->total;
                     $this->input[intval($key)]['total'] = number_format($this->total,2);
                 }
+                   
+               }else{
+                $trans = $this->input[intval($key)]['trans_exp'];
+                $others = $this->input[intval($key)]['others'];
+                if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0))
+                {
+                    $this->input[intval($key)]['total'] = "0.00";
+                    $this->input[intval($key)]['raw_total'] = 0.0;
+        
+                }else if(($trans == "" || (float)$trans == 0) && ($others == "" || (float)$others == 0))
+                {
+                    $this->total = 0.0;
+                    $this->input[intval($key)]['raw_total'] = $this->total;
+                    $this->input[intval($key)]['total'] = number_format($this->total,2);
+                }
+                else{
+                    $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']);
+                    $this->input[intval($key)]['raw_total'] = $this->total;
+                    $this->input[intval($key)]['total'] = number_format($this->total,2);
+                }
+               }
 
     }
     
     //test for saving
     public $listeners = [
-        'storeItenerary'
+        'storeItenerary'=>'storeItenerary',
+        'sendTotalVal'=>'sendTotalVal',
+       
     ];
 
+
+
+    public function sendTotalVal(){
+       
+        
+            $this->finalTotalperDay =0.0;
+            foreach ($this->input as $key => $value) {
+                $this->finalTotalperDay += (float)  $this->input[intval($key)]['raw_total'];
+           }
+           $this->emit('calculatetotalfromothers', $this->finalTotalperDay);
+       
+        
+    }
     // public function showAlert($key){
         
     //     $this->alert('success', 'EMIT FROM PARENT LOLS'. $key, [
@@ -335,8 +381,6 @@ class Itenerary extends Component
                         'date' =>$this->input[$key]['date'],
                         'perdiem' => $this->input[$key]['per_diem'], 
                         'travel_order_id' => $trans_id));
-
-
                         return back();
                         
             // Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);

@@ -24,6 +24,7 @@ class TravelOrderMain extends Component
     public $user;
     public $purpose;
     public $has_registration;
+    public $registration_amt;
     public $per_diem;
 
     //variables for place
@@ -53,6 +54,8 @@ class TravelOrderMain extends Component
     public $err_diem = false;
     
     public $gen = [];
+
+    public $finalTotal;
 
 
     public $input = [[
@@ -98,41 +101,67 @@ class TravelOrderMain extends Component
         $prov = Province::where("province_code", "=",  $this->province_codes)->first();
         $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
 
-         $this->validate([
+        $this->validate([
             'users_id' => 'required',
             'purpose' => 'required',
             'region_codes' => 'required',
             'province_codes' => 'required',
             'city_codes' => 'required',
-         ]);
-
-         $travel_order = new TravelOrder;
-         $travel_order->purpose = $this->purpose;
-         $travel_order->philippine_regions_id =  $reg['id'];
-         $travel_order->philippine_provinces_id = $prov['id'];
-         $travel_order->philippine_cities_id = $cit['id'];
-         $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
-         $travel_order->user_id = $this->users_id;
-         $travel_order->dv_type_sorter_id = "1";
-         $travel_order->dte_id =  $reg['id'];
-         $travel_order->save();
+             ],
+            [
+            'users_id.required' => 'The name field is required.',
+            'purpose.required' => 'The purpose field is required.',
+            'region_codes.required' => 'The region field is required.',
+            'province_codes.required' => 'The province field is required.',
+            'city_codes.required' => 'The city field is required.',   
+            ]);
+        if (isset($this->finalTotal)) {
+            $travel_order = new TravelOrder;
+            $travel_order->purpose = $this->purpose;
+            $travel_order->philippine_regions_id =  $reg['id'];
+            $travel_order->philippine_provinces_id = $prov['id'];
+            $travel_order->philippine_cities_id = $cit['id'];
+            $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+            $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+            $travel_order->total = $this->finalTotal;
+            $travel_order->user_id = $this->users_id;
+            $travel_order->dv_type_sorter_id = "1";
+            $travel_order->dte_id =  $reg['id'];
+            $travel_order->save();  
+            $this->emit('storeItenerary',$travel_order->id);
+          
+            $this->alert('success', 'Successfully Added!', [
+              'background' => '#ccffcc',
+              'padding' => '0.5rem',
+              'position' =>  'top-end', 
+              'timer' =>  2500,  
+              'toast' =>  true, 
+              'text' =>  '', 
+              'confirmButtonText' =>  'Ok', 
+              'cancelButtonText' =>  'Cancel', 
+              'showCancelButton' =>  false, 
+              'showConfirmButton' =>  false, 
+        ]);
+        }else{
+            $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
+                'background' => '#ffffff',
+                'padding' => '2rem',
+                'backdrop' => true,
+                'position' =>  'center', 
+                'timer' =>  4500,  
+                'toast' =>  false, 
+                'text' =>  'Press "Calculate" button before saving...  Thank You!', 
+                'confirmButtonText' =>  'Ok', 
+                'cancelButtonText' =>  'Cancel', 
+                'showCancelButton' =>  false, 
+                'showConfirmButton' =>  false, 
+          ]);
+        }
+        
 
 
         // $this->emit('showAlert',$travel_order->id);
-           $this->emit('storeItenerary',$travel_order->id);
-          
-          $this->alert('success', 'Successfully Added!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' =>  '', 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
+        
     }
 
     public function clearFields()
@@ -157,24 +186,25 @@ class TravelOrderMain extends Component
         unset($this->input[$i]);
     }
     public function checkModel(){
-        $this->alert('success', 'Successfully Added!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' => "hello", 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
+    //     $this->alert('success', 'Successfully Added!', [
+    //         'background' => '#ccffcc',
+    //         'padding' => '0.5rem',
+    //         'position' =>  'top-end', 
+    //         'timer' =>  2500,  
+    //         'toast' =>  true, 
+    //         'text' => "hello", 
+    //         'confirmButtonText' =>  'Ok', 
+    //         'cancelButtonText' =>  'Cancel', 
+    //         'showCancelButton' =>  false, 
+    //         'showConfirmButton' =>  false, 
+    //   ]);
     }
 
 
 
     public function generateDays()
     {
+        $this->finalTotal = $this->subTotal= 0.0;
         if(is_null($this->date_from) || is_null($this->date_to))
         {
             $this->showDays = false;
@@ -241,6 +271,28 @@ class TravelOrderMain extends Component
     return $this->gen;
     }
 
-  
+
+    //for final total
+
+    public $listeners = [
+        'calculatetotalfromothers'=>'finalTotalCalculation',
+    ];
+
+    public $subTotal;
+    public function TotalCalculation(){
+        if ($this->has_registration == true) {
+            
+        $this->finalTotal = $this->subTotal= $this->registration_amt;
+        $this->emit('sendTotalVal');
+        } else {
+            $this->finalTotal = $this->subTotal = 0.0;
+        $this->emit('sendTotalVal');
+        }
+        
+    }
+    public function finalTotalCalculation($value){
+        $this->subTotal += $value;
+        $this->finalTotal = number_format($this->subTotal,2);
+    }
     
 }
