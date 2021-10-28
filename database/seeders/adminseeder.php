@@ -33,9 +33,9 @@ class adminseeder extends Seeder
             'position_id'=>1]);
 
             DB::table('users')->insert([
-                'first_name'=> 'Sample',
+                'first_name'=> 'Jane',
                 'middle_name'=> 'Sec',
-                'last_name'=> 'Secretary',
+                'last_name'=> 'Sappe',
                 'address'=> 'Tacurong City',
                 'birth_day'=>  Carbon::create('2000', '09', '10'),   
                 'contact_number'=>'09123456789',        
@@ -48,7 +48,7 @@ class adminseeder extends Seeder
                 'position_id'=>3]);
 
                 DB::table('users')->insert([
-                    'first_name'=> 'Department',
+                    'first_name'=> 'Dolores',
                     'middle_name'=> 'T',
                     'last_name'=> 'Head',
                     'address'=> 'Tacurong City',
@@ -63,9 +63,9 @@ class adminseeder extends Seeder
                     'position_id'=>2]);
 
                     DB::table('users')->insert([
-                        'first_name'=> 'Test',
+                        'first_name'=> 'Travis',
                         'middle_name'=> 'T',
-                        'last_name'=> 'DepartmentHead',
+                        'last_name'=> 'Scott',
                         'address'=> 'Tacurong City',
                         'birth_day'=>  Carbon::create('2000', '02', '03'),   
                         'contact_number'=>'09312356688',        

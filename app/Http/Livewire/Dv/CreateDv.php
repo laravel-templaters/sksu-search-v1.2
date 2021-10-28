@@ -79,7 +79,7 @@ class CreateDv extends Component
      public $position;
      public $department;
      
-
+        public $mop_text;
      //mock variables
      public $dvno_temp = 101294159841091;
 
@@ -121,7 +121,14 @@ class CreateDv extends Component
         }
 
         //get total of particulars
-        
+        if(isset($this->mode_id)){
+            $temp = DB::table('mode_of_payments')->where('id',$this->mode_id)->get();
+            foreach ($temp as $key ) {
+                $this->mop_text= $key->mode_of_payment;
+            }
+            
+            
+        }
         
         
         //Pass to DV
@@ -143,7 +150,7 @@ class CreateDv extends Component
         $this->position = position::where('id', '=',  $this->signatory->position_id)->first();
         $this->department = Department::where('id', '=',  $this->signatory->department_id)->first();
 
-        $this->openstep4();
+        $this->validateForm(4);
     }
 
     //dynamic input field methods START ----------
@@ -235,9 +242,18 @@ class CreateDv extends Component
                 $this->openstep3();
             break;
             case 4:
+                $this->calculateTotal();
                 $this->openstep4();
             break;
             
+        }
+    }
+
+    public function calculateTotal(){
+
+        $this->total= 0.0;
+        foreach ($this->amount as $key => $value) {
+            $this->total += (float)$this->amount[$key];
         }
     }
 
