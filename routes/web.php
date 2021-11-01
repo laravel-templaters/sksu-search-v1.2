@@ -81,3 +81,9 @@ Route::mediaLibrary();
 Route::get('/to', function () {
     return view('travelorder.travel-order-wrapper');
 });
+
+//temp routes for admin kay di ko kabalo
+
+Route::get('/admin/dashboard', function () {
+    return view('livewire.admin.dash-main');
+});
