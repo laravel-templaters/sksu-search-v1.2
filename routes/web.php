@@ -84,6 +84,4 @@ Route::get('/to', function () {
 
 //temp routes for admin kay di ko kabalo
 
-Route::get('/admin/dashboard', function () {
-    return view('livewire.admin.dash-main');
-});
+Route::get('/admin/dashboard',\App\Http\Livewire\AdminSide\DashMain::class);
