@@ -232,7 +232,8 @@ class TravelOrderMain extends Component
             else{     
                 // dd( $this->per_diem);
 
-                    TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                    $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                    
                     $this->showDays = true;
  
             }  

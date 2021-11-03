@@ -4,12 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\IteneraryEntry;
+use App\Models\Itenerary;
 
 use Illuminate\Support\Facades\DB;
 
 // use App\Models\Itenerary;
 
-class Itenerary extends Component
+class IteneraryView extends Component
 {
     public $gen;
     public $i = 1;
@@ -97,7 +98,7 @@ class Itenerary extends Component
             }
 
         }
-        return view('livewire.itenerary')->with(['isset_per_diem' => $this->isSet_per_diem]);
+        return view('livewire.itenerary-view')->with(['isset_per_diem' => $this->isSet_per_diem]);
        
         
     }
@@ -156,7 +157,9 @@ class Itenerary extends Component
                 $this->err_diff = true;
             }else{     
               
-                    TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                  TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+
+                    
                     
                     $this->showDays = true;
 
@@ -371,7 +374,7 @@ class Itenerary extends Component
         // ]
         // );
 
-        foreach ($this->input as $key => $value) {
+       
       
                 // DB::table('iteneraries')->insert(
                 //  array('is_breakfast_covered' => $this->input[$key]['breakfast'] == 1 ? '1' : '0', 
@@ -382,25 +385,25 @@ class Itenerary extends Component
                 //         'perdiem' => $this->input[$key]['per_diem'], 
                 //         'travel_order_id' => $trans_id));
 
-                        $itenerary = new App\Models\Itenerary;
-                        $itenerary->is_breakfast_covered = $this->input[$key]['breakfast'] == 1 ? '1' : '0';
-                        $itenerary->is_lunch_covered =  $this->input[$key]['lunch'] == 1 ? '1' : '0';
-                        $itenerary->is_dinner_covered = $this->input[$key]['dinner'] == 1 ? '1' : '0';
-                        $itenerary->is_lodging_covered = $this->input[$key]['lodging'] == 1 ? '1' : '0';
-                        $itenerary->date = $this->input[$key]['date'];
-                        $itenerary->perdiem = $this->input[$key]['per_diem'];
+                        $itenerary = new Itenerary;
+                        $itenerary->is_breakfast_covered = $this->input[0]['breakfast'] == 1 ? '1' : '0';
+                        $itenerary->is_lunch_covered =  $this->input[0]['lunch'] == 1 ? '1' : '0';
+                        $itenerary->is_dinner_covered = $this->input[0]['dinner'] == 1 ? '1' : '0';
+                        $itenerary->is_lodging_covered = $this->input[0]['lodging'] == 1 ? '1' : '0';
+                        $itenerary->date = $this->input[0]['date'];
+                        $itenerary->perdiem = $this->input[0]['per_diem'];
                         $itenerary->travel_order_id = $trans_id;
                         $itenerary->save();
-
-                        foreach($this->input as $key => $value){
+                    
+                        foreach($this->input as $key1 => $value1){
                             $itenerary_entries = new IteneraryEntry;
-                            $itenerary_entries->place_to_be_visited = $this->input[$key]['place'];
-                            $itenerary_entries->departure_time =  $this->input[$key]['dep_time'];
-                            $itenerary_entries->arrival_time = $this->input[$key]['arr_time'];
-                            $itenerary_entries->mode_of_transport = $this->input[$key]['mot'];
-                            $itenerary_entries->transport_expenses = $this->input[$key]['trans_exp'];
-                            $itenerary_entries->others = $this->input[$key]['others'];
-                            $itenerary_entries->total = $this->input[$key]['total'];;
+                            $itenerary_entries->place_to_be_visited = $this->input[$key1]['place'];
+                            $itenerary_entries->departure_time =  $this->input[$key1]['dep_time'];
+                            $itenerary_entries->arrival_time = $this->input[$key1]['arr_time'];
+                            $itenerary_entries->mode_of_transport = $this->input[$key1]['mot'];
+                            $itenerary_entries->transport_expenses = $this->input[$key1]['trans_exp'];
+                            $itenerary_entries->others = $this->input[$key1]['others'];
+                            $itenerary_entries->total = $this->input[$key1]['total'];;
                             $itenerary_entries->itenerary_id = $itenerary->id;
                             $itenerary_entries->save(); 
     
@@ -420,7 +423,7 @@ class Itenerary extends Component
             // $itenerary->perdiem = $this->input[$key]['per_diem'];
             // $itenerary->travel_order_id = $trans_id;
             // $itenerary->save();
-        }
+
 
     }
     
