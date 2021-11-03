@@ -136,7 +136,7 @@ class TravelOrderMain extends Component
               'position' =>  'top-end', 
               'timer' =>  2500,  
               'toast' =>  true, 
-              'text' =>  '', 
+              'text' =>  '',  
               'confirmButtonText' =>  'Ok', 
               'cancelButtonText' =>  'Cancel', 
               'showCancelButton' =>  false, 

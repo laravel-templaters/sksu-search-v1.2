@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\IteneraryEntry;
+
 use Illuminate\Support\Facades\DB;
 
 // use App\Models\Itenerary;
@@ -370,18 +372,43 @@ class Itenerary extends Component
         // );
 
         foreach ($this->input as $key => $value) {
-           //$dates = \Carbon\Carbon::createFromFormat('M. d',  $this->input[$key]['date'])->format('Y-m-d');
-//dd( $this->input[$key]['date'] );
-            //dd($this->input[$key]['date']);
-             DB::table('iteneraries')->insert(
-                 array('is_breakfast_covered' => $this->input[$key]['breakfast'] == 1 ? '1' : '0', 
-                        'is_lunch_covered' => $this->input[$key]['lunch'] == 1 ? '1' : '0', 
-                        'is_dinner_covered' => $this->input[$key]['dinner'] == 1 ? '1' : '0', 
-                        'is_lodging_covered' => $this->input[$key]['lodging'] == 1 ? '1' : '0', 
-                        'date' =>$this->input[$key]['date'],
-                        'perdiem' => $this->input[$key]['per_diem'], 
-                        'travel_order_id' => $trans_id));
-                        return back();
+      
+                // DB::table('iteneraries')->insert(
+                //  array('is_breakfast_covered' => $this->input[$key]['breakfast'] == 1 ? '1' : '0', 
+                //         'is_lunch_covered' => $this->input[$key]['lunch'] == 1 ? '1' : '0', 
+                //         'is_dinner_covered' => $this->input[$key]['dinner'] == 1 ? '1' : '0', 
+                //         'is_lodging_covered' => $this->input[$key]['lodging'] == 1 ? '1' : '0', 
+                //         'date' =>$this->input[$key]['date'],
+                //         'perdiem' => $this->input[$key]['per_diem'], 
+                //         'travel_order_id' => $trans_id));
+
+                        $itenerary = new App\Models\Itenerary;
+                        $itenerary->is_breakfast_covered = $this->input[$key]['breakfast'] == 1 ? '1' : '0';
+                        $itenerary->is_lunch_covered =  $this->input[$key]['lunch'] == 1 ? '1' : '0';
+                        $itenerary->is_dinner_covered = $this->input[$key]['dinner'] == 1 ? '1' : '0';
+                        $itenerary->is_lodging_covered = $this->input[$key]['lodging'] == 1 ? '1' : '0';
+                        $itenerary->date = $this->input[$key]['date'];
+                        $itenerary->perdiem = $this->input[$key]['per_diem'];
+                        $itenerary->travel_order_id = $trans_id;
+                        $itenerary->save();
+
+                        foreach($this->input as $key => $value){
+                            $itenerary_entries = new IteneraryEntry;
+                            $itenerary_entries->place_to_be_visited = $this->input[$key]['place'];
+                            $itenerary_entries->departure_time =  $this->input[$key]['dep_time'];
+                            $itenerary_entries->arrival_time = $this->input[$key]['arr_time'];
+                            $itenerary_entries->mode_of_transport = $this->input[$key]['mot'];
+                            $itenerary_entries->transport_expenses = $this->input[$key]['trans_exp'];
+                            $itenerary_entries->others = $this->input[$key]['others'];
+                            $itenerary_entries->total = $this->input[$key]['total'];;
+                            $itenerary_entries->itenerary_id = $itenerary->id;
+                            $itenerary_entries->save(); 
+    
+                        }
+
+                      //  return back();
+
+               
                         
             // Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);
             // $itenerary = new App\Models\Itenerary;
