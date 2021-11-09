@@ -18,6 +18,7 @@ class AlterTravelOrdersTable extends Migration
             $table->integer('philippine_regions_id')->after('purpose');
             $table->integer('philippine_provinces_id')->after('philippine_regions_id');
             $table->integer('philippine_cities_id')->after('philippine_provinces_id');
+            $table->string('date_range')->after('user_id')->nullable();
         });
     }
 
@@ -32,6 +33,7 @@ class AlterTravelOrdersTable extends Migration
         $table->dropColumn('philippine_regions_id');
         $table->dropColumn('philippine_provinces_id');
         $table->dropColumn('philippine_cities_id');
+        $table->dropColumn('date_range');
         $table->string('place_to_go');
         });
     }

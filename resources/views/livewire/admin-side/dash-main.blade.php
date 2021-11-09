@@ -78,7 +78,7 @@
                                                                         <div>
                                                                         <p class="text-sm text-gray-900">
                                                                             Applied on
-                                                                            <time datetime="">{{$travelOrder->created_at}} <span class="text-red-600">pa format ko gab tenks into January 01,2001</span></time>
+                                                                            <time datetime="">{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $travelOrder->created_at)->format('F d, Y')}}</time>
                                                                         </p>
                                                                         <p class="flex items-center mt-2 text-sm text-gray-500">
                                                                             <!-- Heroicon name: solid/check-circle -->
@@ -175,7 +175,7 @@
                                                                 Date Range
                                                                 </dt>
                                                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                                Date Range here pleath
+                                                                {{$travelOrder->date_range}}
                                                                 </dd>
                                                             </div>
                                                             {{-- <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
