@@ -20,9 +20,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', \App\Http\Livewire\AdminSide\DashMain::class)->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('transactions');
  
 Route::get('/sec', function () {
     return view('dashboard');
@@ -81,7 +83,3 @@ Route::mediaLibrary();
 Route::get('/to', function () {
     return view('travelorder.travel-order-wrapper');
 });
-
-//temp routes for admin kay di ko kabalo
-
-Route::get('/admin/dashboard',\App\Http\Livewire\AdminSide\DashMain::class);
