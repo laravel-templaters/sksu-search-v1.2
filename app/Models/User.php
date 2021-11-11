@@ -64,7 +64,7 @@ class User extends Authenticatable
     }
 
     public function travel_order(){
-        return $this->belongsTo('App\Models\TravelOrder');
+        return $this->hasMany('App\Models\TravelOrder');
     }
 
     public function role(){

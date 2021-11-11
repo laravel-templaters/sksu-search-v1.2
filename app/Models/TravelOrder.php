@@ -21,8 +21,8 @@ class TravelOrder extends Model
         return $this->belongsTo('App\Models\DVTravelOrderPivot');
     }
 
-    public function users(){
-        return $this->hasMany('App\Models\User');
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 
     public function dte(){

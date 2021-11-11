@@ -153,7 +153,7 @@
             </div>
                 @if($showDays)
                 
-
+               
                 @foreach ($gen as $g)
                  {{-- @livewire('itenerary', ['gen' => $g], key($g)) --}}
                  @include('wrappers.itinerary-daily-wrapper')

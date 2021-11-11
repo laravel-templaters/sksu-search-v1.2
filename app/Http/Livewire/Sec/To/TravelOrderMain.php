@@ -96,7 +96,9 @@ class TravelOrderMain extends Component
 
     public function submit()
     {
-
+        $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
+        $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
+        $date_string = $from_date ." - ".$to_date;
         $reg = Region::where("region_code", "=",  $this->region_codes)->first();
         $prov = Province::where("province_code", "=",  $this->province_codes)->first();
         $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
@@ -125,7 +127,8 @@ class TravelOrderMain extends Component
             $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
             $travel_order->total = $this->finalTotal;
             $travel_order->user_id = $this->users_id;
-            $travel_order->dv_type_sorter_id = "1";
+            $travel_order->date_range = $date_string;
+            $travel_order->dv_type_sorter_id = "1"; 
             $travel_order->dte_id =  $reg['id'];
             $travel_order->save();  
             $this->emit('storeItenerary',$travel_order->id);
@@ -136,7 +139,7 @@ class TravelOrderMain extends Component
               'position' =>  'top-end', 
               'timer' =>  2500,  
               'toast' =>  true, 
-              'text' =>  '', 
+              'text' =>  '',  
               'confirmButtonText' =>  'Ok', 
               'cancelButtonText' =>  'Cancel', 
               'showCancelButton' =>  false, 
@@ -232,7 +235,8 @@ class TravelOrderMain extends Component
             else{     
                 // dd( $this->per_diem);
 
-                    TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                    $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                    
                     $this->showDays = true;
  
             }  
