@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gradient-to-b from-primary-text via-primary-text to-primary-bg">
+<div class="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-primary-text">
     <div>
         {{ $logo }}
     </div>

@@ -21,4 +21,8 @@ class DVSubCategory extends Model
         return $this->belongsTo('App\Models\DVCategory');
     }
 
+    public function related_docs(){
+        return $this->hasMany('App\Models\RelatedDoc');
+    }
+
 }

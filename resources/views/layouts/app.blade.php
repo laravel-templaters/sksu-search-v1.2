@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-primary-text">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,8 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css"> --}}
+
 
 
         @livewireStyles
@@ -22,7 +24,7 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     
-    <body class="font-sans">
+    <body class="font-sans" >
         <div class="min-h-screen bg-primary-text">
             @livewire('navigation-menu')
 
@@ -39,13 +41,14 @@
             <main class="bg-transparent">
                 {{ $slot }}
             </main>
-           @include('footer')
+         
         </div>
-
+           @include('footer')
         @stack('modals')
         @stack('scripts')
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <x-livewire-alert::scripts />
+       
     </body>
 </html>

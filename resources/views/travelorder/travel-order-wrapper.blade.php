@@ -2,4 +2,4 @@
 
 @livewire('sec.to.travel-order-main')
 
-</x-app-layout>
+</x-app-layout> 

@@ -20,12 +20,14 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', \App\Http\Livewire\AdminSide\DashMain::class)->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('transactions');
  
 Route::get('/sec', function () {
-    return view('profile.show');
+    return view('dashboard');
 })->name('sec');
 
 Route::get('/disbursements', function () {

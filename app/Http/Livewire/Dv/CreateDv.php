@@ -9,7 +9,9 @@ use App\Models\DVType;
 use App\Models\DVCategory;
 use App\Models\DVSubCategory;
 use App\Models\ModeOfPayment;
+use App\Models\RelatedDoc;
 use App\Models\Particular;
+use App\Models\TravelOrder;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -28,6 +30,7 @@ class CreateDv extends Component
     public $step2finished = false;
     public $step3finished = false;
     public $step4finished = false;
+    public $showToModal = false;
 
     //variable forsearch
     public $searchuser;
@@ -50,6 +53,16 @@ class CreateDv extends Component
     public $dv_category;
     public $dv_sub_category_id;
     public $voucher_type;
+    public $voucher;
+    public $related_docs;
+
+    //for to only
+    public $searchto;
+    public $searchedto;
+    public $travelorderid;
+    public $modaltopurpose;
+    public $modaltoowner;
+    public $modaltoid;
 
     public $mode_id;
 
@@ -66,17 +79,24 @@ class CreateDv extends Component
      public $position;
      public $department;
      
-
+        public $mop_text;
      //mock variables
      public $dvno_temp = 101294159841091;
 
 
     public function render()
     {
+        if(isset($this->searchto)){
+            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
+            // $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%' or lower(place_to_go) like '%".strtolower($this->searchto)."%'")->orderBy('created_at');
+        }
+        if (isset($this->searchuser)) {
+            $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+        }
 
         $this ->searchedsignatories = User::whereRaw("(lower(first_name) like '%".strtolower($this->searchsignatory) ."%' or lower(middle_name) like '%".strtolower($this->searchsignatory)."%' or lower(last_name) like '%".strtolower($this->searchsignatory)."%') and role_id = 2")
         ->get();  
-        $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+        
         $this->mode_of_payment = DB::table('mode_of_payments')->get();
         $this->date = Carbon::now();
 
@@ -86,18 +106,29 @@ class CreateDv extends Component
             {
                 case '1':
                     $this->voucher_type = (DVType::where('id', '=',  $this->category_id)->first())->dv_type;
+                    $this->voucher = DVType::where('id', '=',  $this->category_id)->first();
                     break;
                     case '2':
-                        $this->voucher_type = (DVCategory::where('id', '=',  $this->category_id)->first())->dv_category;    
+                        $this->voucher_type = (DVCategory::where('id', '=',  $this->category_id)->first())->dv_category;
+                        $this->voucher = DVCategory::where('id', '=',  $this->category_id)->first();     
                         break;
                         case '3':
-                            $this->voucher_type = (DVSubCategory::where('id', '=',  $this->category_id)->first())->dv_sub_category;     
+                            $this->voucher_type = (DVSubCategory::where('id', '=',  $this->category_id)->first())->dv_sub_category;
+                            $this->voucher = DVSubCategory::where('id', '=',  $this->category_id)->first();      
                             break;
             }
+            // dd($this->voucher->id);
         }
 
         //get total of particulars
-        
+        if(isset($this->mode_id)){
+            $temp = DB::table('mode_of_payments')->where('id',$this->mode_id)->get();
+            foreach ($temp as $key ) {
+                $this->mop_text= $key->mode_of_payment;
+            }
+            
+            
+        }
         
         
         //Pass to DV
@@ -106,9 +137,10 @@ class CreateDv extends Component
         $this->dv_category = DVCategory::where('id', '=',  $this->dv_category_id)->first();
         $this->dv_type_id = $this->dv_category->dv_type_id;
         $this->dv_type = DVType::where('id', '=',  $this->dv_type_id)->first();
+        $this->related_docs = RelatedDoc::where('dv_sub_category_id', '=', $this->voucher->id)->get();
         return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories)
-        ->with('dv_type_id', $this->dv_type_id);
-       
+        ->with('dv_type_id', $this->dv_type_id)->with('related_docs' , $this->related_docs);
+
     }
 
     public function setsignatory($id){
@@ -150,19 +182,7 @@ class CreateDv extends Component
  
      public function storeParticulars(){
 
-                $validatedDate = $this->validate([
-                        'entry.0' => 'required',
-                        'amount.0' => 'required',
-                        'entry.*' => 'required',
-                        'amount.*' => 'required',
-                    ],
-                    [
-                        'entry.0.required' => 'Entry field is required',
-                        'amount.0.required' => 'Amount field is required',
-                        'entry.*.required' => 'Entry field is required',
-                        'amount.*.required' => 'Amount field is required',
-                    ]
-                );
+                
 
             foreach ($this->entry as $key => $value) { 
 
@@ -205,11 +225,7 @@ class CreateDv extends Component
 
         $this->total = 0;
 
-       if(isset($this->entry)){
-        foreach ($this->entry as $key => $value) { 
-            $this->total += floatval($this->amount[$key]);
-        }
-       }
+       
 
         
         //$this->total = $this->total/2;
@@ -226,9 +242,18 @@ class CreateDv extends Component
                 $this->openstep3();
             break;
             case 4:
+                $this->calculateTotal();
                 $this->openstep4();
             break;
             
+        }
+    }
+
+    public function calculateTotal(){
+
+        $this->total= 0.0;
+        foreach ($this->amount as $key => $value) {
+            $this->total += (float)$this->amount[$key];
         }
     }
 
@@ -241,25 +266,47 @@ class CreateDv extends Component
         }
     }
 
+    public function sTOid($id,$import){
+        if ($import) {
+            $this->travelorderid=$id;
+            $touid=TravelOrder::find($id);
+            $this->entry[0]=$touid->purpose;
+            $this->user_id=$touid->user_id;
+            $names=User::where('id',$this->user_id)->get();
+            $this->amount[0]=$touid->total;
+            foreach($names as $name){
+                $this->fn=$name->first_name;
+                $this->ln=$name->last_name;
+               
+            }
+            $this->showToModal = false;
+        }else{
+            $this->modaltoid = $id;
+            $this->travelorderid=$id;
+            $touid=TravelOrder::find($id);
+            $this->modaltopurpose = $touid->purpose;
+            $names=User::where('id',$touid->user_id)->get();
+            foreach($names as $name){
+                $fullname = strtoupper($name->first_name.' '.$name->last_name);
+                $this->modaltoowner = $fullname;
+            }
+          
+            $this->showToModal = true;
+        }
+        
+    }
     public function openstep1(){
         $this->step1finished = false;
-        $this->step2finished = false;
-        $this->step3finished = false;
-        $this->step4finished = false;
-
         $this->isstep2open = false;
         $this->isstep3open = false;
         $this->isstep4open = false;
         $this->isstep1open = true;
+
     }
     
     public function openstep2(){
-        
         $this->step1finished = true;
         $this->step2finished = false;
-        $this->step3finished = false;
-        $this->step4finished = false;
-
         $this->isstep1open = false;
         $this->isstep4open = false;
         $this->isstep3open = false;
@@ -267,28 +314,57 @@ class CreateDv extends Component
     }
 
     public function openstep3(){
-
-        $this->step1finished = true;
         $this->step2finished = true;
         $this->step3finished = false;
-        $this->step4finished = false;
-
         $this->isstep1open = false;
         $this->isstep4open = false;
         $this->isstep3open = true;
         $this->isstep2open = false;
     }
     public function openstep4(){
-
-        $this->step1finished = true;
-        $this->step2finished = true;
+        
         $this->step3finished = true;
         $this->step4finished = false;
-
         $this->isstep1open = false;
         $this->isstep4open = true;
         $this->isstep3open = false;
         $this->isstep2open = false;
+    }
+
+    public function validateParticulars(){
+
+        $validatedDate = $this->validate([
+            'entry.0' => 'required',
+            'amount.0' => 'required',
+            'entry.*' => 'required',
+            'amount.*' => 'required',
+        ],
+        [
+            'entry.0.required' => 'Entry field is required',
+            'amount.0.required' => 'Amount field is required',
+            'entry.*.required' => 'Entry field is required',
+            'amount.*.required' => 'Amount field is required',
+        ]
+        
+        );
+    return true;
+    }
+
+    public function validateStep1(){
+    
+        // validate here
+        // if(isset($this->entry)){
+            if ($this->validate(['fn'=>'required','ln'=>'required'],['fn.required'=> 'Please select payee from the left side panel', 'ln.required'=> 'Please select payee from the left side panel'])) {
+                
+            
+            if ($this->validateParticulars()) {
+                
+                $this->step1finished = true;
+                $this->openstep2();
+            } 
+        }   
+        // }
+    
     }
     
 
