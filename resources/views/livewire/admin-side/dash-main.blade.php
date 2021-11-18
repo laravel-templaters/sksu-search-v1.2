@@ -1,4 +1,101 @@
 <div>
+    @slot('leftColumn')
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <nav class="pl-5 pr-5 space-y-1" aria-label="Sidebar">
+        <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
+        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-gray-100 rounded-md group"
+            aria-current="page">
+            <span class="truncate">
+                Dashboard
+            </span>
+
+            <!-- Current: "bg-white", Default: "bg-gray-100 text-gray-600 group-hover:bg-gray-200" -->
+            <span class="bg-white ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                5
+            </span>
+        </a>
+
+        <a href="#"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
+            <span class="truncate">
+                Team
+            </span>
+        </a>
+
+        <a href="#"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
+            <span class="truncate">
+                Projects
+            </span>
+
+            <span
+                class="bg-gray-100 text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                19
+            </span>
+        </a>
+
+        <a href="#"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
+            <span class="truncate">
+                Calendar
+            </span>
+
+            <span
+                class="bg-gray-100 text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                20+
+            </span>
+        </a>
+
+        <a href="#"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
+            <span class="truncate">
+                Documents
+            </span>
+        </a>
+
+        <a href="#"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
+            <span class="truncate">
+                Reports
+            </span>
+        </a>
+    </nav>
+
+    @endslot
+    @slot('rightCol')
+
+    <dl class="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-1">
+        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+            <dt class="text-sm font-medium text-gray-500 truncate">
+                Total Subscribers
+            </dt>
+            <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                71,897
+            </dd>
+        </div>
+
+        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+            <dt class="text-sm font-medium text-gray-500 truncate">
+                Avg. Open Rate
+            </dt>
+            <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                58.16%
+            </dd>
+        </div>
+
+        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+            <dt class="text-sm font-medium text-gray-500 truncate">
+                Avg. Click Rate
+            </dt>
+            <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                24.57%
+            </dd>
+        </div>
+    </dl>
+
+
+
+    @endslot
     <div class="grid-cols-12 gap-6">
         <div class="col-span-12">
             {{-- //remove later --}}
@@ -64,8 +161,8 @@
                                                 <div class="flex-shrink-0">
                                                     {{-- need pic dri gab --}}
                                                     <img class="w-12 h-12 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                        alt="">
+                                                        src="{{ Auth::user()->profile_photo_url }}"
+                                                        alt="{{ Auth::user()->name }}">
                                                 </div>
                                                 <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-2 md:gap-4">
                                                     <div>
@@ -131,14 +228,14 @@
                             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
                             x-transition:leave-end="opacity-0" @click.away="showModal = showFlyout= false"
                             x-data="{showFlyout : false}">
-                            <!-- start of flyout -->
 
                             <div
-                                class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                                class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 overflow-x-auto text-center sm:block sm:p-0">
+                                <!-- start of flyout -->
 
                                 <div class="relative top-0" id="flyout" x-show="showFlyout"
                                     @click.away="showFlyout= false">
-                                    <div class="absolute z-20 w-screen max-w-md px-2 mt-3 origin-bottom transform -translate-x-1/2 top-20 left-1/2 sm:px-0 lg:max-w-3xl"
+                                    <div class="absolute z-20 w-screen px-2 mt-3 origin-bottom transform -translate-x-1/2 min-w-max top-20 left-1/2 sm:px-0 "
                                         x-show="showFlyout" @click.away="showFlyout= false"
                                         x-transition:enter="transition ease-out duration-600"
                                         x-transition:enter-start="transform opacity-0 scale-0"
@@ -148,56 +245,143 @@
                                         x-transition:leave-end="transform opacity-0 scale-0" x-cloak>
                                         <div
                                             class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                            <div
-                                                class="relative grid gap-6 px-5 py-6 bg-white sm:gap-8 sm:p-8 lg:grid-cols-2">
-                                                <a href="#"
+                                            <div class="relative grid grid-cols-1 gap-6 px-5 py-6 bg-white sm:p-8"
+                                                x-data="{ showMe : false }">
+                                                <a href="#" x-on:click="showMe = !showMe"
                                                     class="flex items-start p-3 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50">
                                                     <div
                                                         class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-md sm:h-12 sm:w-12">
                                                         <!-- Heroicon name: outline/chart-bar -->
-                                                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                            aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 stroke-width="2"
-                                                                d="PM9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
                                                     </div>
-                                                    <div class="ml-4">
+                                                    <div class="ml-4 text-left">
                                                         <p class="text-base font-medium text-gray-900">
-                                                            Analytics
+                                                            2021-02-02
                                                         </p>
                                                         <p class="mt-1 text-sm text-gray-500">
-                                                            Get a better understanding of where your traffic is
-                                                            coming from.
+                                                            Click To View Itenerary
                                                         </p>
                                                     </div>
 
-                                                </a>
-                                                <a href="#"
-                                                    class="flex items-start p-3 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50">
-                                                    <div
-                                                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-md sm:h-12 sm:w-12">
-                                                        <!-- Heroicon name: outline/chart-bar -->
-                                                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                            aria-hidden="true">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                                        </svg>
-                                                    </div>
-                                                    <div class="ml-4">
-                                                        <p class="text-base font-medium text-gray-900">
-                                                            Analytics
-                                                        </p>
-                                                        <p class="mt-1 text-sm text-gray-500">
-                                                            Get a better understanding of where your traffic is
-                                                            coming from.
-                                                        </p>
-                                                    </div>
 
                                                 </a>
+                                                <div x-cloak x-show="showMe"
+                                                    class="relative inset-0 bottom-0 right-0 z-30 bg-gray-50">
+
+                                                    <div class="inline-flex">
+                                                        <span>
+                                                            Covered By Registration Fee: Breakfast | Lunch | Lodging
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex flex-col">
+                                                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                                            <div
+                                                                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                                                <div
+                                                                    class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+                                                                    <table class="min-w-full divide-y divide-gray-200">
+                                                                        <thead class="bg-gray-50">
+                                                                            <tr class="uppercase">
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                                                    Place To Visit
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                                                    Departure Time
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                                                    Arrival Time
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                                                    Mode Of Trans.
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                                                    TRANS. EXP
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                                                    OTHERS
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                                                    TOTAL
+                                                                                </th>
+                                                                                <th scope="col"
+                                                                                    class="relative px-6 py-3">
+                                                                                    <span class="sr-only">Edit</span>
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <!-- Odd row -->
+                                                                            <tr class="bg-white">
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    Jane Cooper
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                                                    Regional Paradigm Technician
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                                                    jane.cooper@example.com
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                                                    Admin
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                                                                    <a href="#"
+                                                                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <!-- Even row -->
+                                                                            <tr class="bg-gray-50">
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    Cody Fisher
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                                                    Product Directives Officer
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                                                    cody.fisher@example.com
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                                                    Owner
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                                                                    <a href="#"
+                                                                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <!-- More people... -->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
 
                                         </div>
@@ -262,14 +446,14 @@
                                                             P {{$travelordermodaldet->total}}
                                                         </dd>
                                                     </div>
-                                                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                                                    <div class="py-4 cursor-pointer sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                                                         x-on:click="showFlyout = true">
 
                                                         <dt class="text-sm font-medium text-gray-500">
                                                             Date Range
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                            {{$travelOrder->date_range}} 4568*4567-4654-6465
+                                                            {{$travelOrder->date_range}}
                                                         </dd>
 
                                                     </div>

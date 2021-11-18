@@ -19,7 +19,7 @@ class DashMain extends Component
             $this->travelordermodalinfo=TravelOrder::with('user')->get();
         }
         $this->travelorders = TravelOrder::with('user')->get();
-        return view('livewire.admin-side.dash-main')->layout('layouts.admin')->with('travelorders',$this->travelorders)->with('travelordermodalinfo',$this->travelordermodalinfo);
+        return view('livewire.admin-side.dash-main')->layout('layouts.sec')->with('travelorders',$this->travelorders)->with('travelordermodalinfo',$this->travelordermodalinfo);
     }
     public $showModal= false;
     public $travelorders;

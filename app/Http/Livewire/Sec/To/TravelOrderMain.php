@@ -144,7 +144,9 @@ class TravelOrderMain extends Component
               'cancelButtonText' =>  'Cancel', 
               'showCancelButton' =>  false, 
               'showConfirmButton' =>  false, 
-        ]);
+            ]);
+            Sleep(2);
+                return redirect('dashboard');
         }else{
             $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
                 'background' => '#ffffff',

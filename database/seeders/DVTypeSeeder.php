@@ -20,5 +20,11 @@ class DVTypeSeeder extends Seeder
             DB::table('dv_types')->insert([
                 'dv_type'=> 'Travel Order',
                 ]);
+                 DB::table('dv_types')->insert([
+                'dv_type'=> 'Liquidation',
+                ]);
+                DB::table('dv_types')->insert([
+                'dv_type'=> 'Communication',
+                ]);
     }
 }
