@@ -94,7 +94,7 @@ $this->per_diem = $per_diem;
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model.debounce='input.{{$key}}.dep_time' type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
+                                        <input wire:model.debounce='input.{{$key}}.dep_time' wire:change="validateTime({{$key}})" type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
 
                                         @if(isset($input[intval($key)]['dep_time']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['dep_time']}}</h1>
@@ -106,7 +106,7 @@ $this->per_diem = $per_diem;
                                         
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                        <input wire:model='input.{{$key}}.arr_time' type="time" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
+                                        <input wire:model='input.{{$key}}.arr_time' wire:change="validateTime({{$key}})" type="time" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
 
                                         @if(isset($input[intval($key)]['arr_time']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['arr_time']}}</h1>
@@ -130,7 +130,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model.lazy='input.{{$key}}.trans_exp' type="number" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:leave="ComputeDiem({{$key}},'doesntmatter')">
+                                        <input wire:model.lazy='input.{{$key}}.trans_exp' type="number"  min="0" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:leave="ComputeDiem({{$key}},'doesntmatter')">
                                         
                                         @if(isset($input[intval($key)]['trans_exp']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['trans_exp']}}</h1>
@@ -142,7 +142,7 @@ $this->per_diem = $per_diem;
                                     </td>
                                    
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model.lazy='input.{{$key}}.others' type="number" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                        <input wire:model.lazy='input.{{$key}}.others' type="number" min="0" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                         
                                         @if(isset($input[intval($key)]['others']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['others']}}</h1>
@@ -244,7 +244,7 @@ $this->per_diem = $per_diem;
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model.debounce='input.{{$key}}.dep_time' type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
+                                        <input wire:model.debounce='input.{{$key}}.dep_time' wire:change="validateTime({{$key}})" type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
 
                                         @if(isset($input[intval($key)]['dep_time']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['dep_time']}}</h1>
@@ -256,7 +256,7 @@ $this->per_diem = $per_diem;
                                         
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                        <input wire:model='input.{{$key}}.arr_time' type="time" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
+                                        <input wire:model='input.{{$key}}.arr_time' type="time" wire:change="validateTime({{$key}})" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
 
                                         @if(isset($input[intval($key)]['arr_time']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['arr_time']}}</h1>
@@ -280,7 +280,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model.lazy='input.{{$key}}.trans_exp' type="number" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:leave="ComputeDiem({{$key}},'doesntmatter')">
+                                        <input wire:model.lazy='input.{{$key}}.trans_exp' type="number" min="0" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:leave="ComputeDiem({{$key}},'doesntmatter')">
                                         
                                         @if(isset($input[intval($key)]['trans_exp']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['trans_exp']}}</h1>
@@ -292,7 +292,7 @@ $this->per_diem = $per_diem;
                                     </td>
                                     
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model.lazy='input.{{$key}}.others' type="number" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                        <input wire:model.lazy='input.{{$key}}.others' type="number" min="0" name="input.{{$key}}.others" id="input.{{$key}}.others" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
                                         
                                         @if(isset($input[intval($key)]['others']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['others']}}</h1>

@@ -170,7 +170,41 @@ class IteneraryView extends Component
    
 
 
-    
+    public function validateTime($key)
+    {
+        $dep_time = $this->input[intval($key)]["dep_time"];
+        $arr_time = $this->input[intval($key)]["arr_time"];
+        // dd($key);
+
+        if($dep_time != "" && $arr_time != "") 
+        {
+            if($dep_time > $arr_time)
+            {
+
+                $this->alert('warning', 'Invalid Time!', [
+                            'background' => '#fff',
+                            'padding' => '0.5rem',
+                            'position' =>  'bottom-start', 
+                            'timer' =>  3000,  
+                            'toast' =>  true, 
+                            'text' =>  '', 
+                            'confirmButtonText' =>  'Ok', 
+                            'cancelButtonText' =>  'Cancel', 
+                            'showCancelButton' =>  false, 
+                            'showConfirmButton' =>  false, 
+                      ]);
+
+
+                $this->input[$key]['arr_time'] = "";
+                $this->input[$key]['dep_time'] = "";
+
+                // $this->reset($this->input[0]["dep_time"]);
+                // $this->reset($this->input[0]["arr_time"]);
+            }
+        }
+        
+         
+    }
 
 
 
@@ -201,11 +235,11 @@ class IteneraryView extends Component
     return $this->gen;
     }
 
-    function test($key)
-    {
+    // function test($key)
+    // {
   
   
-    }
+    // }
 
     function ComputeDiem($key,$type){
         $switchk = false;
