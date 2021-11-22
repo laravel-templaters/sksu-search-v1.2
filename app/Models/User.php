@@ -78,4 +78,7 @@ class User extends Authenticatable
     public function positions(){
         return $this->belongsTo('App\Models\position');
     }
+    public function last_action(){
+        return $this->hasOne('App\Models\LastAction');
+    }
 }

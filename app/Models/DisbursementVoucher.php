@@ -39,4 +39,11 @@ class DisbursementVoucher extends Model
     public function dv_type(){
         return $this->hasMany('App\Models\DVType');
     }
+    public function dv_progress(){
+        return $this->hasOne('App\Models\DvProgress');
+    }
+    public function last_action(){
+        return $this->hasOne('App\Models\LastAction');
+    }
+    
 }
