@@ -966,10 +966,15 @@
                                     x-transition:enter-start="translate-x-full"
                                     x-transition:enter-end="translate-x-0"> Previous </button>
                              </div>
-                             <div class="justify-end col-span-4 col-start-7" >
+                             <div class="justify-end col-span-1 col-start-8 mr-2" >
                                     <input  type="button" class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-primary-bg text-secondary-bg-alt hover:bg-primary-text-alt hover:text-primary-bg" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                                     x-transition:enter-start="translate-x-full"
                                     x-transition:enter-end="translate-x-0" onclick="printDiv('dvPrint')" value = "Print DV"/>
+                             </div>
+                             <div class="justify-end col-span-2 col-start-9" >
+                                    <input  type="button" class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-primary-bg text-secondary-bg-alt hover:bg-primary-text-alt hover:text-primary-bg" x-cloak x-show="isstep4open" x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
+                                    x-transition:enter-start="translate-x-full"
+                                    x-transition:enter-end="translate-x-0" onclick="printDiv('dvPrint')" value = "Save"/>
                              </div>
                     </div>
 
