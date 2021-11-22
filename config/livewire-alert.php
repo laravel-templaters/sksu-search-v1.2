@@ -23,5 +23,26 @@ return [
         'cancelButtonText' => 'No',
         'confirmButtonColor' => '#3085d6',
         'cancelButtonColor' => '#d33'
-    ]
+    ],
+    'customClass' => [
+        'margin-bottom' => '',
+        'container' => '',
+        'popup' => '',
+        'header' => '',
+        'title' => '',
+        'closeButton' => '',
+        'icon' => '',
+        'image' => '',
+        'content' => '',
+        'htmlContainer' => '',
+        'input' => '',
+        'inputLabel' => '',
+        'validationMessage' => '',
+        'actions' => '',
+        'confirmButton' => '',
+        'denyButton' => '',
+        'cancelButton' => '',
+        'loader' => '',
+        'footer' => ''
+       ]
 ];
