@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSignatoriesTable extends Migration
+class CreateLastActionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSignatoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('signatories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('disbursement_voucher_id');
-            $table->foreignId('user_id');
-            $table->boolean('signed')->default(false);
-            $table->date('date_signed');
+        Schema::create('last_actions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignID('disbursement_voucher_id');
+            $table->foreignID('user_id');
+            $table->foreignID('action_type_id');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateSignatoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('signatories');
+        Schema::dropIfExists('last_actions');
     }
 }
