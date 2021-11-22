@@ -2,15 +2,16 @@
     @slot('leftColumn')
     <!-- This example requires Tailwind CSS v2.0+ -->
     <nav class="pl-5 pr-5 space-y-1" aria-label="Sidebar">
-        <!-- Current: "bg-gray-100 text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
-        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-gray-100 rounded-md group"
+        <!-- Current: "bg-secondary-text text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
+        <a href="#"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-900 rounded-md bg-secondary-text group"
             aria-current="page">
             <span class="truncate">
                 Dashboard
             </span>
 
-            <!-- Current: "bg-white", Default: "bg-gray-100 text-gray-600 group-hover:bg-gray-200" -->
-            <span class="bg-white ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+            <!-- Current: "bg-gray-100", Default: "bg-secondary-text text-gray-600 group-hover:bg-gray-200" -->
+            <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
                 5
             </span>
         </a>
@@ -29,7 +30,7 @@
             </span>
 
             <span
-                class="bg-gray-100 text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                class="bg-secondary-text text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
                 19
             </span>
         </a>
@@ -41,7 +42,7 @@
             </span>
 
             <span
-                class="bg-gray-100 text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                class="bg-secondary-text text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
                 20+
             </span>
         </a>
@@ -65,7 +66,155 @@
     @slot('rightCol')
 
 
-    div.max-h-screen.min
+    <div class="flex max-h-screen min-h-full">
+        <div class="flow-root">
+            <ul role="list" class="">
+                <li class="" id="rejected">
+                    <div class="relative pb-8">
+                        <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
+                            <div>
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 bg-red-500 rounded-full ring-8 ring-gray-100">
+                                    <!-- Heroicon name: solid/user -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
+                                <div>
+                                    <p class="text-gray-500 ">Rejected by Accounting by <strong
+                                            class="text-primary-bg">Juan Dela Cruz</strong></p>
+                                </div>
+                                <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
+                                    <time datetime="2020-09-20">Sep 20</time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="" id="closed">
+                    <div class="relative pb-8">
+                        <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
+                            <div>
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 bg-green-700 rounded-full ring-8 ring-gray-100">
+                                    <!-- Heroicon name: solid/user -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                        <path fill-rule="evenodd"
+                                            d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
+                                <div>
+                                    <p class="text-gray-500 ">Closed by Accounting by <strong
+                                            class="text-primary-bg">Juan Dela Cruz</strong></p>
+                                </div>
+                                <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
+                                    <time datetime="2020-09-20">Sep 20</time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="" id="returned">
+                    <div class="relative pb-8">
+                        <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
+                            <div>
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 bg-yellow-500 rounded-full ring-8 ring-gray-100">
+                                    <!-- Heroicon name: solid/user -->
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-white transform scale-y-105" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
+                                <div>
+                                    <p class="text-gray-500 ">Returned to Budget Office by <strong
+                                            class="text-primary-bg">Juan Dela Cruz</strong></p>
+                                </div>
+                                <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
+                                    <time datetime="2020-09-20">Sep 20</time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="" id="forwarded">
+                    <div class="relative pb-8">
+                        <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                        <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
+                            <div>
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 bg-green-500 rounded-full ring-8 ring-gray-100">
+                                    <!-- Heroicon name: solid/user -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
+                                <div>
+                                    <p class="text-gray-500 ">Forwarded to Budget Office by <strong
+                                            class="text-primary-bg">Juan Dela Cruz</strong></p>
+                                </div>
+                                <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
+                                    <time datetime="2020-09-20">Sep 20</time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="" id="recieved">
+                    <div class="relative pb-8">
+
+                        <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
+                            <div>
+                                <span
+                                    class="flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full ring-8 ring-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
+                                <div>
+                                    <p class="text-gray-500 ">Recieved by ICU From <strong class="text-primary-bg">Juan
+                                            Dela Cruz</strong></p>
+                                </div>
+                                <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
+                                    <time datetime="2020-09-20">Sep 20</time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
 
 
     @endslot
@@ -94,7 +243,7 @@
                         </div>
 
 
-                        <div class="absolute left-0 w-56 mt-2 origin-bottom-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        <div class="absolute left-0 w-56 mt-2 origin-bottom-left bg-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
                             @click.away="showOptions=false" x-show="showOptions"
                             x-transition:enter="transition ease-out duration-100"
@@ -104,7 +253,7 @@
                             x-transition:leave-start="transform opacity-100 scale-100"
                             x-transition:leave-end="transform opacity-0 scale-95" x-cloak>
                             <div class="py-1" role="none">
-                                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                                <!-- Active: "bg-secondary-text text-gray-900", Not Active: "text-gray-700" -->
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                     id="menu-item-0">Disbursement Vouchers</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
@@ -122,7 +271,7 @@
                     {{-- travel orders start --}}
                     <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="flex flex-col col-span-3" x-data="{showModal : @entangle('showModal')}">
-                        <div class="overflow-hidden bg-white shadow sm:rounded-md">
+                        <div class="overflow-hidden bg-gray-100 shadow sm:rounded-md">
                             <ul role="list" class="divide-y divide-gray-200">
                                 @if(isset($travelorders))
                                 @foreach($travelorders as $travelOrder)
@@ -218,7 +367,7 @@
                                         x-transition:leave-end="transform opacity-0 scale-0" x-cloak>
                                         <div
                                             class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                            <div class="relative grid grid-cols-1 gap-6 px-5 py-6 bg-white sm:p-8"
+                                            <div class="relative grid grid-cols-1 gap-6 px-5 py-6 bg-gray-100 sm:p-8"
                                                 x-data="{ showMe : false }">
                                                 <a href="#" x-on:click="showMe = !showMe"
                                                     class="flex items-start p-3 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50">
@@ -296,7 +445,7 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <!-- Odd row -->
-                                                                            <tr class="bg-white">
+                                                                            <tr class="bg-gray-100">
                                                                                 <td
                                                                                     class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                                                                                     Jane Cooper
@@ -384,7 +533,7 @@
                                         {{-- Start of TO INFO --}}
                                         @if(isset($travelordermodalinfo))
                                         @foreach($travelordermodalinfo as $travelordermodaldet)
-                                        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+                                        <div class="overflow-hidden bg-gray-100 shadow sm:rounded-lg">
                                             <div class="px-4 py-5 sm:px-6">
                                                 <h3 class="text-lg font-medium leading-6 text-gray-900">
                                                     Travel Order Information
@@ -486,7 +635,7 @@
                                             Create Voucher
                                         </button>
                                         <button type="button"
-                                            class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-bg-alt sm:mt-0 sm:col-start-1 sm:text-sm"
+                                            class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-bg-alt sm:mt-0 sm:col-start-1 sm:text-sm"
                                             @click="showModal=false">
                                             Close
                                         </button>

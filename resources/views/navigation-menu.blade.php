@@ -28,7 +28,7 @@
                 <!-- Teams Dropdown -->
 
                 <!-- Settings Dropdown -->
-                <div class="relative ml-3">
+                <div class="ml-3" x-cloak>
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())

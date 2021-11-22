@@ -10,6 +10,9 @@ module.exports = {
     ],
 
     theme: {
+        scale: {
+            '105': '-1'
+        },
         extend: {
             fontFamily: {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
