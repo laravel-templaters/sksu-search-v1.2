@@ -21,7 +21,23 @@ class DVCategorySeeder extends Seeder
             DB::table('dv_categories')->insert([
                 'dv_category'=> 'Reimbursements',
                 'dv_type_id'=> 1,
-                ]);
+            ]);
+            DB::table('dv_categories')->insert([
+                'dv_category'=> 'Individual Compensation for Salary/Wage',
+                'dv_type_id'=> 1,
+            ]);
+            DB::table('dv_categories')->insert([
+                'dv_category'=> 'Payroll Compensation for Salaries/Wages',
+                'dv_type_id'=> 1,
+            ]);
+             DB::table('dv_categories')->insert([
+                'dv_category'=> 'asd',
+                'dv_type_id'=> 1,
+            ]);
+            DB::table('dv_categories')->insert([
+                'dv_category'=> 'asd',
+                'dv_type_id'=> 1,
+            ]);
                 
                 // DB::table('dv_categories')->insert([
                 //     'dv_category'=> 'Cash Advances',

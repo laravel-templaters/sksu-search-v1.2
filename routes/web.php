@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateDVWrapperController;
 use App\Http\Controllers\RoutingController;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TravelOrderSaved;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,4 +83,12 @@ Route::mediaLibrary();
 //delete lang karon
 Route::middleware(['auth:sanctum', 'verified'])->get('/to', function () {
     return view('travelorder.travel-order-wrapper');
+});
+
+
+
+//for emailing
+Route::middleware(['auth:sanctum', 'verified'])->get('/email',function(){
+    Mail::to('gicawalo@gmail.com')->send(new TravelOrderSaved());
+    return new TravelOrderSaved();
 });

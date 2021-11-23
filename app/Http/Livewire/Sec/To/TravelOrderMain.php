@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\TravelOrder;  
 use App\Models\Dte;
 use Carbon\Carbon;
+use App\Notifications\TravelOrderSaved;
 
 class TravelOrderMain extends Component
 {
@@ -132,7 +133,7 @@ class TravelOrderMain extends Component
             $travel_order->dte_id =  $reg['id'];
             $travel_order->save();  
             $this->emit('storeItenerary',$travel_order->id);
-          
+            $travel_order->notify(new TravelOrderSaved($invoice));
             $this->alert('success', 'Successfully Added!', [
               'background' => '#ccffcc',
               'padding' => '0.5rem',

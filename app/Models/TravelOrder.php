@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\TravelOrderSaved;
 
 class TravelOrder extends Model
 {
+    use Notifiable;
     protected $table = "travel_orders";
     //Change Primary Key
     protected $primaryKey = 'id';

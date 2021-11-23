@@ -31,6 +31,7 @@ class CreateDv extends Component
     public $step3finished = false;
     public $step4finished = false;
     public $showToModal = false;
+    public $dvSaved = false;
 
     //variable forsearch
     public $searchuser;
