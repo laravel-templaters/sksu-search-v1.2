@@ -1,4 +1,4 @@
-<div>
+<div x-data="{}">
     @slot('leftColumn')
     <!-- This example requires Tailwind CSS v2.0+ -->
     <nav class="pl-5 pr-5 space-y-1" aria-label="Sidebar">
@@ -7,7 +7,7 @@
             class="flex items-center px-3 py-2 text-sm font-medium text-gray-900 rounded-md bg-secondary-text group"
             aria-current="page">
             <span class="truncate">
-                Dashboard
+                Disbursement Vouchers
             </span>
 
             <!-- Current: "bg-gray-100", Default: "bg-secondary-text text-gray-600 group-hover:bg-gray-200" -->
@@ -19,14 +19,26 @@
         <a href="#"
             class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
             <span class="truncate">
-                Team
+                Liquidations
+            </span>
+            <span class="bg-secondary-text ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                50
             </span>
         </a>
 
         <a href="#"
             class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
             <span class="truncate">
-                Projects
+                Reimbursements
+            </span>
+
+
+        </a>
+
+        <a href="#"
+            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
+            <span class="truncate">
+                Communications
             </span>
 
             <span
@@ -35,32 +47,61 @@
             </span>
         </a>
 
-        <a href="#"
-            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
-            <span class="truncate">
-                Calendar
-            </span>
 
-            <span
-                class="bg-secondary-text text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
-                20+
-            </span>
-        </a>
-
-        <a href="#"
-            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
-            <span class="truncate">
-                Documents
-            </span>
-        </a>
-
-        <a href="#"
-            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
-            <span class="truncate">
-                Reports
-            </span>
-        </a>
     </nav>
+    <div class="pl-5">
+
+
+        <dl class="grid grid-cols-1 gap-5 mt-5">
+            <div class="relative px-4 pt-5 pb-12 overflow-hidden rounded-lg shadow bg-gray-50 sm:pt-6 sm:px-6">
+                <dt>
+                    <p class="text-sm font-medium text-gray-500 truncate">D.V. In Progress</p>
+                </dt>
+                <dd class="flex items-baseline pb-2 sm:pb-5">
+                    <p class="text-2xl font-semibold text-gray-900">
+                        10
+                    </p>
+                    <div class="absolute inset-x-0 bottom-0 px-4 py-4 bg-gray-100 ">
+                        <div class="text-sm">
+                            <a href="#" class="font-medium text-primary-bg hover:text-primary-text"> View all</a>
+                        </div>
+                    </div>
+                </dd>
+            </div>
+            <div class="relative px-4 pt-5 pb-12 overflow-hidden rounded-lg shadow bg-gray-50 sm:pt-6 sm:px-6">
+                <dt>
+                    <p class="text-sm font-medium text-gray-500 truncate">Unliquidated DV</p>
+                </dt>
+                <dd class="flex items-baseline pb-2 sm:pb-5">
+                    <p class="text-2xl font-semibold text-gray-900">
+                        50
+                    </p>
+                    <div class="absolute inset-x-0 bottom-0 px-4 py-4 bg-gray-100 ">
+                        <div class="text-sm">
+                            <a href="#" class="font-medium text-primary-bg hover:text-primary-text"> View all</a>
+                        </div>
+                    </div>
+                </dd>
+            </div>
+            <div class="relative px-4 pt-5 pb-12 overflow-hidden rounded-lg shadow bg-gray-50 sm:pt-6 sm:px-6">
+                <dt>
+                    <p class="text-sm font-medium text-gray-500 truncate">D.V. In Progress</p>
+                </dt>
+                <dd class="flex items-baseline pb-2 sm:pb-5">
+                    <p class="text-2xl font-semibold text-gray-900">
+                        10,000
+                    </p>
+                    <div class="absolute inset-x-0 bottom-0 px-4 py-4 bg-gray-100 ">
+                        <div class="text-sm">
+                            <a href="#" class="font-medium text-primary-bg hover:text-primary-text"> View all</a>
+                        </div>
+                    </div>
+                </dd>
+            </div>
+        </dl>
+    </div>
+
+    <!-- stats end -->
 
     @endslot
     @slot('rightCol')
@@ -223,50 +264,7 @@
             {{-- //remove later --}}
             <!-- This example requires Tailwind CSS v2.0+ -->
             <div class="mt-3">
-                <h3 class="text-lg font-medium leading-6 text-primary-bg" x-data="{showOptions : false}">
-                    <span class="inline">Travel Order</span>
-                    <!-- This example requires Tailwind CSS v2.0+ -->
-                    <div class="relative inline-block mx-auto">
-                        <div>
-                            <button type="button"
-                                class="flex items-center bg-transparent rounded-full text-primary-bg hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-bg-alt"
-                                id="menu-button" aria-expanded="true" aria-haspopup="true"
-                                x-on:click="showOptions = !showOptions ">
-                                <span class="sr-only">Open options</span>
-                                <!-- Heroicon name: solid/dots-vertical -->
-                                <svg class="w-auto h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor" aria-hidden="true">
-                                    <path
-                                        d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                                </svg>
-                            </button>
-                        </div>
 
-
-                        <div class="absolute left-0 w-56 mt-2 origin-bottom-left bg-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
-                            @click.away="showOptions=false" x-show="showOptions"
-                            x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="transform opacity-0 scale-95"
-                            x-transition:enter-end="transform opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-75"
-                            x-transition:leave-start="transform opacity-100 scale-100"
-                            x-transition:leave-end="transform opacity-0 scale-95" x-cloak>
-                            <div class="py-1" role="none">
-                                <!-- Active: "bg-secondary-text text-gray-900", Not Active: "text-gray-700" -->
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="menu-item-0">Disbursement Vouchers</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="menu-item-0">Change with</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="menu-item-1">Other</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                    id="menu-item-2">Transaction types</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </h3>
                 <dl class="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-3">
                     {{-- travel orders start --}}
                     <!-- This example requires Tailwind CSS v2.0+ -->
