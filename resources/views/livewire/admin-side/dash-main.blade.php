@@ -1,30 +1,26 @@
-<div x-data="{}">
+<div>
     @slot('leftColumn')
     <!-- This example requires Tailwind CSS v2.0+ -->
     <nav class="pl-5 pr-5 space-y-1" aria-label="Sidebar">
-        <!-- Current: "bg-secondary-text text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900" -->
-        <a href="#"
-            class="flex items-center px-3 py-2 text-sm font-medium text-gray-900 rounded-md bg-secondary-text group"
-            aria-current="page">
-            <span class="truncate">
-                Disbursement Vouchers
-            </span>
+        <!-- Current: " bg-secondary-text text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+        -->
+        <div x-data="{dvClicked : true, liqClicked : false, reimClicked : false,  commClicked : false}">
+            <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+                aria-current="page" x-on:click="dvClicked = true" :class="dvClicked ? 'text-primary-bg bg-secondary-text' : 'text-primary-bg-alt hover:bg-secondary-bg-alt
+                hover:text-primary-bg'">
+                <span class="truncate">
+                    Disbursement Vouchers
+                </span>
+                <div x-show="dvClicked" x-cloak>asd</div>
 
-            <!-- Current: "bg-gray-100", Default: "bg-secondary-text text-gray-600 group-hover:bg-gray-200" -->
-            <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
-                5
-            </span>
-        </a>
+                <!-- Current: "bg-gray-100", Default: "bg-secondary-text text-gray-600 group-hover:bg-gray-200" -->
+                <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                    5
+                </span>
+            </a>
+        </div>
 
-        <a href="#"
-            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
-            <span class="truncate">
-                Liquidations
-            </span>
-            <span class="bg-secondary-text ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
-                50
-            </span>
-        </a>
+
 
         <a href="#"
             class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
@@ -49,6 +45,7 @@
 
 
     </nav>
+    
     <div class="pl-5">
 
 
