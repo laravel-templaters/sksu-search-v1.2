@@ -11,6 +11,10 @@ use App\Models\DVSubCategory;
 use App\Models\ModeOfPayment;
 use App\Models\RelatedDoc;
 use App\Models\Particular;
+use App\Models\DisbursementVoucher;
+use App\Models\Signatory;
+use App\Models\LastAction;
+use App\Models\DVProgress;
 use App\Models\TravelOrder;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -142,6 +146,72 @@ class CreateDv extends Component
         return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories)
         ->with('dv_type_id', $this->dv_type_id)->with('related_docs' , $this->related_docs);
 
+    }
+
+    public function saveDV(){
+        $dv_count = DisbursementVoucher::get()->count();
+        $dv_number = "000-TEST-000";
+        $dv_type_id = (DVSubCategory::where('id', '=',  $this->category_id)->first())->id;
+        $user_id = $this->searchedusers[0]['id'];
+        $mop_id = $this->mode_id;
+        $status_id = 1;
+
+        // insert dv table
+        $disbursement_voucher = new DisbursementVoucher;
+        $disbursement_voucher->dv_tracking_number ="01-000".$dv_count."-ACCESS";
+        $disbursement_voucher->dv_number = $dv_number;
+        $disbursement_voucher->user_id = $user_id;
+        $disbursement_voucher->mop_id = $mop_id;
+        $disbursement_voucher->status_id =$status_id;
+        $disbursement_voucher->dv_type_id = $dv_type_id;
+        $disbursement_voucher->save();
+
+
+        //insert signatories table
+        $dv_id = (DB::table('disbursement_vouchers')->latest('id')->first())->id;
+
+        $signatory = new Signatory;
+        $signatory->disbursement_voucher_id = $dv_id;
+        $signatory->user_id = $user_id;
+        $signatory->signed = 0;
+        $signatory->save();
+
+        //insert last_action table
+        $last_action = new LastAction;
+        $last_action->disbursement_voucher_id = $dv_id;
+        $last_action->user_id = $user_id;
+        $last_action->action_type_id = 1;
+        $last_action->description = "FORWARDED TO" ;
+        $last_action->save();
+
+        //insert progress table
+        $sig_id = (DB::table('signatories')->latest('id')->first())->id;
+        $last_action_id = (DB::table('last_actions')->latest('id')->first())->id;
+
+        $dv_progress = new DVProgress;
+        $dv_progress->disbursement_voucher_id = $dv_id;
+        $dv_progress->signatory_id = $sig_id;
+        $dv_progress->last_action_id = $last_action_id;
+        $dv_progress->date_start = now();
+        $dv_progress->date_completed = now();
+        $dv_progress->save();
+
+        $this->alert('success', 'Voucher is saved!', [
+                'background' => '#ccffcc',
+                'padding' => '0.5rem',
+                'position' =>  'top-end', 
+                'timer' =>  2500,  
+                'toast' =>  true, 
+                'text' =>  '', 
+                'confirmButtonText' =>  'Ok', 
+                'cancelButtonText' =>  'Cancel', 
+                'showCancelButton' =>  false, 
+                'showConfirmButton' =>  false, 
+        ]);
+          //show print button
+          $this->dvSaved = true;
+
+              
     }
 
     public function setsignatory($id){
@@ -355,7 +425,7 @@ class CreateDv extends Component
     
         // validate here
         // if(isset($this->entry)){
-            if ($this->validate(['fn'=>'required','ln'=>'required'],['fn.required'=> 'Please select payee from the left side panel', 'ln.required'=> 'Please select payee from the left side panel'])) {
+            if ($this->validate(['fn'=>'required','ln'=>'required', 'mode_id'=>'required'],['fn.required'=> 'Please select payee from the left side panel', 'ln.required'=> 'Please select payee from the left side panel', 'mode_id.required'=> 'Please select mode of payment'])) {
                 
             
             if ($this->validateParticulars()) {
