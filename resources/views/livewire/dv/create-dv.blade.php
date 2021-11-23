@@ -324,11 +324,14 @@
                                             class="block text-sm font-medium text-gray-700">Mode Of Payment</label>
                                         <select wire:model="mode_id"
                                             class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option selected>--SELECT MODE OF PAYMENT--</option>
                                             @foreach ($mode_of_payment as $payment)
                                             <option value="{{$payment->id}}">{{$payment->mode_of_payment}}</option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                        @error('mode_id')
+                                        <span class="text-sm text-red-500">{{$message}}</span>
+                                        @enderror                                    </div>
 
                                     {{-- DV Category --}}
                                     <div class="col-span-4">
@@ -1113,12 +1116,12 @@
                         onclick="printDiv('dvPrint')" value="Print DV" />
                 </div>
                 <div class="justify-end col-span-2 col-start-9">
-                    <input type="button"
+                    <button
                         class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-primary-bg text-secondary-bg-alt hover:bg-primary-text-alt hover:text-primary-bg"
                         x-cloak x-show="isstep4open"
                         x-transition:enter="transform transition ease-in-out duration-700 sm:duration-700"
                         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
-                        onclick="printDiv('dvPrint')" value="Save" />
+                        wire:click="saveDV" value="Save" />Save<button>
                 </div>
             </div>
 
