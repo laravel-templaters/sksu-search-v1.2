@@ -52,23 +52,36 @@
                 <h3 class="hidden">{{Illuminate\Support\Facades\Hash::make('aasd'.$dv_category_id = $category->id)}}
                 </h3>
                 <div x-data="{openCA:false}">
+                    {{-- sub cat only a --}}
+                    @php
+                    if(isset($dv_type_id)){
+                    $sub_categories = App\Models\DVSubCategory::where('dv_category_id', '=',
+                    $dv_category_id)->get();
+                    }
+                    @endphp
+                    @if($sub_categories->count()==0)
+                    <h3 class="p-2 rounded-md text-primary-bg text-md hover:bg-primary-bg hover:text-secondary-text">
+
+                        <a
+                            href="{{route('cdv', ['id' => $dv_category_id, 'sorter' => '2'])}}">{{$category->dv_category}}</a>
+                    </h3>
+                    <div class="grid flex-col grid-cols-1 p-3 ml-3 rounded-md bg-primary-bg-alt " x-cloak
+                        x-show="openCA"></div>
+                    @else
+
                     <h3 class="p-2 rounded-md text-primary-bg text-md hover:bg-primary-bg hover:text-secondary-text"
                         x-on:click="openCA = !openCA ">{{$category->dv_category}}</h3>
                     <div class="grid flex-col grid-cols-1 p-3 ml-3 rounded-md bg-primary-bg-alt " x-cloak
                         x-show="openCA">
-                        {{-- sub cat only a --}}
-                        @php
-                        if(isset($dv_type_id)){
-                        $sub_categories = App\Models\DVSubCategory::where('dv_category_id', '=',
-                        $dv_category_id)->get();
-                        }
-                        @endphp
+
+
                         @foreach ($sub_categories as $sub_category)
                         <a href="{{route('cdv', ['id' => $sub_category->id, 'sorter' => '3'])}}"
                             class="p-2 rounded-md text-secondary-text text-md hover:bg-gray-300 hover:text-primary-bg">{{$sub_category->dv_sub_category}}</a>
                         {{-- sub cat only a end--}}
                         @endforeach
                     </div>
+                    @endif
                 </div>
                 @endforeach
                 {{-- loop category here end--}}
