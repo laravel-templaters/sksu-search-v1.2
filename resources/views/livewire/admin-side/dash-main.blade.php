@@ -15,7 +15,7 @@
 
                 <!-- Current: "bg-gray-100", Default: "bg-secondary-text text-gray-600 group-hover:bg-gray-200" -->
                 <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
-                    5
+                    {{$disbursement_voucher->count()}}
                 </span>
             </a>
         </div>
@@ -56,7 +56,7 @@
                 </dt>
                 <dd class="flex items-baseline pb-2 sm:pb-5">
                     <p class="text-2xl font-semibold text-gray-900">
-                        10
+                        {{$disbursement_voucher->count()}}
                     </p>
                     <div class="absolute inset-x-0 bottom-0 px-4 py-4 bg-gray-100 ">
                         <div class="text-sm">
