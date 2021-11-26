@@ -15,21 +15,23 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('middle_name')->nullable();
-            $table->string('last_name');
+            $table->string('name');
+            // $table->string('middle_name')->nullable();
+            // $table->string('last_name');
             $table->string('suffix')->nullable();
-            $table->string('address');
-            $table->date('birth_day');
-            $table->string('contact_number');
+            //$table->string('address');
+            $table->date('birth_day')->nullable();
+            $table->string('contact_number')->nullable();
             $table->string('email')->unique();
-            $table->string('employee_number')->unique();
+            $table->string('provider_id')->nullable();
+            $table->string('avatar')->nullable();
+            // $table->string('employee_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('username');
-            $table->string('password');
-            $table->foreignId('role_id');
-            $table->foreignId('department_id');
-            $table->foreignId('position_id');
+            // $table->string('username');
+            $table->string('password')->nullable();
+            $table->foreignId('role_id')->nullable();
+            $table->foreignId('department_id')->nullable();
+            $table->foreignId('position_id')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

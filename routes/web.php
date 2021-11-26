@@ -6,6 +6,7 @@ use App\Http\Controllers\RoutingController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TravelOrderSaved;
+use App\Http\Controllers\GoogleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,11 @@ use App\Mail\TravelOrderSaved;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('auth/google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
+
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -69,7 +75,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements/reimburseme
     return view('reimbursements');
 })->name('reimbursements');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('redirects', 'App\Http\Controllers\HomeController@index');
+Route::middleware(['auth:sanctum', 'verified'])->get('redirects', 'App\Http\Controllers\HomeController@index')->name('redirect');
 
 //for create dv dont delete
 
