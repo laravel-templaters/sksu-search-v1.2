@@ -522,7 +522,7 @@
                                     </div>
                                 </div> --}}
                     <div class="px-4 py-8 mx-auto max-w-7xl">
-                        <h3 class="mb-5 text-4xl font-extrabold drop-shadow-lg">Documents required : </h3>
+                        <h3 class="mb-5 text-4xl font-extrabold drop-shadow-lg">Documents required :</h3>
                         @if ($related_docs->count() > 0)
                         <div class="mx-auto overflow-hidden bg-white border border-gray-300 rounded-md">
 
