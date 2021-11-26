@@ -11,6 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
+                @if(auth()->user()->role_id == 1)
                 <div class="hidden space-x-1 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -22,6 +23,28 @@
                     {{ __('Secretary') }}
                     </x-jet-nav-link> --}}
                 </div>
+                @elseif(auth()->user()->role_id == 2)
+                <div class="hidden space-x-1 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('transactions') }}" :active="request()->routeIs('transactions')">
+                        {{ __('Transactions') }}
+                    </x-jet-nav-link>
+                    {{-- <x-jet-nav-link href="{{ route('sec') }}" :active="request()->routeIs('sec')">
+                    {{ __('Secretary') }}
+                    </x-jet-nav-link> --}}
+                </div>
+                @elseif(auth()->user()->role_id == 3)
+                <div class="hidden space-x-1 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('client-dash') }}" :active="request()->routeIs('client-dash')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('transactions') }}" :active="request()->routeIs('transactions')">
+                        {{ __('Transactions') }}
+                    </x-jet-nav-link>
+                </div>
+                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

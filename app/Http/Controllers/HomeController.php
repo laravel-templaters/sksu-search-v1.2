@@ -13,9 +13,9 @@ class HomeController extends Controller
 
         if($role == 1)
         {
-            return redirect()->route('sec');
+            return redirect()->route('dashboard');
         }else if($role == 3){
-           return redirect()->route('dashboard');
+           return redirect()->route('client-dash');
         }else if($role == 2){
             return redirect()->route('department-head');
          }

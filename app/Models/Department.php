@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
+    protected $table = "departments";
+    //Change Primary Key
+    protected $primaryKey = 'id';
+
     public function user(){
-        return $this->hasMany('App\Models\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

@@ -27,9 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', function (
     return view('dashboard');
 })->name('transactions');
  
-Route::middleware(['auth:sanctum', 'verified'])->get('/sec', function () {
-    return view('dashboard');
-})->name('sec');
+Route::middleware(['auth:sanctum', 'verified'])->get('/client/dash', \App\Http\Livewire\Client\ClientDashboardMain::class)->name('client-dash');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements', function () {
     return view('disbursements');

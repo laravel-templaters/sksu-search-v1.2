@@ -71,8 +71,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Roles');
     }
 
-    public function departments(){  
-        return $this->belongsTo('App\Models\Department');
+    public function department(){  
+        return $this->hasOne('App\Models\Department','id','department_id');
     }
 
     public function positions(){
@@ -80,5 +80,8 @@ class User extends Authenticatable
     }
     public function last_action(){
         return $this->hasOne('App\Models\LastAction');
+    }
+    public function signatory(){
+          return $this->belongsTo('App\Models\Signatories');
     }
 }

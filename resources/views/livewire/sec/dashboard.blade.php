@@ -7,10 +7,15 @@
     <ul role="list" class="grid grid-cols-1 gap-3">
         {{-- loop here for type --}}
         @foreach ($types as $type)
+
         <h3 class="hidden">{{Illuminate\Support\Facades\Hash::make('aasd'.$dv_type_id = $type->id)}}</h3>
+        @if($dv_type_id != 1 || $dv_type_id != '1' )
+
         @php
         if(isset($dv_type_id)){
+
         $categories = App\Models\DVCategory::where('dv_type_id', '=', $dv_type_id)->get();
+
         }
         @endphp
         <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-primary-bg" x-data="{showMe : false}">
@@ -49,21 +54,23 @@
                 {{-- loop category here --}}
 
                 @foreach ($categories as $category)
-                <h3 class="hidden">{{Illuminate\Support\Facades\Hash::make('aasd'.$dv_category_id = $category->id)}}
+                <h3 class="hidden">
+                    {{Illuminate\Support\Facades\Hash::make('aasd'.$dv_category_id = App\Models\DVTypeSorter::where('dv_category_id','=', $category->id)->where('sorter','LIKE', '2')->limit(1)->get())}}
                 </h3>
                 <div x-data="{openCA:false}">
                     {{-- sub cat only a --}}
                     @php
                     if(isset($dv_type_id)){
                     $sub_categories = App\Models\DVSubCategory::where('dv_category_id', '=',
-                    $dv_category_id)->get();
+                    $category->id)->get();
+
                     }
                     @endphp
                     @if($sub_categories->count()==0)
                     <h3 class="p-2 rounded-md text-primary-bg text-md hover:bg-primary-bg hover:text-secondary-text">
 
                         <a
-                            href="{{route('cdv', ['id' => $dv_category_id, 'sorter' => '2'])}}">{{$category->dv_category}}</a>
+                            href="{{route('cdv', ['id' => $dv_category_id[0]['id'] , 'sorter' => '2'])}}">{{$category->dv_category}}</a>
                     </h3>
                     <div class="grid flex-col grid-cols-1 p-3 ml-3 rounded-md bg-primary-bg-alt " x-cloak
                         x-show="openCA"></div>
@@ -87,6 +94,7 @@
                 {{-- loop category here end--}}
             </div>
         </li>
+        @endif
         @endforeach
         {{-- loop here for type  end--}}
     </ul>

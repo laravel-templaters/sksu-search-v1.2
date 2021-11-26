@@ -4,48 +4,54 @@
     <nav class="pl-5 pr-5 space-y-1" aria-label="Sidebar">
         <!-- Current: " bg-secondary-text text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
         -->
-        <div x-data="{dvClicked : true, liqClicked : false, reimClicked : false,  commClicked : false}">
-            <a href="#" class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
-                aria-current="page" x-on:click="dvClicked = true" :class="dvClicked ? 'text-primary-bg bg-secondary-text' : 'text-primary-bg-alt hover:bg-secondary-bg-alt
-                hover:text-primary-bg'">
+        <div x-data="{active : ''}" class="gap-x-5">
+            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+                aria-current="page" x-on:click="active = 'dv'"
+                x-bind:class="active=='dv' ? 'text-primary-bg bg-secondary-text' : 'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
                 <span class="truncate">
                     Disbursement Vouchers
                 </span>
-                <div x-show="dvClicked" x-cloak>asd</div>
 
                 <!-- Current: "bg-gray-100", Default: "bg-secondary-text text-gray-600 group-hover:bg-gray-200" -->
+                @if($disbursement_voucher->count()>0)
                 <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
                     {{$disbursement_voucher->count()}}
                 </span>
-            </a>
+                @endif
+
+            </button>
+
+
+
+
+            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+                x-on:click="active = 'reim'"
+                x-bind:class="active=='reim' ? 'text-primary-bg bg-secondary-text' : 'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
+                <span class="truncate">
+                    Reimbursements
+                </span>
+
+
+            </button>
+
+            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+                x-on:click="active = 'comms'"
+                x-bind:class="active=='comms' ? 'text-primary-bg bg-secondary-text' :'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
+                <span class="truncate">
+                    Communications
+                </span>
+
+                <span
+                    class="bg-secondary-text text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                    19
+                </span>
+            </button>
+
         </div>
 
 
-
-        <a href="#"
-            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
-            <span class="truncate">
-                Reimbursements
-            </span>
-
-
-        </a>
-
-        <a href="#"
-            class="flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900 group">
-            <span class="truncate">
-                Communications
-            </span>
-
-            <span
-                class="bg-secondary-text text-gray-600 group-hover:bg-gray-200 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
-                19
-            </span>
-        </a>
-
-
     </nav>
-    
+
     <div class="pl-5">
 
 

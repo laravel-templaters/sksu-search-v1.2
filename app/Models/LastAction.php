@@ -12,12 +12,12 @@ class LastAction extends Model
         return $this->hasOne('App\Models\DvProgress');
     }
     public function action_type(){
-        return $this->belongsTo('App\Models\ActionType');
+        return $this->hasOne('App\Models\ActionType','id','action_type_id');
     }
     public function disbursement_voucher(){
-        return $this->belongsTo('App\Models\DisbursementVoucher');
+        return $this->hasOne('App\Models\DisbursementVoucher','id','disbursement_voucher_id');
     }
     public function user(){
-    return $this->belongsTo('App\Models\User');
+    return $this->hasOne('App\Models\User');
     }
 }

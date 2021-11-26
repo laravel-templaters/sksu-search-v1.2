@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\position;
 use App\Models\Department;
 use App\Models\DVType;
+use App\Models\DVTypeSorter;
 use App\Models\DVCategory;
 use App\Models\DVSubCategory;
 use App\Models\ModeOfPayment;
@@ -110,16 +111,16 @@ class CreateDv extends Component
             switch($this->sorter)
             {
                 case '1':
-                    $this->voucher_type = (DVType::where('id', '=',  $this->category_id)->first())->dv_type;
-                    $this->voucher = DVType::where('id', '=',  $this->category_id)->first();
+                    $this->voucher_type = (DVType::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->id)->first())->dv_type;
+                    $this->voucher = DVType::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->dv_type_id)->first();
                     break;
                     case '2':
-                        $this->voucher_type = (DVCategory::where('id', '=',  $this->category_id)->first())->dv_category;
-                        $this->voucher = DVCategory::where('id', '=',  $this->category_id)->first();     
+                        $this->voucher_type = (DVCategory::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->id)->first())->dv_category;
+                        $this->voucher = DVCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first();     
                         break;
                         case '3':
-                            $this->voucher_type = (DVSubCategory::where('id', '=',  $this->category_id)->first())->dv_sub_category;
-                            $this->voucher = DVSubCategory::where('id', '=',  $this->category_id)->first();      
+                            $this->voucher_type = (DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->id)->first())->dv_sub_category;
+                            $this->voucher = DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_sub_category_id)->first();      
                             break;
             }
             // dd($this->voucher->id);
@@ -137,11 +138,11 @@ class CreateDv extends Component
         
         
         //Pass to DV
-        $this->dv_sub_category_id = DVSubCategory::where('id', '=',  $this->category_id)->first();
-        $this->dv_category_id = $this->dv_sub_category_id->dv_category_id;
-        $this->dv_category = DVCategory::where('id', '=',  $this->dv_category_id)->first();
-        $this->dv_type_id = $this->dv_category->dv_type_id;
-        $this->dv_type = DVType::where('id', '=',  $this->dv_type_id)->first();
+        //$this->dv_sub_category_id = DVSubCategory::where('id', '=',  $this->category_id)->first();
+        //$this->dv_category_id = $this->dv_sub_category_id->dv_category_id;
+       // $this->dv_category = DVCategory::where('id', '=',  $this->dv_category_id)->first();
+        //$this->dv_type_id = $this->dv_category->dv_type_id;
+        //$this->dv_type = DVType::where('id', '=',  $this->dv_type_id)->first();
         $this->related_docs = RelatedDoc::where('dv_sub_category_id', '=', $this->voucher->id)->get();
         return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories)
         ->with('dv_type_id', $this->dv_type_id)->with('related_docs' , $this->related_docs);
@@ -151,7 +152,6 @@ class CreateDv extends Component
     public function saveDV(){
         $dv_count = DisbursementVoucher::get()->count();
         $dv_number = "000-TEST-000";
-        $dv_type_id = (DVSubCategory::where('id', '=',  $this->category_id)->first())->id;
         $user_id = $this->searchedusers[0]['id'];
         $mop_id = $this->mode_id;
         $status_id = 1;
@@ -163,7 +163,7 @@ class CreateDv extends Component
         $disbursement_voucher->user_id = $user_id;
         $disbursement_voucher->mop_id = $mop_id;
         $disbursement_voucher->status_id =$status_id;
-        $disbursement_voucher->dv_type_id = $dv_type_id;
+        $disbursement_voucher->dv_type_sorter_id = $this->category_id;
         $disbursement_voucher->save();
 
 
@@ -175,13 +175,15 @@ class CreateDv extends Component
         $signatory->user_id = $user_id;
         $signatory->signed = 0;
         $signatory->save();
-
+        //set default signatories
+       // dd((Signatory::latest()->first())->user->department->department_name);
         //insert last_action table
         $last_action = new LastAction;
         $last_action->disbursement_voucher_id = $dv_id;
         $last_action->user_id = $user_id;
         $last_action->action_type_id = 1;
-        $last_action->description = "FORWARDED TO" ;
+        $last_action->read = 0;
+        $last_action->description = "TO ".(Signatory::latest()->first())->user->department->department_name;
         $last_action->save();
 
         //insert progress table

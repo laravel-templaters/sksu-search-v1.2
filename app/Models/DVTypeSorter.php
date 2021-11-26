@@ -13,6 +13,9 @@ class DVTypeSorter extends Model
 
     use HasFactory;
 
+    public function disbursement_voucher(){
+        return $this->belongsTo('App\Models\DisbursementVoucher');
+    }
     public function travel_order(){
         return $this->belongsTo('App\Models\TravelOrder');
     }
@@ -26,14 +29,14 @@ class DVTypeSorter extends Model
     }
 
     public function dv_type(){
-        return $this->hasMany('App\Models\DVType');
+        return $this->hasOne('App\Models\DVType','id','dv_type_id');
     }
 
     public function dv_categories(){
-        return $this->hasMany('App\Models\DVCategory');
+        return $this->hasOne('App\Models\DVCategory','id','dv_category_id');
     }
 
     public function dv_sub_categories(){
-        return $this->hasMany('App\Models\DVSubCategory');
+        return $this->hasOne('App\Models\DVSubCategory','id','dv_sub_category_id');
     }
 }
