@@ -118,7 +118,7 @@ class CreateDv extends Component
                     break;
                     case '2':
                         $this->voucher_type = (DVCategory::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first())->dv_category;
-                        $this->voucher = DVCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first();     
+                        $this->voucher = DVCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first();        
                         break;
                         case '3':
                             $this->voucher_type = (DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_sub_category_id)->first())->dv_sub_category;
