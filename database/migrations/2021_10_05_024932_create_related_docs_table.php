@@ -15,8 +15,7 @@ class CreateRelatedDocsTable extends Migration
     {
         Schema::create('related_docs', function (Blueprint $table) {
             $table->id();
-            $table->string('related_docs');
-            $table->foreignId('dv_sub_category_id');
+            $table->foreignId('d_v_type_sorter_id');
             $table->timestamps();
         });
     }

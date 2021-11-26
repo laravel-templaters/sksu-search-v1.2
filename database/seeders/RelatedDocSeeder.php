@@ -14,103 +14,37 @@ class RelatedDocSeeder extends Seeder
      */
     public function run()
     {
-        //first
+        
          DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 1,
+            'd_v_type_sorter_id'=> 1,
             ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 1,
-                ]);
-                DB::table('related_docs')->insert([
-                    'related_docs'=> 'OTHERS',
-                    'dv_sub_category_id'=> 1,
-                    ]);
-
-         //second
-         DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 2,
+            DB::table('related_document_lists')->insert([
+            'related_docs_id'=> 1,
             ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 2,
-                ]);
-          
-          //third
-          DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 3,
-            ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 3,
-                ]);
-                
-          //fourth
-          DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 4,
-            ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 4,
+                DB::table('related_document_list_entries')->insert([
+                'related_document_list_id'=> 1,
+                'related_document_list_entry'=> 'Default Doc',
                 ]);
 
-           //fifth
-          DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 5,
-            ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 5,
-                ]); 
-                
-         //sixth
-         DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 6,
-            ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 6,
-                ]);
-                DB::table('related_docs')->insert([
-                    'related_docs'=> 'OTHERS',
-                    'dv_sub_category_id'=> 6,
-                    ]); 
-                    
-                    
-          //seventh
-          DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 7,
-            ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 7,
-                ]);  
-                
-        //eighth
+
+    //start here                
         DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 8,
+        'd_v_type_sorter_id'=> 10,]);
+            DB::table('related_document_lists')->insert([
+            'related_docs_id'=> 2,
             ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 8,
+                DB::table('related_document_list_entries')->insert([
+                'related_document_list_id'=> 2,
+                'related_document_list_entry'=> 'Statement of Account/Bill (for pre-audit purposes)',
                 ]);
-                
-        //ninth
-        DB::table('related_docs')->insert([
-            'related_docs'=> 'TRAVEL ORDER',
-            'dv_sub_category_id'=> 9,
-            ]);
-            DB::table('related_docs')->insert([
-                'related_docs'=> 'REQUEST LETTER',
-                'dv_sub_category_id'=> 9,
-                ]);        
+                DB::table('related_document_list_entries')->insert([
+                'related_document_list_id'=> 2,
+                'related_document_list_entry'=> 'Invoice/Official Receipt or machine validated statement of account/bill (for post-audit purposes)',
+                ]);
+                DB::table('related_document_list_entries')->insert([
+                'related_document_list_id'=> 2,
+                'related_document_list_entry'=> 'Certification by Agency Head or his authorized representatives that all National Direct Dial (NDD), National Operator Assisted Calls and International Operator Assisted Calls are official calls*For Telephone/Communication Services Only',
+                ]);
+        
     }
 }

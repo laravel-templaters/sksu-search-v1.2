@@ -15,8 +15,7 @@ class CreateRelatedDocumentListsTable extends Migration
     {
         Schema::create('related_document_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('dv_type_sorter');
-            $table->foreignId('dv_type_sorter_id');
+            $table->string('related_docs_id');
             $table->timestamps();
         });
     }

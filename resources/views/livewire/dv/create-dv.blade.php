@@ -292,10 +292,9 @@
 
 
 
-                                    <div class="col-span-3">
-                                        <label for="first-name" class="block text-sm font-medium text-gray-700">Payee
-                                            first
-                                            name</label>
+                                    <div class="col-span-6">
+                                        <label for="first-name"
+                                            class="block text-sm font-medium text-gray-700 uppercase">Payee</label>
                                         <input type="text" wire:model="fn" name="first-name" id="first-name"
                                             autocomplete="given-name"
                                             class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -305,7 +304,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-span-3">
+                                    <!-- <div class="col-span-3">
                                         <label for="last-name" class="block text-sm font-medium text-gray-700">Payee
                                             last
                                             name</label>
@@ -316,7 +315,7 @@
                                         @error('ln')
                                         <span class="text-sm text-red-500">{{$message}}</span>
                                         @enderror
-                                    </div>
+                                    </div> -->
 
                                     {{-- mode of payment --}}
                                     <div class="col-span-2">
@@ -331,7 +330,7 @@
                                         </select>
                                         @error('mode_id')
                                         <span class="text-sm text-red-500">{{$message}}</span>
-                                        @enderror                                    </div>
+                                        @enderror </div>
 
                                     {{-- DV Category --}}
                                     <div class="col-span-4">
@@ -542,7 +541,8 @@
                                         </svg>
                                     </div>
                                     <div class="flex">
-                                        <h3 class="my-auto uppercase">{{$doc->related_docs}}</h3>
+
+                                        <h3 class="my-auto uppercase">{{$doc->related_document_list_entry}}</h3>
                                     </div>
                                 </li>
                                 @endforeach
@@ -618,9 +618,7 @@
 
                                             <div class="space-y-2">
                                                 <div class="space-y-1 text-lg font-medium leading-6">
-                                                    <h3>{{$searchedsignatory->first_name}}
-                                                        {{$searchedsignatory->middle_name}}
-                                                        {{$searchedsignatory->last_name}}</h3>
+                                                    <h3>{{$searchedsignatory->name}}</h3>
                                                     <p class="text-indigo-600">Department Name</p>
                                                 </div>
                                             </div>

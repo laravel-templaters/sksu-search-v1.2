@@ -11,6 +11,8 @@ use App\Models\DVCategory;
 use App\Models\DVSubCategory;
 use App\Models\ModeOfPayment;
 use App\Models\RelatedDoc;
+use App\Models\RelatedDocumentList;
+use App\Models\RelatedDocumentListEntry;
 use App\Models\Particular;
 use App\Models\DisbursementVoucher;
 use App\Models\Signatory;
@@ -97,10 +99,10 @@ class CreateDv extends Component
             // $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%' or lower(place_to_go) like '%".strtolower($this->searchto)."%'")->orderBy('created_at');
         }
         if (isset($this->searchuser)) {
-            $this->searchedusers= User::where(DB::raw('lower(first_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(middle_name)'),"LIKE","%".strtolower($this->searchuser)."%")->orWhere(DB::raw('lower(last_name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+            $this->searchedusers= User::where(DB::raw('lower(name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
         }
 
-        $this ->searchedsignatories = User::whereRaw("(lower(first_name) like '%".strtolower($this->searchsignatory) ."%' or lower(middle_name) like '%".strtolower($this->searchsignatory)."%' or lower(last_name) like '%".strtolower($this->searchsignatory)."%') and role_id = 2")
+        $this ->searchedsignatories = User::whereRaw("lower(name) like '%".strtolower($this->searchsignatory) ."%' and role_id = 2")
         ->get();  
         
         $this->mode_of_payment = DB::table('mode_of_payments')->get();
@@ -143,7 +145,9 @@ class CreateDv extends Component
        // $this->dv_category = DVCategory::where('id', '=',  $this->dv_category_id)->first();
         //$this->dv_type_id = $this->dv_category->dv_type_id;
         //$this->dv_type = DVType::where('id', '=',  $this->dv_type_id)->first();
-        $this->related_docs = RelatedDoc::where('dv_sub_category_id', '=', $this->voucher->id)->get();
+        $this->related_docs = RelatedDoc::where('d_v_type_sorter_id', '=', $this->category_id)->value('id');
+        $this->related_docs = RelatedDocumentList::where('related_docs_id', '=', $this->related_docs)->value('id');
+        $this->related_docs = RelatedDocumentListEntry::where('related_document_list_id', '=', $this->related_docs)->get();
         return view('livewire.dv.create-dv')->with('searchedusers', $this->searchedusers)->with('searchedsignatories', $this->searchedsignatories)
         ->with('dv_type_id', $this->dv_type_id)->with('related_docs' , $this->related_docs);
 
@@ -334,8 +338,7 @@ class CreateDv extends Component
         $this->user_id=$id;
         $names=User::where('id',$id)->get();
         foreach($names as $name){
-            $this->fn=$name->first_name;
-            $this->ln=$name->last_name;
+            $this->fn=$name->name;
         }
     }
 
@@ -427,7 +430,7 @@ class CreateDv extends Component
     
         // validate here
         // if(isset($this->entry)){
-            if ($this->validate(['fn'=>'required','ln'=>'required', 'mode_id'=>'required'],['fn.required'=> 'Please select payee from the left side panel', 'ln.required'=> 'Please select payee from the left side panel', 'mode_id.required'=> 'Please select mode of payment'])) {
+            if ($this->validate(['fn'=>'required', 'mode_id'=>'required'],['fn.required'=> 'Please select payee from the left side panel', 'mode_id.required'=> 'Please select mode of payment'])) {
                 
             
             if ($this->validateParticulars()) {

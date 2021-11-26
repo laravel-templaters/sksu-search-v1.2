@@ -16,7 +16,7 @@ class CreateRelatedDocumentListEntriesTable extends Migration
         Schema::create('related_document_list_entries', function (Blueprint $table) {
             $table->id();
             $table->string('related_document_list_entry');
-            $table->foreignId('related_doc_list_id');
+            $table->foreignId('related_document_list_id');
             $table->timestamps();
         });
     }
