@@ -1470,9 +1470,6 @@ select {
 .h-screen {
 	height: 100vh;
 }
-.h-2 {
-	height: 0.5rem;
-}
 .max-h-screen {
 	max-height: 100vh;
 }
@@ -1785,6 +1782,11 @@ select {
 	margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-x-reverse: 0;
+	margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+	margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .space-y-8 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-y-reverse: 0;
 	margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1804,11 +1806,6 @@ select {
 	--tw-space-y-reverse: 0;
 	margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-}
-.space-x-1 > :not([hidden]) ~ :not([hidden]) {
-	--tw-space-x-reverse: 0;
-	margin-right: calc(0.25rem * var(--tw-space-x-reverse));
-	margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .space-y-12 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-y-reverse: 0;
@@ -2135,6 +2132,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(224, 231, 255, var(--tw-bg-opacity));
 }
+.bg-gray-400 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(156, 163, 175, var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
@@ -2288,6 +2289,10 @@ select {
 	padding-left: 1.25rem;
 	padding-right: 1.25rem;
 }
+.px-24 {
+	padding-left: 6rem;
+	padding-right: 6rem;
+}
 .py-16 {
 	padding-top: 4rem;
 	padding-bottom: 4rem;
@@ -2299,26 +2304,6 @@ select {
 .py-24 {
 	padding-top: 6rem;
 	padding-bottom: 6rem;
-}
-.px-0 {
-	padding-left: 0px;
-	padding-right: 0px;
-}
-.px-16 {
-	padding-left: 4rem;
-	padding-right: 4rem;
-}
-.px-20 {
-	padding-left: 5rem;
-	padding-right: 5rem;
-}
-.px-24 {
-	padding-left: 6rem;
-	padding-right: 6rem;
-}
-.px-28 {
-	padding-left: 7rem;
-	padding-right: 7rem;
 }
 .pt-6 {
 	padding-top: 1.5rem;
@@ -2968,10 +2953,6 @@ select {
 .focus\:border-indigo-600:focus {
 	--tw-border-opacity: 1;
 	border-color: rgba(79, 70, 229, var(--tw-border-opacity));
-}
-.focus\:border-red-900:focus {
-	--tw-border-opacity: 1;
-	border-color: rgba(127, 29, 29, var(--tw-border-opacity));
 }
 .focus\:bg-indigo-600:focus {
 	--tw-bg-opacity: 1;
