@@ -113,15 +113,15 @@ class CreateDv extends Component
             switch($this->sorter)
             {
                 case '1':
-                    $this->voucher_type = (DVType::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->id)->first())->dv_type;
+                    $this->voucher_type = (DVType::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->type_id)->first())->dv_type;
                     $this->voucher = DVType::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->dv_type_id)->first();
                     break;
                     case '2':
-                        $this->voucher_type = (DVCategory::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->id)->first())->dv_category;
+                        $this->voucher_type = (DVCategory::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first())->dv_category;
                         $this->voucher = DVCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first();     
                         break;
                         case '3':
-                            $this->voucher_type = (DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->id)->first())->dv_sub_category;
+                            $this->voucher_type = (DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_sub_category_id)->first())->dv_sub_category;
                             $this->voucher = DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_sub_category_id)->first();      
                             break;
             }
@@ -157,6 +157,7 @@ class CreateDv extends Component
         $dv_count = DisbursementVoucher::get()->count();
         $dv_number = "000-TEST-000";
         $user_id = $this->searchedusers[0]['id'];
+        $sig_user_id = $this->sig_id;
         $mop_id = $this->mode_id;
         $status_id = 1;
 
@@ -176,18 +177,18 @@ class CreateDv extends Component
 
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $dv_id;
-        $signatory->user_id = $user_id;
+        $signatory->user_id = $sig_user_id;
         $signatory->signed = 0;
         $signatory->save();
         //set default signatories
-       // dd((Signatory::latest()->first())->user->department->department_name);
+        //dd(Signatory::latest()->first()->user->department->department_name);
         //insert last_action table
         $last_action = new LastAction;
         $last_action->disbursement_voucher_id = $dv_id;
         $last_action->user_id = $user_id;
         $last_action->action_type_id = 1;
         $last_action->read = 0;
-        $last_action->description = "TO ".(Signatory::latest()->first())->user->department->department_name;
+        $last_action->description = "TO ".(Signatory::latest()->first()->user->department->department_name);
         $last_action->save();
 
         //insert progress table

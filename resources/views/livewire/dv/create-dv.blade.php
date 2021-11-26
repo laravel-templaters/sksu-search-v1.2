@@ -265,8 +265,7 @@
                                         <img src="{{asset($searcheduser->profile_photo_url)}}"
                                             class="w-20 h-20 mx-auto rounded-full lg:w-24 lg:h-24">
                                         <p class="mt-1 text-sm text-blue-53">
-                                            {{$searcheduser->first_name}} {{$searcheduser->middle_name}}
-                                            {{$searcheduser->last_name}}
+                                            {{$searcheduser->name}}
                                         </p>
                                     </button>
                                 </div>
@@ -541,8 +540,16 @@
                                         </svg>
                                     </div>
                                     <div class="flex">
-
-                                        <h3 class="my-auto uppercase">{{$doc->related_document_list_entry}}</h3>
+                                        @php
+                                        $related_doc_arr = explode('*',$doc->related_document_list_entry);
+                                        @endphp
+                                        <h3 class="my-auto uppercase">{{$related_doc_arr[0]}}
+                                            @if (count($related_doc_arr) > 1)
+                                            <span
+                                                class="text-xs font-light tracking-wide text-red-500">**{{$related_doc_arr[1]}}
+                                            </span>
+                                            @endif
+                                        </h3>
                                     </div>
                                 </li>
                                 @endforeach

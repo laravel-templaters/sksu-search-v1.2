@@ -47,20 +47,15 @@ class adminseeder extends Seeder
         //         'department_id'=>2,
         //         'position_id'=>3]);
 
-        //         DB::table('users')->insert([
-        //             'first_name'=> 'Dolores',
-        //             'middle_name'=> 'T',
-        //             'last_name'=> 'Head',
-        //             'address'=> 'Tacurong City',
-        //             'birth_day'=>  Carbon::create('2000', '04', '06'),   
-        //             'contact_number'=>'09123456789',        
-        //             'email'=>'dhead@d.com',
-        //             'employee_number'=>'0000003',
-        //             'username'=> 'dhead',
-        //             'password'=> Hash::make('department123'),
-        //             'role_id'=>2,
-        //             'department_id'=>2,
-        //             'position_id'=>2]);
+                DB::table('users')->insert([
+                    'name'=> 'Dolores T. Head',
+                    'birth_day'=>  Carbon::create('2000', '04', '06'),   
+                    'contact_number'=>'09123456789',        
+                    'email'=>'dhead@d.com',
+                    'password'=> Hash::make('department123'),
+                    'role_id'=>2,
+                    'department_id'=>2,
+                    'position_id'=>2]);
 
         //             DB::table('users')->insert([
         //                 'first_name'=> 'Travis',

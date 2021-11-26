@@ -14,4 +14,7 @@ class DvProgress extends Model
     public function disbursement_voucher(){
         return $this->belongsTo('App\Models\DisbursementVoucher');
     }
+    public function milestone(){
+        return $this->belongsTo('App\Models\Milestone');
+    }
 }

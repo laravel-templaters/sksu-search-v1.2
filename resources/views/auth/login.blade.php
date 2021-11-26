@@ -16,9 +16,9 @@
             @csrf
 
             <div>
-                <x-jet-label for="username" value="{{ __('Username') }}" />
-                <x-jet-input id="username" class="block w-full mt-1 placeholder-opacity-50 placeholder-primary-text-alt"
-                    type="text" name="username" placeholder="Username Here" required autofocus />
+                <x-jet-label for="email" value="{{ __('Email') }}" />
+                <x-jet-input id="email" class="block w-full mt-1 placeholder-opacity-50 placeholder-primary-text-alt"
+                    type="email" name="email" placeholder="Email" required autofocus />
             </div>
 
             <div class="mt-4">

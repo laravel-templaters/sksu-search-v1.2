@@ -45,5 +45,8 @@ class DisbursementVoucher extends Model
     public function last_action(){
         return $this->belongsTo('App\Models\LastAction');
     }
+    public function milestone(){
+        return $this->belongsTo('App\Models\Milestone');
+    }
     
 }

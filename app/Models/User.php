@@ -79,7 +79,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\position');
     }
     public function last_action(){
-        return $this->hasOne('App\Models\LastAction');
+        return $this->belongsTo('App\Models\LastAction');
     }
     public function signatory(){
           return $this->belongsTo('App\Models\Signatories');

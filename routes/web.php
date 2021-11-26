@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', \App\Http\Liv
 Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', function () {
     return view('dashboard');
 })->name('transactions');
- 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/client/dash', \App\Http\Livewire\Client\ClientDashboardMain::class)->name('client-dash');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements', function () {
@@ -96,3 +96,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/email',function(){
     Mail::to('gicawalo@gmail.com')->send(new TravelOrderSaved());
     return new TravelOrderSaved();
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/act/dashboard', \App\Http\Livewire\Accountant\Pages\Dashboard::class)->name('accountant-dashboard');

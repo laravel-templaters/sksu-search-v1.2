@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @if($disbursement_vouchers != null)
+                        @if(count($disbursement_vouchers)>0)
                         @foreach($disbursement_vouchers as $dv)
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
