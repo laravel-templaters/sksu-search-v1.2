@@ -42,7 +42,11 @@
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
                 </x-jet-button>
+                
             </div>
+            <a href="auth/google" class="inline-flex items-center px-24 py-2 mt-2 w-full bg-gradient-to-r from-primary-bg-alt to-secondary-bg rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:from-blue-600 hover:to-blue-400 hover:text-primary-text active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+            <img src="https://img.icons8.com/color/48/000000/google-logo.png" class="h-8 mx-0 px-auto"/>Login with Google
+                </a>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
