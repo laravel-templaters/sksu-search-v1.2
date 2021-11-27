@@ -194,7 +194,6 @@ class CreateDv extends Component
         //insert progress table
         $sig_id = (DB::table('signatories')->latest('id')->first())->id;
         $last_action_id = (DB::table('last_actions')->latest('id')->first())->id;
-
         $dv_progress = new DVProgress;
         $dv_progress->disbursement_voucher_id = $dv_id;
         $dv_progress->signatory_id = $sig_id;

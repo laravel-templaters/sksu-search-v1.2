@@ -541,15 +541,18 @@
                                     </div>
                                     <div class="flex">
                                         @php
-                                        $related_doc_arr = explode('*',$doc->related_document_list_entry);
+                                        $related_doc_arr = explode('<',$doc->related_document_list_entry);
+                                        $last
                                         @endphp
-                                        <h3 class="my-auto uppercase">{{$related_doc_arr[0]}}
+                                            <h3 class="my-auto uppercase">{{$related_doc_arr[0]}}</h3>
                                             @if (count($related_doc_arr) > 1)
+                                            @php
+                                            $related_doc_divided= explode('>',$related_doc_arr[1]); @endphp
                                             <span
-                                                class="text-xs font-light tracking-wide text-red-500">**{{$related_doc_arr[1]}}
+                                                class="text-xs font-light tracking-wide text-red-500">
+                                                **{{$related_doc_arr[1]}}
                                             </span>
                                             @endif
-                                        </h3>
                                     </div>
                                 </li>
                                 @endforeach
@@ -893,9 +896,7 @@
                                 @if(isset($signatory))
                                 <div
                                     class="col-span-3 col-start-2 row-span-1 row-start-3 font-bold text-center border-b border-black">
-                                    {{$signatory->first_name}}
-                                    {{ \Illuminate\Support\Str::limit($signatory->middle_name, 1, $end='.') }}
-                                    {{$signatory->last_name}}</div>
+                                    {{$signatory->name}}</div>
                                 {{-- {{$responsibility_center[(string)$value]}} --}}
                                 @endif
                                 @if(isset($position))
