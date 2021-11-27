@@ -19,6 +19,7 @@ use App\Models\Signatory;
 use App\Models\LastAction;
 use App\Models\DVProgress;
 use App\Models\TravelOrder;
+use App\Models\Milestone;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -172,11 +173,9 @@ class CreateDv extends Component
         $disbursement_voucher->save();
 
 
-        //insert signatories table
-        $dv_id = (DB::table('disbursement_vouchers')->latest('id')->first())->id;
 
         $signatory = new Signatory;
-        $signatory->disbursement_voucher_id = $dv_id;
+        $signatory->disbursement_voucher_id = $disbursement_voucher->id;
         $signatory->user_id = $sig_user_id;
         $signatory->signed = 0;
         $signatory->save();
@@ -184,24 +183,45 @@ class CreateDv extends Component
         //dd(Signatory::latest()->first()->user->department->department_name);
         //insert last_action table
         $last_action = new LastAction;
-        $last_action->disbursement_voucher_id = $dv_id;
+        $last_action->disbursement_voucher_id = $disbursement_voucher->id;
         $last_action->user_id = $user_id;
         $last_action->action_type_id = 1;
         $last_action->read = 0;
-        $last_action->description = "TO ".(Signatory::latest()->first()->user->department->department_name);
+        $last_action->description = "TO ".($signatory->user->department->department_name);
         $last_action->save();
 
         //insert progress table
-        $sig_id = (DB::table('signatories')->latest('id')->first())->id;
+        //$sig_id = (DB::table('signatories')->latest('id')->first())->id;
         $last_action_id = (DB::table('last_actions')->latest('id')->first())->id;
         $dv_progress = new DVProgress;
-        $dv_progress->disbursement_voucher_id = $dv_id;
+        $dv_progress->disbursement_voucher_id = $disbursement_voucher->id;
         // $dv_progress->signatory_id = $sig_id;
         $dv_progress->last_action_id = $last_action_id;
         $dv_progress->date_start = now();
         $dv_progress->date_completed = now();
         $dv_progress->steps = 5;
         $dv_progress->save();
+
+        //milestones
+        $milestone = new Milestone;
+        $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
+        $milestone->d_v_progress_id = $dv_progress->id;
+        $milestone->date_started = now();
+        $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
+        $milestone->step_number = 1;
+
+        $signatory = new Signatory;
+        $signatory->disbursement_voucher_id = $disbursement_voucher->id;
+        $signatory->user_id = $sig_user_id;
+        $signatory->signed = 0;
+        $signatory->save();
+
+            $milestone = new Milestone;
+            $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
+            $milestone->d_v_progress_id = $dv_progress->id;
+            $milestone->date_started = now();
+            $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
+            $milestone->step_number = 2;
 
         $this->alert('success', 'Voucher is saved!', [
                 'background' => '#ccffcc',
