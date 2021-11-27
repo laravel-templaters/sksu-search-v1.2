@@ -761,7 +761,7 @@
                             <span class="flex px-2 text-sm font-semibold text-black border-r border-black">Payee:
                             </span>
                             <span class="flex pl-2 my-auto text-xs font-semibold text-black uppercase">
-                                {{$ln.', '.$fn}}</span>
+                                {{$fn}}</span>
                         </div>
                         <div class="flex col-span-2 row-span-1 text-right border-b-2 border-r-2 border-black">
                             <span class="flex px-2 text-xs font-normal text-black border-r border-black">TIN/Employee
