@@ -18,7 +18,14 @@ class PositionSeeder extends Seeder
             [
                 ['position_name' => 'Admin'], 
                 ['position_name' => 'Department Head'], 
-                ['position_name' => 'Secretary']
+                ['position_name' => 'Secretary'],
+                ['position_name' => 'Accountant'],
+                ['position_name' => 'President'],
+                ['position_name' => 'Campus Head'],
+                ['position_name' => 'Budget Officer'],
+                ['position_name' => 'President\'s Secretary'],
+                ['position_name' => 'Faculty'],
+                ['position_name' => 'Staff'],
             ]);
     }
 }

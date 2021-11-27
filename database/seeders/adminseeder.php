@@ -1,3 +1,4 @@
+
 <?php
 
 namespace Database\Seeders;
@@ -54,8 +55,39 @@ class adminseeder extends Seeder
                     'email'=>'dhead@d.com',
                     'password'=> Hash::make('department123'),
                     'role_id'=>2,
-                    'department_id'=>2,
+                    'department_id'=>3,
                     'position_id'=>2]);
+
+                 DB::table('users')->insert([
+                    'name'=> 'JESHER Y. PALOMARIA, CPA',
+                    'birth_day'=>  Carbon::create('2000', '04', '06'),   
+                    'contact_number'=>'09123456789',        
+                    'email'=>'jesher@act.com',
+                    'password'=> Hash::make('jesher123'),
+                    'role_id'=>2,
+                    'department_id'=>3,
+                    'position_id'=>4]);
+
+                 DB::table('users')->insert([
+                    'name'=> 'ROLANDO F. HECHANOVA, PhD',
+                    'birth_day'=>  Carbon::create('2000', '04', '06'),   
+                    'contact_number'=>'09123456789',        
+                    'email'=>'jesher@act.com',
+                    'password'=> Hash::make('jesher123'),
+                    'role_id'=>2,
+                    'department_id'=>1,
+                    'position_id'=>5]);
+                
+                //test vars
+                 DB::table('users')->insert([
+                    'name'=> 'JESHER Y. PALOMARIA, CPA',
+                    'birth_day'=>  Carbon::create('2000', '04', '06'),   
+                    'contact_number'=>'09123456789',        
+                    'email'=>'jesher@act.com',
+                    'password'=> Hash::make('jesher123'),
+                    'role_id'=>2,
+                    'department_id'=>3,
+                    'position_id'=>4]);
 
         //             DB::table('users')->insert([
         //                 'first_name'=> 'Travis',

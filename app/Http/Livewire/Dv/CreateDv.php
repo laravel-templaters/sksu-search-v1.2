@@ -207,9 +207,39 @@ class CreateDv extends Component
         $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
         $milestone->d_v_progress_id = $dv_progress->id;
         $milestone->date_started = now();
+        $milestone->isActive = true;
         $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
         $milestone->step_number = 1;
 
+        //ICU
+        $signatory = new Signatory;
+        $signatory->disbursement_voucher_id = $disbursement_voucher->id;
+        $signatory->user_id = $sig_user_id;
+        $signatory->signed = 0;
+        $signatory->save();
+
+            $milestone = new Milestone;
+            $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
+            $milestone->d_v_progress_id = $dv_progress->id;
+            $milestone->date_started = now();
+            $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
+            $milestone->step_number = 2;
+
+         //Budget Officer
+        $signatory = new Signatory;
+        $signatory->disbursement_voucher_id = $disbursement_voucher->id;
+        $signatory->user_id = $sig_user_id;
+        $signatory->signed = 0;
+        $signatory->save();
+
+            $milestone = new Milestone;
+            $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
+            $milestone->d_v_progress_id = $dv_progress->id;
+            $milestone->date_started = now();
+            $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
+            $milestone->step_number = 2;
+        
+         //Accounting Officer
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
         $signatory->user_id = $sig_user_id;
