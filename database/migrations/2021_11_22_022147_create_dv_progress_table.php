@@ -18,7 +18,7 @@ class CreateDvProgressTable extends Migration
             $table->foreignID('disbursement_voucher_id');
             $table->foreignID('last_action_id');
             $table->date('date_start');
-            $table->date('date_completed');
+            $table->date('date_completed')->nullable();
             $table->integer('steps');
             $table->timestamps();
         });

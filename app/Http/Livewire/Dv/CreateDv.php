@@ -197,10 +197,11 @@ class CreateDv extends Component
 
         $dv_progress = new DVProgress;
         $dv_progress->disbursement_voucher_id = $dv_id;
-        $dv_progress->signatory_id = $sig_id;
+        // $dv_progress->signatory_id = $sig_id;
         $dv_progress->last_action_id = $last_action_id;
         $dv_progress->date_start = now();
         $dv_progress->date_completed = now();
+        $dv_progress->steps = 5;
         $dv_progress->save();
 
         $this->alert('success', 'Voucher is saved!', [
