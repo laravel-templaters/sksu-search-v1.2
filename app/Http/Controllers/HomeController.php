@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\ForwardDV;
 
 class HomeController extends Controller
-{
+{ 
     public function index()
     {
         $role = Auth::user()->role_id;

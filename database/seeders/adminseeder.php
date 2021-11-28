@@ -44,7 +44,7 @@ class adminseeder extends Seeder
         //         'password'=> Hash::make('sec123'),
         //         'role_id'=>3,
         //         'department_id'=>2,
-        //         'position_id'=>3]);
+        //         'position_id'=>3]); 
 
                 DB::table('users')->insert([
                     'name'=> 'Dolores T. Head',

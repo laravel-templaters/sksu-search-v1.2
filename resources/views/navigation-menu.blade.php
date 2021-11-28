@@ -25,7 +25,7 @@
                 </div>
                 @elseif(auth()->user()->role_id == 2)
                 <div class="hidden space-x-1 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('department-head') }}" :active="request()->routeIs('department-head')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('transactions') }}" :active="request()->routeIs('transactions')">

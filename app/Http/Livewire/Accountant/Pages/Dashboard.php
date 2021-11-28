@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Accountant\Pages;
 
 use Livewire\Component;
-
+ 
 class Dashboard extends Component
 {
     public function render()

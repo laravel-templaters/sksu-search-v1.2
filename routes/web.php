@@ -35,6 +35,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', function (
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/client/dash', \App\Http\Livewire\Client\ClientDashboardMain::class)->name('client-dash');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/department-head/dash', \App\Http\Livewire\DeptHead\DepartmentHead::class)->name('department-head');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements', function () {
     return view('disbursements');
 })->name('disbursements');
