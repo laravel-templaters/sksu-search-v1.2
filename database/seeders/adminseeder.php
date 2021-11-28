@@ -1,6 +1,4 @@
-
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -72,7 +70,7 @@ class adminseeder extends Seeder
                     'name'=> 'ROLANDO F. HECHANOVA, PhD',
                     'birth_day'=>  Carbon::create('2000', '04', '06'),   
                     'contact_number'=>'09123456789',        
-                    'email'=>'jesher@act.com',
+                    'email'=>'rhech@pres.com',
                     'password'=> Hash::make('jesher123'),
                     'role_id'=>2,
                     'department_id'=>1,
@@ -80,14 +78,34 @@ class adminseeder extends Seeder
                 
                 //test vars
                  DB::table('users')->insert([
-                    'name'=> 'JESHER Y. PALOMARIA, CPA',
-                    'birth_day'=>  Carbon::create('2000', '04', '06'),   
+                    'name'=> 'Heiven C Cordero',
+                    'birth_day'=>  Carbon::create('1986', '04', '06'),   
                     'contact_number'=>'09123456789',        
-                    'email'=>'jesher@act.com',
-                    'password'=> Hash::make('jesher123'),
-                    'role_id'=>2,
+                    'email'=>'hcc@dep.com',
+                    'password'=> Hash::make('hcc123'),
+                    'role_id'=>3,
                     'department_id'=>3,
-                    'position_id'=>4]);
+                    'position_id'=>2]);
+
+                 DB::table('users')->insert([
+                    'name'=> 'Mentha C. La Palma',
+                    'birth_day'=>  Carbon::create('1998', '04', '06'),   
+                    'contact_number'=>'09123456789',        
+                    'email'=>'mclp@budget.com',
+                    'password'=> Hash::make('mclp123'),
+                    'role_id'=>3,
+                    'department_id'=>3,
+                    'position_id'=>7]);
+
+                 DB::table('users')->insert([
+                    'name'=> 'Douglas P. Canlubang',
+                    'birth_day'=>  Carbon::create('1988', '04', '06'),   
+                    'contact_number'=>'09123456789',        
+                    'email'=>'dpc@icu.com',
+                    'password'=> Hash::make('dpc123'),
+                    'role_id'=>3,
+                    'department_id'=>3,
+                    'position_id'=>11]);
 
         //             DB::table('users')->insert([
         //                 'first_name'=> 'Travis',

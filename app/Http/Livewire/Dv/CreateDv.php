@@ -157,7 +157,7 @@ class CreateDv extends Component
     public function saveDV(){
         $dv_count = DisbursementVoucher::get()->count();
         $dv_number = "000-TEST-000";
-        $user_id = $this->searchedusers[0]['id'];
+        $user_id = $this->user_id;
         $sig_user_id = $this->sig_id;
         $mop_id = $this->mode_id;
         $status_id = 1;

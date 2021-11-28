@@ -16,16 +16,17 @@ class PositionSeeder extends Seeder
     {
         DB::table('positions')->insert(
             [
-                ['position_name' => 'Admin'], 
-                ['position_name' => 'Department Head'], 
-                ['position_name' => 'Secretary'],
-                ['position_name' => 'Accountant'],
-                ['position_name' => 'President'],
-                ['position_name' => 'Campus Head'],
-                ['position_name' => 'Budget Officer'],
-                ['position_name' => 'President\'s Secretary'],
-                ['position_name' => 'Faculty'],
-                ['position_name' => 'Staff'],
+                ['position_name' => 'Admin'], //1
+                ['position_name' => 'Department Head'], //2
+                ['position_name' => 'Secretary'],//3
+                ['position_name' => 'Accountant'],//4
+                ['position_name' => 'President'],//5
+                ['position_name' => 'Campus Head'],//6
+                ['position_name' => 'Budget Officer'],//7
+                ['position_name' => 'President\'s Secretary'],//8
+                ['position_name' => 'Faculty'],//9
+                ['position_name' => 'Staff'],//10
+                ['position_name' => 'ICU Officer'],//11
             ]);
     }
 }
