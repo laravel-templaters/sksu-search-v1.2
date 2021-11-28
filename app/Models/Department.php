@@ -15,4 +15,7 @@ class Department extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+     public function campus(){
+        return $this->hasOne('App\Models\Campus');
+    }
 }

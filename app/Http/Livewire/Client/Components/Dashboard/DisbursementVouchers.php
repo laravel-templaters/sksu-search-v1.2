@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 class DisbursementVouchers extends Component
 {
-     
+    
+    
     public $disbursement_vouchers;
     public $last_action;
     public $progress;

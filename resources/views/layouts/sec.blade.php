@@ -52,7 +52,7 @@
                 <div class="bg-gray-100 lg:min-w-0 lg:flex-1">
                     <div class="h-full px-4 py-6 sm:px-6 lg:px-8">
                         <!-- Start main area-->
-                        <div class="relative h-full" style="min-height: 36rem;">
+                        <div class="h-full" style="min-height: 36rem;">
                             {{$slot}}
                         </div>
                         <!-- End main area -->

@@ -22,7 +22,7 @@
                     {{-- <x-jet-nav-link href="{{ route('sec') }}" :active="request()->routeIs('sec')">
                     {{ __('Secretary') }}
                     </x-jet-nav-link> --}}
-                </div>
+                </div>  
                 @elseif(auth()->user()->role_id == 2)
                 <div class="hidden space-x-1 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">

@@ -20,6 +20,7 @@ class CreateMilestonesTable extends Migration
             $table->dateTime('date_started');
             $table->dateTime('date_completed');
             $table->longText('description');
+            $table->boolean('isActive')->default(false);
             $table->integer('step_number');
             $table->boolean('is_completed')->default(false);
             $table->timestamps();
