@@ -7,7 +7,7 @@
                         <tr>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                DV Tracking No
+                                DV Tracking No @dump(Auth::user()->id)
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -79,6 +79,9 @@
                     </tbody>
                 </table>
             </div>
+            <button type="button" class="text-white p-2 mt-4 rounded-md bg-blue-500 hover:text-yellow-300"
+            wire:click="testPusher"><span
+            class="text-xs"> TEST PUSHER </span></button>
         </div>
     </div>
 

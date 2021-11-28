@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\ForwardDV;
 
 class HomeController extends Controller
 {
@@ -15,9 +16,15 @@ class HomeController extends Controller
         {
             return redirect()->route('dashboard');
         }else if($role == 3){
+          // event(new ForwardDV(Auth::user(), 'hello gabriel'));
            return redirect()->route('client-dash');
         }else if($role == 2){
             return redirect()->route('department-head');
          }
+    }
+    public function test()
+    {
+        //dd("hello".Auth::user()->name);
+      
     }
 }

@@ -20,9 +20,11 @@ use App\Models\LastAction;
 use App\Models\DVProgress;
 use App\Models\TravelOrder;
 use App\Models\Milestone;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Events\ForwardDV;
 class CreateDv extends Component
 {
     public $category_id;
@@ -268,7 +270,7 @@ class CreateDv extends Component
           //show print button
           $this->dvSaved = true;
 
-              
+
     }
 
     public function setsignatory($id){

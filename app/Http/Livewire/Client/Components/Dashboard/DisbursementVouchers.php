@@ -10,6 +10,8 @@ use App\Models\DisbursementVoucher;
 use App\Models\LastAction;
 use App\Models\DvProgress;       
 use App\Models\User;
+use App\Events\ForwardDV;
+use Illuminate\Support\Facades\Auth;
 
 class DisbursementVouchers extends Component
 {
@@ -20,7 +22,7 @@ class DisbursementVouchers extends Component
     public $progress;
     public $feeds;
 
-
+    public $user;
     public $temp = 'asfasd';
     public $readyToLoad = false;
  
@@ -37,6 +39,38 @@ class DisbursementVouchers extends Component
         
         return view('livewire.client.components.dashboard.disbursement-vouchers');
         
+    }
+
+
+    public function getListeners()
+    {
+        return [
+            "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'alerts',
+           
+        ];
+    }
+
+    public function alerts(){
+
+        $this->alert('success', 'A voucher has arrived!', [
+            'background' => '#ccffcc',
+            'padding' => '0.5rem',
+            'position' =>  'top-end', 
+            'timer' =>  2500,  
+            'toast' =>  true, 
+            'text' =>  '', 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+    ]);
+    }
+
+    public function testPusher(){
+        $user = User::where('id', 6)->first();   
+        // dd($user->id);
+         event(new ForwardDV($user->id));
+
     }
 
     
