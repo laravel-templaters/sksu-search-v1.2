@@ -16,5 +16,11 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+<<<<<<< Updated upstream
 
-
+=======
+//ss
+Broadcast::channel('forward-dv.{id}', function ($user, $id) {
+    return (int) $user->id === (int) $id;   
+});
+>>>>>>> Stashed changes
