@@ -27,6 +27,17 @@ class PositionSeeder extends Seeder
                 ['position_name' => 'Faculty'],//9
                 ['position_name' => 'Staff'],//10
                 ['position_name' => 'ICU Officer'],//11
+                ['position_name' => 'Director'],//12
+                ['position_name' => 'Vice President'],//13
+                ['position_name' => 'University Board Secretary & Director'],//14
+                ['position_name' => 'Chief'],//15
+                ['position_name' => 'Asst. Director'],//16
+                ['position_name' => 'University Registrar'],//17
+                ['position_name' => 'Dean'],//18
+                ['position_name' => 'Chairman'],//19
+                ['position_name' => 'Budget Officer III'],//20
+                ['position_name' => 'University Cashier'],//21
+
             ]);
     }
 }
