@@ -41,31 +41,6 @@ class DisbursementVouchers extends Component
         
     }
 
-
-    public function getListeners()
-    {
-        return [
-            "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'alerts',
-           
-        ];
-    }
-
-    public function alerts(){
-
-        $this->alert('success', 'A voucher has arrived!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' =>  '', 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-    ]);
-    }
-
     public function testPusher(){
         $user = User::where('id', 6)->first();   
         // dd($user->id);

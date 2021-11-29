@@ -17,7 +17,10 @@ class LastAction extends Model
     public function disbursement_voucher(){
         return $this->hasOne('App\Models\DisbursementVoucher','id','disbursement_voucher_id');
     }
-    public function user(){
-    return $this->hasOne('App\Models\User','id','user_id');
+    public function sender(){
+    return $this->hasOne('App\Models\User','id','sender_id');
+    }
+    public function reciever(){
+    return $this->hasOne('App\Models\User','id','reciever_id');
     }
 }

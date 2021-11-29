@@ -7,11 +7,12 @@
                         <tr>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                DV Tracking No {{Auth::user()->id}}
+                                DV Tracking No
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 DV Type
+
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -79,8 +80,7 @@
                     </tbody>
                 </table>
             </div>
-            <button type="button" class="p-2 mt-4 text-white bg-blue-500 rounded-md hover:text-yellow-300"
-                wire:click="testPusher"><span class="text-xs"> TEST PUSHER </span></button>
+
         </div>
     </div>
 

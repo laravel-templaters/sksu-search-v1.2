@@ -28,7 +28,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -57,7 +57,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -87,7 +87,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -119,7 +119,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -149,7 +149,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -186,7 +186,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -216,7 +216,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -247,7 +247,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -280,7 +280,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -311,7 +311,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->user->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}} </time>

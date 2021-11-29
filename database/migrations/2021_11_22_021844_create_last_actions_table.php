@@ -16,7 +16,8 @@ class CreateLastActionsTable extends Migration
         Schema::create('last_actions', function (Blueprint $table) {
             $table->id();
             $table->foreignID('disbursement_voucher_id');
-            $table->foreignID('user_id');
+            $table->foreignID('reciever_id');
+            $table->foreignID('sender_id');
             $table->foreignID('action_type_id');
             $table->string('description');
             $table->boolean('read');

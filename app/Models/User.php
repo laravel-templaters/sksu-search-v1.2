@@ -84,4 +84,7 @@ class User extends Authenticatable
     public function signatory(){
           return $this->belongsTo('App\Models\Signatories');
     }
+    public function milestone(){
+          return $this->belongsTo('App\Models\Milestone');
+    }
 }
