@@ -110,7 +110,12 @@
     @slot('rightCol')
     @livewire('client.components.dashboard.feed-status')
     @endslot
-    <div x-cloak x-show="active == 'dv'">
+    <div x-cloak x-show="active == 'dv'" x-data="emitCalled = @entangle('emitCalled')" x-init="$watch('emitCalled', value => {
+        if(value == true){
+            setTimeout(function(){ showFeed=true; }, 1000);
+            setTimeout(function(){ emitCalled = false; }, 500);
+        }
+    }) ">
         @livewire('client.components.dashboard.disbursement-vouchers')
     </div>
 

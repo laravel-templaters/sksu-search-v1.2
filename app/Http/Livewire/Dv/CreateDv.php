@@ -161,7 +161,6 @@ class CreateDv extends Component
     public function saveDV(){
         $sig_user_first = $this->sig_id;
         $dv_count = DisbursementVoucher::get()->count();
-        $dv_number = "000-TEST-000";
         $user_id = $this->user_id;
         $sig_user_id = $this->sig_id;
         $mop_id = $this->mode_id;
@@ -170,14 +169,13 @@ class CreateDv extends Component
         // insert dv table
         $disbursement_voucher = new DisbursementVoucher;
         $disbursement_voucher->dv_tracking_number =$this->trackingNumber;
-        $disbursement_voucher->dv_number = $dv_number;
         $disbursement_voucher->user_id = $user_id;
         $disbursement_voucher->mop_id = $mop_id;
         $disbursement_voucher->status_id =$status_id;
         $disbursement_voucher->dv_type_sorter_id = $this->category_id;
         $disbursement_voucher->save();
 
-
+        $this->storeParticulars();
 
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
@@ -341,6 +339,14 @@ class CreateDv extends Component
             foreach ($this->entry as $key => $value) { 
 
                 //Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);
+
+                if (!(isset($this->responsibility_center[$key]))) {
+                    $this->responsibility_center[$key] = null;
+                }
+                if (!(isset($this->mfo_pap[$key]))) {
+                    $this->mfo_pap[$key] = null;
+                }
+
                 $particulars = new Particular;
                 $particulars->disbursement_voucher_id = $this->dv_id;
                 $particulars->entry = $this->entry[$key];
@@ -417,7 +423,7 @@ class CreateDv extends Component
         foreach($names as $name){
             $this->fn=$name->name;
         }
-        $this->trackingNumber=Date('y')."-000".(User::where('id','=',$this->user_id)->firstOrFail())->department->campus->campus_shortCode;
+        $this->trackingNumber=Date('y')."-000".(DisbursementVoucher::get()->count()+1).(User::where('id','=',$this->user_id)->firstOrFail())->department->campus->campus_shortCode;
     }
 
     public function sTOid($id,$import){

@@ -737,7 +737,7 @@
                             </div>
                             <div class="col-span-2 pr-2 m-2">
                                 <div class="m-3"> {!! QrCode::size(80)->margin(2)->backgroundColor(0, 0, 0,
-                                    0)->generate((string)$dvno_temp); !!}</div>
+                                    0)->generate((string)$trackingNumber); !!}</div>
                             </div>
                         </div>
                         {{-- dV --}}

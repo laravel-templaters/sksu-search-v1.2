@@ -17,6 +17,7 @@ class ClientDashboardMain extends Component
     public $last_action;
     public $progress;
     public $feeds=[];
+    public $emitCalled =false;
     
 
     public function render()
@@ -61,5 +62,18 @@ class ClientDashboardMain extends Component
             'showConfirmButton' =>  false, 
       ]);
     }
+
+    public function getListeners()
+    {
+        return [
+            "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'callEmitter',
+           
+        ];
+    }
+    public function callEmitter(){
+        $this->emitCalled = true;
+        $this->emit('dvClicked',DisbursementVoucher::first()->orderBy('updated_at','desc')->value('id'));
+    }
+
     
 }

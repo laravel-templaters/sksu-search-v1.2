@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class LastAction extends Model
 {
+    protected $fillable = [
+        'disbursement_voucher_id',
+    ];
     use HasFactory;
     public function dv_progress(){
         return $this->hasOne('App\Models\DvProgress');

@@ -19,7 +19,7 @@ class ActionTypeSeeder extends Seeder
             'description'=> 'FORWARDED',
             ]);
         DB::table('action_types')->insert([
-            'description'=> 'RECIEVED',
+            'description'=> 'RECEIVED',
             ]);
         DB::table('action_types')->insert([
             'description'=> 'RETURNED',

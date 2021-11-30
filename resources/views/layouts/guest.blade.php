@@ -21,4 +21,5 @@
             {{ $slot }}
         </div>
     </body>
+    <div class="fixed bottom-0 block min-w-full pt-3">@include('footer')</div>
 </html>

@@ -34,15 +34,17 @@ class GoogleController extends Controller
                 Auth::login($finduser);
                 return redirect()->route('redirect');
             }else{
+                $newUser = new User;
+                $newUser->name = $user->name;
+                $newUser->email =$user->email;
+                $newUser->provider_id = $user->id;
+                $newUser->role_id =3;
+                $newUser->department_id =50;
+                $newUser->position_id =10;
+                $newUser->save();
                 
-                $newUser = DB::table('users')->insert([
-                    'name'=>$user->name,          
-                    'email' => $user->email,
-                    'provider_id' => $user->id,
-                    'role_id' => '3',
-                    'department_id' => '2',       
-                    'position_id' => '3',
-                ]);
+                
+               
 
                 Auth::login($newUser);
                 return redirect()->route('redirect');

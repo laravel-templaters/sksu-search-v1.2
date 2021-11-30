@@ -17,7 +17,7 @@ class Particular extends Model
         'disbursement_voucher-id', 'entry', 'responsibility_center','mfo_pap','amount'
     ];
 
-    public function disbursement_vouchers(){
-        return $this->belongsTo('App\Models\DisbursementVoucher');
+    public function disbursement_voucher(){
+        return $this->hasOne('App\Models\DisbursementVoucher','id','disbursement_voucher_id');
     }
 }

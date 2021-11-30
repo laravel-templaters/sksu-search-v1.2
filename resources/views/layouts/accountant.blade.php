@@ -47,7 +47,7 @@
     </main>
 
     </div>
-    @include('footer')
+    <div class="fixed bottom-0 min-w-full pt-3">@include('footer')</div>
     @stack('modals')
     @stack('scripts')
     @livewireScripts
@@ -55,5 +55,6 @@
     <x-livewire-alert::scripts />
 
 </body>
+
 
 </html>

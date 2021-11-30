@@ -78,7 +78,7 @@ class adminseeder extends Seeder
                   'position_id'=>12]);               
                
                DB::table('users')->insert([
-                  'name'=> 'RODELYN M. DALAAP, PhD',
+                  'name'=> 'RODELYN M. DALAYAP, PhD',
                   'birth_day'=>  Carbon::create('2000', '04', '06'),   
                   'contact_number'=>'09123456789',        
                   'email'=>'rodelyndalayap@director.com',

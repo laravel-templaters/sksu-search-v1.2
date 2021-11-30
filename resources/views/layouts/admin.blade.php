@@ -55,9 +55,7 @@
         </div>
 
     </div>
-    <div class="fixed bottom-0 flex flex-col flex-1 md:pl-64">
-        @include('footer')
-    </div>
+    <div class="fixed bottom-0 block min-w-full pt-3">@include('footer')</div>
     @stack('modals')
     @stack('scripts')
     @livewireScripts
