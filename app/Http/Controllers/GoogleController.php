@@ -31,6 +31,9 @@ class GoogleController extends Controller
 
             if($finduser)
             {
+                if($finduser->provider_id){
+
+                }
                 Auth::login($finduser);
                 return redirect()->route('redirect');
             }else{
@@ -43,10 +46,6 @@ class GoogleController extends Controller
                 $newUser->department_id =50;
                 $newUser->position_id =10;
                 $newUser->save();
-                
-                
-               
-
                 Auth::login($newUser);
                 return redirect()->route('redirect');
             }
