@@ -12,8 +12,8 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css"> --}}
-    <script src="{{ mix('js/app.js') }}" defer></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
 
     @livewireStyles
 
@@ -24,7 +24,7 @@
         }
 
     </style>
-
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
 </head>
 
@@ -50,9 +50,12 @@
     @include('footer')
     @stack('modals')
     @stack('scripts')
+
     @livewireScripts
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
     <x-livewire-alert::scripts />
+    <x-livewire-alert::flash />
 
 </body>
 

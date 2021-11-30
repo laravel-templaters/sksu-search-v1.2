@@ -55,7 +55,7 @@ class GoogleController extends Controller
                 $newUser->email =$user->email;
                 $newUser->provider_id = $user->id;
                 $newUser->avatar = $user->avatar;
-                $newUser->email_verified_at = $user->$user->user['verified_email'] ? Carbon::now() : null;
+                $newUser->email_verified_at = $user->user['verified_email']  == true ? Carbon::now() : null;
                 $newUser->role_id =3;
                 $newUser->department_id =50;
                 $newUser->position_id =10;

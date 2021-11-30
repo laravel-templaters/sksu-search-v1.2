@@ -111,7 +111,7 @@
     @slot('rightCol')
     @livewire('client.components.dashboard.feed-status')
     @endslot
-    <div x-cloak x-show="active == 'dv'" x-init="$watch('emitCalled', value => {
+    <div x-cloak x-show="active == 'dv'" x-data="{emitCalled : @entangle('emitCalled')}" x-init="$watch('emitCalled', value => {
         if(value == true){
             showFeed=true;
             setTimeout(function(){ emitCalled = false; }, 300);

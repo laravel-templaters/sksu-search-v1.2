@@ -44,7 +44,7 @@ class DisbursementVouchers extends Component
     public function testPusher(){
         $user = User::where('id', 7)->first();   
         // dd($user->id);
-         event(new ForwardDV(29));
+         event(new ForwardDV(50));
 
     }
 

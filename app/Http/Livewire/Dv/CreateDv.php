@@ -275,7 +275,11 @@ class CreateDv extends Component
             $milestone->step_number = 5;
             $milestone ->save();
 
-        $this->alert('success', 'Voucher is saved!', [
+        
+          //show print button
+          $this->dvSaved = true;
+         event(new ForwardDV($sig_user_first));
+         $this->alert('success', 'Voucher Saved!', [
                 'background' => '#ccffcc',
                 'padding' => '0.5rem',
                 'position' =>  'top-end', 
@@ -286,12 +290,7 @@ class CreateDv extends Component
                 'cancelButtonText' =>  'Cancel', 
                 'showCancelButton' =>  false, 
                 'showConfirmButton' =>  false, 
-        ]);
-          //show print button
-          $this->dvSaved = true;
-        $user = User::where('id', 7)->first();   
-      
-         event(new ForwardDV($sig_user_first));
+          ]);
 
     }
 

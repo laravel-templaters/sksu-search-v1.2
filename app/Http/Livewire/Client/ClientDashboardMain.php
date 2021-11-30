@@ -25,10 +25,20 @@ class ClientDashboardMain extends Component
         ];
     }
     public function callEmitter(){
-        $this->wth("success");
         $this->emitCalled = true;
-        $this->wth("warning");
         $this->emit('dvClicked',DisbursementVoucher::first()->orderBy('updated_at','desc')->value('id'));
+        $this->alert('success', 'Successfully Added!', [
+            'background' => '#ccffcc',
+            'padding' => '0.5rem',
+            'position' =>  'top-end', 
+            'timer' =>  2500,  
+            'toast' =>  true, 
+            'text' => "hello", 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+      ]);
     }
     public function render()
     {
@@ -58,21 +68,7 @@ class ClientDashboardMain extends Component
     }
 
 
-    public function wth($lols){
-        $this->alert($lols, 'Successfully Added!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' => "hello", 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
-    }
-
+    
     
     
 
