@@ -10,7 +10,6 @@ use App\Models\DisbursementVoucher;
 use App\Models\LastAction;
 use App\Models\DvProgress;       
 use App\Models\User;
-
 class ClientDashboardMain extends Component
 {
     public $disbursement_voucher;
@@ -19,7 +18,18 @@ class ClientDashboardMain extends Component
     public $feeds=[];
     public $emitCalled =false;
     
-
+    public function getListeners()
+    {
+        return [
+            "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'callEmitter',
+        ];
+    }
+    public function callEmitter(){
+        $this->wth("success");
+        $this->emitCalled = true;
+        $this->wth("warning");
+        $this->emit('dvClicked',DisbursementVoucher::first()->orderBy('updated_at','desc')->value('id'));
+    }
     public function render()
     {
          $this->disbursement_voucher = DisbursementVoucher::where('user_id','=',auth()->user()->id)->get();
@@ -48,8 +58,8 @@ class ClientDashboardMain extends Component
     }
 
 
-    public function wth(){
-        $this->alert('success', 'Successfully Added!', [
+    public function wth($lols){
+        $this->alert($lols, 'Successfully Added!', [
             'background' => '#ccffcc',
             'padding' => '0.5rem',
             'position' =>  'top-end', 
@@ -63,17 +73,8 @@ class ClientDashboardMain extends Component
       ]);
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'callEmitter',
-           
-        ];
-    }
-    public function callEmitter(){
-        $this->emitCalled = true;
-        $this->emit('dvClicked',DisbursementVoucher::first()->orderBy('updated_at','desc')->value('id'));
-    }
+    
+    
 
     
 }

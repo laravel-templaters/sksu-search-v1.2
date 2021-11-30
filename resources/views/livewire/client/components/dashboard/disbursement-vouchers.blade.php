@@ -7,7 +7,7 @@
                         <tr>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                DV Tracking No
+                                DV Tracking No {{auth()->user()->id}}
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -80,7 +80,7 @@
                     </tbody>
                 </table>
             </div>
-
+            <button class="flex m-2" wire:click="testPusher">Click Me</button>
         </div>
     </div>
 

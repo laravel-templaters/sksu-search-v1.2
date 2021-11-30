@@ -15,7 +15,7 @@ class FeedStatus extends Component
 {
     
     public $feeds=[];
-    protected $listeners = ['dvClicked' => 'populateFeed'];
+    //protected $listeners = ['dvClicked' => 'populateFeed'];
 
     public function render()
     {
@@ -23,5 +23,6 @@ class FeedStatus extends Component
     }
     public function populateFeed($dv_id){
         $this->feeds = LastAction::where('disbursement_voucher_id','=',$dv_id)->orderBy('id','desc')->get();
+       
     }
 }

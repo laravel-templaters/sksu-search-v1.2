@@ -1,4 +1,5 @@
 <div>
+
     @slot('leftColumn')
     <!-- This example requires Tailwind CSS v2.0+ -->
     <nav class="pl-5 pr-5 space-y-1" aria-label="Sidebar">
@@ -110,12 +111,12 @@
     @slot('rightCol')
     @livewire('client.components.dashboard.feed-status')
     @endslot
-    <div x-cloak x-show="active == 'dv'" x-data="emitCalled = @entangle('emitCalled')" x-init="$watch('emitCalled', value => {
+    <div x-cloak x-show="active == 'dv'" x-init="$watch('emitCalled', value => {
         if(value == true){
-            setTimeout(function(){ showFeed=true; }, 1000);
-            setTimeout(function(){ emitCalled = false; }, 500);
+            showFeed=true;
+            setTimeout(function(){ emitCalled = false; }, 300);
         }
-    }) ">
+    })">
         @livewire('client.components.dashboard.disbursement-vouchers')
     </div>
 
