@@ -38,7 +38,7 @@ class GoogleController extends Controller
                 'email' => $user->email,
                 'provider_id' => $user->id,
                 'role_id' => '3',
-                'department_id' => '2',       
+                'department_id' => '51',       
                 'position_id' => '3', 
                 ]);
 
