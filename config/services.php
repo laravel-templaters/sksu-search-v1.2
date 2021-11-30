@@ -32,7 +32,8 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://sksusearch.tech/auth/google/callback',
+        'redirect' => 'http://www.sksusearch.tech/auth/google/callback',
+
     ],
 
 ];
