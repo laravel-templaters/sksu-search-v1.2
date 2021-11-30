@@ -288,6 +288,8 @@ class DepartmentSeeder extends Seeder
                        'department_short_code'=>'acc-uacc',
                        'campus_id'=>'1',
                        ]);//47  
+
+
                        
                     DB::table('departments')->insert([
                        'department_name'=> 'Science Laboratory High School',
@@ -305,7 +307,12 @@ class DepartmentSeeder extends Seeder
                        'department_name'=> 'Supply Office',
                        'department_short_code'=>'acc-so',
                        'campus_id'=>'1',
-                       ]);//50       
-                       
+                       ]);//50
+
+                    DB::table('departments')->insert([
+                       'department_name'=> 'Faculty',
+                       'department_short_code'=>'acc-fac',
+                       'campus_id'=>'1',
+                       ]);//51            
     }
 }
