@@ -543,6 +543,15 @@ class adminseeder extends Seeder
                     'role_id'=>3,
                     'department_id'=>3,
                     'position_id'=>11]);
+                   DB::table('users')->insert([
+                    'name'=> 'Dougasdfasdfasdfasdlas P. Canlubang',
+                    'birth_day'=>  Carbon::create('1988', '04', '06'),   
+                    'contact_number'=>'09123456789',        
+                    'email'=>'roger.gatuslao.grizz@gmail.com',
+                    'password'=> Hash::make('dpc123'),
+                    'role_id'=>3,
+                    'department_id'=>3,
+                    'position_id'=>11]);
             //end test vars--
         //             DB::table('users')->insert([
         //                 'first_name'=> 'Travis',
