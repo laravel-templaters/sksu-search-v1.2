@@ -103,7 +103,7 @@ class CreateDv extends Component
             $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
             // $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%' or lower(place_to_go) like '%".strtolower($this->searchto)."%'")->orderBy('created_at');
         }
-        if (isset($this->searchuser)) {
+        if (isset($this->searchuser) && $this->searchuser != "") {
             $this->searchedusers= User::where(DB::raw('lower(name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
         }
 

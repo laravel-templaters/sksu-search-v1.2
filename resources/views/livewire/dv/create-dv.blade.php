@@ -262,7 +262,7 @@
                                 @foreach($searchedusers as $searcheduser)
                                 <div class="col-span-1 space-x-1">
                                     <button class="" wire:click="sUid({{$searcheduser->id}})">
-                                        <img src="{{asset($searcheduser->profile_photo_url)}}"
+                                        <img src="{{$searcheduser->avatar != null ? asset($searcheduser->avatar) : asset($searcheduser->profile_photo_url)}}"
                                             class="w-20 h-20 mx-auto rounded-full lg:w-24 lg:h-24">
                                         <p class="mt-1 text-sm text-blue-53">
                                             {{$searcheduser->name}}
@@ -387,12 +387,12 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Amount</label>
                                                     @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
-                                                    <input type="number" wire:model="amount.0"
+                                                    <input type="number" min="0" wire:model="amount.0"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                         readonly>
 
                                                     @else
-                                                    <input type="number" wire:model="amount.0"
+                                                    <input type="number" min="0" wire:model="amount.0"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @endif
                                                     @error('amount.0')
@@ -625,7 +625,7 @@
                                             <div class="flex items-center">
                                                 <div>
                                                     <img class="inline-block rounded-full h-14 w-14"
-                                                        src="{{asset($searchedsignatory->profile_photo_url)}}"
+                                                        src="{{$searchedsignatory->avatar != null ? asset($searchedsignatory->avatar) : asset($searchedsignatory->profile_photo_url)}}"
                                                         alt="{{$searchedsignatory->name}}">
                                                 </div>
                                                 <div class="ml-3 text-left">

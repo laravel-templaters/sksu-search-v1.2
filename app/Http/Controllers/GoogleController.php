@@ -38,6 +38,7 @@ class GoogleController extends Controller
                 $newUser->name = $user->name;
                 $newUser->email =$user->email;
                 $newUser->provider_id = $user->id;
+                $newUser->avatar = $user->avatar;
                 $newUser->role_id =3;
                 $newUser->department_id =50;
                 $newUser->position_id =10;
