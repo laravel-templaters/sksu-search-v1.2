@@ -542,14 +542,13 @@
                                     <div class="flex">
                                         @php
                                         $related_doc_arr = explode('<',$doc->related_document_list_entry);
-                                        $last
-                                        @endphp
+                                            $last
+                                            @endphp
                                             <h3 class="my-auto uppercase">{{$related_doc_arr[0]}}</h3>
                                             @if (count($related_doc_arr) > 1)
                                             @php
                                             $related_doc_divided= explode('>',$related_doc_arr[1]); @endphp
-                                            <span
-                                                class="text-xs font-light tracking-wide text-red-500">
+                                            <span class="text-xs font-light tracking-wide text-red-500">
                                                 **{{$related_doc_arr[1]}}
                                             </span>
                                             @endif
@@ -618,20 +617,41 @@
                                 @foreach($searchedsignatories as $searchedsignatory)
 
                                 <li>
-                                    <div class="space-y-4">
-                                        <button class="space-y-2 rounded-lg hover:ring-blue-500 hover:ring-4"
+                                    <div class="space-y-4 text-left">
+                                        <button class="flex-shrink-0 block group"
                                             wire:click.prevent="setsignatory({{$searchedsignatory->id}})">
-                                            <div class="aspect-w-3 aspect-h-2">
-                                                <img class="object-cover rounded-lg shadow-lg "
-                                                    src="{{asset($searchedsignatory->profile_photo_url)}}" alt="n/a">
-                                            </div>
+                                            <!-- This example requires Tailwind CSS v2.0+ -->
 
-                                            <div class="space-y-2">
-                                                <div class="space-y-1 text-lg font-medium leading-6">
-                                                    <h3>{{$searchedsignatory->name}}</h3>
-                                                    <p class="text-indigo-600">Department Name</p>
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <img class="inline-block rounded-full h-14 w-14"
+                                                        src="{{asset($searchedsignatory->profile_photo_url)}}"
+                                                        alt="{{$searchedsignatory->name}}">
+                                                </div>
+                                                <div class="ml-3 text-left">
+                                                    <p
+                                                        class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                        {{$searchedsignatory->name}}
+                                                    </p>
+                                                    <p
+                                                        class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                        @if ($searchedsignatory->position != null)
+                                                        {{$searchedsignatory->position->position_name}}
+                                                        @endif
+                                                    </p>
+                                                    <p
+                                                        class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                        @if ($searchedsignatory->department != null)
+                                                        {{$searchedsignatory->department->department_name}}
+                                                        @endif
+                                                    </p>
+
+
                                                 </div>
                                             </div>
+
+
+
                                         </button>
                                     </div>
                                 </li>
@@ -901,7 +921,7 @@
                                 @endif
                                 @if(isset($position))
                                 <div class="col-span-3 col-start-2 row-span-1 row-start-4 font-semibold text-center">
-                                    {{$position->position_name}} for {{$department->department_name}}</div>
+                                    {{$position->position_name}} of {{$department->department_name}}</div>
                                 @endif
                             </div>
                         </div>
@@ -1121,7 +1141,7 @@
                         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
                         onclick="printDiv('dvPrint')" value="Print DV" />
                 </div>
-                <div class="justify-end col-span-2 col-start-9">
+                <div class="justify-end col-span-2 col-start-9" :class="dvSaved ? 'hidden' : ''">
                     <button
                         class="block w-full py-2 mt-3 text-lg border-gray-300 rounded-lg shadow-sm bg-primary-bg text-secondary-bg-alt hover:bg-primary-text-alt hover:text-primary-bg"
                         x-cloak x-show="isstep4open"

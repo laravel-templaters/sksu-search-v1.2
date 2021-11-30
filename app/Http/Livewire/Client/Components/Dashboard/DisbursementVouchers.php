@@ -32,7 +32,7 @@ class DisbursementVouchers extends Component
     }
     public function render()
     {
-        $this->disbursement_vouchers = $this->readyToLoad ? DisbursementVoucher::where('user_id','=',auth()->user()->id)->get() : [];
+        $this->disbursement_vouchers = $this->readyToLoad ? DisbursementVoucher::where('user_id','=',auth()->user()->id)->orderBy('id','desc')->get() : [];
         $this->last_action = LastAction::get();
         $this->progress = DvProgress::get();
 

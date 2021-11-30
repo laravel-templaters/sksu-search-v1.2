@@ -25,7 +25,8 @@
                 </div>
                 @elseif(auth()->user()->role_id == 2)
                 <div class="hidden space-x-1 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('department-head') }}" :active="request()->routeIs('department-head')">
+                    <x-jet-nav-link href="{{ route('department-head') }}"
+                        :active="request()->routeIs('department-head')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('transactions') }}" :active="request()->routeIs('transactions')">
@@ -56,15 +57,17 @@
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button
-                                class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
+                                class="flex items-center text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
                                 <img class="object-cover w-8 h-8 rounded-full"
-                                    src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    src="{{ Auth::user()->profile_photo_url }}" alt="" />
+                                <h1 class="inline-flex ml-2 text-sm uppercase truncate text-primary-bg">
+                                    {{ Auth::user()->name}}</h1>
                             </button>
                             @else
                             <span class="inline-flex rounded-md">
                                 <button type="button"
                                     class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
-                                    {{ Auth::user()->name }}
+
 
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">

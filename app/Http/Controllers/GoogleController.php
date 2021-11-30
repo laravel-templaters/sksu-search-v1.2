@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 class GoogleController extends Controller
@@ -33,13 +34,14 @@ class GoogleController extends Controller
                 Auth::login($finduser);
                 return redirect()->route('redirect');
             }else{
-                $newUser = User::create([
-                'name'  => $user->name,
-                'email' => $user->email,
-                'provider_id' => $user->id,
-                'role_id' => '3',
-                'department_id' => '2',       
-                'position_id' => '3', 
+                
+                $newUser = DB::table('users')->insert([
+                    'name'=>$user->name,          
+                    'email' => $user->email,
+                    'provider_id' => $user->id,
+                    'role_id' => '3',
+                    'department_id' => '2',       
+                    'position_id' => '3',
                 ]);
 
                 Auth::login($newUser);

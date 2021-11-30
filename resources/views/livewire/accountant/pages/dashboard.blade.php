@@ -112,7 +112,7 @@
             <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
                 <div class="mt-2 ml-4">
                     <h3 class="text-lg font-medium leading-6 text-primary-bg">
-                        Disbursement Vouchers
+                        Pending Disbursment Vouchers
                     </h3>
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">

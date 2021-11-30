@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dv;
 
 use App\Models\User;
 use App\Models\position;
+use App\Models\Campus;
 use App\Models\Department;
 use App\Models\DVType;
 use App\Models\DVTypeSorter;
@@ -66,6 +67,7 @@ class CreateDv extends Component
     public $voucher_type;
     public $voucher;
     public $related_docs;
+    public $trackingNumber="00000";
 
     //for to only
     public $searchto;
@@ -157,6 +159,7 @@ class CreateDv extends Component
     }
 
     public function saveDV(){
+        $sig_user_first = $this->sig_id;
         $dv_count = DisbursementVoucher::get()->count();
         $dv_number = "000-TEST-000";
         $user_id = $this->user_id;
@@ -166,7 +169,7 @@ class CreateDv extends Component
 
         // insert dv table
         $disbursement_voucher = new DisbursementVoucher;
-        $disbursement_voucher->dv_tracking_number ="01-000".$dv_count."-ACCESS";
+        $disbursement_voucher->dv_tracking_number =$this->trackingNumber;
         $disbursement_voucher->dv_number = $dv_number;
         $disbursement_voucher->user_id = $user_id;
         $disbursement_voucher->mop_id = $mop_id;
@@ -186,7 +189,8 @@ class CreateDv extends Component
         //insert last_action table
         $last_action = new LastAction;
         $last_action->disbursement_voucher_id = $disbursement_voucher->id;
-        $last_action->user_id = $user_id;
+        $last_action->reciever_id = $sig_user_id;
+        $last_action->sender_id = $user_id;
         $last_action->action_type_id = 1;
         $last_action->read = 0;
         $last_action->description = "TO ".($signatory->user->department->department_name);
@@ -194,11 +198,10 @@ class CreateDv extends Component
 
         //insert progress table
         //$sig_id = (DB::table('signatories')->latest('id')->first())->id;
-        $last_action_id = (DB::table('last_actions')->latest('id')->first())->id;
         $dv_progress = new DVProgress;
         $dv_progress->disbursement_voucher_id = $disbursement_voucher->id;
         // $dv_progress->signatory_id = $sig_id;
-        $dv_progress->last_action_id = $last_action_id;
+        $dv_progress->last_action_id = $last_action->id;
         $dv_progress->date_start = now();
         $dv_progress->date_completed = now();
         $dv_progress->steps = 5;
@@ -206,54 +209,73 @@ class CreateDv extends Component
 
         //milestones
         $milestone = new Milestone;
-        $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
-        $milestone->d_v_progress_id = $dv_progress->id;
+        $milestone->disbursement_voucher_id = $disbursement_voucher->id;
+        $milestone->assigned_user = $sig_user_id;
         $milestone->date_started = now();
         $milestone->isActive = true;
-        $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
+        $milestone->description = "Signatory=".$sig_user_id."=mustSign";
         $milestone->step_number = 1;
+        $milestone ->save();
 
         //ICU
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-        $signatory->user_id = $sig_user_id;
+        $signatory->user_id = 45;
         $signatory->signed = 0;
         $signatory->save();
 
             $milestone = new Milestone;
-            $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
-            $milestone->d_v_progress_id = $dv_progress->id;
-            $milestone->date_started = now();
+            $milestone->disbursement_voucher_id = $disbursement_voucher->id;
+            $milestone->assigned_user = $signatory->user_id;
+            $milestone->isActive = false;
             $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
             $milestone->step_number = 2;
+            $milestone ->save();
 
          //Budget Officer
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-        $signatory->user_id = $sig_user_id;
+        $signatory->user_id = 4;
         $signatory->signed = 0;
         $signatory->save();
 
             $milestone = new Milestone;
-            $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
-            $milestone->d_v_progress_id = $dv_progress->id;
-            $milestone->date_started = now();
+            $milestone->disbursement_voucher_id = $disbursement_voucher->id;
+            $milestone->assigned_user = $signatory->user_id;
+            $milestone->isActive = false;
             $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
-            $milestone->step_number = 2;
+            $milestone->step_number = 3;
+            $milestone ->save();
         
          //Accounting Officer
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-        $signatory->user_id = $sig_user_id;
+        $signatory->user_id = 21;
         $signatory->signed = 0;
         $signatory->save();
 
             $milestone = new Milestone;
-            $milestone->disbursement_voucher_id = $disbursement_voucher->id;;
-            $milestone->d_v_progress_id = $dv_progress->id;
-            $milestone->date_started = now();
+            $milestone->disbursement_voucher_id = $disbursement_voucher->id;
+            $milestone->assigned_user = $signatory->user_id;
+            $milestone->isActive = false;
             $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
-            $milestone->step_number = 2;
+            $milestone->step_number = 4;
+            $milestone ->save();
+
+         //Pres
+        $signatory = new Signatory;
+        $signatory->disbursement_voucher_id = $disbursement_voucher->id;
+        $signatory->user_id = 1;
+        $signatory->signed = 0;
+        $signatory->save();
+
+            $milestone = new Milestone;
+            $milestone->disbursement_voucher_id = $disbursement_voucher->id;
+            $milestone->assigned_user = $signatory->user_id;
+            $milestone->isActive = false;
+            $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
+            $milestone->step_number = 5;
+            $milestone ->save();
 
         $this->alert('success', 'Voucher is saved!', [
                 'background' => '#ccffcc',
@@ -269,7 +291,9 @@ class CreateDv extends Component
         ]);
           //show print button
           $this->dvSaved = true;
-
+        $user = User::where('id', 7)->first();   
+      
+         event(new ForwardDV($sig_user_first));
 
     }
 
@@ -393,6 +417,7 @@ class CreateDv extends Component
         foreach($names as $name){
             $this->fn=$name->name;
         }
+        $this->trackingNumber=Date('y')."-000".(User::where('id','=',$this->user_id)->firstOrFail())->department->campus->campus_shortCode;
     }
 
     public function sTOid($id,$import){
