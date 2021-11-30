@@ -59,7 +59,7 @@
                             <button
                                 class="flex items-center text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
                                 <img class="object-cover w-8 h-8 rounded-full"
-                                    src="{{ Auth::user()->profile_photo_url }}" alt="" />
+                                    src="{{ Auth::user()->avatar != null ? Auth::user()->avatar: Auth::user()->profile_photo_url }}" alt="" />
                                 <h1 class="inline-flex ml-2 text-sm uppercase truncate text-primary-bg">
                                     {{ Auth::user()->name}}</h1>
                             </button>
