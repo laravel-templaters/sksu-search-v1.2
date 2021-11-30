@@ -47,7 +47,7 @@
     </main>
 
     </div>
-    <div class="fixed bottom-0 min-w-full pt-3">@include('footer')</div>
+    @include('footer')
     @stack('modals')
     @stack('scripts')
     @livewireScripts

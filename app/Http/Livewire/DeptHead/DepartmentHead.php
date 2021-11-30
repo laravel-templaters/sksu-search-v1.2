@@ -54,29 +54,42 @@ class DepartmentHead extends Component
     {
         return [
             "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'populateTable',
-           
         ];
     }
+   
     public function recieveDocument($dvID,$mID,$uID){
        $la = new LastAction();
             $la->disbursement_voucher_id=$dvID;
             $la->reciever_id=$uID;
             $la->sender_id=auth()->user()->id;
             $la->action_type_id= 2;
-            $la->description ="by ".(User::find(auth()->user()->id)->department->department_name);
+            $la->description ="to ".(User::find(auth()->user()->id)->department->department_name);
             $la->read =false;
             $la->save();
         DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
          event(new ForwardDV($uID));
         $this->searchPending = "";
     }
-    public function forwardDocument($mID){
-        Milestone::where('id', $mID)
-                ->update([
-                    'date_completed' => now(),
-                    'is-active' =>false,
-                    'is_completed' =>true,
+    public function forwardDocument(){
+        // Milestone::where('id', $mID)
+        //         ->update([
+        //             'date_completed' => now(),
+        //             'is-active' =>false,
+        //             'is_completed' =>true,
                         
-                ]);
+        //         ]);
+         $this->alert('success', 'Forwarding!', [
+            'background' => '#ccffcc',
+            'padding' => '0.5rem',
+            'position' =>  'top-end', 
+            'timer' =>  2500,  
+            'toast' =>  true, 
+            'text' => "hello", 
+            'confirmButtonText' =>  'Ok', 
+            'cancelButtonText' =>  'Cancel', 
+            'showCancelButton' =>  false, 
+            'showConfirmButton' =>  false, 
+      ]);
+        event(new ForwardDV(29));
     }
 }

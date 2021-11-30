@@ -30,7 +30,7 @@
 
 </head>
 
-<body class="h-full font-sans" x-data="{active : 'dv', showFeed : false}">
+<body class="h-full font-sans" x-data="{active : 'dv', showFeed : false,}">
 
 
 

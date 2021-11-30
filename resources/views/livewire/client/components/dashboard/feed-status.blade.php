@@ -39,12 +39,12 @@
             </li>
             @break
             @case(2)
-            <li class="" id="recieved">
+            <li class="" id="received">
                 <div class="relative pb-8">
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
                         <div>
                             <span
-                                class="flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full ring-8 ring-gray-100">
+                                class="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full ring-8 ring-gray-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
@@ -56,8 +56,8 @@
                         <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
-                                    {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                    {{$feed->description}} byaaaa <strong
+                                        class="text-primary-bg">{{$feed->sender->name}} aaaa</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -86,7 +86,7 @@
                         <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
-                                    {{$feed->description}} by <strong
+                                    {{$feed->description}} bya <strong
                                         class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">

@@ -213,7 +213,8 @@
                                         </button>
                                         @elseif($last_actions->action_type->description == "RECEIVED")
                                         <button
-                                            class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg">
+                                            class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
+                                            wire:click="forwardDocument">
                                             Forward voucher
                                         </button>
                                         @endif
@@ -293,7 +294,8 @@
                                         </button>
                                         @elseif($last_actions->action_type->description == "RECEIVED")
                                         <button
-                                            class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg">
+                                            class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
+                                            wire:click="forwardDocument">
                                             Forward voucher
                                         </button>
                                         @endif
