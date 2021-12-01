@@ -18,6 +18,7 @@ class DisbursementVouchers extends Component
     
     
     public $disbursement_vouchers;
+    public $updated_dv;
     public $last_action;
     public $progress;
     public $feeds;
@@ -25,6 +26,26 @@ class DisbursementVouchers extends Component
     public $user;
     public $temp = 'asfasd';
     public $readyToLoad = false;
+
+    protected $listeners = ['popFromNotif' => 'dvclickedfromnotif'];
+
+    public function dvclickedfromnotif(){
+        dd('here');
+        $this->disbursement_vouchers = $this->readyToLoad ? DisbursementVoucher::where('user_id','=',auth()->user()->id)->orderBy('updated_at','desc')->orderBy('id','desc')->get() : [];
+        $this->updated_dv = DisbursementVoucher::first()->orderBy('updated_at','desc')->value('id');
+        $this->emit('dvClicked',$this->updated_dv);
+    }
+    public function getListeners()
+    {
+        return [
+            "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'callEmitter',
+        ];
+    }
+    public function callEmitter(){
+        $this->disbursement_vouchers = $this->readyToLoad ? DisbursementVoucher::where('user_id','=',auth()->user()->id)->orderBy('updated_at','desc')->orderBy('id','desc')->get() : [];
+        $this->updated_dv = DisbursementVoucher::first()->orderBy('updated_at','desc')->value('id');
+        $this->emit('dvUpdated');
+    }
  
     public function loadPosts()
     {

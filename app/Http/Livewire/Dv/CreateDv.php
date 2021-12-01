@@ -43,6 +43,7 @@ class CreateDv extends Component
     public $step4finished = false;
     public $showToModal = false;
     public $dvSaved = false;
+    public $showNotif = false;
 
     //variable forsearch
     public $searchuser;
@@ -218,7 +219,7 @@ class CreateDv extends Component
         //ICU
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-        $signatory->user_id = 45;
+        $signatory->user_id = 50;
         $signatory->signed = 0;
         $signatory->save();
 
@@ -277,20 +278,10 @@ class CreateDv extends Component
 
         
           //show print button
-          $this->dvSaved = true;
+         $this->dvSaved = true;
+         $this->showNotif = true;
          event(new ForwardDV($sig_user_first));
-         $this->alert('success', 'Voucher Saved!', [
-                'background' => '#ccffcc',
-                'padding' => '0.5rem',
-                'position' =>  'top-end', 
-                'timer' =>  2500,  
-                'toast' =>  true, 
-                'text' =>  '', 
-                'confirmButtonText' =>  'Ok', 
-                'cancelButtonText' =>  'Cancel', 
-                'showCancelButton' =>  false, 
-                'showConfirmButton' =>  false, 
-          ]);
+        
 
     }
 

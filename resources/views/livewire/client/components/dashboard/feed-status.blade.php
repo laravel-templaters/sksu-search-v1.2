@@ -4,12 +4,12 @@
             @php
             $ctr=1;
             @endphp
-            @foreach ($feeds as $feed)
+            @foreach ($feeds as $key=>$feed)
             @if ($ctr==count($feeds))
 
             @switch($feed->action_type_id)
             @case(1)
-            <li class="" id="forwarded">
+            <li class="" id="forwarded" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
                         <div>
@@ -28,7 +28,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->sender->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -39,7 +39,7 @@
             </li>
             @break
             @case(2)
-            <li class="" id="received">
+            <li class="" id="received" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
                         <div>
@@ -56,8 +56,8 @@
                         <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
-                                    {{$feed->description}} byaaaa <strong
-                                        class="text-primary-bg">{{$feed->sender->name}} aaaa</strong></p>
+                                    {{$feed->description}} by <strong
+                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -68,7 +68,7 @@
             </li>
             @break
             @case(3)
-            <li class="" id="returned">
+            <li class="" id="returned" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
                         <div>
@@ -86,7 +86,7 @@
                         <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4 text-xs">
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
-                                    {{$feed->description}} bya <strong
+                                    {{$feed->description}} to <strong
                                         class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
@@ -99,7 +99,7 @@
             @break
 
             @case(4)
-            <li class="" id="closed">
+            <li class="" id="closed" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
                         <div>
@@ -119,7 +119,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->sender->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -130,7 +130,7 @@
             </li>
             @break
             @case(5)
-            <li class="" id="rejected">
+            <li class="" id="rejected" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
                         <div>
@@ -149,7 +149,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->sender->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -166,7 +166,7 @@
             @else
             @switch($feed->action_type_id)
             @case(1)
-            <li class="" id="forwarded">
+            <li class="" id="forwarded" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
@@ -197,7 +197,7 @@
             </li>
             @break
             @case(2)
-            <li class="" id="recieved">
+            <li class="" id="recieved" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
@@ -216,7 +216,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->sender->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -227,7 +227,7 @@
             </li>
             @break
             @case(3)
-            <li class="" id="returned">
+            <li class="" id="returned" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
@@ -247,7 +247,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->sender->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -259,7 +259,7 @@
             @break
 
             @case(4)
-            <li class="" id="closed">
+            <li class="" id="closed" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
@@ -280,7 +280,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->sender->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}}</time>
@@ -291,7 +291,7 @@
             </li>
             @break
             @case(5)
-            <li class="" id="rejected">
+            <li class="" id="rejected" wire:key="{{$key}}">
                 <div class="relative pb-8">
                     <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
                     <div class="relative inline-flex space-x-3 bg-gray-100 rounded-full ">
@@ -311,7 +311,7 @@
                             <div>
                                 <p class="text-gray-500 uppercase">{{$feed->action_type->description}}
                                     {{$feed->description}} by <strong
-                                        class="text-primary-bg">{{$feed->reciever->name}}</strong></p>
+                                        class="text-primary-bg">{{$feed->sender->name}}</strong></p>
                             </div>
                             <div class="pr-3 text-right text-gray-500 whitespace-nowrap">
                                 <time datetime="2020-09-20">{{$feed->created_at->diffForHumans()}} </time>

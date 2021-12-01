@@ -41,12 +41,12 @@
         @endif
 
         <!-- Page Content -->
-        <main class="bg-transparent">asdfasdfasdfsadf
+        <main class="bg-transparent">
             {{ $slot }}
         </main>
 
     </div>
-    <div class="relative bottom-0">@include('footer')</div>
+    <!-- <div class="relative bottom-0">@include('footer')</div> -->
     @stack('modals')
     @stack('scripts')
     @livewireScripts
