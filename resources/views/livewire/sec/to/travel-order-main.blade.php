@@ -22,7 +22,7 @@
                         <select wire:model="users_id"class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                             <option selected>--SELECT USER--</option>
                             @foreach ($users as $user)   
-                            <option value="{{$user->id}}">{{$user->first_name}} {{ \Illuminate\Support\Str::limit($user->middle_name, 1, $end='.') }} {{$user->last_name}}</option>
+                            <option value="{{$user->id}}">{{$user->name}}</option>
                             @endforeach
                         </select>
                         @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror

@@ -352,11 +352,11 @@
                                                         class="block text-sm font-medium text-gray-700">Entry</label>
 
                                                     @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
-                                                    <input type="text" wire:model="entry.0"
+                                                    <input type="text" wire:model="entry.0" wire:key="-1"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                         readonly>
                                                     @else
-                                                    <input type="text" wire:model="entry.0"
+                                                    <input type="text" wire:model="entry.0" wire:key="-1"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @endif
 
@@ -368,7 +368,7 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Responsibility
                                                         Center</label>
-                                                    <input type="text" wire:model="responsibility_center.0"
+                                                    <input type="text" wire:model="responsibility_center.0" wire:key="-1"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('responsibility_center.0')
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -377,7 +377,7 @@
                                                 <div class="col-span-1 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">MFO/PAP</label>
-                                                    <input type="text" wire:model="mfo_pap.0"
+                                                    <input type="text" wire:model="mfo_pap.0" wire:key="-5"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('mfo_pap.0')
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -387,12 +387,12 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Amount</label>
                                                     @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
-                                                    <input type="number" min="0" wire:model="amount.0"
+                                                    <input type="number" min="0" wire:model="amount.0" wire:key="-2"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                         readonly>
 
                                                     @else
-                                                    <input type="number" min="0" wire:model="amount.0"
+                                                    <input type="number" min="0" wire:model="amount.0" wire:key="-3"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @endif
                                                     @error('amount.0')
@@ -408,7 +408,7 @@
                                                 <div class="col-span-3 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Entry</label>
-                                                    <input type="text" wire:model="entry.{{ $value }}"
+                                                    <input type="text" wire:model="entry.{{ $value }}" wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('entry.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -418,7 +418,7 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700 truncate">Responsibility
                                                         Center</label>
-                                                    <input type="text" wire:model="responsibility_center.{{ $value }}"
+                                                    <input type="text" wire:model="responsibility_center.{{ $value }}"  wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('responsibility_center.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -427,7 +427,7 @@
                                                 <div class="col-span-1 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">MFO/PAP</label>
-                                                    <input type="text" wire:model="mfo_pap.{{ $value }}"
+                                                    <input type="text" wire:model="mfo_pap.{{ $value }}"  wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('mfo_pap.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -436,7 +436,7 @@
                                                 <div class="col-span-1 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Amount</label>
-                                                    <input type="number" wire:model="amount.{{ $value }}"
+                                                    <input type="number" wire:model="amount.{{ $value }}"  wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('amount.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>

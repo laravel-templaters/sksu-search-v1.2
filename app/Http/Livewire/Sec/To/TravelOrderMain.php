@@ -41,7 +41,6 @@ class TravelOrderMain extends Component
     public $inputs = [];
     public $i = 1;
     //variables for mock
-    public $frick ="hey";
 
     //variables for date_from and date_to
     public $date_from;
@@ -133,35 +132,35 @@ class TravelOrderMain extends Component
             $travel_order->dte_id =  $reg['id'];
             $travel_order->save();  
             $this->emit('storeItenerary',$travel_order->id);
-            $travel_order->notify(new TravelOrderSaved($invoice));
-            $this->alert('success', 'Successfully Added!', [
-              'background' => '#ccffcc',
-              'padding' => '0.5rem',
-              'position' =>  'top-end', 
-              'timer' =>  2500,  
-              'toast' =>  true, 
-              'text' =>  '',  
-              'confirmButtonText' =>  'Ok', 
-              'cancelButtonText' =>  'Cancel', 
-              'showCancelButton' =>  false, 
-              'showConfirmButton' =>  false, 
-            ]);
+            // $travel_order->notify(new TravelOrderSaved($invoice));
+            // $this->alert('success', 'Successfully Added!', [
+            //   'background' => '#ccffcc',
+            //   'padding' => '0.5rem',
+            //   'position' =>  'top-end', 
+            //   'timer' =>  2500,  
+            //   'toast' =>  true, 
+            //   'text' =>  '',  
+            //   'confirmButtonText' =>  'Ok', 
+            //   'cancelButtonText' =>  'Cancel', 
+            //   'showCancelButton' =>  false, 
+            //   'showConfirmButton' =>  false, 
+            // ]);
             Sleep(2);
                 return redirect('dashboard');
         }else{
-            $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
-                'background' => '#ffffff',
-                'padding' => '2rem',
-                'backdrop' => true,
-                'position' =>  'center', 
-                'timer' =>  4500,  
-                'toast' =>  false, 
-                'text' =>  'Press "Calculate" button before saving...  Thank You!', 
-                'confirmButtonText' =>  'Ok', 
-                'cancelButtonText' =>  'Cancel', 
-                'showCancelButton' =>  false, 
-                'showConfirmButton' =>  false, 
-          ]);
+            // $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
+            //     'background' => '#ffffff',
+            //     'padding' => '2rem',
+            //     'backdrop' => true,
+            //     'position' =>  'center', 
+            //     'timer' =>  4500,  
+            //     'toast' =>  false, 
+            //     'text' =>  'Press "Calculate" button before saving...  Thank You!', 
+            //     'confirmButtonText' =>  'Ok', 
+            //     'cancelButtonText' =>  'Cancel', 
+            //     'showCancelButton' =>  false, 
+            //     'showConfirmButton' =>  false, 
+        //  ]);
         }
         
 
