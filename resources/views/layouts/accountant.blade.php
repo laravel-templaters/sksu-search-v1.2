@@ -47,7 +47,7 @@
     </main>
 
     </div>
-    @include('footer')
+    <!-- @include('footer') -->
     @stack('modals')
     @stack('scripts')
 

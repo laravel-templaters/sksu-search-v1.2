@@ -129,7 +129,7 @@
 
 
     <div class="relative bottom-0 left-0 flex flex-col flex-1 md:pl-4">
-        @include('footer')
+        <!-- @include('footer') -->
     </div>
     @stack('modals')
     @livewireScripts

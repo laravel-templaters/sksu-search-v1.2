@@ -80,7 +80,7 @@
                     </tbody>
                 </table>
             </div>
-            <button class="flex m-2" wire:click="testPusher">Click Me</button>
+            <!-- <button class="flex m-2" wire:click="testPusher">Click Me</button> -->
         </div>
     </div>
 

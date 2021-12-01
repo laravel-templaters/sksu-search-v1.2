@@ -17,29 +17,9 @@ class ClientDashboardMain extends Component
     public $progress;
     public $feeds=[];
     public $emitCalled =false;
+    public $showDvUpdated = false;
     
-    public function getListeners()
-    {
-        return [
-            "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'callEmitter',
-        ];
-    }
-    public function callEmitter(){
-        $this->emitCalled = true;
-        $this->emit('dvClicked',DisbursementVoucher::first()->orderBy('updated_at','desc')->value('id'));
-        $this->alert('success', 'Successfully Added!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' => "hello", 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
-    }
+   
     public function render()
     {
          $this->disbursement_voucher = DisbursementVoucher::where('user_id','=',auth()->user()->id)->get();
@@ -62,15 +42,17 @@ class ClientDashboardMain extends Component
     public $travelordermodalinfo;
     public $travelordermodalinfo_id=null;
 
+    protected $listeners = ['dvUpdated' => 'dvUpdated'];
+    public function dvUpdated(){
+        $this->showDvUpdated = true;
+    }
+
     public function setmodalID($id){
         $this->travelordermodalinfo_id=$id;
         $this->showModal = true;
     }
-
-
-    
-    
-    
-
-    
+    public function notifEmitter(){
+        // $this->emitUp('popFromNotif');
+        // $this->emit('dvUpdated');
+    }
 }

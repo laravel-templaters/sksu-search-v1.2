@@ -510,7 +510,15 @@ class adminseeder extends Seeder
                 
 
 
-
+                  DB::table('users')->insert([
+                   'name'=> 'Heiven C Cordero, PhD',
+                   'birth_day'=>  Carbon::create('2000', '04', '06'),   
+                   'contact_number'=>'09123456789',        
+                   'email'=>'heivencordero@sksu.edu.ph',
+                   'password'=> Hash::make('cordero123'),
+                   'role_id'=>2,
+                   'department_id'=>4,
+                   'position_id'=>11]); 
 
                    
                 //test vars

@@ -13,6 +13,8 @@ use App\Models\Milestone;
 use Carbon\Carbon;   
 use App\Models\User;
 use App\Events\ForwardDV;
+use App\Models\Signatory;
+
 //use Illuminate\Support\Facades\Auth;
 class DepartmentHead extends Component
 {
@@ -36,11 +38,7 @@ class DepartmentHead extends Component
     {
         $this->milestones = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
        
-        if ($this->searchPersonal =="") {
-            $this->pending_dv = $this->readyToLoad ? DisbursementVoucher::where('user_id','=',auth()->user()->id)->get() : [];
-        } else {
-            $this->pending_dv = $this->readyToLoad ? DisbursementVoucher::where('user_id','=',auth()->user()->id)->where('dv_tracking_number','like','%'.$this->searchPending.'%')->get() : [];
-        }
+         $this->pending_dv = $this->readyToLoad ? DisbursementVoucher::where('user_id','=',auth()->user()->id)->where('dv_tracking_number','like','%'.$this->searchPending.'%')->get() : [];
         
         return view('livewire.dept-head.department-head')->layout('layouts.accountant');
     }
@@ -63,14 +61,14 @@ class DepartmentHead extends Component
             $la->reciever_id=$uID;
             $la->sender_id=auth()->user()->id;
             $la->action_type_id= 2;
-            $la->description ="to ".(User::find(auth()->user()->id)->department->department_name);
+            $la->description ="by ".(User::find(auth()->user()->id)->department->department_name);
             $la->read =false;
             $la->save();
         DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
          event(new ForwardDV($uID));
         $this->searchPending = "";
     }
-    public function forwardDocument(){
+    public function forwardDocument($dvID,$mID,$uID){
         // Milestone::where('id', $mID)
         //         ->update([
         //             'date_completed' => now(),
@@ -78,18 +76,27 @@ class DepartmentHead extends Component
         //             'is_completed' =>true,
                         
         //         ]);
-         $this->alert('success', 'Forwarding!', [
-            'background' => '#ccffcc',
-            'padding' => '0.5rem',
-            'position' =>  'top-end', 
-            'timer' =>  2500,  
-            'toast' =>  true, 
-            'text' => "hello", 
-            'confirmButtonText' =>  'Ok', 
-            'cancelButtonText' =>  'Cancel', 
-            'showCancelButton' =>  false, 
-            'showConfirmButton' =>  false, 
-      ]);
-        event(new ForwardDV(29));
+        $ms = Milestone::find($mID);
+        $ms->date_completed = Carbon::now();
+        $ms->isActive =false;
+        $ms->is_completed=true;
+        $ms->save();
+        $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','=',($ms->step_number)+1)->first();
+            $la = new LastAction();
+            $la->disbursement_voucher_id=$dvID;
+            $la->reciever_id=$next_step_id->assigned_user;
+            $la->sender_id=auth()->user()->id;
+            $la->action_type_id= 1;
+            $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
+            $la->read =false;
+            $la->save();
+       
+        $ms1 = Milestone::find($next_step_id->id);
+        $ms1->date_started = Carbon::now();
+        $ms1->isActive =true;
+        $ms1->save();
+         DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
+         Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',auth()->user()->id)->update(['signed'=>true,'date_signed'=>Carbon::now()]);
+        event(new ForwardDV($next_step_id->assigned_user));
     }
 }

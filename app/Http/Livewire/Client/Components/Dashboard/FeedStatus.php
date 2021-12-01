@@ -15,14 +15,15 @@ class FeedStatus extends Component
 {
     
     public $feeds=[];
-    //protected $listeners = ['dvClicked' => 'populateFeed'];
+    protected $listeners = ['dvClicked' => 'populateFeed'];
 
     public function render()
     {
+        
         return view('livewire.client.components.dashboard.feed-status');
     }
     public function populateFeed($dv_id){
+         $this->feeds =[];
         $this->feeds = LastAction::where('disbursement_voucher_id','=',$dv_id)->orderBy('id','desc')->get();
-       
     }
 }
