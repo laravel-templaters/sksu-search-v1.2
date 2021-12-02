@@ -6,23 +6,23 @@
         <!-- Current: " bg-secondary-text text-gray-900", Default: "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
         -->
         <div class="gap-x-5">
-            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+            <button class="flex items-center px-3 py-2 my-1 text-sm font-medium rounded-md w-54 cursor-hand group"
                 aria-current="page" x-on:click="active = 'dv'"
                 x-bind:class="active=='dv' ? 'text-primary-bg bg-secondary-text' : 'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
-                <span class="truncate">
+                <span class="mr-2 truncate">
                     Disbursement Vouchers
                 </span>
 
                 <!-- Current: "bg-gray-100", Default: "bg-secondary-text text-gray-600 group-hover:bg-gray-200" -->
                 @if($disbursement_voucher->count()>0)
-                <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                <span class="bg-gray-100 inline-block py-0.5 px-3 text-xs rounded-full">
                     {{$disbursement_voucher->count()}}
                 </span>
                 @endif
 
             </button>
 
-            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+            <button class="flex items-center px-3 py-2 my-1 text-sm font-medium rounded-md w-52 cursor-hand group"
                 x-on:click="active = 'to'"
                 x-bind:class="active=='to' ? 'text-primary-bg bg-secondary-text' :'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
                 <span class="truncate">
@@ -30,7 +30,7 @@
                 </span>
 
                 @if($travelorders->count()>0)
-                <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs float-right rounded-full">
                     {{$travelorders->count()}}
                 </span>
                 @endif
@@ -39,7 +39,7 @@
 
 
 
-            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+            <button class="flex items-center px-3 py-2 my-1 text-sm font-medium rounded-md w-52 cursor-hand group"
                 x-on:click="active = 'reim'"
                 x-bind:class="active=='reim' ? 'text-primary-bg bg-secondary-text' : 'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
                 <span class="truncate">
@@ -49,7 +49,7 @@
 
             </button>
 
-            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+            <button class="flex items-center px-3 py-2 my-1 text-sm font-medium rounded-md w-52 cursor-hand group"
                 x-on:click="active = 'comms'"
                 x-bind:class="active=='comms' ? 'text-primary-bg bg-secondary-text' :'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
                 <span class="truncate">

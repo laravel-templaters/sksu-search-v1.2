@@ -12,7 +12,7 @@
                 </p>
             </div>
 
-
+{{-- 
             <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5">
                 <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
                     <label for="username" class="block pt-2 mt-px font-medium text-md text-primary-bg">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
 
 
                 <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5">
@@ -141,7 +141,7 @@
 
                         <div class="col-span-1 col-start-3 row-span-1 row-start-1 mt-1" x-data="{hovered : false}">
                             <div class="flex>
-                                <h3 class=" inline ml-1 text-sm text-gray-600 ">Registration Amount
+                                <h3 class="inline ml-1 text-sm text-gray-600 ">Registration Amount
                                 </h3>
                                 <svg xmlns=" http://www.w3.org/2000/svg" class="inline w-4 h-4 text-blue-600"
                                 @mouseover="hovered = true" @mouseleave="hovered=false" viewBox="0 0 20 20"

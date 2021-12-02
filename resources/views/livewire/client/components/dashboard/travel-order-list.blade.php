@@ -21,7 +21,7 @@
                                                 <div class="flex-shrink-0">
                                                     {{-- need pic dri gab --}}
                                                     <img class="w-12 h-12 rounded-full"
-                                                        src="{{ Auth::user()->profile_photo_url }}"
+                                                        src="{{ Auth::user()->avatar != null ? Auth::user()->avatar : Auth::user()->profile_photo_url }}"
                                                         alt="{{ Auth::user()->name }}">
                                                 </div>
                                                 <div class="flex-1 min-w-0 px-4 md:grid md:grid-cols-2 md:gap-4">
@@ -103,14 +103,19 @@
                                         x-transition:leave="transition ease-in duration-75"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0" x-cloak>
+                                        
                                         <div
                                             class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                            <div class="relative grid grid-cols-1 gap-6 px-5 py-6 bg-gray-100 sm:p-8"
-                                                x-data="{ showMe : false }">
-                                                <a href="#" x-on:click="showMe = !showMe"
+                                             <div class="relative grid grid-cols-1 gap-6 px-5 py-6 bg-gray-100 sm:p-8"
+                                                x-data="{ showMe{{$itenerary->id}} : false }">
+                                                @if(isset($iteneraries))
+                                                @foreach ($iteneraries as $itenerary)
+
+                                                <a href="#" x-on:click="showMe{{$itenerary->id}} = ! showMe{{$itenerary->id}}"
                                                     class="flex items-start p-3 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50">
+
                                                     <div
-                                                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-md sm:h-12 sm:w-12">
+                                                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-md text-primary-text bg-primary-bg-alt hover:bg-primary-bg sm:h-12 sm:w-12">
                                                         <!-- Heroicon name: outline/chart-bar -->
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -119,23 +124,24 @@
                                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                         </svg>
                                                     </div>
+
+
                                                     <div class="ml-4 text-left">
                                                         <p class="text-base font-medium text-gray-900">
-                                                            2021-02-02
+                                                            {{Carbon\Carbon::createFromFormat('Y-m-d', $itenerary->date)->format('F d, Y')}}
                                                         </p>
                                                         <p class="mt-1 text-sm text-gray-500">
                                                             Click To View Itenerary
                                                         </p>
                                                     </div>
-
-
                                                 </a>
-                                                <div x-cloak x-show="showMe"
+                                                 
+                                                <div x-cloak x-show="showMe{{$itenerary->id}}"
                                                     class="relative inset-0 bottom-0 right-0 z-30 bg-gray-50">
 
                                                     <div class="inline-flex">
                                                         <span>
-                                                            Covered By Registration Fee: Breakfast | Lunch | Lodging
+                                                            {{$travelOrder = 0 ? 'Covered By Registration Fee: Breakfast | Lunch | Lodging' : ''}}
                                                         </span>
                                                     </div>
                                                     <div class="flex flex-col">
@@ -183,10 +189,14 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <!-- Odd row -->
+                                                                            {{-- @if (isset($iteneraries))
+                                                                            @foreach ($iteneraries as $itenerary) --}}
+                                                                                
+                                                                            
                                                                             <tr class="bg-gray-100">
                                                                                 <td
                                                                                     class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                                                    Jane Cooper
+                                                                                    
                                                                                 </td>
                                                                                 <td
                                                                                     class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
@@ -206,31 +216,9 @@
                                                                                         class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                                                                 </td>
                                                                             </tr>
-
+                                                                            {{-- @endforeach
+                                                                             @endif --}}
                                                                             <!-- Even row -->
-                                                                            <tr class="bg-gray-50">
-                                                                                <td
-                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                                                    Cody Fisher
-                                                                                </td>
-                                                                                <td
-                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                                                    Product Directives Officer
-                                                                                </td>
-                                                                                <td
-                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                                                    cody.fisher@example.com
-                                                                                </td>
-                                                                                <td
-                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                                                    Owner
-                                                                                </td>
-                                                                                <td
-                                                                                    class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                                                                    <a href="#"
-                                                                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                                                </td>
-                                                                            </tr>
 
                                                                             <!-- More people... -->
                                                                         </tbody>
@@ -240,7 +228,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                 @endforeach
+                                                 @endif       
 
                                             </div>
 
@@ -287,7 +276,7 @@
                                                             Applicant
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                            {{$travelordermodaldet->user->first_name.' '.$travelordermodaldet->user->last_name}}
+                                                            {{$travelordermodaldet->user->name}}  
                                                         </dd>
                                                     </div>
                                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -313,7 +302,7 @@
                                                             Date Range
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                            {{$travelOrder->date_range}}
+                                                            {{$travelordermodaldet->date_range}}
                                                         </dd>
 
                                                     </div>
