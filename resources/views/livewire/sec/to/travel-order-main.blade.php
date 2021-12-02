@@ -4,12 +4,33 @@
         onkeydown="return event.key != 'Enter';">
         <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div>
-                <div>
-                    <h3 class="text-3xl font-medium leading-6 text-gray-900">
-                        Create Travel Order
-                    </h3>
-                    <p class="max-w-2xl mt-1 text-sm text-gray-500">
-                    </p>
+
+                <h3 class="text-3xl font-medium leading-6 text-gray-900">
+                    Create Travel Order
+                </h3>
+                <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                </p>
+            </div>
+
+
+            <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5">
+                <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
+                    <label for="username" class="block pt-2 mt-px font-medium text-md text-primary-bg">
+                        Name
+                    </label>
+                    <div class="col-span-1 mt-1">
+                        <div class="grid grid-rows-1">
+                            <select wire:model="users_id"
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                <option selected>--SELECT USER--</option>
+                                @foreach ($users as $user)
+                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
                 </div>
 
 
@@ -120,7 +141,7 @@
 
                         <div class="col-span-1 col-start-3 row-span-1 row-start-1 mt-1" x-data="{hovered : false}">
                             <div class="flex>
-                                <h3 class="inline ml-1 text-sm text-gray-600 ">Registration Amount
+                                <h3 class=" inline ml-1 text-sm text-gray-600 ">Registration Amount
                                 </h3>
                                 <svg xmlns=" http://www.w3.org/2000/svg" class="inline w-4 h-4 text-blue-600"
                                 @mouseover="hovered = true" @mouseleave="hovered=false" viewBox="0 0 20 20"

@@ -41,7 +41,6 @@ class TravelOrderMain extends Component
     public $inputs = [];
     public $i = 1;
     //variables for mock
-    public $frick ="hey";
 
     //variables for date_from and date_to
     public $date_from;
@@ -149,19 +148,19 @@ class TravelOrderMain extends Component
             Sleep(2);
                 return redirect('dashboard');
         }else{
-            $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
-                'background' => '#ffffff',
-                'padding' => '2rem',
-                'backdrop' => true,
-                'position' =>  'center', 
-                'timer' =>  4500,  
-                'toast' =>  false, 
-                'text' =>  'Press "Calculate" button before saving...  Thank You!', 
-                'confirmButtonText' =>  'Ok', 
-                'cancelButtonText' =>  'Cancel', 
-                'showCancelButton' =>  false, 
-                'showConfirmButton' =>  false, 
-          ]);
+            // $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
+            //     'background' => '#ffffff',
+            //     'padding' => '2rem',
+            //     'backdrop' => true,
+            //     'position' =>  'center', 
+            //     'timer' =>  4500,  
+            //     'toast' =>  false, 
+            //     'text' =>  'Press "Calculate" button before saving...  Thank You!', 
+            //     'confirmButtonText' =>  'Ok', 
+            //     'cancelButtonText' =>  'Cancel', 
+            //     'showCancelButton' =>  false, 
+            //     'showConfirmButton' =>  false, 
+        //  ]);
         }
         
 
