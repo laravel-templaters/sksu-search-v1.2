@@ -151,7 +151,7 @@
                                     @endphp
                                     <button type="button"
                                         class="text-sm font-medium text-indigo-600 bg-white rounded-md hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                        wire:click="$emit('dvClicked',{{$dvID}})" x-on:click="showFeed=true;
+                                        wire:click="$emit('dvClicked',{{$dvID}})" x-on:click="showFee   =true;
                                         showDvUpdated = false;">
                                         View
 

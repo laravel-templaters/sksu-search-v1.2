@@ -133,19 +133,19 @@ class TravelOrderMain extends Component
             $travel_order->dte_id =  $reg['id'];
             $travel_order->save();  
             $this->emit('storeItenerary',$travel_order->id);
-            $travel_order->notify(new TravelOrderSaved($invoice));
-            $this->alert('success', 'Successfully Added!', [
-              'background' => '#ccffcc',
-              'padding' => '0.5rem',
-              'position' =>  'top-end', 
-              'timer' =>  2500,  
-              'toast' =>  true, 
-              'text' =>  '',  
-              'confirmButtonText' =>  'Ok', 
-              'cancelButtonText' =>  'Cancel', 
-              'showCancelButton' =>  false, 
-              'showConfirmButton' =>  false, 
-            ]);
+            // $travel_order->notify(new TravelOrderSaved($invoice));
+            // $this->alert('success', 'Successfully Added!', [
+            //   'background' => '#ccffcc',
+            //   'padding' => '0.5rem',
+            //   'position' =>  'top-end', 
+            //   'timer' =>  2500,  
+            //   'toast' =>  true, 
+            //   'text' =>  '',  
+            //   'confirmButtonText' =>  'Ok', 
+            //   'cancelButtonText' =>  'Cancel', 
+            //   'showCancelButton' =>  false, 
+            //   'showConfirmButton' =>  false, 
+            // ]);
             Sleep(2);
                 return redirect('dashboard');
         }else{
