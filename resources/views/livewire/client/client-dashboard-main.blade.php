@@ -22,6 +22,20 @@
 
             </button>
 
+            <button class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-hand group"
+                x-on:click="active = 'to'"
+                x-bind:class="active=='to' ? 'text-primary-bg bg-secondary-text' :'text-primary-bg-alt hover:bg-secondary-bg-alt hover:text-primary-bg'">
+                <span class="truncate">
+                    Travel Orders
+                </span>
+
+                  @if($travelorders->count()>0)
+                <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+                    {{$travelorders->count()}}
+                </span>
+                @endif
+            </button>
+
 
 
 

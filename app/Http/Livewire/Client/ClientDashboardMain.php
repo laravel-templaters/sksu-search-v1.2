@@ -18,6 +18,11 @@ class ClientDashboardMain extends Component
     public $feeds=[];
     public $emitCalled =false;
     public $showDvUpdated = false;
+       //needed pa ba ni? Yes need na sya hehe
+       public $showModal= false;
+       public $travelorders;
+       public $travelordermodalinfo;
+       public $travelordermodalinfo_id=null;
     
    
     public function render()
@@ -36,11 +41,7 @@ class ClientDashboardMain extends Component
         return view('livewire.client.client-dashboard-main')->layout('layouts.sec')->with('travelorders',$this->travelorders)->with('travelordermodalinfo',$this->travelordermodalinfo);
     }
     
-    //needed pa ba ni?
-    public $showModal= false;
-    public $travelorders;
-    public $travelordermodalinfo;
-    public $travelordermodalinfo_id=null;
+ 
 
     protected $listeners = ['dvUpdated' => 'dvUpdated'];
     public function dvUpdated(){
