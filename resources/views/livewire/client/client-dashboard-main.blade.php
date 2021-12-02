@@ -29,7 +29,7 @@
                     Travel Orders
                 </span>
 
-                  @if($travelorders->count()>0)
+                @if($travelorders->count()>0)
                 <span class="bg-gray-100 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
                     {{$travelorders->count()}}
                 </span>
@@ -196,5 +196,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div x-cloak x-show="active == 'to'">
+        @livewire('client.components.dashboard.travel-order-list')
     </div>
 </div>
