@@ -36,14 +36,14 @@ class TravelOrderList extends Component
 
 
         if (isset($this->travelordermodalinfo_id)||$this->travelordermodalinfo_id!=null) {
-            $this->travelordermodalinfo=TravelOrder::where('id',$this->travelordermodalinfo_id)->with('user')->get();
+            $this->travelordermodalinfo=TravelOrder::where('id',$this->travelordermodalinfo_id)->where('user_id','=',auth()->user()->id)->get();
             //$this->travelordermodalinfo=TravelOrder::with('user')->get();
             $this->iteneraries = Itenerary::where('travel_order_id', $this->travelordermodalinfo_id)->get();
         }else{
-            $this->travelordermodalinfo=TravelOrder::with('user')->get();
+            $this->travelordermodalinfo=TravelOrder::where('user_id','=',auth()->user()->id)->get();
            // $this->iteneraries = Itenerary::where('travel_order_id', $this->travelordermodalinfo_id)->get();
         }
-        $this->travelorders = TravelOrder::with('user')->get();
+        $this->travelorders = TravelOrder::where('user_id','=',auth()->user()->id)->get();
         return view('livewire.client.components.dashboard.travel-order-list')->with('travelorders',$this->travelorders)->with('travelordermodalinfo',$this->travelordermodalinfo)
         ->with('iteneraries',$this->iteneraries);
     }

@@ -103,15 +103,16 @@
                                         x-transition:leave="transition ease-in duration-75"
                                         x-transition:leave-start="transform opacity-100 scale-100"
                                         x-transition:leave-end="transform opacity-0 scale-0" x-cloak>
-                                        
-                                        <div
-                                            class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                             <div class="relative grid grid-cols-1 gap-6 px-5 py-6 bg-gray-100 sm:p-8"
-                                                x-data="{ showMe{{$itenerary->id}} : false }">
-                                                @if(isset($iteneraries))
-                                                @foreach ($iteneraries as $itenerary)
 
-                                                <a href="#" x-on:click="showMe{{$itenerary->id}} = ! showMe{{$itenerary->id}}"
+                                        <div
+                                            class="flex-shrink max-w-full overflow-hidden rounded-lg shadow-lg md:mx-5 lg:mx-10 xl:mx-12 sm:mx-auto ring-1 ring-black ring-opacity-5">
+
+                                            @if(isset($iteneraries))
+                                            @foreach ($iteneraries as $itenerary)
+                                            <div class="relative grid grid-cols-1 gap-6 px-5 py-6 bg-gray-100 sm:p-8"
+                                                x-data="{ showMe{{$itenerary->id}} : false }">
+                                                <a href="#"
+                                                    x-on:click="showMe{{$itenerary->id}} = ! showMe{{$itenerary->id}}"
                                                     class="flex items-start p-3 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-50">
 
                                                     <div
@@ -135,7 +136,7 @@
                                                         </p>
                                                     </div>
                                                 </a>
-                                                 
+
                                                 <div x-cloak x-show="showMe{{$itenerary->id}}"
                                                     class="relative inset-0 bottom-0 right-0 z-30 bg-gray-50">
 
@@ -152,7 +153,7 @@
                                                                     class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
                                                                     <table class="min-w-full divide-y divide-gray-200">
                                                                         <thead class="bg-gray-50">
-                                                                            <tr class="uppercase">
+                                                                            <tr class="text-center uppercase">
                                                                                 <th scope="col"
                                                                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                                                                     Place To Visit
@@ -189,35 +190,54 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <!-- Odd row -->
-                                                                            {{-- @if (isset($iteneraries))
-                                                                            @foreach ($iteneraries as $itenerary) --}}
-                                                                                
-                                                                            
-                                                                            <tr class="bg-gray-100">
+                                                                            @if (isset($itenerary))
+                                                                            @php
+                                                                            $i_entries =
+                                                                            App\Models\IteneraryEntry::where('itenerary_id','=',$itenerary->id)->get();
+
+                                                                            @endphp
+                                                                            @if ($i_entries)
+                                                                            @foreach ($i_entries as $i_entry)
+
+
+                                                                            <tr class="text-justify bg-gray-100">
                                                                                 <td
                                                                                     class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                                                    
+                                                                                    {{$i_entry->place_to_be_visited}}
                                                                                 </td>
                                                                                 <td
-                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                                                    Regional Paradigm Technician
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    <time>{{$i_entry->departure_time}}</time>
                                                                                 </td>
                                                                                 <td
-                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                                                    jane.cooper@example.com
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    <time>{{$i_entry->arrival_time}}</time>
                                                                                 </td>
                                                                                 <td
-                                                                                    class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                                                    Admin
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    {{$i_entry->mode_of_transport}}
                                                                                 </td>
                                                                                 <td
-                                                                                    class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                                                                    <a href="#"
-                                                                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    {{$i_entry->transport_expenses}}
                                                                                 </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    {{$i_entry->others}}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                                                    {{$i_entry->total}}
+                                                                                </td>
+                                                                                <td
+                                                                                    class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+
+                                                                                </td>
+
                                                                             </tr>
-                                                                            {{-- @endforeach
-                                                                             @endif --}}
+                                                                            @endforeach
+                                                                            @endif
+                                                                            @endif
                                                                             <!-- Even row -->
 
                                                                             <!-- More people... -->
@@ -228,10 +248,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                 @endforeach
-                                                 @endif       
-
                                             </div>
+                                            @endforeach
+                                            @endif
+
+
 
                                         </div>
                                     </div>
@@ -276,7 +297,7 @@
                                                             Applicant
                                                         </dt>
                                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                                            {{$travelordermodaldet->user->name}}  
+                                                            {{$travelordermodaldet->user->name}}
                                                         </dd>
                                                     </div>
                                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

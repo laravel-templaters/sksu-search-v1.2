@@ -358,11 +358,13 @@
                                                         class="block text-sm font-medium text-gray-700">Entry</label>
 
                                                     @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
-                                                    <input type="text" wire:model="entry.0" wire:key="-1"
+                                                    <input type="text" wire:model.defer="entry.0"
+                                                        wire:key="{{rand(0,15555)}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                         readonly>
                                                     @else
-                                                    <input type="text" wire:model="entry.0" wire:key="-1"
+                                                    <input type="text" wire:model.defer="entry.0"
+                                                        wire:key="{{rand(0,15555)}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @endif
 
@@ -374,7 +376,8 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Responsibility
                                                         Center</label>
-                                                    <input type="text" wire:model="responsibility_center.0" wire:key="-1"
+                                                    <input type="text" wire:model.defer="responsibility_center.0"
+                                                        wire:key="{{rand(0,15555)}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('responsibility_center.0')
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -383,7 +386,7 @@
                                                 <div class="col-span-1 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">MFO/PAP</label>
-                                                    <input type="text" wire:model="mfo_pap.0" wire:key="-5"
+                                                    <input type="text" wire:model.defer="mfo_pap.0" wire:key="-5"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('mfo_pap.0')
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -393,12 +396,14 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Amount</label>
                                                     @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
-                                                    <input type="number" min="0" wire:model="amount.0" wire:key="-2"
+                                                    <input type="number" min="0" wire:model.defer="amount.0"
+                                                        wire:key="-2"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                         readonly>
 
                                                     @else
-                                                    <input type="number" min="0" wire:model="amount.0" wire:key="-3"
+                                                    <input type="number" min="0" wire:model.defer="amount.0"
+                                                        wire:key="-3"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @endif
                                                     @error('amount.0')
@@ -414,7 +419,8 @@
                                                 <div class="col-span-3 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Entry</label>
-                                                    <input type="text" wire:model="entry.{{ $value }}" wire:key="{{$key}}"
+                                                    <input type="text" wire:model.defer="entry.{{ $value }}"
+                                                        wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('entry.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -424,7 +430,9 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700 truncate">Responsibility
                                                         Center</label>
-                                                    <input type="text" wire:model="responsibility_center.{{ $value }}"  wire:key="{{$key}}"
+                                                    <input type="text"
+                                                        wire:model.defer="responsibility_center.{{ $value }}"
+                                                        wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('responsibility_center.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -433,7 +441,8 @@
                                                 <div class="col-span-1 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">MFO/PAP</label>
-                                                    <input type="text" wire:model="mfo_pap.{{ $value }}"  wire:key="{{$key}}"
+                                                    <input type="text" wire:model.defer="mfo_pap.{{ $value }}"
+                                                        wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('mfo_pap.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -442,7 +451,8 @@
                                                 <div class="col-span-1 m-2">
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Amount</label>
-                                                    <input type="number" wire:model="amount.{{ $value }}"  wire:key="{{$key}}"
+                                                    <input type="number" wire:model.defer="amount.{{ $value }}"
+                                                        wire:key="{{$key}}"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                     @error('amount.'.$value)
                                                     <span class="text-sm text-red-500">{{$message}}</span>
@@ -531,13 +541,13 @@
                         @if ($related_docs->count() > 0)
                         <div class="mx-auto overflow-hidden bg-white border border-gray-300 rounded-md">
 
-                            <ul role="list" class="">
+                            <ol role="list" class="space-y-3">
 
                                 @foreach ($related_docs as $doc)
 
-                                <li class="flex justify-start px-6 py-4">
+                                <li class="justify-start block px-6">
 
-                                    <div class="flex">
+                                    <div class="block">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 my-auto"
                                             viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -545,26 +555,32 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </div>
-                                    <div class="flex">
+                                    <div class="block">
                                         @php
                                         $related_doc_arr = explode('<',$doc->related_document_list_entry);
-                                            $last
                                             @endphp
                                             <h3 class="my-auto uppercase">{{$related_doc_arr[0]}}</h3>
                                             @if (count($related_doc_arr) > 1)
                                             @php
                                             $related_doc_divided= explode('>',$related_doc_arr[1]); @endphp
-                                            <span class="text-xs font-light tracking-wide text-red-500">
-                                                **{{$related_doc_arr[1]}}
-                                            </span>
+                                            <ul role="list" class="space-y-4">
+                                                @foreach($related_doc_divided as $doc)
+                                                <li class="block max-w-full">
+                                                    <span class="font-light tracking-wide text-gray-600 text-md">
+                                                        {{$doc}}
+                                                    </span>
+                                                </li>
+                                                @endforeach
+                                            </ul>
                                             @endif
                                     </div>
                                 </li>
                                 @endforeach
-                            </ul>
+                            </ol>
                             <div class="m-2"><span class="text-indigo-600 text-md">Note: Click proceed if documents
                                     required for your disbursement voucher is <strong
-                                        class="font-bold uppercase text-md text-primary-text-alt">compiled and ready for
+                                        class="font-bold uppercase text-md text-primary-text-alt">compiled and ready
+                                        for
                                         submission</strong></span></div>
 
                         </div>
