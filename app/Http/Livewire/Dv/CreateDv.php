@@ -101,14 +101,14 @@ class CreateDv extends Component
     public function render()
     {
         if(isset($this->searchto)){
-            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
+            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
             // $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%' or lower(place_to_go) like '%".strtolower($this->searchto)."%'")->orderBy('created_at');
         }
         if (isset($this->searchuser) && $this->searchuser != "") {
-            $this->searchedusers= User::where(DB::raw('lower(name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+            $this->searchedusers= User::where(DB::raw('lower(name)'),"LIKE","".strtolower($this->searchuser)."%")->get();
         }
 
-        $this ->searchedsignatories = User::whereRaw("lower(name) like '%".strtolower($this->searchsignatory) ."%' and role_id = 2")
+        $this ->searchedsignatories = User::whereRaw("lower(name) like '".strtolower($this->searchsignatory) ."%' and role_id = 2")
         ->get();  
         
         $this->mode_of_payment = DB::table('mode_of_payments')->get();
