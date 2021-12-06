@@ -117,7 +117,8 @@ class TravelOrderMain extends Component
             'province_codes.required' => 'The province field is required.',
             'city_codes.required' => 'The city field is required.',   
             ]);
-        if (isset($this->finalTotal)) {
+        if (isset($this->finalTotal) && $this->finalTotal != 0) {
+
             $travel_order = new TravelOrder;
             $travel_order->purpose = $this->purpose;
             $travel_order->philippine_regions_id =  $reg['id'];
@@ -132,7 +133,13 @@ class TravelOrderMain extends Component
             $travel_order->dte_id =  $reg['id'];
             $travel_order->save();  
             $this->emit('storeItenerary',$travel_order->id);
-            // $travel_order->notify(new TravelOrderSaved($invoice));
+            
+            Sleep(2);
+                return redirect('dashboard');
+
+
+
+                // $travel_order->notify(new TravelOrderSaved($invoice));
             // $this->alert('success', 'Successfully Added!', [
             //   'background' => '#ccffcc',
             //   'padding' => '0.5rem',
@@ -145,9 +152,8 @@ class TravelOrderMain extends Component
             //   'showCancelButton' =>  false, 
             //   'showConfirmButton' =>  false, 
             // ]);
-            Sleep(2);
-                return redirect('dashboard');
         }else{
+ 
             // $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
             //     'background' => '#ffffff',
             //     'padding' => '2rem',
