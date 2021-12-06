@@ -50,6 +50,7 @@ class GoogleController extends Controller
                 }
                 
             }else{
+                
                 $newUser = new User;
                 $newUser->name = $user->name;
                 $newUser->email =$user->email;

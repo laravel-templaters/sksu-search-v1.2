@@ -7,9 +7,9 @@ $this->per_diem = $per_diem;
     
         <div class="my-3 overflow-x-auto rounded-lg">
             <div class="inline-block py-2 align-middle min-w-ful">
-                <div class="overflow-hidden border-b border-gray-200 shadow">
-                    <table class="min-w-full m-2 divide-y divide-gray-200 rounded-lg table-fixed" id="itineraryTable">
-                        <thead class="bg-gray-200">
+                <div class="overflow-hidden border-b border-white shadow">
+                    <table class="min-w-full m-2 divide-y divide-white rounded-lg table-fixed" id="itineraryTable">
+                        <thead class="bg-primary-bg">
                            
                             <tr>
                                 <th scope="col" colspan="8" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase bg-white">
@@ -17,54 +17,54 @@ $this->per_diem = $per_diem;
                                 </th>
                                 
                                 <th scope="col" colspan="4" class="px-3 pt-3 text-xs font-medium tracking-normal text-center text-gray-700 uppercase bg-white">
-                                  <span class="text-sm font-semibold text-indigo-500">NOTE:</span> Tick the box below if the registration fee covers it
+                                  <span class="text-sm font-semibold text-secondary-bg">NOTE:</span> Tick the box below if the registration fee covers it
                                 </th>
                                 <th scope="col" colspan="2" class="px-6 py-3 text-xs font-extrabold tracking-wider text-left text-gray-800 uppercase bg-white">
                                 </th>
                             </tr>
                              <tr>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Date ({{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('Y')}}) 
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Place to be visited
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Departure Time
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Arrival Time
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Mode of Trans.
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Trans. Exp
                                 </th>
                                 
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Others
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
                                     Per Diem
                                 </th>
                                 {{-- <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Covered by Registration
                                 </th> --}}
                                 
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
                                     Breakfast
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
                                     Lunch
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
                                     Dinner
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
                                     Lodging
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-xs font-extrabold tracking-wider text-left text-gray-800 uppercase">
+                                <th scope="col" class="px-6 py-3 text-xs font-extrabold tracking-wider text-left uppercase text-secondary-bg">
                                     Total
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Edit</span>
@@ -106,7 +106,7 @@ $this->per_diem = $per_diem;
                                         
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                        <input wire:model='input.{{$key}}.arr_time' wire:change="validateTime({{$key}})" type="time" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
+                                        <input wire:model.defer='input.{{$key}}.arr_time' wire:change="validateTime({{$key}})" type="time" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
 
                                         @if(isset($input[intval($key)]['arr_time']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['arr_time']}}</h1>
@@ -118,7 +118,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot" id="input.{{$key}}.mot" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                        <input wire:model.defer='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot" id="input.{{$key}}.mot" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
 
                                         @if(isset($input[intval($key)]['mot']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['mot']}}</h1>
@@ -131,9 +131,9 @@ $this->per_diem = $per_diem;
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                         <input wire:model.lazy='input.{{$key}}.trans_exp' type="number"  min="0" name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:leave="ComputeDiem({{$key}},'doesntmatter')">
-                                        
                                         @if(isset($input[intval($key)]['trans_exp']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['trans_exp']}}</h1>
+                                        
                                         <script>
                                             var itExist = !!document.getElementById("input.{{$key}}.trans_exp");
                                         </script>
@@ -166,7 +166,7 @@ $this->per_diem = $per_diem;
                                     </td>
 
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast" class="w-4 h-4 mx-auto text-indigo-600 border-gray-300 rounded disable-btn focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'breakfast')" >
+                                        <input wire:model='input.{{$key}}.breakfast' type="checkbox" name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast" class="w-4 h-4 mx-auto border-gray-300 rounded text-secondary-bg disable-btn focus:ring-primary-bg" wire:click="ComputeDiem({{$key}},'breakfast')" >
                                     
                                         @if(isset($input[intval($key)]['breakfast']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['breakfast']}}</h1>
@@ -178,7 +178,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                    <input wire:model='input.{{$key}}.lunch' type="checkbox" name="input.{{$key}}.lunch" id="input.{{$key}}.lunch" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'lunch')" >
+                                    <input wire:model='input.{{$key}}.lunch' type="checkbox" name="input.{{$key}}.lunch" id="input.{{$key}}.lunch" class="w-4 h-4 border-gray-300 rounded text-secondary-bg focus:ring-primary-bg" wire:click="ComputeDiem({{$key}},'lunch')" >
                                         
                                             @if(isset($input[intval($key)]['lunch']))
                                             <h1 class="" style="display:none;">{{$input[intval($key)]['lunch']}}</h1>
@@ -190,7 +190,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model='input.{{$key}}.dinner' type="checkbox" name="input.{{$key}}.dinner" id="input.{{$key}}.dinner" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'dinner')" >
+                                        <input wire:model='input.{{$key}}.dinner' type="checkbox" name="input.{{$key}}.dinner" id="input.{{$key}}.dinner" class="w-4 h-4 border-gray-300 rounded text-secondary-bg focus:ring-primary-bg" wire:click="ComputeDiem({{$key}},'dinner')" >
                                             
                                         @if(isset($input[intval($key)]['dinner']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['dinner']}}</h1>
@@ -201,7 +201,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                        <input wire:model='input.{{$key}}.lodging' type="checkbox" name="input.{{$key}}.lodging"" id="input.{{$key}}.lodging"" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" wire:click="ComputeDiem({{$key}},'lodging')" >
+                                        <input wire:model='input.{{$key}}.lodging' type="checkbox" name="input.{{$key}}.lodging"" id="input.{{$key}}.lodging"" class="w-4 h-4 border-gray-300 rounded text-secondary-bg focus:ring-primary-bg" wire:click="ComputeDiem({{$key}},'lodging')" >
                                         
                                         @if(isset($input[intval($key)]['lodging']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['lodging']}}</h1>
@@ -244,7 +244,7 @@ $this->per_diem = $per_diem;
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model.debounce='input.{{$key}}.dep_time' wire:change="validateTime({{$key}})" type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
+                                        <input wire:model.debounce='input.{{$key}}.dep_time' wire:change="({{$key}})" type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
 
                                         @if(isset($input[intval($key)]['dep_time']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['dep_time']}}</h1>
@@ -256,7 +256,7 @@ $this->per_diem = $per_diem;
                                         
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                        <input wire:model='input.{{$key}}.arr_time' type="time" wire:change="validateTime({{$key}})" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
+                                        <input wire:model.defer='input.{{$key}}.arr_time' type="time" wire:change="validateTime({{$key}})" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"class="min-w-full min-h-full border-transparent">
 
                                         @if(isset($input[intval($key)]['arr_time']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['arr_time']}}</h1>
@@ -268,7 +268,7 @@ $this->per_diem = $per_diem;
 
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                        <input wire:model='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot" id="input.{{$key}}.mot" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                        <input wire:model.defer='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot" id="input.{{$key}}.mot" class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
 
                                         @if(isset($input[intval($key)]['mot']))
                                         <h1 class="" style="display:none;">{{$input[intval($key)]['mot']}}</h1>
@@ -344,7 +344,7 @@ $this->per_diem = $per_diem;
                 </div>  
 
                 <div class="flex">
-                    <a class="cursor-pointer mt-2 mr-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+                    <a class="cursor-pointer mt-2 mr-2 inline-flex items-center px-2.5 py-1.5 border border-white shadow-sm text-xs font-medium rounded text-white bg-primary-bg hover:bg-primary-bg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-bg" 
                     wire:click.prevent="addmain()" > ADD ROWS</a>
                     {{-- <button class="m-5 bg-gray-700" wire:click.prevent="checkModel()" >seasd </button>
                     {{$frick}} --}}

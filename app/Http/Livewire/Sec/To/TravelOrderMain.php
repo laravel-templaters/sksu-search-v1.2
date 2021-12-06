@@ -135,7 +135,7 @@ class TravelOrderMain extends Component
             $this->emit('storeItenerary',$travel_order->id);
             
             Sleep(2);
-                return redirect('dashboard');
+                return redirect()->route('client-dash');
 
 
 

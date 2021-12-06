@@ -181,18 +181,18 @@ class IteneraryView extends Component
             if($dep_time > $arr_time)
             {
 
-                $this->alert('warning', 'Invalid Time!', [
-                            'background' => '#fff',
-                            'padding' => '0.5rem',
-                            'position' =>  'bottom-start', 
-                            'timer' =>  3000,  
-                            'toast' =>  true, 
-                            'text' =>  '', 
-                            'confirmButtonText' =>  'Ok', 
-                            'cancelButtonText' =>  'Cancel', 
-                            'showCancelButton' =>  false, 
-                            'showConfirmButton' =>  false, 
-                      ]);
+                // $this->alert('warning', 'Invalid Time!', [
+                //             'background' => '#fff',
+                //             'padding' => '0.5rem',
+                //             'position' =>  'bottom-start', 
+                //             'timer' =>  3000,  
+                //             'toast' =>  true, 
+                //             'text' =>  '', 
+                //             'confirmButtonText' =>  'Ok', 
+                //             'cancelButtonText' =>  'Cancel', 
+                //             'showCancelButton' =>  false, 
+                //             'showConfirmButton' =>  false, 
+                //       ]);
 
 
                 $this->input[$key]['arr_time'] = "";
