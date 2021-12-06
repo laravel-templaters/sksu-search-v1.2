@@ -547,27 +547,34 @@
 
                                 <li class="justify-start block px-6">
 
-                                    <div class="block">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 my-auto"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
+
                                     <div class="block">
                                         @php
                                         $related_doc_arr = explode('<',$doc->related_document_list_entry);
+                                            $doc_arr= explode('*',$doc->related_document_list_entry);
                                             @endphp
-                                            <h3 class="my-auto uppercase">{{$related_doc_arr[0]}}</h3>
+                                            <h3 class="my-auto uppercase"> <span class="my-auto">•</span> <span
+                                                    class="ml-1">{{$doc_arr[0]}}</span></h3>
+                                            @if (count($doc_arr)>1)
+                                            <span
+                                                class="ml-2 text-sm font-extrabold tracking-widest text-indigo-600">*{{$doc_arr[1]}}</span>
+                                            @endif
                                             @if (count($related_doc_arr) > 1)
                                             @php
                                             $related_doc_divided= explode('>',$related_doc_arr[1]); @endphp
-                                            <ul role="list" class="space-y-4">
-                                                @foreach($related_doc_divided as $doc)
-                                                <li class="block max-w-full">
+                                            <ul role="list" class="ml-3 space-y-4">
+                                                @foreach($related_doc_divided as $docu)
+                                                <li class="block max-w-full ml-2">
                                                     <span class="font-light tracking-wide text-gray-600 text-md">
-                                                        {{$doc}}
+                                                        @php
+                                                        $doc_arr= explode('*',$docu);
+                                                        @endphp
+                                                        @if (count($doc_arr)>1)
+                                                        {{$docu}} <span class="ml-2 text-sm font-extrabold tracking-widest text-indigo-600">*$doc_arr[1]</span>
+                                                        @else
+                                                        {{$docu}}
+                                                        @endif
+
                                                     </span>
                                                 </li>
                                                 @endforeach
