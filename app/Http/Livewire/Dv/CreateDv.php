@@ -423,7 +423,8 @@ class CreateDv extends Component
             $this->entry[0]=$touid->purpose;
             $this->user_id=$touid->user_id;
             $names=User::where('id',$this->user_id)->get();
-            $this->amount[0]=$touid->total;
+            $this->amount[0] = $touid->total;
+           
             foreach($names as $name){
                 $this->fn=$name->name;
                

@@ -27,8 +27,6 @@ class RelatedDocSeeder extends Seeder
                 ]);
 
 
-    //start here
-    
         DB::table('related_docs')->insert([
         'd_v_type_sorter_id'=> 10,]);
             DB::table('related_document_lists')->insert([
@@ -468,17 +466,89 @@ class RelatedDocSeeder extends Seeder
                                         DB::table('related_document_lists')->insert([
                                         'related_docs_id'=> 13,
                                         ]);
-                                        DB::table('related_document_list_entries')->insert([
-                                        'related_document_list_id'=> 13,
-                                        'related_document_list_entry'=> 'Invoices/receipts for GOCCs/GFIs and LGUs',
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 13,
+                                            'related_document_list_entry'=> 'Invoices/receipts for GOCCs/GFIs and LGUs',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 13,
+                                            'related_document_list_entry'=> 'Receipts and/or other documents evidencing disbursement, if there are available, or in lieu thereof, certification executed by the official concerned that the expense sought to be reimbursed have been incurred for any of the purposes contemplated under the provisions of the GAA in relation to or by reasons of his position, in case of NGAs',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 13,
+                                            'related_document_list_entry'=> 'Other supporting documents as are necessary depending on the nature of expense charged',
+                                            ]); 
+                                            
+                             DB::table('related_docs')->insert([
+                                    'd_v_type_sorter_id'=> 28,]);
+                                        DB::table('related_document_lists')->insert([
+                                        'related_docs_id'=> 14,
                                         ]);
-                                        DB::table('related_document_list_entries')->insert([
-                                        'related_document_list_id'=> 13,
-                                        'related_document_list_entry'=> 'Receipts and/or other documents evidencing disbursement, if there are available, or in lieu thereof, certification executed by the official concerned that the expense sought to be reimbursed have been incurred for any of the purposes contemplated under the provisions of the GAA in relation to or by reasons of his position, in case of NGAs',
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 14,
+                                            'related_document_list_entry'=> 'Travel Order',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 14,
+                                            'related_document_list_entry'=> 'Request Letter',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 14,
+                                            'related_document_list_entry'=> 'Other supporting documents',
+                                            ]); 
+
+                             DB::table('related_docs')->insert([
+                                    'd_v_type_sorter_id'=> 29,]);
+                                        DB::table('related_document_lists')->insert([
+                                        'related_docs_id'=> 15,
                                         ]);
-                                        DB::table('related_document_list_entries')->insert([
-                                        'related_document_list_id'=> 13,
-                                        'related_document_list_entry'=> 'Other supporting documents as are necessary depending on the nature of expense charged',
-                                        ]); 
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 15,
+                                            'related_document_list_entry'=> 'Travel Order',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 15,
+                                            'related_document_list_entry'=> 'Request Letter',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 15,
+                                            'related_document_list_entry'=> 'Other supporting documents',
+                                            ]); 
+                                            
+                             DB::table('related_docs')->insert([
+                                    'd_v_type_sorter_id'=> 33,]);
+                                        DB::table('related_document_lists')->insert([
+                                        'related_docs_id'=> 16,
+                                        ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 16,
+                                            'related_document_list_entry'=> 'Travel Order',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 16,
+                                            'related_document_list_entry'=> 'Request Letter',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 16,
+                                            'related_document_list_entry'=> 'Other supporting documents',
+                                            ]); 
+
+                             DB::table('related_docs')->insert([
+                                    'd_v_type_sorter_id'=> 34,]);
+                                        DB::table('related_document_lists')->insert([
+                                        'related_docs_id'=> 17,
+                                        ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 17,
+                                            'related_document_list_entry'=> 'Travel Order',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 17,
+                                            'related_document_list_entry'=> 'Request Letter',
+                                            ]);
+                                            DB::table('related_document_list_entries')->insert([
+                                            'related_document_list_id'=> 17,
+                                            'related_document_list_entry'=> 'Other supporting documents',
+                                            ]); 
     }
 }

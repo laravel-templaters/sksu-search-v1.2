@@ -148,7 +148,7 @@ class TravelOrderMain extends Component
                 $travel_order->philippine_cities_id = $cit['id'];
                 $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
                 $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
-                $travel_order->total = $this->finalTotal;
+                $travel_order->total = $this->finalTotal_raw;
                 $travel_order->user_id = $this->users_id;
                 $travel_order->date_range = $date_string;
                 $travel_order->dv_type_sorter_id = "1"; 
@@ -298,8 +298,10 @@ class TravelOrderMain extends Component
         }
         
     }
+    public $finalTotal_raw=0.0;
     public function finalTotalCalculation($value){
         $this->subTotal += $value;
+         $this->finalTotal_raw = $this->subTotal;
         $this->finalTotal = number_format($this->subTotal,2);
     }
     

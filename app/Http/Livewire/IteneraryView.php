@@ -176,7 +176,7 @@ class IteneraryView extends Component
         $dep_time = $this->input[intval($key)]["dep_time"];
         $arr_time = $this->input[intval($key)]["arr_time"];
         // dd($key);
-
+        
         if($dep_time != "" && $arr_time != "") 
         {
             if($dep_time > $arr_time)
@@ -195,7 +195,7 @@ class IteneraryView extends Component
                 //             'showConfirmButton' =>  false, 
                 //       ]);
 
-
+               session()->flash('message', 'Invalid Time');
                 $this->input[$key]['arr_time'] = "";
                 $this->input[$key]['dep_time'] = "";
 
@@ -384,7 +384,7 @@ class IteneraryView extends Component
 
     public function sendTotalVal(){
        
-        
+            $this->validateIEs();
             $this->finalTotalperDay =0.0;
             foreach ($this->input as $key => $value) {
                 $this->finalTotalperDay += (float)  $this->input[intval($key)]['raw_total'];

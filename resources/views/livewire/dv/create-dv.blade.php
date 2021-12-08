@@ -397,8 +397,7 @@
                                                     <label for="first-name"
                                                         class="block text-sm font-medium text-gray-700">Amount</label>
                                                     @if(strtoupper($voucher_type)=="LOCAL TRAVEL")
-                                                    <input type="number" min="0" wire:model.defer="amount.0"
-                                                        wire:key="-2"
+                                                    <input type="number" min="0" wire:model="amount.0" wire:key="-2"
                                                         class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                         readonly>
 
@@ -1294,6 +1293,7 @@
 
 
                 var originalContents = document.body.innerHTML;
+
                 var element = document.getElementById("toPrint");
 
                 //element.classList.add("transform");
