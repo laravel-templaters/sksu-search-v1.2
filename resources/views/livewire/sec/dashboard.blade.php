@@ -18,13 +18,14 @@
 
         }
         @endphp
-        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-primary-bg" x-data="{showMe : false}">
+        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-orange-ripe-light"
+            x-data="{showMe : false}">
             @if($categories->count()>0)
             <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
-                <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
+                <h3 class="my-auto text-xl font-extrabold text-primary-bg">{{$type->dv_type}}</h3>
                 <div class="flex">
                     <button> <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 my-auto text-transparent text-primary-text" id="chevron" fill="none"
+                            class="w-5 h-5 my-auto text-transparent text-primary-bg" id="chevron" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
@@ -35,10 +36,10 @@
             @else
             <a href="{{route('travel-order', ['id' => $dv_type_id])}}">
                 <div class="flex justify-between min-w-full p-3">
-                    <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
+                    <h3 class="my-auto text-xl font-extrabold text-primary-bg">{{$type->dv_type}}</h3>
                     <div class="flex">
                         <button> <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-5 h-5 my-auto text-transparent text-primary-text" id="chevron" fill="none"
+                                class="w-5 h-5 my-auto text-transparent text-primary-bg" id="chevron" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
