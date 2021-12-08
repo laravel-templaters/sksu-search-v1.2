@@ -42,7 +42,7 @@
                         <div class="col-span-1 mt-1">
                             <div class="grid grid-rows-1">
                                 <select wire:model="users_id"
-                                    class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                    class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                                     <option selected>--SELECT USER--</option>
                                     @foreach ($users as $user)
                                     <option value="{{$user->id}}">{{Str::upper($user->name)}}</option>
@@ -60,9 +60,9 @@
                         </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                             <textarea wire:model="purpose" id="about" name="about" rows="3"
-                                class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                                class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:text-sm"></textarea>
                             <p class="mt-2 text-sm text-gray-500"><span
-                                    class="font-extrabold text-indigo-600">NOTE:</span> This will also serve as the
+                                    class="font-extrabold text-secondary-bg">NOTE:</span> This will also serve as the
                                 entry for your disbursement voucher in the future.</p>
                             @error('purpose') <span class="text-red-700 error">{{ $message }}</span> @enderror
                         </div>
@@ -76,7 +76,7 @@
                         <div class="col-span-1 row-span-1 mt-1">
                             <h3 class="ml-1 text-sm text-gray-600 ">Region</h3>
                             <select wire:model="region_codes" id="country" name="country" autocomplete="country"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                                 <option selected>--SELECT REGION--</option>
                                 @foreach ($regions as $region)
                                 <option value="{{$region->region_code}}">{{$region->region_description}}</option>
@@ -88,7 +88,7 @@
                         <div class="col-span-1 row-span-1 mt-1">
                             <h3 class="ml-1 text-sm text-gray-600 ">Province</h3>
                             <select wire:model="province_codes"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                                 <option selected>--SELECT PROVINCE--</option>
                                 @foreach ($provinces as $province)
                                 <option value="{{$province->province_code}}">{{$province->province_description}}
@@ -102,7 +102,7 @@
                         <div class="col-span-1 col-start-2 row-span-1 row-start-2 mt-1">
                             <h3 class="ml-1 text-sm text-gray-600 ">City / Municipality</h3>
                             <select wire:model="city_codes"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                                 <option selected>--SELECT CITY/MUNICIPALITY--</option>
                                 @foreach ($cities as $city)
                                 <option value="{{$city->city_municipality_code}}">
@@ -114,9 +114,9 @@
                         <div class="col-span-1 col-start-3 row-span-1 row-start-2 mt-1">
                             <h3 class="ml-1 text-sm text-gray-600 ">Others</h3>
                             <input type="text"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                             <p class="mt-2 ml-1 text-sm text-gray-500"><span
-                                    class="font-extrabold text-indigo-600">NOTE:</span> Input specific address excluding
+                                    class="font-extrabold text-secondary-bg">NOTE:</span> Input specific address excluding
                                 the city, province and region of your destination</p>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                             <div class="relative flex items-start">
                                 <input wire:model="has_registration" id="comments"
                                     aria-describedby="comments-description" name="comments" type="checkbox"
-                                    class="w-4 h-4 my-auto text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    class="w-4 h-4 my-auto border-gray-300 rounded text-secondary-bg focus:ring-primary-bg">
                                 <div class="my-auto ml-3 text-sm">
                                     <label for="comments" class="font-medium text-gray-700">Has Registration</label>
                                 </div>
@@ -143,7 +143,7 @@
                             <div class="flex>
                                 <h3 class="inline ml-1 text-sm text-gray-600 ">Registration Amount
                                 </h3>
-                                <svg xmlns=" http://www.w3.org/2000/svg" class="inline w-4 h-4 text-blue-600"
+                                <svg xmlns=" http://www.w3.org/2000/svg" class="inline w-4 h-4 text-primary-bg"
                                 @mouseover="hovered = true" @mouseleave="hovered=false" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
@@ -156,11 +156,11 @@
 
                             @if($has_registration==false)
                             <input type="number" wire:model.lazy="registration_amt"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
                                 readonly>
                             @else
                             <input type="number" wire:model.lazy="registration_amt"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm ">
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm ">
                             @endif
                             <h3 x-show="hovered" x-cloak class="text-xs text-indigo-500">If amount is not 0 and "has
                                 Registration" checkbox is not checked. Registration amount will not be included in the
@@ -182,7 +182,7 @@
                     </p>
                     <div class="flex mt-5">
                         <div
-                            class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                            class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_from"
                                 class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2 ">From</label>
                             <input wire:model="date_from" type="date" name="date_from" id="date_from"
@@ -192,7 +192,7 @@
                         <span class="mx-2 my-auto text-3xl">-</span>
 
                         <div
-                            class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                            class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_to"
                                 class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2">To</label>
                             <input wire:model="date_to" type="date" name="date_to" id="date_to"
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <button wire:click.prevent="generateDays" wire:loading.attr="disabled" type="button"
-                        class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        class="mt-2 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-white bg-primary-bg hover:bg-primary-bg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-bg">
                         Generate
                     </button>
                 </div>
@@ -217,11 +217,11 @@
 
                 @if(isset($gen))
                 <div class="relative min-w-full my-4 ml-4 mr-7">
-                    <div class="absolute right-0 pr-12 bg-white mr-7"><a
-                            class="pl-3 pr-2 my-auto text-sm font-bold uppercase bg-white border-2 border-r-0 hover:bg-primary-bg-alt hover:text-secondary-bg-alt rounded-l-md border-primary-bg-alt text-secondary-bg"
+                    <div class="absolute bottom-0 pr-0 mt-2 mr-4 bg-white right-2 "><a
+                            class="pl-3 pr-2 my-auto text-sm font-bold uppercase bg-white border-2 border-r-0 cursor-pointer hover:bg-primary-bg-alt hover:text-secondary-bg-alt rounded-l-md border-primary-bg-alt text-secondary-bg"
                             wire:click="TotalCalculation">Calculate</a> <span
                             class="font-extrabold text-gray-900 text-md">TOTAL:</span><span
-                            class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div>
+                            class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div>   
                 </div>
                 @endif
 
