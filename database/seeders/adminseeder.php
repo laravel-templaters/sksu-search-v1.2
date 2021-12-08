@@ -834,16 +834,6 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'HENRISA P. APARIS',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'henrisaaparis@sksu.edu.ph',
-         'password' => Hash::make('aparis123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'ALEXIS D. APRESTO',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
@@ -1263,15 +1253,6 @@ class adminseeder extends Seeder
          'position_id' => 9
       ]);
 
-      DB::table('users')->insert([
-         'name' => 'VIVENCIO L. CALIXTRO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'vivenciocalixtro@sksu.edu.ph',
-         'password' => Hash::make('calixtro123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
 
       DB::table('users')->insert([
          'name' => 'MA LYN A. CALUB',
@@ -1329,16 +1310,6 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'maryjoycarnazo@sksu.edu.ph',
          'password' => Hash::make('carnazo123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
-         'name' => 'RHODINA C. CASTILLO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'rhodinacastillo@sksu.edu.ph',
-         'password' => Hash::make('castillo123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
@@ -1446,31 +1417,11 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'LENNIE ANN C. CERDANA',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'lennieanncerdana@sksu.edu.ph',
-         'password' => Hash::make('cerdana123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'DONALD A. COGO',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
          'email' => 'donaldcogo@sksu.edu.ph',
          'password' => Hash::make('cogo123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
-         'name' => 'LOVINA P. COGOLLO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'lovinacogollo@sksu.edu.ph',
-         'password' => Hash::make('cogollo123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
@@ -1511,26 +1462,6 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'ellenconsomo@sksu.edu.ph',
          'password' => Hash::make('consomo123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
-         'name' => 'GEMMA A. CONSTANTINO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'gemmaconstantino@sksu.edu.ph',
-         'password' => Hash::make('constantino123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
-         'name' => 'EDWIN F. CORTEJO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'edwincortejo@sksu.edu.ph',
-         'password' => Hash::make('cortejo123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
@@ -1666,16 +1597,6 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'SUSIE D. DAZA',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'susiedaza@sksu.edu.ph',
-         'password' => Hash::make('daza123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'RENATO B. DE LA CRUZ',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
@@ -1796,16 +1717,6 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'LEONCIO N. DULIN',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'leonciodulin@sksu.edu.ph',
-         'password' => Hash::make('dulin123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'VELESSA JANE B. DULIN',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
@@ -1881,26 +1792,6 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'dominicescano@sksu.edu.ph',
          'password' => Hash::make('escano123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
-         'name' => 'NANCY B. ESPACIO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'nancyespacio@sksu.edu.ph',
-         'password' => Hash::make('espacio123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
-         'name' => 'HELEN M. ESPARTERO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'helenespartero@sksu.edu.ph',
-         'password' => Hash::make('espartero123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
@@ -1996,16 +1887,6 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'MARY JEAN S. FALSARIO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'maryjeanfalsario@sksu.edu.ph',
-         'password' => Hash::make('falsario123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'JENA MAE M. FATAGANI',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
@@ -2086,16 +1967,6 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'REY S. FUENTEBILLA',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'reyfuentebilla@sksu.edu.ph',
-         'password' => Hash::make('fuentebilla123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'CHRISTINE G. FUNA',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
@@ -2161,16 +2032,6 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'joylyngamiao@sksu.edu.ph',
          'password' => Hash::make('gamiao123'),
-         'role_id' => 3,
-         'position_id' => 9
-      ]);
-
-      DB::table('users')->insert([
-         'name' => 'CECILIA E. GENER',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'ceciliagener@sksu.edu.ph',
-         'password' => Hash::make('gener123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
@@ -2576,71 +2437,1481 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => '',
+         'name' => 'MERLYN P. LEYSA',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
-         'email' => '',
-         'password' => Hash::make(''),
+         'email' => 'merlynleysa@sksu.edu.ph',
+         'password' => Hash::make('leysa123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
 
       DB::table('users')->insert([
-         'name' => '',
+         'name' => 'LOVELYN C. LLANILLO',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
-         'email' => '',
-         'password' => Hash::make(''),
+         'email' => 'lovelynllanillo@sksu.edu.ph',
+         'password' => Hash::make('llanillo123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
 
       DB::table('users')->insert([
-         'name' => '',
+         'name' => 'MARY JANE D. LOQUIS',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
-         'email' => '',
-         'password' => Hash::make(''),
+         'email' => 'maryjaneloquis@sksu.edu.ph',
+         'password' => Hash::make('loquis123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
 
       DB::table('users')->insert([
-         'name' => '',
+         'name' => 'SUSAN P. LOSAÑES',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
-         'email' => '',
-         'password' => Hash::make(''),
+         'email' => 'susanlosanes@sksu.edu.ph',
+         'password' => Hash::make('losanes123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
 
       DB::table('users')->insert([
-         'name' => '',
+         'name' => 'ERLINDA S. LUCEÑO',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
-         'email' => '',
-         'password' => Hash::make(''),
+         'email' => 'erlindaluceno@sksu.edu.ph',
+         'password' => Hash::make('luceno123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
 
       DB::table('users')->insert([
-         'name' => '',
+         'name' => 'RIZZA G. LUMANGCO',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
-         'email' => '',
-         'password' => Hash::make(''),
+         'email' => 'rizzalumangco@sksu.edu.ph',
+         'password' => Hash::make('lumangco123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
 
       DB::table('users')->insert([
-         'name' => '',
+         'name' => 'JENEVIEVE D. LUMBU AN',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
-         'email' => '',
-         'password' => Hash::make(''),
+         'email' => 'jenevievelumbuan@sksu.edu.ph',
+         'password' => Hash::make('lumbuan123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JOYCELLE C. LUMOGDANG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'joycellelumogdang@sksu.edu.ph',
+         'password' => Hash::make('lumogdang123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MANSHUR A. LUNA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'manshurluna@sksu.edu.ph',
+         'password' => Hash::make('luna123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'TONINA M. LUNA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'toninaluna@sksu.edu.ph',
+         'password' => Hash::make('luna123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MERLINDA B. MACASAYON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'merlindamacasayon@sksu.edu.ph',
+         'password' => Hash::make('macasayon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JUDITH A. MACHAN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'judithmachan@sksu.edu.ph',
+         'password' => Hash::make('machan123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'IVY LYNN F. MADRIAGA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'ivylynnmadriaga@sksu.edu.ph',
+         'password' => Hash::make('madriaga123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ALVIN E. MAGBANUA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'alvinmagbanua@sksu.edu.ph',
+         'password' => Hash::make('magbanua123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CHERRYLOU B. MAGBANUA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cherryloumagbanua@sksu.edu.ph',
+         'password' => Hash::make('magbanua123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARY LYNN G. MAGBANUA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marylynnmagbanua@sksu.edu.ph',
+         'password' => Hash::make('magbanua123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CHARLIE J. MAGHANOY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'charliemaghanoy@sksu.edu.ph',
+         'password' => Hash::make('maghanoy123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ALLAN A. MAGLANTAY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'allanmaglantay@sksu.edu.ph',
+         'password' => Hash::make('maglantay123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARY GRACE G. MAGLANTAY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marygracemaglantay@sksu.edu.ph',
+         'password' => Hash::make('maglantay123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'DUMA J. MAKALILAY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'dumamakalilay@sksu.edu.ph',
+         'password' => Hash::make('makalilay 123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'AMERA C. MALACO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'ameramalaco@sksu.edu.ph',
+         'password' => Hash::make('malaco123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JOSEPHINE P. MALINOG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'josephinemalinog@sksu.edu.ph',
+         'password' => Hash::make('malinog123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'NORMINA A. MAMALINTA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'norminamamalinta@sksu.edu.ph',
+         'password' => Hash::make('mamalinta123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'GRACIELA LOU F. MANA-AY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'gracielaloumanaay@sksu.edu.ph',
+         'password' => Hash::make('manaay123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RESHNEY F. MANANGAN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'reshneymanangan@sksu.edu.ph',
+         'password' => Hash::make('manangan123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ANESA P. MANGINDRA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'anesamangindra@sksu.edu.ph',
+         'password' => Hash::make('mangindra123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ANNA ROSE T. MARCELINO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'annarosemarcelino@sksu.edu.ph',
+         'password' => Hash::make('marcelino123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JUNITO P. MARCELINO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'junitomarcelino@sksu.edu.ph',
+         'password' => Hash::make('marcelino123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'YORYNCITA C. MARFORI',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'yoryncitamarfori@sksu.edu.ph',
+         'password' => Hash::make('marfori123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RUBILEE S. MARIANO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'rubileemariano@sksu.edu.ph',
+         'password' => Hash::make('mariano123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'VINA MARIE A. MARTIN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'vinamariemartin@sksu.edu.ph',
+         'password' => Hash::make('martin123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RICHARD K. MASLA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'richardmasla@sksu.edu.ph',
+         'password' => Hash::make('masla123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ADELAIDA R. MATILOS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'adelaidamatilos@sksu.edu.ph',
+         'password' => Hash::make('matilos123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RANDY E. MAYO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'randymayo@sksu.edu.ph',
+         'password' => Hash::make('mayo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'LEILA JANE D. MENDOZA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'leilajanemendoza@sksu.edu.ph',
+         'password' => Hash::make('mendoza123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MANOLO B. MERCADO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'manolomercado@sksu.edu.ph',
+         'password' => Hash::make('mercado123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'LEIZEL C. MERIALES',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'leizelmeriales@sksu.edu.ph',
+         'password' => Hash::make('meriales123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'EDRALIN D. MESIAS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'edralinmesias@sksu.edu.ph',
+         'password' => Hash::make('mesias123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'VICTORIA A. MIJARES',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'victoriamijares@sksu.edu.ph',
+         'password' => Hash::make('mijares123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'GRACE JOY T. MILLENDEZ',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'gracejoymillendez@sksu.edu.ph',
+         'password' => Hash::make('millendez123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARY GRACE S. MOLINA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marygracemolina@sksu.edu.ph',
+         'password' => Hash::make('molina123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ZILJIH S. MOLINA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'ziljihmolina@sksu.edu.ph',
+         'password' => Hash::make('molina123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'EMY A. MORBO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'emymorbo@sksu.edu.ph',
+         'password' => Hash::make('morbo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'NORA M. MOYA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'noramoya@sksu.edu.ph',
+         'password' => Hash::make('moya123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'AMELITA A. MOYET',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'amelitamoyet@sksu.edu.ph',
+         'password' => Hash::make('moyet123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'PATERNA A. MURILLO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'paternamurillo@sksu.edu.ph',
+         'password' => Hash::make('murillo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'NATHANIEL D. NAANEP',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'nathanielnaanep@sksu.edu.ph',
+         'password' => Hash::make('naanep123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CESAR J. NALLOS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cesarnallos@sksu.edu.ph',
+         'password' => Hash::make('nallos123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ROMEO C. NARCILLA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'romeonarcilla@sksu.edu.ph',
+         'password' => Hash::make('narcilla123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RAMONITO J. NAZARENO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'ramonitonazareno@sksu.edu.ph',
+         'password' => Hash::make('nazareno123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'LEONARD R. NECESITO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'leonardnecesito@sksu.edu.ph',
+         'password' => Hash::make('necesito123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'DEXTER C. NECOR',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'dexternecor@sksu.edu.ph',
+         'password' => Hash::make('necor123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JAIME BOY U. NGAG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'jaimeboyngag@sksu.edu.ph',
+         'password' => Hash::make('ngag123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CELIA ROSE J. NOTA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'celiarosenota@sksu.edu.ph',
+         'password' => Hash::make('nota123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ADRIANA B. OBENA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'adrianaobena@sksu.edu.ph',
+         'password' => Hash::make('obena123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CHONA A. OMEGA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'chonaomega@sksu.edu.ph',
+         'password' => Hash::make('omega123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ROSALINDA M. ONA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'rosalindaona@sksu.edu.ph',
+         'password' => Hash::make('ona123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'PAUL RYAN L. OÑAS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'paulryanonas@sksu.edu.ph',
+         'password' => Hash::make('onas123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+      
+      DB::table('users')->insert([
+         'name' => 'JUAREYN L. ONDOY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'juareynondoy@sksu.edu.ph',
+         'password' => Hash::make('ondoy123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARK F. ONIA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'markonia@sksu.edu.ph',
+         'password' => Hash::make('onia123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'IAN MARK E. ORCAJADA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'ianmarkorcajada@sksu.edu.ph',
+         'password' => Hash::make('orcajada123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CHARITY L. ORIA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'charityoria@sksu.edu.ph',
+         'password' => Hash::make('oria123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+      
+      DB::table('users')->insert([
+         'name' => 'JECYLLE R. ORIANA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'jecylleoriana@sksu.edu.ph',
+         'password' => Hash::make('oriana123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JESUSA D. ORTUOSTE',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'jesusaortuoste@sksu.edu.ph',
+         'password' => Hash::make('ortuoste123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ROMUALDO M. ORTUOSTE',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'romualdoortuoste@sksu.edu.ph',
+         'password' => Hash::make('ortuoste123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ALLAN REY M. PACULANAN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'allanreypaculanan@sksu.edu.ph',
+         'password' => Hash::make('paculanan123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+      
+      DB::table('users')->insert([
+         'name' => 'AMY M. PADERNAL',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'amypadernal@sksu.edu.ph',
+         'password' => Hash::make('padernal123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MERLE C. PADILLA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'merlepadilla@sksu.edu.ph',
+         'password' => Hash::make('padilla123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ARTCHIE P. PADIOS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'artchiepadios@sksu.edu.ph',
+         'password' => Hash::make('padios123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ELMER T. PAHM',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'elmerpahm@sksu.edu.ph',
+         'password' => Hash::make('pahm123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+      
+      DB::table('users')->insert([
+         'name' => 'VERONICA D. PAHM',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'veronicapahm@sksu.edu.ph',
+         'password' => Hash::make('pahm123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'SALVADOR A. PAL',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'salvadorpal@sksu.edu.ph',
+         'password' => Hash::make('pal123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'LYWELYN M. PALANOG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'lywelynpalanog@sksu.edu.ph',
+         'password' => Hash::make('palanog123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ROGELIO C. PALANOG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'rogeliopalanog@sksu.edu.ph',
+         'password' => Hash::make('palanog123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+      
+      DB::table('users')->insert([
+         'name' => 'JEZYL E. PALAPOS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'jezylpalapos@sksu.edu.ph',
+         'password' => Hash::make('palapos123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ANJANNETE C. PALLARCON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'anjannetepallarcon@sksu.edu.ph',
+         'password' => Hash::make('pallarcon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CYNTHIA L. PAMA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cynthiapama@sksu.edu.ph',
+         'password' => Hash::make('pama123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'PERCILA M. PANAGDATO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'percilapanagdato@sksu.edu.ph',
+         'password' => Hash::make('panagdato123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+      
+      DB::table('users')->insert([
+         'name' => 'NORHATA T. PANDAY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'norhatapanday@sksu.edu.ph',
+         'password' => Hash::make('panday123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'IRIL I. PANES',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'irilpanes@sksu.edu.ph',
+         'password' => Hash::make('panes123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'BADU M. PANIMBANG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'badupanimbang@sksu.edu.ph',
+         'password' => Hash::make('panimbang123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'SUNSHINE M. PARAICO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'sunshineparaico@sksu.edu.ph',
+         'password' => Hash::make('paraico123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'EMERSON G. PARCON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'emersonparcon@sksu.edu.ph',
+         'password' => Hash::make('parcon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARY GRACE P. PASQUIN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marygracepasquin@sksu.edu.ph',
+         'password' => Hash::make('pasquin123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'DOLORCITA E. PAUYA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'dolorcitapauya@sksu.edu.ph',
+         'password' => Hash::make('pauya123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CRISTELA MARIE M. PELARCO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cristelamariepelarco@sksu.edu.ph',
+         'password' => Hash::make('pelarco123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARILOU U. PEREZ',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marilouperez@sksu.edu.ph',
+         'password' => Hash::make('perez123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JONALYN S. PERFECIO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'jonalynperfecio@sksu.edu.ph',
+         'password' => Hash::make('perfecio123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARY GRACE L. PEROCHO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marygraceperocho@sksu.edu.ph',
+         'password' => Hash::make('perocho123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RICHARD H. PIMENTEL',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'richardpimentel@sksu.edu.ph',
+         'password' => Hash::make('pimentel123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'EVA C. POLO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'evapolo@sksu.edu.ph',
+         'password' => Hash::make('polo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JOEMARIE A. PONO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'joemariepono@sksu.edu.ph',
+         'password' => Hash::make('pono123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'EUFEMIA B. PORQUE',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'eufemiaporque@sksu.edu.ph',
+         'password' => Hash::make('porque123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'EDMARLYN C. PORRAS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'edmarlynporras@sksu.edu.ph',
+         'password' => Hash::make('porras123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ADRIAN V. PROTACIO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'adrianprotacio@sksu.edu.ph',
+         'password' => Hash::make('protacio123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'VIRGINIA E. PUBLICO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'virginiapublico@sksu.edu.ph',
+         'password' => Hash::make('publico123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CHERYL T. PUEBLO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cherylpueblo@sksu.edu.ph',
+         'password' => Hash::make('pueblo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'EDEN R. QUILLA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'edenquilla@sksu.edu.ph',
+         'password' => Hash::make('quilla123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'GERALDINE P. QUILLO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'geraldinequillo@sksu.edu.ph',
+         'password' => Hash::make('quillo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JANET F. RABUT',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'janetrabut@sksu.edu.ph',
+         'password' => Hash::make('rabut123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CYRUS B. RAEL',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cyrusrael@sksu.edu.ph',
+         'password' => Hash::make('rael123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'AVELINO HERMAN B. RAMOS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'avelinohermanramos@sksu.edu.ph',
+         'password' => Hash::make('ramos123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'BRANDO C. RAZON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'brandorazon@sksu.edu.ph',
+         'password' => Hash::make('razon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MAE D. REBUGIO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'maerebugio@sksu.edu.ph',
+         'password' => Hash::make('rebugio123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ALEX N. REMEGIO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'alexremegio@sksu.edu.ph',
+         'password' => Hash::make('remegio123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'FLORLYN MAE S. REMEGIO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'florlynmaeremegio @sksu.edu.ph',
+         'password' => Hash::make('remegio123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'BERNARD A. RENDON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'bernardrendon@sksu.edu.ph',
+         'password' => Hash::make('rendon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ANDRES T. REYES',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'andresreyes@sksu.edu.ph',
+         'password' => Hash::make('reyes123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARIANIE L. REYES',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marianiereyes@sksu.edu.ph',
+         'password' => Hash::make('reyes123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CARLOS S. RIVERA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'carlosrivera@sksu.edu.ph',
+         'password' => Hash::make('rivera123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JONATHAN P. ROQUE',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'jonathanroque@sksu.edu.ph',
+         'password' => Hash::make('roque123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CERILO B. RUBIN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cerilorubin@sksu.edu.ph',
+         'password' => Hash::make('rubin123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARIBETH P. SALABAN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'maribethsalaban@sksu.edu.ph',
+         'password' => Hash::make('salaban123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MICKLE DAN M. SALADINO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'mickledansaladino@sksu.edu.ph',
+         'password' => Hash::make('saladino123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CARILYN S. SALANIO-MARTIN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'carilynsalaniomartin@sksu.edu.ph',
+         'password' => Hash::make('salaniomartin123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JAN MICHAEL B. SALDICAYA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'janmichaelsaldicaya@sksu.edu.ph',
+         'password' => Hash::make('saldicaya123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'FAHAD A. SALENDAB',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'fahadsalendab@sksu.edu.ph',
+         'password' => Hash::make('salendab123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'SAMUEL R. SALVADOR',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'samuelsalvador@sksu.edu.ph',
+         'password' => Hash::make('salvador123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'AINEE GRACE S. SANSANO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'aineegracesansano@sksu.edu.ph',
+         'password' => Hash::make('sansano123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'DENAFEL C. SARAÑA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'denafelsarana@sksu.edu.ph',
+         'password' => Hash::make('sarana123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ROSELA O. SAZON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'roselasazon@sksu.edu.ph',
+         'password' => Hash::make('sazon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JOE H. SELAYRO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'joeselayro@sksu.edu.ph',
+         'password' => Hash::make('selayro123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ARNULFO C. SOLINAP',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'arnulfosolinap@sksu.edu.ph',
+         'password' => Hash::make('solinap123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RODOLFO B. SOLOMON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'rodolfosolomon@sksu.edu.ph',
+         'password' => Hash::make('solomon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MARILOU P. SOMBRIA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'marilousombria@sksu.edu.ph',
+         'password' => Hash::make('sombria123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JAYSON S. SUHAYON',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'jaysonsuhayon@sksu.edu.ph',
+         'password' => Hash::make('suhayon123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'HAZEL MAE B. SULAIMAN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'hazelmaesulaiman@sksu.edu.ph',
+         'password' => Hash::make('sulaiman123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'SHAIDA B. SUMAPAL',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'shaidasumapal@sksu.edu.ph',
+         'password' => Hash::make('sumapal123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'GINA ROSE TREXIANNE S. SY',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'ginarosetrexiannesy@sksu.edu.ph',
+         'password' => Hash::make('sy123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MAY NECTAR CYRILL L. TABARES',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'maynectarcyrilltabares@sksu.edu.ph',
+         'password' => Hash::make('tabares123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ROSEMARY C. TABINGO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'rosemarytabingo@sksu.edu.ph',
+         'password' => Hash::make('tabingo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'KENDATU L. TAGO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'kendatutago@sksu.edu.ph',
+         'password' => Hash::make('tago123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'KAREN B. TALIDONG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'karentalidong@sksu.edu.ph',
+         'password' => Hash::make('talidong123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'GLENN S. TALUA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'glenntalua@sksu.edu.ph',
+         'password' => Hash::make('talua123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MOHAIDA A. TAMAMA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'mohaidatamama@sksu.edu.ph',
+         'password' => Hash::make('tamama123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'DOREEN B. TAMPUS',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'doreentampus@sksu.edu.ph',
+         'password' => Hash::make('tampus123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MAY FLOR L. TAPOT',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'mayflortapot@sksu.edu.ph',
+         'password' => Hash::make('tapot123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'JUDY E. TIAÑA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'judytiana@sksu.edu.ph',
+         'password' => Hash::make('tiana123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'RICHARD S. TOLEDO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'richardtoledo@sksu.edu.ph',
+         'password' => Hash::make('toledo123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ROSE VIÑA E. TUTOR',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'rosevinatutor@sksu.edu.ph',
+         'password' => Hash::make('tutor123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ERNESTO L. UMIPIG',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'ernestoumipig@sksu.edu.ph',
+         'password' => Hash::make('umipig123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'MOHAMMAD ISA S. USMAN',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'mohammadisausman@sksu.edu.ph',
+         'password' => Hash::make('usman123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ANNIERAH M. USOP',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'annierahusop@sksu.edu.ph',
+         'password' => Hash::make('usop123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'ANAMARIE G. VALDEZ',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'anamarievaldez@sksu.edu.ph',
+         'password' => Hash::make('valdez123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'DENNIS M. VALDEZ',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'dennisvaldez@sksu.edu.ph',
+         'password' => Hash::make('valdez123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'NE B. VELASCO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'nevelasco@sksu.edu.ph',
+         'password' => Hash::make('velasco123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'CHERRY VANESSA M. VENTURA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'cherryvanessaventura@sksu.edu.ph',
+         'password' => Hash::make('ventura123'),
+         'role_id' => 3,
+         'position_id' => 9
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'NOEL R. VILLANUEVA',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'noelvillanueva@sksu.edu.ph',
+         'password' => Hash::make('villanueva123'),
          'role_id' => 3,
          'position_id' => 9
       ]);
