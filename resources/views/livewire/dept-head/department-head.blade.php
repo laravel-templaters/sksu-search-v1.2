@@ -1,5 +1,7 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8"
-    x-data="{ active : @entangle('active'),personalClicked : @entangle('personalClicked'),pendingClicked : @entangle('pendingClicked'), show_Banner :@entangle('showBanner') }"
+<div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
+    @entangle('showReturnModal'), active :
+    @entangle('active'),personalClicked :
+    @entangle('personalClicked'),pendingClicked : @entangle('pendingClicked'), show_Banner :@entangle('showBanner') }"
     x-init="$watch('show_Banner', value => {
         if(value == true){
             setTimeout(function(){ show_Banner = false; }, 5000);
@@ -96,11 +98,11 @@
             <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
                 <div class="mt-2 ml-4">
                     <h3 class="text-lg font-medium leading-6 text-primary-bg">
-                        Personal Disbursment Vouchers
+                        Personal Disbursement Vouchers
                     </h3>
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
-                    <input type="text" wire:model.debounce.300ms="searchPersonal"
+                    <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPersonal"
                         class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-secondary-bg text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
                 </div>
             </div>
@@ -119,7 +121,8 @@
                     @foreach ($pending_dv as $dv)
                     @if ($searchPersonal=="")
                     <li class="rounded-lg">
-                        <a class="block rounded-lg hover:bg-gray-50">
+                        <a class="block rounded-lg hover:cursor-pointer hover:bg-gray-50"
+                            x-on:click="$wire.showModal({{$dv->id}})">
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
                                     <p class="text-sm font-medium text-indigo-600 truncate">
@@ -168,8 +171,8 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                         <p>
-                                            <!-- Closing on
-                                            <time datetime="2020-01-07">January 7, 2020</time> -->
+                                            Created on
+                                            <time datetime="2020-01-07">{{$dv->created_at}}</time>
                                         </p>
                                     </div>
                                 </div>
@@ -177,9 +180,10 @@
                         </a>
                     </li>
                     @else
-                    @if(str_contains(strtolower($milestone->disbursement_voucher->dv_tracking_number),strtolower($searchPending)))
+                    @if(str_contains(strtolower($dv->dv_tracking_number),strtolower($searchPending)))
                     <li class="rounded-lg">
-                        <a class="block rounded-lg hover:bg-gray-50">
+                        <a class="block rounded-lg hover:cursor-pointer hover:bg-gray-50"
+                            x-on:click="$wire.showModal({{$dv->id}})">
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
                                     <p class="text-sm font-medium text-indigo-600 truncate">
@@ -228,8 +232,8 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                         <p>
-                                            <!-- Closing on
-                                            <time datetime="2020-01-07">January 7, 2020</time> -->
+                                            Created on
+                                            <time datetime="2020-01-07">{{$dv->created_at}}</time>
                                         </p>
                                     </div>
                                 </div>
@@ -252,11 +256,11 @@
             <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
                 <div class="mt-2 ml-4">
                     <h3 class="text-lg font-medium leading-6 text-primary-bg">
-                        Pending Disbursment Vouchers
+                        Pending Disbursement Vouchers
                     </h3>
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
-                    <input type="text" wire:model.debounce.300ms="searchPending"
+                    <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPending"
                         class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-secondary-bg text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
                 </div>
             </div>
@@ -284,7 +288,7 @@
                                         {{$milestone->disbursement_voucher->user->name}}
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2 justify-items-start">
-                                        <button
+                                        <button x-on:click="$wire.showModal({{$milestone->disbursement_voucher->id}})"
                                             class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full bg-primary-bg-alt text-primary-text hover:bg-green-800 active:bg-primary-bg active:text-secondary-bg">
                                             View voucher info
                                         </button>
@@ -306,6 +310,7 @@
                                         </button>
                                         @endif
                                         <button
+                                            wire:click="showModalReturn({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})"
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg">
                                             Return voucher
                                         </button>
@@ -346,8 +351,9 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                         <p>
-                                            Closing on
-                                            <time datetime="2020-01-07">January 7, 2020</time>
+                                            Created on
+                                            <time
+                                                datetime="2020-01-07">{{$milestone->disbursement_voucher->created_at}}</time>
                                         </p>
                                     </div>
                                 </div>
@@ -365,7 +371,7 @@
                                         {{$milestone->disbursement_voucher->user->name}}
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2 justify-items-start">
-                                        <button
+                                        <button x-on:click="$wire.showModal({{$milestone->disbursement_voucher->id}})"
                                             class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full bg-primary-bg-alt text-primary-text hover:bg-green-800 active:bg-primary-bg active:text-secondary-bg">
                                             View voucher info
                                         </button>
@@ -382,11 +388,12 @@
                                         @elseif($last_actions->action_type->description == "RECEIVED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
-                                            wire:click="forwardDocument">
+                                            wire:click="forwardDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
                                             Forward voucher
                                         </button>
                                         @endif
                                         <button
+                                            wire:click="showModalReturn({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})"
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg">
                                             Return voucher
                                         </button>
@@ -427,8 +434,9 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                         <p>
-                                            Closing on
-                                            <time datetime="2020-01-07">January 7, 2020</time>
+                                            Created on
+                                            <time
+                                                datetime="2020-01-07">{{$milestone->disbursement_voucher->created_at}}</time>
                                         </p>
                                     </div>
                                 </div>
@@ -444,6 +452,333 @@
             </div>
         </div>
     </div>
+
+    <!-- modal view Info start -->
+    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+        x-cloak x-show="showModal">
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+                x-show="showModal"></div>
+
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div x-cloak x-show="showModal" @click.away="showModal=false" x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+                <div class="max-w-full mx-auto">
+                    <!-- card start -->
+                    <!-- This example requires Tailwind CSS v2.0+ -->
+                    <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+                        <div class="px-4 py-5 sm:px-6">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">
+                                Disbursement Voucher Information
+                            </h3>
+                            <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                                Voucher Details
+                            </p>
+                        </div>
+                        <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
+                            @if ($dvInfo)
+                            <dl class="sm:divide-y sm:divide-gray-200">
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Disbursement Voucher Number
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+
+                                        @if ($dvInfo->dv_number == null || $dvInfo->dv_number =="")
+                                        Voucher number not yet set
+                                        @else
+                                        {{$dvInfo->dv_number}}
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Disbursement Voucher Tracking Number
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->dv_tracking_number}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Payee
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->user->name}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Application for
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        @php
+                                        $dv_type ="";
+
+                                        if($dvInfo->dv_type_sorter->sorter == '3'){
+                                        $dv_type =$dvInfo->dv_type_sorter->dv_sub_categories->dv_sub_category;
+                                        }elseif ($dvInfo->dv_type_sorter->sorter == '2') {
+                                        $dv_type =$dvInfo->dv_type_sorter->dv_categories->dv_category;
+                                        }elseif ($dvInfo->dv_type_sorter->sorter == '1'){
+                                        $dv_type =$dvInfo->dv_type_sorter->dv_type->dv_type;
+                                        }else{
+                                        $dv_type = "Couldn't be Found";
+                                        }
+                                        @endphp
+                                        {{$dv_type}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Email address
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->user->email}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Amount Expected
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvModalTotalAmount}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Fund Cluster
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                        @if ($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")
+                                        Fund cluster not set yet
+                                        @else
+                                        {{$dvInfo->fund_cluster}}
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Mode of Payment
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->mop->mode_of_payment}}
+                                    </dd>
+                                </div>
+                            </dl>
+                            @else
+                            <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                            @endif
+                        </div>
+                        <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">
+                                Particulars
+                            </h3>
+                            <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                                Voucher Entries
+                            </p>
+                        </div>
+                        <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
+                            @if ($dvInfo)
+                            @php
+                            $dvparticulars =
+                            App\Models\Particular::where('disbursement_voucher_id','=',$dvInfo->id)->get();
+                            @endphp
+                            @if($dvparticulars)
+                            @foreach ($dvparticulars as $key => $dvparticular)
+                            <dl class="sm:divide-y sm:divide-gray-200">
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Entry No. {{$key +1}}
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvparticular->entry}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Responsibility Center
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                        @if ($dvparticular->responsibility_center== null
+                                        ||$dvparticular->responsibility_center=="")
+                                        -----
+                                        @else
+                                        {{$dvparticular->responsibility_center}}
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        MFO/PAP
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                        @if ($dvparticular->mfo_pap== null ||$dvparticular->mfo_pap=="")
+                                        -----
+                                        @else
+                                        {{$dvparticular->mfo_pap}}
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Amount
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                        @if ($dvparticular->amount== null || $dvparticular->amount==0)
+                                        -----
+                                        @else
+                                        {{$dvparticular->amount}}
+                                        @endif
+                                    </dd>
+                                </div>
+                            </dl>
+                            @endforeach
+                            @else
+                            <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                            @endif
+                            @else
+                            <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- card end -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal view Info end -->
+    <!-- modal forward start-->
+    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+        x-cloak x-show="showModalForward">
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+                x-show="showModalForward"></div>
+
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div x-cloak x-show="showModalForward" @click.away="showModalForward=false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+                <div class="max-w-full mx-auto">
+                    <div class="p-10 bg-gray-100">
+                        <ul role="list"
+                            class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal forward end -->
+    <!-- modal return start-->
+    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+        x-cloak x-show="showModalReturn">
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+                x-show="showModalReturn"></div>
+
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div x-cloak x-show="showModalReturn" @click.away="showModalReturn=false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+                <div class="max-w-full mx-auto">
+                    <div class="p-10 rounded-lg bg-secondary-text">
+                        <h1 class="mb-10 font-sans text-lg font-bold tracking-wider drop-shadow-sm text-primary-bg">
+                            SELECT WHERE
+                            TO RETURN VOUCHER</h1>
+                        <ul role="list"
+                            class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+                            @if ($sigsReturn)
+                            @foreach ($sigsReturn as $key => $mssig)
+                            <li>
+                                <div class="space-y-4 text-left">
+                                    <button class="flex-shrink-0 block "
+                                        wire:click.prevent="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->assigned_user}})">
+                                        <!-- This example requires Tailwind CSS v2.0+ -->
+
+                                        <div
+                                            class="flex items-center rounded-lg group-hover:bg-primary-text group-hover:bg-opacity-95 group-focus:ring-2 group-focus:ring-primary-text">
+                                            <div>
+                                                <img class="inline-block truncate rounded-full h-14 w-14"
+                                                    src="{{$mssig->assigned->avatar != null ? asset($mssig->assigned->avatar) : asset($mssig->assigned->profile_photo_url)}}"
+                                                    alt="{{$mssig->assigned->name}}">
+                                            </div>
+                                            <div class="ml-3 text-left">
+                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                    {{$mssig->assigned->name}}
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    @if ($mssig->assigned->position != null)
+                                                    {{$mssig->assigned->position->position_name}}
+                                                    @endif
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    @if ($mssig->assigned->department != null)
+                                                    {{$mssig->assigned->department->department_name}}
+                                                    @endif
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </button>
+                                </div>
+                            </li>
+                            @endforeach
+
+                            @else
+                            Nothing to show...
+                            @endif
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal return end -->
+
 
 
 </div>

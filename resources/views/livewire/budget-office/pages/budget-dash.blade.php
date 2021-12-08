@@ -66,6 +66,7 @@
                         x-bind:class="active == 'myacc' ? 'border-secondary-text text-primary-bg-alt ' : ' border-transparent text-secondary-text hover:text-primary-bg hover:border-secondary-text'">
                         My Account
 
+
                         @if (count($pending_dv)>0)
                         <span x-bind:class="personalClicked == false ? 'animate-pulse':'animate-none'" class="bg-gray-100 text-gray-900 ml-3 py-0.5 px-2.5 rounded-full items-center text-center
                             text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
@@ -463,18 +464,17 @@
 
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-            <div x-cloak x-data="{showInput : false}" x-show="showModal" @click.away="showModal=false"
-                x-transition:enter="ease-out duration-300"
+            <div x-cloak x-show="showModal" @click.away="showModal=false" x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:leave="ease-in duration-200"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                 class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
-                <div class="max-w-full mx-auto">
+                <div class="max-w-full mx-auto" x-data="{showInput : false}">
                     <!-- card start -->
                     <!-- This example requires Tailwind CSS v2.0+ -->
-                    <div class="overflow-hidden bg-white shadow sm:rounded-lg" @click.away="showInput = false">
+                    <div class="overflow-hidden bg-gray-100 shadow sm:rounded-lg" @click.away="showInput = false">
                         <div class="px-4 py-5 sm:px-6">
                             <h3 class="text-lg font-medium leading-6 text-gray-900">
                                 Disbursement Voucher Information
@@ -492,25 +492,8 @@
                                     </dt>
                                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
 
-                                        @if (($dvInfo->dv_number == null || $dvInfo->dv_number =="")&& $dvInfo->user_id
-                                        != auth()->user()->id)
-                                        <span x-show="showInput==false">Voucher number not yet set</span> <a
-                                            x-show="showInput==false" x-on:click="showInput=true"
-                                            class="p-2 ml-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">Set
-                                            Voucher
-                                            Number</a>
-                                        <div class="flex" x-show="showInput">
-                                            <input id="voucher_number" name="voucher_number" type="text"
-                                                wire:model.defer="voucher_number"
-                                                class="flex p-2 mx-2 border rounded-lg text-md focus:ring-1 focus:ring-offset-primary-text" />
-                                            @error('voucher_number')
-                                            <span class="my-auto text-sm text-red-500">{{$message}}</span>
-                                            @enderror
-                                        </div> <button x-show="showInput" wire:click="setVoucherNumber({{$dvInfo->id}})"
-                                            class="p-2 m-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">
-                                            Save Voucher Number</button>
-
-
+                                        @if ($dvInfo->dv_number == null || $dvInfo->dv_number =="")
+                                        Voucher number not yet set
                                         @else
                                         {{$dvInfo->dv_number}}
                                         @endif
@@ -573,10 +556,24 @@
                                     <dt class="text-sm font-medium text-gray-500">
                                         Fund Cluster
                                     </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
 
-                                        @if ($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")
-                                        Fund cluster not set yet
+                                        @if (($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")&&
+                                        $dvInfo->user_id != auth()->user()->id)
+                                        <span x-show="showInput==false"> Fund cluster not set yet</span> <a
+                                            x-show="showInput==false" x-on:click="showInput=true"
+                                            class="p-2 ml-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">Set
+                                            Fund Cluster</a>
+                                        <div class="flex" x-show="showInput">
+                                            <input id="fundcluster" name="fundcluster" type="text"
+                                                wire:model.defer="fundcluster"
+                                                class="flex p-2 mx-2 border rounded-lg text-md focus:ring-1 focus:ring-offset-primary-text" />
+                                            @error('fundcluster')
+                                            <span class="my-auto text-sm text-red-500">{{$message}}</span>
+                                            @enderror
+                                        </div> <button x-show="showInput" wire:click="setfundcluster({{$dvInfo->id}})"
+                                            class="p-2 m-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">
+                                            Save Fund cluster Number</button>
                                         @else
                                         {{$dvInfo->fund_cluster}}
                                         @endif

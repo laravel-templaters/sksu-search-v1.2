@@ -16,6 +16,7 @@ class CreateNotesTable extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('disbursement_voucher_id');
+            $table->foreignId('last_action_id');
             $table->string('note');
             $table->timestamps();
         });

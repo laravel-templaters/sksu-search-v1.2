@@ -100,3 +100,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/email',function(){
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/act/dashboard', \App\Http\Livewire\Accountant\Pages\Dashboard::class)->name('accountant-dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/budoff/dashboard', \App\Http\Livewire\BudgetOffice\Pages\BudgetDash::class)->name('budget-dashboard');

@@ -16,12 +16,12 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->insert(
             [
-                ['role_name' => 'Admin'],
-                ['role_name' => 'Department Head'], 
-                ['role_name' => 'Secretary'],
-                ['role_name' => 'Accountant'],
-                ['role_name' => 'Budget Office'],
-                ['role_name' => 'President']
+                ['role_name' => 'Admin'],//1
+                ['role_name' => 'Department Head'], //2
+                ['role_name' => 'Secretary'],//3
+                ['role_name' => 'Accountant'],//4
+                ['role_name' => 'Budget Officer'],//5
+                ['role_name' => 'President']//6
             ]);
     }
 }

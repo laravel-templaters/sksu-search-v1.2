@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\DeptHead;
+namespace App\Http\Livewire\BudgetOffice\Pages;
 
 use Livewire\Component;
 //models
@@ -16,10 +16,8 @@ use App\Models\User;
 use App\Events\ForwardDV;
 use App\Models\Signatory;
 
-//use Illuminate\Support\Facades\Auth;
-class DepartmentHead extends Component
-{
-    //view voucher info
+class BudgetDash extends Component
+{//view voucher info
     public $showViewModal= false;
     public $showForwardModal= false;
     public $showReturnModal= false;
@@ -47,9 +45,9 @@ class DepartmentHead extends Component
         $this->milestones = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
        
          $this->pending_dv = DisbursementVoucher::where('user_id','=',auth()->user()->id)->get();
-        
-        return view('livewire.dept-head.department-head')->layout('layouts.accountant');
+        return view('livewire.budget-office.pages.budget-dash')->layout('layouts.accountant');
     }
+    
     public function populateTable(){
         $this->greeting = $this->greetings[rand(0,(count($this->greetings)-1))];
         $this->pendingClicked = false;
@@ -147,6 +145,20 @@ class DepartmentHead extends Component
             $this->sigsReturn = $ms1;
         }
         $this->showReturnModal = true;
-
+        
     }
+
+    //Budget exclusiove methods
+    public $fundcluster="";
+    public function setfundcluster($dvID){
+      
+         if ($this->validate(['fundcluster'=>'required|min:3'],['fundcluster.required'=> 'Input fund cluster please.','fundcluster.min'=> 'Input too short.'])) {
+             $dv = DisbursementVoucher::find($dvID); 
+            $dv->fund_cluster = $this->fundcluster;
+            $dv->save();
+             $this->showViewModal = false;
+             $this->showModal($dvID);
+         }
+    }
+       
 }

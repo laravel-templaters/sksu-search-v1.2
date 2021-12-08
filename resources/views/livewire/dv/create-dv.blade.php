@@ -267,9 +267,10 @@
                                 @if($searchedusers->count() > 0)
                                 @foreach($searchedusers as $searcheduser)
                                 <div class="col-span-1 space-x-1">
-                                    <button class="" wire:click="sUid({{$searcheduser->id}})">
+                                    <button class="rounded-xl focus:ring-2 focus:ring-primary-text"
+                                        wire:click="sUid({{$searcheduser->id}})">
                                         <img src="{{$searcheduser->avatar != null ? asset($searcheduser->avatar) : asset($searcheduser->profile_photo_url)}}"
-                                            class="w-20 h-20 mx-auto rounded-full lg:w-24 lg:h-24">
+                                            class="w-20 h-20 p-2 mx-auto rounded-full lg:w-24 lg:h-24">
                                         <p class="mt-1 text-sm text-blue-53">
                                             {{$searcheduser->name}}
                                         </p>
@@ -553,12 +554,17 @@
                                         $related_doc_arr = explode('<',$doc->related_document_list_entry);
                                             $doc_arr= explode('*',$doc->related_document_list_entry);
                                             @endphp
+
+                                            @if (count($doc_arr)>1)
                                             <h3 class="my-auto uppercase"> <span class="my-auto">•</span> <span
                                                     class="ml-1">{{$doc_arr[0]}}</span></h3>
-                                            @if (count($doc_arr)>1)
                                             <span
                                                 class="ml-2 text-sm font-extrabold tracking-widest text-indigo-600">*{{$doc_arr[1]}}</span>
+                                            @else
+                                            <h3 class="my-auto uppercase"> <span class="my-auto">•</span> <span
+                                                    class="ml-1">{{$related_doc_arr[0]}}</span></h3>
                                             @endif
+
                                             @if (count($related_doc_arr) > 1)
                                             @php
                                             $related_doc_divided= explode('>',$related_doc_arr[1]); @endphp
@@ -570,7 +576,8 @@
                                                         $doc_arr= explode('*',$docu);
                                                         @endphp
                                                         @if (count($doc_arr)>1)
-                                                        {{$docu}} <span class="ml-2 text-sm font-extrabold tracking-widest text-indigo-600">*$doc_arr[1]</span>
+                                                        {{$docu}} <span
+                                                            class="ml-2 text-sm font-extrabold tracking-widest text-indigo-600">*$doc_arr[1]</span>
                                                         @else
                                                         {{$docu}}
                                                         @endif
