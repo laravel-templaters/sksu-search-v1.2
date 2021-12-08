@@ -14,7 +14,7 @@ class DVCategory extends Model
     use HasFactory;
 
     public function dv_types(){
-        return $this->belongsTo('App\Models\DVType');
+        return $this->hasOne('App\Models\DVType','id','dv_type_id');
     }
 
     public function dv_type_sorters(){
@@ -22,6 +22,6 @@ class DVCategory extends Model
     }
 
     public function dv_sub_categories(){
-        return $this->hasMany('App\Models\DVSubCategory');
+        return $this->belongsTo('App\Models\DVSubCategory');
     }
 }

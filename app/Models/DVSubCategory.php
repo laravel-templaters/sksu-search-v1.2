@@ -18,7 +18,7 @@ class DVSubCategory extends Model
     }
 
     public function dv_categories(){
-        return $this->belongsTo('App\Models\DVCategory');
+        return $this->hasOne('App\Models\DVCategory','id','dv_category_id');
     }
 
     public function related_docs(){

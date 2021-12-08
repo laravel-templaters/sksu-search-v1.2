@@ -22,6 +22,6 @@ class DVType extends Model
     }
 
     public function dv_categories(){
-        return $this->hasMany('App\Models\DVCategory');
+        return $this->belongsTo('App\Models\DVCategory');
     }
 }

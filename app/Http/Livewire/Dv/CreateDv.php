@@ -119,16 +119,16 @@ class CreateDv extends Component
             switch($this->sorter)
             {
                 case '1':
-                    $this->voucher_type = (DVType::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->type_id)->first())->dv_type;
-                    $this->voucher = DVType::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->dv_type_id)->first();
+                    $this->voucher_type = (DVType::where('id', '=',  $this->category_id)->first())->dv_type;
+                    $this->voucher = DVType::where('id', '=',  $this->category_id)->first();
                     break;
                     case '2':
-                        $this->voucher_type = (DVCategory::where('id', '=',   (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first())->dv_category;
-                        $this->voucher = DVCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_category_id)->first();        
+                        $this->voucher_type = (DVCategory::where('id', '=', $this->category_id)->first())->dv_category;
+                        $this->voucher = DVCategory::where('id', '=', $this->category_id)->first();        
                         break;
                         case '3':
-                            $this->voucher_type = (DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_sub_category_id)->first())->dv_sub_category;
-                            $this->voucher = DVSubCategory::where('id', '=',  (DVTypeSorter::findOrFail($this->category_id))->dv_sub_category_id)->first();      
+                            $this->voucher_type = (DVSubCategory::where('id', '=', $this->category_id)->first())->dv_sub_category;
+                            $this->voucher = DVSubCategory::where('id', '=', $this->category_id)->first();      
                             break;
             }
             // dd($this->voucher->id);
