@@ -41,7 +41,6 @@ class TravelOrderMain extends Component
     public $inputs = [];
     public $i = 1;
     //variables for mock
-    public $frick ="hey";
 
     //variables for date_from and date_to
     public $date_from;
@@ -77,7 +76,7 @@ class TravelOrderMain extends Component
 
     public function render()
     {
-        $this->user = User::get();
+        $this->user = User::orderBy('name', 'asc')->get();
         $this->region = Region::get();
         $this->province = Province::where("region_code", "=",  $this->region_codes)->get();
         $this->city = City::where("province_code", "=", $this->province_codes)->get();
@@ -93,18 +92,9 @@ class TravelOrderMain extends Component
     // {
         
     // }
-
-
-    public function submit()
-    {
-        $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
-        $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
-        $date_string = $from_date ." - ".$to_date;
-        $reg = Region::where("region_code", "=",  $this->region_codes)->first();
-        $prov = Province::where("province_code", "=",  $this->province_codes)->first();
-        $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
-
-        $this->validate([
+    public function validateTo(){
+         $this->emit('valIE');
+         $this->validate([
             'users_id' => 'required',
             'purpose' => 'required',
             'region_codes' => 'required',
@@ -118,50 +108,59 @@ class TravelOrderMain extends Component
             'province_codes.required' => 'The province field is required.',
             'city_codes.required' => 'The city field is required.',   
             ]);
-        if (isset($this->finalTotal)) {
-            $travel_order = new TravelOrder;
-            $travel_order->purpose = $this->purpose;
-            $travel_order->philippine_regions_id =  $reg['id'];
-            $travel_order->philippine_provinces_id = $prov['id'];
-            $travel_order->philippine_cities_id = $cit['id'];
-            $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
-            $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
-            $travel_order->total = $this->finalTotal;
-            $travel_order->user_id = $this->users_id;
-            $travel_order->date_range = $date_string;
-            $travel_order->dv_type_sorter_id = "1"; 
-            $travel_order->dte_id =  $reg['id'];
-            $travel_order->save();  
-            $this->emit('storeItenerary',$travel_order->id);
-            $travel_order->notify(new TravelOrderSaved($invoice));
-            $this->alert('success', 'Successfully Added!', [
-              'background' => '#ccffcc',
-              'padding' => '0.5rem',
-              'position' =>  'top-end', 
-              'timer' =>  2500,  
-              'toast' =>  true, 
-              'text' =>  '',  
-              'confirmButtonText' =>  'Ok', 
-              'cancelButtonText' =>  'Cancel', 
-              'showCancelButton' =>  false, 
-              'showConfirmButton' =>  false, 
-            ]);
-            Sleep(2);
-                return redirect('dashboard');
+            $this->toValidated=true;
+    }
+    public $toValidated =false;
+    public $iteneraryValidated =false;
+    public function isiteneraryvalidated($isval){
+        if($isval){
+        $this->iteneraryValidated =true;
+        }else if ($isval==false){
+        $this->iteneraryValidated =false;
         }else{
-            $this->alert('warning', '<h3 class="font-sans font-extrabold text-blue-500 font-xs"> TOTAL UNCALCULATED </h3>', [
-                'background' => '#ffffff',
-                'padding' => '2rem',
-                'backdrop' => true,
-                'position' =>  'center', 
-                'timer' =>  4500,  
-                'toast' =>  false, 
-                'text' =>  'Press "Calculate" button before saving...  Thank You!', 
-                'confirmButtonText' =>  'Ok', 
-                'cancelButtonText' =>  'Cancel', 
-                'showCancelButton' =>  false, 
-                'showConfirmButton' =>  false, 
-          ]);
+        $this->iteneraryValidated =false;
+        $this->finalTotal = 0.0;
+        }
+    }
+
+    public function validateToAgain(){
+        $this->validateTo();
+         $this->submit();
+    }
+    public function submit()
+    {
+        $this->validateTo();
+        $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
+        $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
+        $date_string = $from_date ." - ".$to_date;
+        $reg = Region::where("region_code", "=",  $this->region_codes)->first();
+        $prov = Province::where("province_code", "=",  $this->province_codes)->first();
+        $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
+        
+       
+        if (isset($this->finalTotal) && $this->finalTotal != 0) {
+
+            if ($this->toValidated && $this->iteneraryValidated) {
+                $travel_order = new TravelOrder;
+                $travel_order->purpose = $this->purpose;
+                $travel_order->philippine_regions_id =  $reg['id'];
+                $travel_order->philippine_provinces_id = $prov['id'];
+                $travel_order->philippine_cities_id = $cit['id'];
+                $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+                $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+                $travel_order->total = $this->finalTotal;
+                $travel_order->user_id = $this->users_id;
+                $travel_order->date_range = $date_string;
+                $travel_order->dv_type_sorter_id = "1"; 
+                $travel_order->dte_id =  $reg['id'];
+                $travel_order->save();  
+                $this->emit('storeItenerary',$travel_order->id);
+                
+                Sleep(2);
+                return redirect()->route('redirect');
+            }
+        }else{
+ 
         }
         
 
@@ -283,14 +282,16 @@ class TravelOrderMain extends Component
 
     public $listeners = [
         'calculatetotalfromothers'=>'finalTotalCalculation',
+        'iteneraryvalidated'=>'isiteneraryvalidated'
     ];
 
     public $subTotal;
     public function TotalCalculation(){
         if ($this->has_registration == true) {
-            
-        $this->finalTotal = $this->subTotal= $this->registration_amt;
-        $this->emit('sendTotalVal');
+         $this->emit('sendTotalVal');
+         $this->emit('valIE');
+
+         $this->finalTotal = $this->subTotal= $this->registration_amt;
         } else {
             $this->finalTotal = $this->subTotal = 0.0;
         $this->emit('sendTotalVal');

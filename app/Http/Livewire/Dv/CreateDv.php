@@ -101,14 +101,14 @@ class CreateDv extends Component
     public function render()
     {
         if(isset($this->searchto)){
-            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
+            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
             // $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%' or lower(place_to_go) like '%".strtolower($this->searchto)."%'")->orderBy('created_at');
         }
         if (isset($this->searchuser) && $this->searchuser != "") {
-            $this->searchedusers= User::where(DB::raw('lower(name)'),"LIKE","%".strtolower($this->searchuser)."%")->get();
+            $this->searchedusers= User::where(DB::raw('lower(name)'),"LIKE","".strtolower($this->searchuser)."%")->get();
         }
 
-        $this ->searchedsignatories = User::whereRaw("lower(name) like '%".strtolower($this->searchsignatory) ."%' and role_id = 2")
+        $this ->searchedsignatories = User::whereRaw("lower(name) like '".strtolower($this->searchsignatory) ."%' and role_id = 2")
         ->get();  
         
         $this->mode_of_payment = DB::table('mode_of_payments')->get();
@@ -176,7 +176,7 @@ class CreateDv extends Component
         $disbursement_voucher->dv_type_sorter_id = $this->category_id;
         $disbursement_voucher->save();
 
-        $this->storeParticulars();
+        $this->storeParticulars($disbursement_voucher->id);
 
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
@@ -322,7 +322,7 @@ class CreateDv extends Component
     //methods Store Particulars START -----------
      public $dv_id=1;
  
-     public function storeParticulars(){
+     public function storeParticulars($disbursement_id){
 
                 
 
@@ -338,7 +338,7 @@ class CreateDv extends Component
                 }
 
                 $particulars = new Particular;
-                $particulars->disbursement_voucher_id = $this->dv_id;
+                $particulars->disbursement_voucher_id = $disbursement_id;
                 $particulars->entry = $this->entry[$key];
                 $particulars->responsibility_center = $this->responsibility_center[$key];
                 $particulars->mfo_pap = $this->mfo_pap[$key];
@@ -425,11 +425,11 @@ class CreateDv extends Component
             $names=User::where('id',$this->user_id)->get();
             $this->amount[0]=$touid->total;
             foreach($names as $name){
-                $this->fn=$name->first_name;
-                $this->ln=$name->last_name;
+                $this->fn=$name->name;
                
             }
             $this->showToModal = false;
+            
         }else{
             $this->modaltoid = $id;
             $this->travelorderid=$id;
@@ -437,10 +437,9 @@ class CreateDv extends Component
             $this->modaltopurpose = $touid->purpose;
             $names=User::where('id',$touid->user_id)->get();
             foreach($names as $name){
-                $fullname = strtoupper($name->first_name.' '.$name->last_name);
+                $fullname = strtoupper($name->name);
                 $this->modaltoowner = $fullname;
             }
-          
             $this->showToModal = true;
         }
         

@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{showStatus: false, showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
+<div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{showStatus: false,showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
     @entangle('showReturnModal'), active :
     @entangle('active'),personalClicked :
     @entangle('personalClicked'),pendingClicked : @entangle('pendingClicked'), show_Banner :@entangle('showBanner') }"
@@ -194,14 +194,14 @@
                                         {{$dv->user->name}}
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <button x-on:click="$wire.showModal({{$dv->id}})"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                            View voucher information
-                                        </button>
-                                        <button x-on:click="showStatus = true; $wire.emit('dvClicked',{{$dv->id}});"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
-                                            View voucher feed
-                                        </button>
+                                          <button x-on:click="$wire.showModal({{$dv->id}})"
+                                              class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                              View voucher information
+                                          </button>
+                                          <button x-on:click="showStatus = true; $wire.emit('dvClicked',{{$dv->id}});"
+                                              class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
+                                              View voucher feed
+                                          </button>
                                     </div>
                                 </div>
                                 <div class="mt-2 sm:flex sm:justify-between">
@@ -478,10 +478,10 @@
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                 class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
-                <div class="max-w-full mx-auto">
+                <div class="max-w-full mx-auto" x-data="{showInput : false}">
                     <!-- card start -->
                     <!-- This example requires Tailwind CSS v2.0+ -->
-                    <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+                    <div class="overflow-hidden bg-gray-100 shadow sm:rounded-lg" @click.away="showInput = false">
                         <div class="px-4 py-5 sm:px-6">
                             <h3 class="text-lg font-medium leading-6 text-gray-900">
                                 Disbursement Voucher Information
@@ -489,7 +489,6 @@
                             <p class="max-w-2xl mt-1 text-sm text-gray-500">
                                 Voucher Details
                             </p>
-
                         </div>
                         <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
                             @if ($dvInfo)
@@ -564,10 +563,24 @@
                                     <dt class="text-sm font-medium text-gray-500">
                                         Fund Cluster
                                     </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
 
-                                        @if ($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")
-                                        Fund cluster not set yet
+                                        @if (($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")&&
+                                        $dvInfo->user_id != auth()->user()->id)
+                                        <span x-show="showInput==false"> Fund cluster not set yet</span> <a
+                                            x-show="showInput==false" x-on:click="showInput=true"
+                                            class="p-2 ml-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">Set
+                                            Fund Cluster</a>
+                                        <div class="flex" x-show="showInput">
+                                            <input id="fundcluster" name="fundcluster" type="text"
+                                                wire:model.defer="fundcluster"
+                                                class="flex p-2 mx-2 border rounded-lg text-md focus:ring-1 focus:ring-offset-primary-text" />
+                                            @error('fundcluster')
+                                            <span class="my-auto text-sm text-red-500">{{$message}}</span>
+                                            @enderror
+                                        </div> <button x-show="showInput" wire:click="setfundcluster({{$dvInfo->id}})"
+                                            class="p-2 m-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">
+                                            Save Fund cluster Number</button>
                                         @else
                                         {{$dvInfo->fund_cluster}}
                                         @endif
@@ -830,7 +843,4 @@
         </div>
     </div>
     <!-- feed slide over end -->
-
-
-
 </div>

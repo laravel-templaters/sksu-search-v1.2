@@ -5,7 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\IteneraryEntry;
 use App\Models\Itenerary;
-
+use Carbon\Carbon;
+use App\Http\Livewire\Sec\To\TravelOrderMain;
 use Illuminate\Support\Facades\DB;
 
 // use App\Models\Itenerary;
@@ -181,18 +182,18 @@ class IteneraryView extends Component
             if($dep_time > $arr_time)
             {
 
-                $this->alert('warning', 'Invalid Time!', [
-                            'background' => '#fff',
-                            'padding' => '0.5rem',
-                            'position' =>  'bottom-start', 
-                            'timer' =>  3000,  
-                            'toast' =>  true, 
-                            'text' =>  '', 
-                            'confirmButtonText' =>  'Ok', 
-                            'cancelButtonText' =>  'Cancel', 
-                            'showCancelButton' =>  false, 
-                            'showConfirmButton' =>  false, 
-                      ]);
+                // $this->alert('warning', 'Invalid Time!', [
+                //             'background' => '#fff',
+                //             'padding' => '0.5rem',
+                //             'position' =>  'bottom-start', 
+                //             'timer' =>  3000,  
+                //             'toast' =>  true, 
+                //             'text' =>  '', 
+                //             'confirmButtonText' =>  'Ok', 
+                //             'cancelButtonText' =>  'Cancel', 
+                //             'showCancelButton' =>  false, 
+                //             'showConfirmButton' =>  false, 
+                //       ]);
 
 
                 $this->input[$key]['arr_time'] = "";
@@ -351,8 +352,33 @@ class IteneraryView extends Component
     public $listeners = [
         'storeItenerary'=>'storeItenerary',
         'sendTotalVal'=>'sendTotalVal',
+        'valIE' => 'validateIEs',
        
     ];
+
+    public function validateIEs(){
+        $validatedDate = $this->validate([
+            'input.*.place' => 'required',
+            'input.*.dep_time' => 'required',
+            'input.*.arr_time' => 'required',
+            'input.*.mot' => 'required',
+            'input.*.trans_exp' => 'required',
+            'input.*.others' => 'required',
+            'input.*.total' => 'required',
+        ],
+        [
+            'input.*.place' => 'This field is required',
+            'input.*.dep_time' => 'This field is required',
+            'input.*.arr_time' => 'This field is required',
+            'input.*.mot' => 'This field is required',
+            'input.*.trans_exp' => 'This field is required',
+            'input.*.others' => 'This field is required',
+            'input.*.total' => 'This field is required',
+
+        ]
+        );
+        $this->emitUp('iteneraryvalidated', true);
+    }
 
 
 
@@ -387,26 +413,26 @@ class IteneraryView extends Component
     public function storeItenerary($trans_id)
     {
 
-        // $validatedDate = $this->validate([
-        //     'input.*.place' => 'required',
-        //     'input.*.dep_time' => 'required',
-        //     'input.*.arr_time' => 'required',
-        //     'input.*.mot' => 'required',
-        //     'input.*.trans_exp' => 'required',
-        //     'input.*.others' => 'required',
-        //     'input.*.total' => 'required',
-        // ],
-        // [
-        //     'input.*.place' => 'This field is required',
-        //     'input.*.dep_time' => 'This field is required',
-        //     'input.*.arr_time' => 'This field is required',
-        //     'input.*.mot' => 'This field is required',
-        //     'input.*.trans_exp' => 'This field is required',
-        //     'input.*.others' => 'This field is required',
-        //     'input.*.total' => 'This field is required',
+        $validatedDate = $this->validate([
+            'input.*.place' => 'required',
+            'input.*.dep_time' => 'required',
+            'input.*.arr_time' => 'required',
+            'input.*.mot' => 'required',
+            'input.*.trans_exp' => 'required',
+            'input.*.others' => 'required',
+            'input.*.total' => 'required',
+        ],
+        [
+            'input.*.place' => 'This field is required',
+            'input.*.dep_time' => 'This field is required',
+            'input.*.arr_time' => 'This field is required',
+            'input.*.mot' => 'This field is required',
+            'input.*.trans_exp' => 'This field is required',
+            'input.*.others' => 'This field is required',
+            'input.*.total' => 'This field is required',
 
-        // ]
-        // );
+        ]
+        );
 
        
       
@@ -443,21 +469,7 @@ class IteneraryView extends Component
     
                         }
 
-                      //  return back();
-
-               
                         
-            // Contact::create(['name' => $this->name[$key], 'phone' => $this->phone[$key]]);
-            // $itenerary = new App\Models\Itenerary;
-            // $itenerary->is_breakfast_covered = $this->input[$key]['breakfast'] == 1 ? '1' : '0';
-            // $itenerary->is_lunch_covered = $this->input[$key]['lunch'] == 1 ? '1' : '0';
-            // $itenerary->is_dinner_covered = $this->input[$key]['dinner'] == 1 ? '1' : '0';
-            // $itenerary->is_lodging_covered = $this->input[$key]['lodging'] == 1 ? '1' : '0';
-            // $itenerary->date = $this->input[$key]['date'];
-            // $itenerary->perdiem = $this->input[$key]['per_diem'];
-            // $itenerary->travel_order_id = $trans_id;
-            // $itenerary->save();
-
 
     }
     

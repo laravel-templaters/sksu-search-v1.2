@@ -21,7 +21,7 @@ class DisbursementVoucher extends Model
     }
 
     public function mop(){
-    return $this->hasOne('App\Models\ModeOfPayment');
+    return $this->hasOne('App\Models\ModeOfPayment','id','mop_id');
     }
 
     public function status(){

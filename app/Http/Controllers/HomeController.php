@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $role = Auth::user()->role_id;
-
+      
         if($role == 1)
         {
             return redirect()->route('dashboard');
@@ -20,6 +20,11 @@ class HomeController extends Controller
            return redirect()->route('client-dash');
         }else if($role == 2){
             return redirect()->route('department-head');
+         }else if($role == 4){
+            return redirect()->route('accountant-dashboard');
+         }
+         else if($role == 5){
+            return redirect()->route('budget-dashboard');
          }
     }
     public function test()
