@@ -25,6 +25,8 @@ module.exports = {
                 "primary-text": "#dda15e",
                 "primary-text-alt": "#dc2f02",
                 "secondary-text": "#fefae0",
+                "orange-ripe": "#FF8840",
+                "main-bg": "#fedfa2",
             },
         },
     },

@@ -18,13 +18,13 @@
 
         }
         @endphp
-        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-primary-bg" x-data="{showMe : false}">
+        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-orange-ripe" x-data="{showMe : false}">
             @if($categories->count()>0)
             <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
-                <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
+                <h3 class="my-auto text-xl font-extrabold text-primary-bg">{{$type->dv_type}}</h3>
                 <div class="flex">
                     <button> <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 my-auto text-transparent text-primary-text" id="chevron" fill="none"
+                            class="w-5 h-5 my-auto text-transparent text-primary-bg" id="chevron" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
@@ -35,10 +35,10 @@
             @else
             <a href="{{route('travel-order', ['id' => $dv_type_id])}}">
                 <div class="flex justify-between min-w-full p-3">
-                    <h3 class="my-auto text-xl font-extrabold text-primary-text">{{$type->dv_type}}</h3>
+                    <h3 class="my-auto text-xl font-extrabold text-primary-bg">{{$type->dv_type}}</h3>
                     <div class="flex">
                         <button> <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-5 h-5 my-auto text-transparent text-primary-text" id="chevron" fill="none"
+                                class="w-5 h-5 my-auto text-transparent text-primary-bg" id="chevron" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
@@ -75,6 +75,10 @@
                     <div class="grid flex-col grid-cols-1 p-3 ml-3 rounded-md bg-primary-bg-alt " x-cloak
                         x-show="openCA"></div>
                     @else
+                    @php
+                    $dv_category_id = App\Models\DVTypeSorter::where('dv_category_id','=',
+                    $category->id)->where('sorter','LIKE', '3')->limit(1)->get();
+                    @endphp
 
                     <h3 class="p-2 rounded-md text-primary-bg text-md hover:bg-primary-bg hover:text-secondary-text"
                         x-on:click="openCA = !openCA ">{{$category->dv_category}}</h3>
@@ -82,9 +86,10 @@
                         x-show="openCA">
 
 
+
                         @foreach ($sub_categories as $sub_category)
                         <a href="{{route('cdv', ['id' => $dv_category_id[0]['id'], 'sorter' => '3'])}}"
-                            class="p-2 rounded-md text-secondary-text text-md hover:bg-gray-300 hover:text-primary-bg">{{$sub_category->dv_sub_category}}</a>
+                            class="p-2 rounded-md text-secondary-text text-md hover:bg-gray-300 hover:text-primary-bg">{{$sub_category->dv_sub_category}}-----{{ $dv_category_id[0]['id']}}</a>
                         {{-- sub cat only a end--}}
                         @endforeach
                     </div>

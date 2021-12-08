@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
+<div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{showStatus: false,showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
     @entangle('showReturnModal'), active :
     @entangle('active'),personalClicked :
     @entangle('personalClicked'),pendingClicked : @entangle('pendingClicked'), show_Banner :@entangle('showBanner') }"
@@ -121,8 +121,7 @@
                     @foreach ($pending_dv as $dv)
                     @if ($searchPersonal=="")
                     <li class="rounded-lg">
-                        <a class="block rounded-lg hover:cursor-pointer hover:bg-gray-50"
-                            x-on:click="$wire.showModal({{$dv->id}})">
+                        <a class="block rounded-lg hover:bg-gray-50">
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
                                     <p class="text-sm font-medium text-indigo-600 truncate">
@@ -130,9 +129,13 @@
                                         {{$dv->user->name}}
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <button
-                                            class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-
+                                        <button x-on:click="$wire.showModal({{$dv->id}})"
+                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                            View voucher information
+                                        </button>
+                                        <button x-on:click="showStatus = true; $wire.emit('dvClicked',{{$dv->id}});"
+                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
+                                            View voucher feed
                                         </button>
                                     </div>
                                 </div>
@@ -191,10 +194,14 @@
                                         {{$dv->user->name}}
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <button
-                                            class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-
-                                        </button>
+                                          <button x-on:click="$wire.showModal({{$dv->id}})"
+                                              class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                              View voucher information
+                                          </button>
+                                          <button x-on:click="showStatus = true; $wire.emit('dvClicked',{{$dv->id}});"
+                                              class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
+                                              View voucher feed
+                                          </button>
                                     </div>
                                 </div>
                                 <div class="mt-2 sm:flex sm:justify-between">
@@ -792,5 +799,48 @@
     </div>
 
     <!-- modal return end -->
+    <!-- feed slide over start -->
+    <div class="fixed inset-0 overflow-hidden" x-cloak x-show="showStatus" aria-labelledby="slide-over-title"
+        role="dialog" aria-modal="true">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0" aria-hidden="true" x-cloak x-show="showStatus">
+                <div class="fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
 
+                    <div class="w-screen max-w-2xl" x-cloak x-show="showStatus"
+                        x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
+                        x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+                        x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
+                        x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-0">
+                        <div class="flex flex-col h-full py-6 overflow-y-scroll bg-white shadow-xl">
+                            <div class="px-4 sm:px-6">
+                                <div class="flex items-start justify-between">
+                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
+                                        Panel title
+                                    </h2>
+                                    <div class="flex items-center ml-3 h-7">
+                                        <button type="button" x-on:click="showStatus =false"
+                                            class="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            <span class="sr-only">Close panel</span>
+                                            <!-- Heroicon name: outline/x -->
+                                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative flex-1 px-4 mt-6 sm:px-6">
+                                <!-- Replace with your content -->
+                                @livewire('client.components.dashboard.feed-status');
+                                <!-- /End replace -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- feed slide over end -->
 </div>

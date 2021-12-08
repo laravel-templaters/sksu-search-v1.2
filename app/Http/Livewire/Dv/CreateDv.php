@@ -425,11 +425,11 @@ class CreateDv extends Component
             $names=User::where('id',$this->user_id)->get();
             $this->amount[0]=$touid->total;
             foreach($names as $name){
-                $this->fn=$name->first_name;
-                $this->ln=$name->last_name;
+                $this->fn=$name->name;
                
             }
             $this->showToModal = false;
+            
         }else{
             $this->modaltoid = $id;
             $this->travelorderid=$id;
@@ -437,10 +437,9 @@ class CreateDv extends Component
             $this->modaltopurpose = $touid->purpose;
             $names=User::where('id',$touid->user_id)->get();
             foreach($names as $name){
-                $fullname = strtoupper($name->first_name.' '.$name->last_name);
+                $fullname = strtoupper($name->name);
                 $this->modaltoowner = $fullname;
             }
-          
             $this->showToModal = true;
         }
         

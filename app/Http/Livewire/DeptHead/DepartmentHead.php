@@ -112,7 +112,7 @@ class DepartmentHead extends Component
             $la->disbursement_voucher_id=$dvID;
             $la->reciever_id=$next_step_id->assigned_user;
             $la->sender_id=auth()->user()->id;
-            $la->action_type_id= 1;
+            $la->action_type_id= 3;
             $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
             $la->read =false;
             $la->save();
