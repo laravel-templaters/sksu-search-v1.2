@@ -18,7 +18,10 @@ class RoleSeeder extends Seeder
             [
                 ['role_name' => 'Admin'],
                 ['role_name' => 'Department Head'], 
-                ['role_name' => 'Secretary']
+                ['role_name' => 'Secretary'],
+                ['role_name' => 'Accountant'],
+                ['role_name' => 'Budget Office'],
+                ['role_name' => 'President']
             ]);
     }
 }
