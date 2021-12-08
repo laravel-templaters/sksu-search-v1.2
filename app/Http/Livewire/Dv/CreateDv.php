@@ -176,7 +176,7 @@ class CreateDv extends Component
         $disbursement_voucher->dv_type_sorter_id = $this->category_id;
         $disbursement_voucher->save();
 
-        $this->storeParticulars();
+        $this->storeParticulars($disbursement_voucher->id);
 
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
@@ -322,7 +322,7 @@ class CreateDv extends Component
     //methods Store Particulars START -----------
      public $dv_id=1;
  
-     public function storeParticulars(){
+     public function storeParticulars($disbursement_id){
 
                 
 
@@ -338,7 +338,7 @@ class CreateDv extends Component
                 }
 
                 $particulars = new Particular;
-                $particulars->disbursement_voucher_id = $this->dv_id;
+                $particulars->disbursement_voucher_id = $disbursement_id;
                 $particulars->entry = $this->entry[$key];
                 $particulars->responsibility_center = $this->responsibility_center[$key];
                 $particulars->mfo_pap = $this->mfo_pap[$key];

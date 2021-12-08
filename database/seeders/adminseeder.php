@@ -53,7 +53,7 @@ class adminseeder extends Seeder
                'contact_number'=>'09123456789',        
                'email'=>'reynaldodalayap@sksu.edu.ph',
                'password'=> Hash::make('dalayap123'),
-               'role_id'=>2,
+               'role_id'=>5,
                'department_id'=>8,
                'position_id'=>13]);   
 
@@ -223,7 +223,7 @@ class adminseeder extends Seeder
                   'contact_number'=>'09123456789',        
                   'email'=>'jesherpalomaria@sksu.edu.ph',
                   'password'=> Hash::make('palomaria123'),
-                  'role_id'=>2,
+                  'role_id'=>4,
                   'department_id'=>25,
                   'position_id'=>12]);
                   

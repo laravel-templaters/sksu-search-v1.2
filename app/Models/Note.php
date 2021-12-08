@@ -16,4 +16,7 @@ class Note extends Model
     public function disbursement_vouchers(){
         return $this->belongsTo('App\Models\DisbursementVoucher');
     }
+    public function last_action(){
+        return $this->belongsTo('App\Models\LastAction');
+    }
 }
