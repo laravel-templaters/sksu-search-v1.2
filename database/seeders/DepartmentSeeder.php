@@ -313,6 +313,18 @@ class DepartmentSeeder extends Seeder
                        'department_name'=> 'Faculty',
                        'department_short_code'=>'acc-fac',
                        'campus_id'=>'1',
-                       ]);//51            
+                       ]);//51 
+                       
+                    DB::table('departments')->insert([
+                       'department_name'=> 'President\'s Office',
+                       'department_short_code'=>'acc-presoff',
+                       'campus_id'=>'1',
+                        ]);//52 
+                        
+                    DB::table('departments')->insert([
+                        'department_name'=> 'Cashier\'s Office',
+                        'department_short_code'=>'acc-cashoff',
+                        'campus_id'=>'1',
+                        ]);//53         
     }
 }
