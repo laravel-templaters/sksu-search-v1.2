@@ -29,11 +29,15 @@ class DepartmentSeeder extends Seeder
                 'department_name'=> 'Budget Office',
                 'department_short_code'=>'acc-budg',
                 'campus_id'=>'1',
+                'admin_user'=>'3',
+                'head_user'=>'47',
                 ]);//2
                 DB::table('departments')->insert([
                     'department_name'=> 'Accounting Office',
                     'department_short_code'=>'acc-acto',
                     'campus_id'=>'1',
+                    'admin_user'=>'20',
+                    'head_user'=>'59',
                     ]);//3
                     DB::table('departments')->insert([
                     'department_name'=> 'Information and Communications Tech',
@@ -44,6 +48,8 @@ class DepartmentSeeder extends Seeder
                     'department_name'=> 'Internal Control Unit',
                     'department_short_code'=>'acc-icu',
                     'campus_id'=>'1',
+                    'admin_user'=>'45',
+                    'head_user'=>'238',                    
                     ]);//5
                     DB::table('departments')->insert([
                         'department_name'=> 'Academic Affairs',
@@ -209,85 +215,85 @@ class DepartmentSeeder extends Seeder
                       'department_name'=> 'Climate Change & DRRMC',
                       'department_short_code'=>'acc-ccdrrmc',
                       'campus_id'=>'1',
-                      ]);//34 
+                      ]);//33 
                       
                     DB::table('departments')->insert([
                       'department_name'=> 'DRRMC',
                       'department_short_code'=>'acc-drrmc',
                       'campus_id'=>'1',
-                      ]);//35
+                      ]);//34
                       
                      DB::table('departments')->insert([
                        'department_name'=> 'Board Review and Coaching',
                        'department_short_code'=>'acc-brc',
                        'campus_id'=>'1',
-                       ]);//36 
+                       ]);//35
 
                     DB::table('departments')->insert([
                       'department_name'=> 'College of Graduate School',
                       'department_short_code'=>'acc-cgs',
                       'campus_id'=>'1',
-                      ]);//37
+                      ]);//36
                      
                     DB::table('departments')->insert([
                        'department_name'=> 'College of Law',
                        'department_short_code'=>'acc-law',
                        'campus_id'=>'1',
-                       ]);//38 
+                       ]);//37 
                        
                     DB::table('departments')->insert([
                      'department_name'=> 'College of Teacher Education',
                      'department_short_code'=>'acc-ted',
                      'campus_id'=>'1',
-                     ]);//39
+                     ]);//38
                      
                     DB::table('departments')->insert([
                        'department_name'=> 'College of Health Sciences',
                        'department_short_code'=>'acc-hs',
                        'campus_id'=>'1',
-                       ]);//40
+                       ]);//39
                        
                     DB::table('departments')->insert([
                        'department_name'=> 'College of Criminal Justice Education',
                        'department_short_code'=>'acc-cje',
                        'campus_id'=>'1',
-                       ]);//41  
+                       ]);//40  
                      
                     DB::table('departments')->insert([
                        'department_name'=> 'College of Business Administration & Hotel Management',
                        'department_short_code'=>'acc-bahm',
                        'campus_id'=>'1',
-                      ]);//42 
+                      ]);//41 
                       
                     DB::table('departments')->insert([
                       'department_name'=> 'College of Arts and Sciences',
                       'department_short_code'=>'acc-aas',
                       'campus_id'=>'1',
-                     ]);//43
+                     ]);//42
                      
                     DB::table('departments')->insert([
                        'department_name'=> 'College of Computer Studies',
                        'department_short_code'=>'acc-cs',
                        'campus_id'=>'1',
-                      ]);//44  
+                      ]);//43  
                       
                     DB::table('departments')->insert([
                        'department_name'=> 'College of Industrial Technology',
                        'department_short_code'=>'acc-it',
                        'campus_id'=>'1',
-                     ]);//45 
+                     ]);//44 
                      
                      DB::table('departments')->insert([
                        'department_name'=> 'College of Engineering',
                        'department_short_code'=>'acc-eng',
                        'campus_id'=>'1',
-                       ]);//46 
+                       ]);//45 
 
                     DB::table('departments')->insert([
                        'department_name'=> 'University Accreditation',
                        'department_short_code'=>'acc-uacc',
                        'campus_id'=>'1',
-                       ]);//47  
+                       ]);//46  
 
 
                        
@@ -295,36 +301,40 @@ class DepartmentSeeder extends Seeder
                        'department_name'=> 'Science Laboratory High School',
                        'department_short_code'=>'acc-slhs',
                        'campus_id'=>'1',
-                       ]);//48
+                       ]);//47
                       
                     DB::table('departments')->insert([
                        'department_name'=> 'Internal Audit',
                        'department_short_code'=>'acc-ia',
                        'campus_id'=>'1',
-                       ]);//49 
+                       ]);//48 
                        
                     DB::table('departments')->insert([
                        'department_name'=> 'Supply Office',
                        'department_short_code'=>'acc-so',
                        'campus_id'=>'1',
-                       ]);//50
+                       ]);//49
 
                     DB::table('departments')->insert([
                        'department_name'=> 'Faculty',
                        'department_short_code'=>'acc-fac',
                        'campus_id'=>'1',
-                       ]);//51 
+                       ]);//50 
                        
                     DB::table('departments')->insert([
                        'department_name'=> 'President\'s Office',
                        'department_short_code'=>'acc-presoff',
                        'campus_id'=>'1',
-                        ]);//52 
+                        'admin_user'=>'63',
+                        'head_user'=>'62',
+                        ]);//51 
                         
                     DB::table('departments')->insert([
                         'department_name'=> 'Cashier\'s Office',
                         'department_short_code'=>'acc-cashoff',
                         'campus_id'=>'1',
-                        ]);//53         
+                        'admin_user'=>'64',
+                        'head_user'=>'66',
+                        ]);//52         
     }
 }

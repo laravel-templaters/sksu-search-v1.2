@@ -18,4 +18,10 @@ class Department extends Model
      public function campus(){
         return $this->hasOne('App\Models\Campus','id','campus_id');
     }
+    public function admin_user(){
+        return $this->hasOne('App\Models\User','id','admin_user');
+    }
+    public function head_user(){
+        return $this->hasOne('App\Models\User','id','head_user');
+    }
 }

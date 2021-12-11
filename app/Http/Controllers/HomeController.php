@@ -19,12 +19,45 @@ class HomeController extends Controller
           // event(new ForwardDV(Auth::user(), 'hello gabriel'));
            return redirect()->route('client-dash');
         }else if($role == 2){
-            return redirect()->route('department-head');
+
+                //temporary fix
+            if(Auth::user()->department->admin_user != null){
+                if (Auth::user()->department->admin_user->id == Auth::user()->id || Auth::user()->department->head_user->id == Auth::user()->id) {
+                    return redirect()->route('accountant-dashboard');
+                } else {
+                    return redirect()->route('department-head');
+                }
+                
+            }else{
+                return redirect()->route('department-head');
+            }
+        
          }else if($role == 4){
-            return redirect()->route('accountant-dashboard');
+                 //temporary fix
+            if(Auth::user()->department->admin_user != null){
+                if (Auth::user()->department->admin_user->id == Auth::user()->id || Auth::user()->department->head_user->id == Auth::user()->id) {
+                    
+                } else {
+                    return redirect()->route('accountant-dashboard');
+                }
+                
+            }else{
+                return redirect()->route('accountant-dashboard');
+            }
+           
          }
          else if($role == 5){
-            return redirect()->route('budget-dashboard');
+            if(Auth::user()->department->admin_user != null){
+                if (Auth::user()->department->admin_user->id == Auth::user()->id || Auth::user()->department->head_user->id == Auth::user()->id) {
+                    
+                } else {
+                    return redirect()->route('budget-dashboard');
+                }
+                
+            }else{
+                return redirect()->route('budget-dashboard');
+            }
+           
          }
     }
     public function test()
