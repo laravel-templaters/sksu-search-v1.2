@@ -41,17 +41,6 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'REYNALDO H. DALAYAP JR., PhD',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'reynaldodalayap@sksu.edu.ph',
-         'password' => Hash::make('dalayap123'),
-         'role_id' => 2,
-         'department_id' => 2,
-         'position_id' => 20
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'LYNETTE G. PENIERO',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
@@ -233,9 +222,9 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'jesherpalomaria@sksu.edu.ph',
          'password' => Hash::make('palomaria123'),
-         'role_id' => 2,
-         'department_id' => 25,
-         'position_id' => 12
+         'role_id' => 4,
+         'department_id' => 3,
+         'position_id' => 4
       ]);
 
 
@@ -514,6 +503,18 @@ class adminseeder extends Seeder
          'position_id' => 11
       ]);
 
+      
+      DB::table('users')->insert([
+         'name' => 'REGINA L. LACAMENTO',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'reginalacamento@sksu.edu.ph',
+         'password' => Hash::make('lacamento123'),
+         'role_id' => 2,
+         'department_id' => 5,
+         'position_id' => 11
+      ]);
+
       DB::table('users')->insert([
          'name' => 'LOVINA P. COGOLLO, PhD',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
@@ -526,23 +527,12 @@ class adminseeder extends Seeder
       ]);
 
       DB::table('users')->insert([
-         'name' => 'REIZZA MAE D. KUSAIN	',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'reizzamaekusain@sksu.edu.ph',
-         'password' => Hash::make('kusain123'),
-         'role_id' => 2,
-
-         'position_id' => 20
-      ]);
-
-      DB::table('users')->insert([
          'name' => 'JAY BADILLA',
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
          'email' => 'jaybadilla@sksu.edu.ph',
          'password' => Hash::make('bandilla123'),
-         'role_id' => 2,
+         'role_id' => 5,
          'department_id' => 2,
          'position_id' => 20
       ]);
@@ -553,7 +543,29 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'jeremyoriana@sksu.edu.ph',
          'password' => Hash::make('oriana123'),
-         'role_id' => 2,
+         'role_id' => 5,
+         'department_id' => 2,
+         'position_id' => 20
+      ]);
+      
+      DB::table('users')->insert([
+         'name' => 'REIZZA MAE D. KUSAIN	',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'reizzamaekusain@sksu.edu.ph',
+         'password' => Hash::make('kusain123'),
+         'role_id' => 5,
+         'department_id' => 2,
+         'position_id' => 20
+      ]);
+
+      DB::table('users')->insert([
+         'name' => 'REYNALDO H. DALAYAP JR., PhD',
+         'birth_day' =>  Carbon::create('2000', '04', '06'),
+         'contact_number' => '09123456789',
+         'email' => 'reynaldodalayap@sksu.edu.ph',
+         'password' => Hash::make('dalayap123'),
+         'role_id' => 5,
          'department_id' => 2,
          'position_id' => 20
       ]);
@@ -564,7 +576,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'kayeannacaylar@sksu.edu.ph',
          'password' => Hash::make('acaylar123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -575,7 +587,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'mariloutorrecampo@sksu.edu.ph',
          'password' => Hash::make('torrecampo123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -586,7 +598,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'catherinelegaspi@sksu.edu.ph',
          'password' => Hash::make('legaspi123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -598,7 +610,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'lapuzmamalo@sksu.edu.ph',
          'password' => Hash::make('mamalo123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -609,7 +621,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'armiejanoto@sksu.edu.ph',
          'password' => Hash::make('janoto123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -620,7 +632,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'kimberlypantinople@sksu.edu.ph',
          'password' => Hash::make('pantinople123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -632,7 +644,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'nicolemagante@sksu.edu.ph',
          'password' => Hash::make('magante123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -643,7 +655,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'jasondavetemblique@sksu.edu.ph',
          'password' => Hash::make('temblique123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -654,7 +666,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'fretchiemaebedua@sksu.edu.ph',
          'password' => Hash::make('bedua123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -666,7 +678,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'johnreidelacruz@sksu.edu.ph',
          'password' => Hash::make('delacruz123'),
-         'role_id' => 2,
+         'role_id' => 4,
          'department_id' => 3,
          'position_id' => 22
       ]);
@@ -679,7 +691,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'roselendador@sksu.edu.ph',
          'password' => Hash::make('dador123'),
-         'role_id' => 3,
+         'role_id' => 2,
          'department_id' => 51,
          'position_id' => 23
       ]);
@@ -690,7 +702,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'estherlanceta@sksu.edu.ph',
          'password' => Hash::make('lanceta123'),
-         'role_id' => 3,
+         'role_id' => 2,
          'department_id' => 51,
          'position_id' => 23
       ]);
@@ -701,7 +713,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'irishmaepasquin@sksu.edu.ph',
          'password' => Hash::make('pasquin123'),
-         'role_id' => 3,
+         'role_id' => 2,
          'department_id' => 51,
          'position_id' => 23
       ]);
@@ -735,7 +747,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'vivianlanceta@sksu.edu.ph',
          'password' => Hash::make('lanceta123'),
-         'role_id' => 3,
+         'role_id' => 2,
          'department_id' => 52,
          'position_id' => 21
       ]);
@@ -746,7 +758,7 @@ class adminseeder extends Seeder
          'contact_number' => '09123456789',
          'email' => 'jacquelinbringuelo@sksu.edu.ph',
          'password' => Hash::make('bringuelo123'),
-         'role_id' => 3,
+         'role_id' => 2,
          'department_id' => 52,
          'position_id' => 21
       ]);
@@ -762,7 +774,7 @@ class adminseeder extends Seeder
          'password' => Hash::make('abanales123'),
          'role_id' => 3,
          'position_id' => 9,
-'department_id'=> 50,
+         'department_id'=> 50,
       ]);
 
       DB::table('users')->insert([
@@ -2636,18 +2648,9 @@ class adminseeder extends Seeder
          'password' => Hash::make('kirab123'),
          'role_id' => 3,
          'position_id' => 9,
-'department_id'=> 50
+         'department_id'=> 50
       ]);
 
-      DB::table('users')->insert([
-         'name' => 'REGINA L. LACAMENTO',
-         'birth_day' =>  Carbon::create('2000', '04', '06'),
-         'contact_number' => '09123456789',
-         'email' => 'reginalacamento@sksu.edu.ph',
-         'password' => Hash::make('lacamento123'),
-         'role_id' => 5,
-         'position_id' => 11
-      ]);
 
       DB::table('users')->insert([
          'name' => 'GISELLE A. LADEMORA',
