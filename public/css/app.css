@@ -2293,6 +2293,9 @@ select {
 .bg-gradient-to-r {
 	background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
+.bg-gradient-to-b {
+	background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
 .from-main-bg {
 	--tw-gradient-from: #fedfa2;
 	--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(254, 223, 162, 0));
@@ -2308,11 +2311,17 @@ select {
 .via-main-bg {
 	--tw-gradient-stops: var(--tw-gradient-from), #fedfa2, var(--tw-gradient-to, rgba(254, 223, 162, 0));
 }
+.via-white {
+	--tw-gradient-stops: var(--tw-gradient-from), #fff, var(--tw-gradient-to, rgba(255, 255, 255, 0));
+}
 .to-secondary-bg {
 	--tw-gradient-to: #bc6c25;
 }
 .to-primary-bg-alt {
 	--tw-gradient-to: #606c38;
+}
+.to-main-bg {
+	--tw-gradient-to: #fedfa2;
 }
 .bg-cover {
 	background-size: cover;

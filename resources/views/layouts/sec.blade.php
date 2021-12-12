@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="h-full font-sans" x-data="{active : 'dv', showFeed : false,}">
+<body class="h-full font-sans bg-gradient-to-b from-main-bg via-white to-main-bg" x-data="{active : 'dv', showFeed : false,}">
 
 
 
