@@ -110,7 +110,11 @@ public $voucher_number = "";
          $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','=',($ms->step_number)+1)->first();
              $la = new LastAction();
              $la->disbursement_voucher_id=$dvID;
-             $la->reciever_id=$next_step_id->assigned_user;
+             if($next_step_id->assigned_user != null){
+                 $la->reciever_id=$next_step_id->assigned_user; 
+             }else{
+                 $la->reciever_id=$next_step_id->department->head_user; 
+             }
              $la->sender_id=auth()->user()->id;
              $la->action_type_id= 1;
              $la->description ="to ".($next_step_id->department->department_name);

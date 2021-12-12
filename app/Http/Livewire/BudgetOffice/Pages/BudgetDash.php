@@ -77,8 +77,8 @@ class BudgetDash extends Component
             "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'populateTable',
         ];
     }
-   
-   
+      
+    
     public function recieveDocument($dvID,$mID,$uID){
         $la = new LastAction();
              $la->disbursement_voucher_id=$dvID;
@@ -102,7 +102,11 @@ class BudgetDash extends Component
          $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','=',($ms->step_number)+1)->first();
              $la = new LastAction();
              $la->disbursement_voucher_id=$dvID;
-             $la->reciever_id=$next_step_id->assigned_user;
+             if($next_step_id->assigned_user != null){
+                 $la->reciever_id=$next_step_id->assigned_user; 
+             }else{
+                 $la->reciever_id=$next_step_id->department->head_user; 
+             }
              $la->sender_id=auth()->user()->id;
              $la->action_type_id= 1;
              $la->description ="to ".($next_step_id->department->department_name);
@@ -123,32 +127,6 @@ class BudgetDash extends Component
              event(new ForwardDV($next_step_id->assigned_user));
           }
          
-     }
-     public function returnDoc($dvID,$mID,$assignedU){
-        
-         $ms = Milestone::find($mID);
-         $ms->isActive =false;
-         $ms->is_completed=false;
-         $ms->save();
-         $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('assigned_user','=',$assignedU)->first();
-             $la = new LastAction();
-             $la->disbursement_voucher_id=$dvID;
-             $la->reciever_id=$next_step_id->assigned_user;
-             $la->sender_id=auth()->user()->id;
-             $la->action_type_id= 3;
-             $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
-             $la->read =false;
-             $la->save();
-        
-         $ms1 = Milestone::find($next_step_id->id);
-         $ms1->date_started = Carbon::now();
-         $ms1->date_completed= null;
-         $ms1->isActive =true;
-         $ms1->is_completed =false;
-         $ms1->save();
-          DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
-          Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',$assignedU)->update(['signed'=>false,'date_signed'=>null]);
-         event(new ForwardDV($next_step_id->assigned_user));
      }
  
      public function showModal($disbursementID){
