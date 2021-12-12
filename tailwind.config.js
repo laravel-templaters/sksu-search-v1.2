@@ -27,7 +27,7 @@ module.exports = {
                 "secondary-text": "#fefae0",
                 "orange-ripe": "#FF8840",
                 "orange-ripe-light": "#F59963",
-                "main-bg": "#fedfa2",
+                "main-bg": "#fedfa2", 
             },
         },
     },

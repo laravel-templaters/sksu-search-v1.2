@@ -17,4 +17,7 @@ class Milestone extends Model
     public function assigned(){
         return $this->hasOne('App\Models\User','id','assigned_user');
     }
+    public function department(){
+        return $this->hasOne('App\Models\Department','id','department_id');
+    }
 }

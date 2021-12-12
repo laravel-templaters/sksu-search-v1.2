@@ -14,6 +14,7 @@ use App\Models\Milestone;
 use Carbon\Carbon;   
 use App\Models\User;
 use App\Events\ForwardDV;
+use App\Models\Department;
 use App\Models\Signatory;
 
 //use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,11 @@ class DepartmentHead extends Component
     public $showReturnModal= false;
     public $dvInfo = [];
     public $dvModalTotalAmount=0;
+    public $department =[];
+    public $isHeadOrAdmin=false;
+    public $isHead=false;
+    public $isAdmin=false;
+    public $isAssigned=false;
 
     public $searchPending="";
     public $searchPersonal="";
@@ -44,7 +50,22 @@ class DepartmentHead extends Component
     }
     public function render()
     {
-        $this->milestones = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
+        $user_id = auth()->user()->id;
+        $this->department = Department::with(['admin_user','head_user'])->where('id',auth()->user()->department_id)->first();
+        if( $this->department->admin_user ==  $user_id ||$this->department->head_user == $user_id ){
+
+            $this->milestones = Milestone::where('department_id','=',auth()->user()->department_id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
+            $this->isHeadOrAdmin=true;
+            if ($this->department->admin_user ==  $user_id){
+                $this->isAdmin=true;
+            }elseif ($this->department->head_user ==  $user_id){
+                $this->isHead=true;
+            }
+        }elseif(Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->first()){
+            $this->milestones = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
+            $this->isAssigned=true;
+        }
+       
        
          $this->pending_dv = DisbursementVoucher::where('user_id','=',auth()->user()->id)->get();
         
@@ -54,7 +75,6 @@ class DepartmentHead extends Component
         $this->greeting = $this->greetings[rand(0,(count($this->greetings)-1))];
         $this->pendingClicked = false;
         $this->showBanner =true;
-        $this->milestone = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
     }
     public function getListeners()
     {
@@ -89,7 +109,7 @@ class DepartmentHead extends Component
             $la->reciever_id=$next_step_id->assigned_user;
             $la->sender_id=auth()->user()->id;
             $la->action_type_id= 1;
-            $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
+            $la->description ="to ".($next_step_id->department->department_name);
             $la->read =false;
             $la->save();
        
@@ -99,7 +119,14 @@ class DepartmentHead extends Component
         $ms1->save();
          DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
          Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',auth()->user()->id)->update(['signed'=>true,'date_signed'=>Carbon::now()]);
-        event(new ForwardDV($next_step_id->assigned_user));
+         if($next_step_id->assigned_user == null){
+            $temp = Department::with(['admin_user','head_user'])->where('id',$ms1->department_id)->first();
+            event(new ForwardDV($temp->admin_user));
+            event(new ForwardDV($temp->head_user));
+         }else{
+            event(new ForwardDV($next_step_id->assigned_user));
+         }
+        
     }
     public function returnDoc($dvID,$mID,$assignedU){
        

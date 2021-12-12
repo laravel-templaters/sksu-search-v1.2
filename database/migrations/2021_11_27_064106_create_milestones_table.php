@@ -17,7 +17,8 @@ class CreateMilestonesTable extends Migration
             $table->id();
             $table->foreignId('disbursement_voucher_id');
             // $table->foreignId('d_v_progress_id');
-            $table->foreignId('assigned_user');
+            $table->foreignId('assigned_user')->nullable();
+            $table->foreignId('department_id')->nullable();
             $table->dateTime('date_started')->nullable();
             $table->dateTime('date_completed')->nullable();
             $table->longText('description');

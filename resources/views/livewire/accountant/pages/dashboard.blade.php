@@ -29,9 +29,15 @@
                             <p class="text-sm font-medium text-secondary-bg">
                                 {{$greeting}}!
                             </p>
+                            @if ($isHeadOrAdmin || $isAssigned)
                             <p class="mt-1 text-sm text-primary-text">
-                                A new voucher has been forwarded to you!
+                                  A new voucher has been forwarded to you!
                             </p>
+                         @else
+                          <p class="mt-1 text-sm text-primary-text">
+                               A voucher of yours has been updated!
+                          </p>
+                         @endif
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
@@ -72,6 +78,7 @@
                         @endif
                     </a>
 
+                    @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'pdv'; pendingClicked = true;"
                         x-bind:class="active == 'pdv' ? 'border-secondary-text text-primary-bg-alt ' : 'border-transparent text-secondary-text hover:text-primary-bg hover:border-secondary-text'">
@@ -82,6 +89,7 @@
                         @endif
 
                     </a>
+                    @endif
                 </nav>
             </div>
         </div>
@@ -255,6 +263,8 @@
             </div>
         </div>
     </div>
+
+    @if ($isHeadOrAdmin || $isAssigned)
     <div class="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8" id="pending" x-cloak x-show="active=='pdv'"
         x-transition:enter="transition ease-in-out delay-700 duration-500 " x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100">
@@ -460,237 +470,7 @@
     </div>
 
 
-    <!-- modal view Info start -->
-    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
-        x-cloak x-show="showModal">
-        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-
-            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
-                x-show="showModal"></div>
-
-
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-            <div x-cloak x-data="{showInput : false}" x-show="showModal" @click.away="showModal=false"
-                x-transition:enter="ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
-                <div class="max-w-full mx-auto">
-                    <!-- card start -->
-                    <!-- This example requires Tailwind CSS v2.0+ -->
-                    <div class="overflow-hidden bg-white shadow sm:rounded-lg" @click.away="showInput = false">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg font-medium leading-6 text-gray-900">
-                                Disbursement Voucher Information
-                            </h3>
-                            <p class="max-w-2xl mt-1 text-sm text-gray-500">
-                                Voucher Details
-                            </p>
-                        </div>
-                        <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
-                            @if ($dvInfo)
-                            <dl class="sm:divide-y sm:divide-gray-200">
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Disbursement Voucher Number
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-
-                                        @if (($dvInfo->dv_number == null || $dvInfo->dv_number =="")&& $dvInfo->user_id
-                                        != auth()->user()->id)
-                                        <span x-show="showInput==false">Voucher number not yet set</span> <a
-                                            x-show="showInput==false" x-on:click="showInput=true"
-                                            class="p-2 ml-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">Set
-                                            Voucher
-                                            Number</a>
-                                        <div class="flex" x-show="showInput">
-                                            <input id="voucher_number" name="voucher_number" type="text"
-                                                wire:model.defer="voucher_number"
-                                                class="flex p-2 mx-2 border rounded-lg text-md focus:ring-1 focus:ring-offset-primary-text" />
-                                            @error('voucher_number')
-                                            <span class="my-auto text-sm text-red-500">{{$message}}</span>
-                                            @enderror
-                                        </div> <button x-show="showInput" wire:click="setVoucherNumber({{$dvInfo->id}})"
-                                            class="p-2 m-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">
-                                            Save Voucher Number</button>
-
-
-                                        @else
-                                        {{$dvInfo->dv_number}}
-                                        @endif
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Disbursement Voucher Tracking Number
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        {{$dvInfo->dv_tracking_number}}
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Payee
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        {{$dvInfo->user->name}}
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Application for
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        @php
-                                        $dv_type ="";
-
-                                        if($dvInfo->dv_type_sorter->sorter == '3'){
-                                        $dv_type =$dvInfo->dv_type_sorter->dv_sub_categories->dv_sub_category;
-                                        }elseif ($dvInfo->dv_type_sorter->sorter == '2') {
-                                        $dv_type =$dvInfo->dv_type_sorter->dv_categories->dv_category;
-                                        }elseif ($dvInfo->dv_type_sorter->sorter == '1'){
-                                        $dv_type =$dvInfo->dv_type_sorter->dv_type->dv_type;
-                                        }else{
-                                        $dv_type = "Couldn't be Found";
-                                        }
-                                        @endphp
-                                        {{$dv_type}}
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Email address
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        {{$dvInfo->user->email}}
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Amount Expected
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        {{$dvModalTotalAmount}}
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Fund Cluster
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
-
-                                        @if ($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")
-                                        Fund cluster not set yet
-                                        @else
-                                        {{$dvInfo->fund_cluster}}
-                                        @endif
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Mode of Payment
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        {{$dvInfo->mop->mode_of_payment}}
-                                    </dd>
-                                </div>
-                            </dl>
-                            @else
-                            <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
-                            @endif
-                        </div>
-                        <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
-                            <h3 class="text-lg font-medium leading-6 text-gray-900">
-                                Particulars
-                            </h3>
-                            <p class="max-w-2xl mt-1 text-sm text-gray-500">
-                                Voucher Entries
-                            </p>
-                        </div>
-                        <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
-                            @if ($dvInfo)
-                            @php
-                            $dvparticulars =
-                            App\Models\Particular::where('disbursement_voucher_id','=',$dvInfo->id)->get();
-                            @endphp
-                            @if($dvparticulars)
-                            @foreach ($dvparticulars as $key => $dvparticular)
-                            <dl class="sm:divide-y sm:divide-gray-200">
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Entry No. {{$key +1}}
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                        {{$dvparticular->entry}}
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Responsibility Center
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
-
-                                        @if ($dvparticular->responsibility_center== null
-                                        ||$dvparticular->responsibility_center=="")
-                                        -----
-                                        @else
-                                        {{$dvparticular->responsibility_center}}
-                                        @endif
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        MFO/PAP
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
-
-                                        @if ($dvparticular->mfo_pap== null ||$dvparticular->mfo_pap=="")
-                                        -----
-                                        @else
-                                        {{$dvparticular->mfo_pap}}
-                                        @endif
-                                    </dd>
-                                </div>
-                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Amount
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
-
-                                        @if ($dvparticular->amount== null || $dvparticular->amount==0)
-                                        -----
-                                        @else
-                                        {{$dvparticular->amount}}
-                                        @endif
-                                    </dd>
-                                </div>
-                            </dl>
-                            @endforeach
-                            @else
-                            <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
-                            @endif
-                            @else
-                            <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
-                            @endif
-                        </div>
-                    </div>
-
-                    <!-- card end -->
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- modal view Info end -->
+   
     <!-- modal forward start-->
     <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
         x-cloak x-show="showModalForward">
@@ -801,8 +581,248 @@
             </div>
         </div>
     </div>
-
     <!-- modal return end -->
+    @endif
+    
+     <!-- modal view Info start -->
+     <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+     x-cloak x-show="showModal">
+     <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+         <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+             x-show="showModal"></div>
+
+
+         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+         <div x-cloak x-data="{showInput : false}" x-show="showModal" @click.away="showModal=false"
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+             <div class="max-w-full mx-auto">
+                 <!-- card start -->
+                 <!-- This example requires Tailwind CSS v2.0+ -->
+                 <div class="overflow-hidden bg-white shadow sm:rounded-lg" @click.away="showInput = false">
+                     <div class="px-4 py-5 sm:px-6">
+                         <h3 class="text-lg font-medium leading-6 text-gray-900">
+                             Disbursement Voucher Information
+                         </h3>
+                         <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                             Voucher Details
+                         </p>
+                     </div>
+                     <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
+                         @if ($dvInfo)
+                         <dl class="sm:divide-y sm:divide-gray-200">
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Disbursement Voucher Number
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+
+                                     @if($isHead)
+                                        @if ($dvInfo->dv_number == null || $dvInfo->dv_number =="")
+                                        Voucher number not yet set
+                                        @else
+                                        {{$dvInfo->dv_number}}
+                                        @endif
+                                     @elseif($isAdmin)
+                                        @if (($dvInfo->dv_number == null || $dvInfo->dv_number =="")&& $dvInfo->user_id
+                                        != auth()->user()->id)
+                                        <span x-show="showInput==false">Voucher number not yet set</span> <a
+                                            x-show="showInput==false" x-on:click="showInput=true"
+                                            class="p-2 ml-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">Set
+                                            Voucher
+                                            Number</a>
+                                        <div class="flex" x-show="showInput">
+                                            <input id="voucher_number" name="voucher_number" type="text"
+                                                wire:model.defer="voucher_number"
+                                                class="flex p-2 mx-2 border rounded-lg text-md focus:ring-1 focus:ring-offset-primary-text" />
+                                            @error('voucher_number')
+                                            <span class="my-auto text-sm text-red-500">{{$message}}</span>
+                                            @enderror
+                                        </div> <button x-show="showInput" wire:click="setVoucherNumber({{$dvInfo->id}})"
+                                            class="p-2 m-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">
+                                            Save Voucher Number</button>
+
+
+                                        @else
+                                        {{$dvInfo->dv_number}}
+                                        @endif
+                                     @endif
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Disbursement Voucher Tracking Number
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                     {{$dvInfo->dv_tracking_number}}
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Payee
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                     {{$dvInfo->user->name}}
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Application for
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                     @php
+                                     $dv_type ="";
+
+                                     if($dvInfo->dv_type_sorter->sorter == '3'){
+                                     $dv_type =$dvInfo->dv_type_sorter->dv_sub_categories->dv_sub_category;
+                                     }elseif ($dvInfo->dv_type_sorter->sorter == '2') {
+                                     $dv_type =$dvInfo->dv_type_sorter->dv_categories->dv_category;
+                                     }elseif ($dvInfo->dv_type_sorter->sorter == '1'){
+                                     $dv_type =$dvInfo->dv_type_sorter->dv_type->dv_type;
+                                     }else{
+                                     $dv_type = "Couldn't be Found";
+                                     }
+                                     @endphp
+                                     {{$dv_type}}
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Email address
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                     {{$dvInfo->user->email}}
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Amount Expected
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                     {{$dvModalTotalAmount}}
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Fund Cluster
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                     @if ($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")
+                                     Fund cluster not set yet
+                                     @else
+                                     {{$dvInfo->fund_cluster}}
+                                     @endif
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Mode of Payment
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                     {{$dvInfo->mop->mode_of_payment}}
+                                 </dd>
+                             </div>
+                         </dl>
+                         @else
+                         <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                 class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                         @endif
+                     </div>
+                     <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
+                         <h3 class="text-lg font-medium leading-6 text-gray-900">
+                             Particulars
+                         </h3>
+                         <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                             Voucher Entries
+                         </p>
+                     </div>
+                     <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
+                         @if ($dvInfo)
+                         @php
+                         $dvparticulars =
+                         App\Models\Particular::where('disbursement_voucher_id','=',$dvInfo->id)->get();
+                         @endphp
+                         @if($dvparticulars)
+                         @foreach ($dvparticulars as $key => $dvparticular)
+                         <dl class="sm:divide-y sm:divide-gray-200">
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Entry No. {{$key +1}}
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                     {{$dvparticular->entry}}
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Responsibility Center
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                     @if ($dvparticular->responsibility_center== null
+                                     ||$dvparticular->responsibility_center=="")
+                                     -----
+                                     @else
+                                     {{$dvparticular->responsibility_center}}
+                                     @endif
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     MFO/PAP
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                     @if ($dvparticular->mfo_pap== null ||$dvparticular->mfo_pap=="")
+                                     -----
+                                     @else
+                                     {{$dvparticular->mfo_pap}}
+                                     @endif
+                                 </dd>
+                             </div>
+                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                 <dt class="text-sm font-medium text-gray-500">
+                                     Amount
+                                 </dt>
+                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+
+                                     @if ($dvparticular->amount== null || $dvparticular->amount==0)
+                                     -----
+                                     @else
+                                     {{$dvparticular->amount}}
+                                     @endif
+                                 </dd>
+                             </div>
+                         </dl>
+                         @endforeach
+                         @else
+                         <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                 class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                         @endif
+                         @else
+                         <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                 class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                         @endif
+                     </div>
+                 </div>
+
+                 <!-- card end -->
+
+
+             </div>
+         </div>
+     </div>
+ </div>
+
+ <!-- modal view Info end -->
     <!-- feed slide over start -->
     <div class="fixed inset-0 overflow-hidden" x-cloak x-show="showStatus" aria-labelledby="slide-over-title"
         role="dialog" aria-modal="true">

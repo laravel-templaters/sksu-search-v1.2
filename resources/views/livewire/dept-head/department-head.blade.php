@@ -29,9 +29,15 @@
                             <p class="text-sm font-medium text-secondary-bg">
                                 {{$greeting}}!
                             </p>
+                           @if ($isHeadOrAdmin || $isAssigned)
+                              <p class="mt-1 text-sm text-primary-text">
+                                    A new voucher has been forwarded to you!
+                              </p>
+                           @else
                             <p class="mt-1 text-sm text-primary-text">
-                                A new voucher has been forwarded to you!
+                                 A voucher of yours has been updated!
                             </p>
+                           @endif
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
@@ -73,6 +79,8 @@
                         @endif
                     </a>
 
+
+                    @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'pdv'; pendingClicked = true;"
                         x-bind:class="active == 'pdv' ? 'border-secondary-text text-primary-bg-alt ' : 'border-transparent text-secondary-text hover:text-primary-bg hover:border-secondary-text'">
@@ -83,6 +91,8 @@
                         @endif
 
                     </a>
+                    @endif
+                    
                 </nav>
             </div>
         </div>
@@ -256,6 +266,9 @@
             </div>
         </div>
     </div>
+    
+  
+    @if ($isHeadOrAdmin || $isAssigned)
     <div class="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8" id="pending" x-cloak x-show="active=='pdv'"
         x-transition:enter="transition ease-in-out delay-700 duration-500 " x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100">
@@ -459,6 +472,120 @@
             </div>
         </div>
     </div>
+
+    <!-- modal forward start-->
+    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+        x-cloak x-show="showModalForward">
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+                x-show="showModalForward"></div>
+
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div x-cloak x-show="showModalForward" @click.away="showModalForward=false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+                <div class="max-w-full mx-auto">
+                    <div class="p-10 bg-gray-100">
+                        <ul role="list"
+                            class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal forward end -->
+    <!-- modal return start-->
+    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+        x-cloak x-show="showModalReturn">
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+                x-show="showModalReturn"></div>
+
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div x-cloak x-show="showModalReturn" @click.away="showModalReturn=false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+                <div class="max-w-full mx-auto">
+                    <div class="p-10 rounded-lg bg-secondary-text">
+                        <h1 class="mb-10 font-sans text-lg font-bold tracking-wider drop-shadow-sm text-primary-bg">
+                            SELECT WHERE
+                            TO RETURN VOUCHER</h1>
+                        <ul role="list"
+                            class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+                            @if ($sigsReturn)
+                            @foreach ($sigsReturn as $key => $mssig)
+                            <li>
+                                <div class="space-y-4 text-left">
+                                    <button class="flex-shrink-0 block "
+                                        wire:click.prevent="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->assigned_user}})">
+                                        <!-- This example requires Tailwind CSS v2.0+ -->
+
+                                        <div
+                                            class="flex items-center rounded-lg group-hover:bg-primary-text group-hover:bg-opacity-95 group-focus:ring-2 group-focus:ring-primary-text">
+                                            <div>
+                                                <img class="inline-block truncate rounded-full h-14 w-14"
+                                                    src="{{$mssig->assigned->avatar != null ? asset($mssig->assigned->avatar) : asset($mssig->assigned->profile_photo_url)}}"
+                                                    alt="{{$mssig->assigned->name}}">
+                                            </div>
+                                            <div class="ml-3 text-left">
+                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                    {{$mssig->assigned->name}}
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    @if ($mssig->assigned->position != null)
+                                                    {{$mssig->assigned->position->position_name}}
+                                                    @endif
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    @if ($mssig->assigned->department != null)
+                                                    {{$mssig->assigned->department->department_name}}
+                                                    @endif
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </button>
+                                </div>
+                            </li>
+                            @endforeach
+
+                            @else
+                            Nothing to show...
+                            @endif
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal return end -->
+    @endif
 
     <!-- modal view Info start -->
     <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
@@ -674,118 +801,7 @@
     </div>
 
     <!-- modal view Info end -->
-    <!-- modal forward start-->
-    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
-        x-cloak x-show="showModalForward">
-        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-
-            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
-                x-show="showModalForward"></div>
-
-
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-            <div x-cloak x-show="showModalForward" @click.away="showModalForward=false"
-                x-transition:enter="ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
-                <div class="max-w-full mx-auto">
-                    <div class="p-10 bg-gray-100">
-                        <ul role="list"
-                            class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
-
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- modal forward end -->
-    <!-- modal return start-->
-    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
-        x-cloak x-show="showModalReturn">
-        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-
-            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
-                x-show="showModalReturn"></div>
-
-
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-            <div x-cloak x-show="showModalReturn" @click.away="showModalReturn=false"
-                x-transition:enter="ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
-                <div class="max-w-full mx-auto">
-                    <div class="p-10 rounded-lg bg-secondary-text">
-                        <h1 class="mb-10 font-sans text-lg font-bold tracking-wider drop-shadow-sm text-primary-bg">
-                            SELECT WHERE
-                            TO RETURN VOUCHER</h1>
-                        <ul role="list"
-                            class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
-                            @if ($sigsReturn)
-                            @foreach ($sigsReturn as $key => $mssig)
-                            <li>
-                                <div class="space-y-4 text-left">
-                                    <button class="flex-shrink-0 block "
-                                        wire:click.prevent="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->assigned_user}})">
-                                        <!-- This example requires Tailwind CSS v2.0+ -->
-
-                                        <div
-                                            class="flex items-center rounded-lg group-hover:bg-primary-text group-hover:bg-opacity-95 group-focus:ring-2 group-focus:ring-primary-text">
-                                            <div>
-                                                <img class="inline-block truncate rounded-full h-14 w-14"
-                                                    src="{{$mssig->assigned->avatar != null ? asset($mssig->assigned->avatar) : asset($mssig->assigned->profile_photo_url)}}"
-                                                    alt="{{$mssig->assigned->name}}">
-                                            </div>
-                                            <div class="ml-3 text-left">
-                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                                                    {{$mssig->assigned->name}}
-                                                </p>
-                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                                                    @if ($mssig->assigned->position != null)
-                                                    {{$mssig->assigned->position->position_name}}
-                                                    @endif
-                                                </p>
-                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                                                    @if ($mssig->assigned->department != null)
-                                                    {{$mssig->assigned->department->department_name}}
-                                                    @endif
-                                                </p>
-
-
-                                            </div>
-                                        </div>
-
-
-
-                                    </button>
-                                </div>
-                            </li>
-                            @endforeach
-
-                            @else
-                            Nothing to show...
-                            @endif
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- modal return end -->
+    
     <!-- feed slide over start -->
     <div class="fixed inset-0 overflow-hidden" x-cloak x-show="showStatus" aria-labelledby="slide-over-title"
         role="dialog" aria-modal="true">

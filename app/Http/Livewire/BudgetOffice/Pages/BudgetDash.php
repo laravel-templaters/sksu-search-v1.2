@@ -23,7 +23,12 @@ class BudgetDash extends Component
     public $showReturnModal= false;
     public $dvInfo = [];
     public $dvModalTotalAmount=0;
-
+    public $department =[];
+    public $isHeadOrAdmin=false;
+    public $isHead=false;
+    public $isAdmin=false;
+    public $isAssigned=false;
+    
     public $searchPending="";
     public $searchPersonal="";
     public $personalClicked=true;
@@ -42,7 +47,20 @@ class BudgetDash extends Component
     }
     public function render()
     {
-        $this->milestones = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
+        $user_id = auth()->user()->id;
+        $this->department = Department::with(['admin_user','head_user'])->where('id',auth()->user()->department_id)->first();
+        if( $this->department->admin_user ==  $user_id ||$this->department->head_user == $user_id ){
+            $this->milestones = Milestone::where('department_id','=',auth()->user()->department_id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
+            $this->isHeadOrAdmin=true;
+            if ($this->department->admin_user ==  $user_id){
+                $this->isAdmin=true;
+            }elseif ($this->department->head_user ==  $user_id){
+                $this->isHead=true;
+            }
+        }elseif(Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->first()){
+            $this->milestones = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
+            $this->isAssigned=true;
+        }
        
          $this->pending_dv = DisbursementVoucher::where('user_id','=',auth()->user()->id)->get();
         return view('livewire.budget-office.pages.budget-dash')->layout('layouts.accountant');
@@ -52,7 +70,6 @@ class BudgetDash extends Component
         $this->greeting = $this->greetings[rand(0,(count($this->greetings)-1))];
         $this->pendingClicked = false;
         $this->showBanner =true;
-        $this->milestone = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
     }
     public function getListeners()
     {
@@ -61,92 +78,100 @@ class BudgetDash extends Component
         ];
     }
    
+   
     public function recieveDocument($dvID,$mID,$uID){
-       $la = new LastAction();
-            $la->disbursement_voucher_id=$dvID;
-            $la->reciever_id=$uID;
-            $la->sender_id=auth()->user()->id;
-            $la->action_type_id= 2;
-            $la->description ="by ".(User::find(auth()->user()->id)->department->department_name);
-            $la->read =false;
-            $la->save();
-        DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
-         event(new ForwardDV($uID));
-        $this->searchPending = "";
-    }
-    public function forwardDocument($dvID,$mID,$uID){
-       
-        $ms = Milestone::find($mID);
-        $ms->date_completed = Carbon::now();
-        $ms->isActive =false;
-        $ms->is_completed=true;
-        $ms->save();
-        $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','=',($ms->step_number)+1)->first();
-            $la = new LastAction();
-            $la->disbursement_voucher_id=$dvID;
-            $la->reciever_id=$next_step_id->assigned_user;
-            $la->sender_id=auth()->user()->id;
-            $la->action_type_id= 1;
-            $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
-            $la->read =false;
-            $la->save();
-       
-        $ms1 = Milestone::find($next_step_id->id);
-        $ms1->date_started = Carbon::now();
-        $ms1->isActive =true;
-        $ms1->save();
+        $la = new LastAction();
+             $la->disbursement_voucher_id=$dvID;
+             $la->reciever_id=$uID;
+             $la->sender_id=auth()->user()->id;
+             $la->action_type_id= 2;
+             $la->description ="by ".(User::find(auth()->user()->id)->department->department_name);
+             $la->read =false;
+             $la->save();
          DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
-         Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',auth()->user()->id)->update(['signed'=>true,'date_signed'=>Carbon::now()]);
-        event(new ForwardDV($next_step_id->assigned_user));
-    }
-    public function returnDoc($dvID,$mID,$assignedU){
-       
-        $ms = Milestone::find($mID);
-        $ms->isActive =false;
-        $ms->is_completed=false;
-        $ms->save();
-        $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('assigned_user','=',$assignedU)->first();
-            $la = new LastAction();
-            $la->disbursement_voucher_id=$dvID;
-            $la->reciever_id=$next_step_id->assigned_user;
-            $la->sender_id=auth()->user()->id;
-            $la->action_type_id= 3;
-            $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
-            $la->read =false;
-            $la->save();
-       
-        $ms1 = Milestone::find($next_step_id->id);
-        $ms1->date_started = Carbon::now();
-        $ms1->date_completed= null;
-        $ms1->isActive =true;
-        $ms1->is_completed =false;
-        $ms1->save();
-         DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
-         Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',$assignedU)->update(['signed'=>false,'date_signed'=>null]);
-        event(new ForwardDV($next_step_id->assigned_user));
-    }
-
-    public function showModal($disbursementID){
-        $this->dvInfo = DisbursementVoucher::findOrFail($disbursementID);
-        $this->dvModalTotalAmount = Particular::where('disbursement_voucher_id',$disbursementID)->sum('amount');
-        $this->showViewModal = true;
-    }
-    public $sigsReturn=[];
-    public function showModalForward($dvID,$mID,$uID){
-     
-    }
-    public function showModalReturn($dvID,$mID,$uID){
-        $ms=Milestone::find($mID);
-        if ($ms->step_number == 1) {
-            //return to user here
-        }
-        else{
-            $ms1 = Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','<',$ms->step_number)->get();
-            $this->sigsReturn = $ms1;
-        }
-        $this->showReturnModal = true;
+          event(new ForwardDV($uID));
+         $this->searchPending = "";
+     }
+     public function forwardDocument($dvID,$mID,$uID){
         
-    }
+         $ms = Milestone::find($mID);
+         $ms->date_completed = Carbon::now();
+         $ms->isActive =false;
+         $ms->is_completed=true;
+         $ms->save();
+         $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','=',($ms->step_number)+1)->first();
+             $la = new LastAction();
+             $la->disbursement_voucher_id=$dvID;
+             $la->reciever_id=$next_step_id->assigned_user;
+             $la->sender_id=auth()->user()->id;
+             $la->action_type_id= 1;
+             $la->description ="to ".($next_step_id->department->department_name);
+             $la->read =false;
+             $la->save();
+        
+         $ms1 = Milestone::find($next_step_id->id);
+         $ms1->date_started = Carbon::now();
+         $ms1->isActive =true;
+         $ms1->save();
+          DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
+          Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',auth()->user()->id)->update(['signed'=>true,'date_signed'=>Carbon::now()]);
+          if($next_step_id->assigned_user == null){
+             $temp = Department::with(['admin_user','head_user'])->where('id',$ms1->department_id)->first();
+             event(new ForwardDV($temp->admin_user));
+             event(new ForwardDV($temp->head_user));
+          }else{
+             event(new ForwardDV($next_step_id->assigned_user));
+          }
+         
+     }
+     public function returnDoc($dvID,$mID,$assignedU){
+        
+         $ms = Milestone::find($mID);
+         $ms->isActive =false;
+         $ms->is_completed=false;
+         $ms->save();
+         $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('assigned_user','=',$assignedU)->first();
+             $la = new LastAction();
+             $la->disbursement_voucher_id=$dvID;
+             $la->reciever_id=$next_step_id->assigned_user;
+             $la->sender_id=auth()->user()->id;
+             $la->action_type_id= 3;
+             $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
+             $la->read =false;
+             $la->save();
+        
+         $ms1 = Milestone::find($next_step_id->id);
+         $ms1->date_started = Carbon::now();
+         $ms1->date_completed= null;
+         $ms1->isActive =true;
+         $ms1->is_completed =false;
+         $ms1->save();
+          DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
+          Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',$assignedU)->update(['signed'=>false,'date_signed'=>null]);
+         event(new ForwardDV($next_step_id->assigned_user));
+     }
+ 
+     public function showModal($disbursementID){
+         $this->dvInfo = DisbursementVoucher::findOrFail($disbursementID);
+         $this->dvModalTotalAmount = Particular::where('disbursement_voucher_id',$disbursementID)->sum('amount');
+         $this->showViewModal = true;
+     }
+     public $sigsReturn=[];
+     public function showModalForward($dvID,$mID,$uID){
+      
+     }
+     public function showModalReturn($dvID,$mID,$uID){
+         $ms=Milestone::find($mID);
+         if ($ms->step_number == 1) {
+             //return to user here
+         }
+         else{
+             $ms1 = Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','<',$ms->step_number)->get();
+             $this->sigsReturn = $ms1;
+         }
+         $this->showReturnModal = true;
+ 
+     }
 
     //Budget exclusiove methods
     public $fundcluster="";
