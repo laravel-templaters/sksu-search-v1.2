@@ -802,50 +802,50 @@
 
     <!-- modal view Info end -->
     
-    <!-- feed slide over start -->
-    <div class="fixed inset-0 overflow-hidden" x-cloak x-show="showStatus" aria-labelledby="slide-over-title"
-        role="dialog" aria-modal="true">
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute inset-0" aria-hidden="true" x-cloak x-show="showStatus">
-                <div class="fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+     <!-- feed slide over start -->
+     <div class="fixed inset-0 overflow-hidden" x-cloak x-show="showStatus" aria-labelledby="slide-over-title"
+     role="dialog" aria-modal="true">
+     <div class="absolute inset-0 overflow-hidden">
+         <div class="absolute inset-0" aria-hidden="true" x-cloak x-show="showStatus">
+             <div class="fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
 
-                    <div class="w-screen max-w-2xl" x-cloak x-show="showStatus"
-                        x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
-                        x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
-                        x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
-                        x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-0">
-                        <div class="flex flex-col h-full py-6 overflow-y-scroll bg-white shadow-xl">
-                            <div class="px-4 sm:px-6">
-                                <div class="flex items-start justify-between">
-                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
-                                        Panel title
-                                    </h2>
-                                    <div class="flex items-center ml-3 h-7">
-                                        <button type="button" x-on:click="showStatus =false"
-                                            class="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            <span class="sr-only">Close panel</span>
-                                            <!-- Heroicon name: outline/x -->
-                                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="relative flex-1 px-4 mt-6 sm:px-6">
-                                <!-- Replace with your content -->
-                                @livewire('client.components.dashboard.feed-status');
-                                <!-- /End replace -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- feed slide over end -->
+                 <div class="w-screen max-w-2xl" x-cloak x-show="showStatus"
+                     x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
+                     x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+                     x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
+                     x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-0">
+                     <div class="flex flex-col h-full py-6 overflow-y-scroll shadow-xl bg-orange-ripe-light">
+                         <div class="px-4 sm:px-6">
+                             <div class="flex items-start justify-between">
+                                 <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
+                                     Disbursement Feed
+                                 </h2>
+                                 <div class="flex items-center ml-3 h-7">
+                                     <button type="button" x-on:click="showStatus =false"
+                                         class="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                         <span class="sr-only">Close panel</span>
+                                         <!-- Heroicon name: outline/x -->
+                                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                 d="M6 18L18 6M6 6l12 12" />
+                                         </svg>
+                                     </button>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="relative flex-1 px-4 mt-6 sm:px-6">
+                             <!-- Replace with your content -->
+                             @livewire('client.components.dashboard.feed-status');
+                             <!-- /End replace -->
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- feed slide over end -->
 
 
 

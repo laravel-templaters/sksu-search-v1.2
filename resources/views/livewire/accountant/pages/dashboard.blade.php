@@ -835,11 +835,11 @@
                         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
                         x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
                         x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-0">
-                        <div class="flex flex-col h-full py-6 overflow-y-scroll bg-white shadow-xl">
+                        <div class="flex flex-col h-full py-6 overflow-y-scroll shadow-xl bg-orange-ripe-light">
                             <div class="px-4 sm:px-6">
                                 <div class="flex items-start justify-between">
                                     <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
-                                        Panel title
+                                        Disbursement Feed
                                     </h2>
                                     <div class="flex items-center ml-3 h-7">
                                         <button type="button" x-on:click="showStatus =false"
