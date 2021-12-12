@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\TravelOrder;
 use App\Models\DisbursementVoucher;
 use App\Models\Particular;
+use App\Models\Department;
 //use App\Models\LastAction;
 use App\Models\DvProgress;
 use App\Models\LastAction;
