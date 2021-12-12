@@ -2784,6 +2784,10 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(0, 0, 0, var(--tw-text-opacity));
 }
+.text-orange-ripe-light {
+	--tw-text-opacity: 1;
+	color: rgba(245, 153, 99, var(--tw-text-opacity));
+}
 .text-opacity-90 {
 	--tw-text-opacity: 0.9;
 }

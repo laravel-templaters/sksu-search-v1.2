@@ -69,7 +69,7 @@
                     <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'myacc'; personalClicked = true;"
-                        x-bind:class="active == 'myacc' ? 'border-secondary-text text-primary-bg-alt ' : ' border-transparent text-secondary-text hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'myacc' ? 'border-secondary-text text-primary-bg-alt ' : ' border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
                         My Account
 
 
@@ -83,7 +83,7 @@
                     @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'pdv'; pendingClicked = true;"
-                        x-bind:class="active == 'pdv' ? 'border-secondary-text text-primary-bg-alt ' : 'border-transparent text-secondary-text hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'pdv' ? 'border-secondary-text text-primary-bg-alt ' : 'border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
                         Pending Disbursement Vouchers
                         @if (count($milestones)>0)
                         <span x-bind:class="pendingClicked == false ?  'animate-pulse':'animate-none'"
