@@ -28,7 +28,7 @@
 
 </head>
 
-<body class="font-sans bg-gradient-to-b from-main-bg via-white to-main-bg">
+<body class="min-h-screen font-sans bg-gradient-to-b from-main-bg via-white to-main-bg">
     @livewire('navigation-menu')
 
 
