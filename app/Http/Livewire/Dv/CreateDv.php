@@ -236,7 +236,7 @@ class CreateDv extends Component
          //Budget Officer
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-        $signatory->user_id = 4;
+        $signatory->user_id = 3;
         $signatory->signed = 0;
         $signatory->save();
 
@@ -252,7 +252,7 @@ class CreateDv extends Component
          //Accounting Officer
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-        $signatory->user_id = 21;
+        $signatory->user_id = 19;
         $signatory->signed = 0;
         $signatory->save();
 
@@ -268,7 +268,7 @@ class CreateDv extends Component
          //Pres
          $signatory = new Signatory;
          $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-         $signatory->user_id = 1;
+         $signatory->user_id = 64;
          $signatory->signed = 0;
          $signatory->save();
  
@@ -287,7 +287,7 @@ class CreateDv extends Component
 
             $milestone = new Milestone;
             $milestone->disbursement_voucher_id = $disbursement_voucher->id;
-            $milestone->department_id = 50;
+            $milestone->department_id = 52;
             $milestone->isActive = false;
             $milestone->description = "Signatory=".$signatory->user_id."=mustSign";
             $milestone->step_number = 6;

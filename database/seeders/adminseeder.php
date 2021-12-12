@@ -531,7 +531,7 @@ class adminseeder extends Seeder
          'birth_day' =>  Carbon::create('2000', '04', '06'),
          'contact_number' => '09123456789',
          'email' => 'jaybadilla@sksu.edu.ph',
-         'password' => Hash::make('bandilla123'),
+         'password' => Hash::make('badilla123'),
          'role_id' => 5,
          'department_id' => 2,
          'position_id' => 20

@@ -659,7 +659,7 @@
 
                                             <div class="flex items-center">
                                                 <div>
-                                                    <img class="inline-block rounded-full h-14 w-14"
+                                                    <img class="inline-block truncate rounded-full h-14 w-14"
                                                         src="{{$searchedsignatory->avatar != null ? asset($searchedsignatory->avatar) : asset($searchedsignatory->profile_photo_url)}}"
                                                         alt="{{$searchedsignatory->name}}">
                                                 </div>

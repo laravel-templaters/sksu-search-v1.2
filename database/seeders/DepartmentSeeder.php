@@ -36,8 +36,8 @@ class DepartmentSeeder extends Seeder
                     'department_name'=> 'Accounting Office',
                     'department_short_code'=>'acc-acto',
                     'campus_id'=>'1',
-                    'admin_user'=>'20',
-                    'head_user'=>'59',
+                    'admin_user'=>'19',
+                    'head_user'=>'60',
                     ]);//3
                     DB::table('departments')->insert([
                     'department_name'=> 'Information and Communications Tech',
@@ -49,7 +49,7 @@ class DepartmentSeeder extends Seeder
                     'department_short_code'=>'acc-icu',
                     'campus_id'=>'1',
                     'admin_user'=>'45',
-                    'head_user'=>'238',                    
+                    'head_user'=>'44',                    
                     ]);//5
                     DB::table('departments')->insert([
                         'department_name'=> 'Academic Affairs',
@@ -325,15 +325,15 @@ class DepartmentSeeder extends Seeder
                        'department_name'=> 'President\'s Office',
                        'department_short_code'=>'acc-presoff',
                        'campus_id'=>'1',
-                        'admin_user'=>'63',
-                        'head_user'=>'62',
+                        'admin_user'=>'64',
+                        'head_user'=>'63',
                         ]);//51 
                         
                     DB::table('departments')->insert([
                         'department_name'=> 'Cashier\'s Office',
                         'department_short_code'=>'acc-cashoff',
                         'campus_id'=>'1',
-                        'admin_user'=>'64',
+                        'admin_user'=>'65',
                         'head_user'=>'66',
                         ]);//52         
     }

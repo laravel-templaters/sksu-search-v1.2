@@ -2290,11 +2290,11 @@ select {
 .bg-gradient-to-br {
 	background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
-.bg-gradient-to-r {
-	background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
 .bg-gradient-to-b {
 	background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+.bg-gradient-to-r {
+	background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 .from-main-bg {
 	--tw-gradient-from: #fedfa2;
@@ -2314,14 +2314,14 @@ select {
 .via-white {
 	--tw-gradient-stops: var(--tw-gradient-from), #fff, var(--tw-gradient-to, rgba(255, 255, 255, 0));
 }
+.to-main-bg {
+	--tw-gradient-to: #fedfa2;
+}
 .to-secondary-bg {
 	--tw-gradient-to: #bc6c25;
 }
 .to-primary-bg-alt {
 	--tw-gradient-to: #606c38;
-}
-.to-main-bg {
-	--tw-gradient-to: #fedfa2;
 }
 .bg-cover {
 	background-size: cover;
@@ -2773,6 +2773,10 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(209, 213, 219, var(--tw-text-opacity));
 }
+.text-orange-ripe-light {
+	--tw-text-opacity: 1;
+	color: rgba(245, 153, 99, var(--tw-text-opacity));
+}
 .text-current {
 	color: currentColor;
 }
@@ -2783,10 +2787,6 @@ select {
 .text-black {
 	--tw-text-opacity: 1;
 	color: rgba(0, 0, 0, var(--tw-text-opacity));
-}
-.text-orange-ripe-light {
-	--tw-text-opacity: 1;
-	color: rgba(245, 153, 99, var(--tw-text-opacity));
 }
 .text-opacity-90 {
 	--tw-text-opacity: 0.9;
