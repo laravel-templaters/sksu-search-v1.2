@@ -262,23 +262,23 @@
                     <span class="text-red-400">Pick Region. (Select Region, Province and Municipality from the options above)</span>
                 </div>
                 @endif
-
-            </div>
-
-        </div>
-
-        <div class="pt-8">
+   <div class="pt-8">
             <div class="flex justify-end">
                 <button type="button"
                     class="px-4 py-2 font-bold bg-white border border-gray-300 rounded-md shadow-sm text-md text-primary-bg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Cancel
                 </button>
-                <button type="button"
+                <button type="button" wire:click.prevent="submit"
                     class="px-4 py-2 mx-2 font-bold border border-gray-300 rounded-md shadow-sm bg-primary-bg-alt text-md text-secondary-text hover:bg-gray-50 hover:text-primary-text-alt focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Save
                 </button>
+                </div>
+                </div>
             </div>
+
         </div>
+
+     
         <script>
         document.querySelector(".amount").addEventListener("keypress", function (evt) {
         if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
