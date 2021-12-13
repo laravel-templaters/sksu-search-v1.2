@@ -185,7 +185,7 @@
                             class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_from"
                                 class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2 ">From</label>
-                            <input wire:model="date_from" min="{{ Carbon\Carbon:: }}" type="date" name="date_from" id="date_from"
+                            <input wire:model="date_from" type="date" name="date_from" id="date_from"
                                 class="block w-48 p-1 text-gray-900 placeholder-gray-500 border-0 rounded-md focus:ring-0 sm:text-sm">
                         </div>
 

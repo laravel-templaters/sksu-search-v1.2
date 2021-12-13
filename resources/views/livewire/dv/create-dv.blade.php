@@ -228,11 +228,16 @@
                         <div class="space-y-2 md:col-span-1">
                             <h3 class="text-xl font-medium leading-6 text-gray-900">Disbursement Voucher</h3>
                             <br>
-                            <p class="mt-1 text-sm text-gray-500">
+                            <p class="mt-1 font-bold tracking-wider text-gray-700 text-md">
                                 Import Travel Order
                             </p>
+                            
                             <input class="p-2 text-sm border-gray-500 rounded-lg" type="text"
                                 wire:model.debounce.500ms="searchto" placeholder="Search Purpose Here">
+                                <p class="mt-1 ml-1 text-sm text-gray-500">
+                                    <span class="font-extrabold tracking-wider text-red-400">Note: </span>
+                                    Please secure a travel order first by, creating one <a href="{{route('travel-order', 3)}}" class="text-indigo-600 underline">here</a>. <br>For more details click this <a href="#" class="text-indigo-600 underline">link</a>
+                                 </p>
                             <div class="grid grid-cols-1 gap-2 px-2 pt-2 mx-auto">
                                 @if(isset($searchedto)==true)
                                 @if($searchedto->count() > 0)

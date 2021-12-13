@@ -11,7 +11,8 @@
 
 
         @if ($typesorter->id != 1 && $typesorter->sorter == 1)
-        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-orange-ripe-light"
+        @if (strtoupper($typesorter->dv_type->dv_type)!="TRAVEL ORDER")
+        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-primary-text bg-opacity-70"
             x-data="{showMe : false}">
             @if(strtoupper($typesorter->dv_type->dv_type)=="DISBURSEMENTS")
             <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
@@ -27,23 +28,8 @@
                 </div>
             </div>
             @else
-            @if (strtoupper($typesorter->dv_type->dv_type)=="TRAVEL ORDER")
-            <a href="{{route('travel-order', ['id' => $typesorter->dv_type->id])}}">
-                <div class="flex justify-between min-w-full p-3">
-                    <h3 class="my-auto text-xl font-extrabold text-primary-bg">{{$typesorter->dv_type->dv_type}}
-                    </h3>
-                    <div class="flex">
-                        <button> <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-5 h-5 my-auto text-transparent text-primary-bg" id="chevron" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 13l-7 7-7-7m14-8l-7 7-7-7" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </a>
-            @else
+            
+            
             <a href="#">
                 <div class="flex justify-between min-w-full p-3">
                     <h3 class="my-auto text-xl font-extrabold text-primary-bg">{{$typesorter->dv_type->dv_type}}</h3>
@@ -58,7 +44,6 @@
                     </div>
                 </div>
             </a>
-            @endif
             @endif
             <div class="p-3 mt-1 mb-1 ml-3 mr-1 bg-opacity-75 rounded-md bg-primary-text " x-cloak x-show="showMe">
                 @foreach ($categories as $category)
@@ -92,6 +77,7 @@
                 @endforeach
             </div>
         </li>
+        @endif
         @endif
 
         @endforeach
