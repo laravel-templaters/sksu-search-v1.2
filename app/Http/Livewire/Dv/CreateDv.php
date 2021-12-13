@@ -236,7 +236,7 @@ class CreateDv extends Component
          //Budget Officer
         $signatory = new Signatory;
         $signatory->disbursement_voucher_id = $disbursement_voucher->id;
-        $signatory->user_id = 3;
+        $signatory->user_id = 50;
         $signatory->signed = 0;
         $signatory->save();
 

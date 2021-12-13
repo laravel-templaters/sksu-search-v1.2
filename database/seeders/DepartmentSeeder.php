@@ -29,7 +29,7 @@ class DepartmentSeeder extends Seeder
                 'department_name'=> 'Budget Office',
                 'department_short_code'=>'acc-budg',
                 'campus_id'=>'1',
-                'admin_user'=>'3',
+                'admin_user'=>'50',
                 'head_user'=>'47',
                 ]);//2
                 DB::table('departments')->insert([
