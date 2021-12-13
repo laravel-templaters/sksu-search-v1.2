@@ -12,42 +12,59 @@
                 </p>
             </div>
 
-{{-- 
-            <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5">
-                <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
-                    <label for="username" class="block pt-2 mt-px font-medium text-md text-primary-bg">
-                        Name
-                    </label>
-                    <div class="col-span-1 mt-1">
-                        <div class="grid grid-rows-1">
-                            <select wire:model="users_id"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                <option selected>--SELECT USER--</option>
-                                @foreach ($users as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-
-                </div> --}}
-
-
-                <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5">
+                <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5" x-data="{picked:@entangle('picked'), searched :@entangle('searched')}">
                     <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
                         <label for="username" class="block pt-2 mt-px font-medium text-md text-primary-bg">
-                            Name
+                        Name
                         </label>
-                        <div class="col-span-1 mt-1">
-                            <div class="grid grid-rows-1">
-                                <select wire:model="users_id"
-                                    class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
-                                    <option selected>--SELECT USER--</option>
+                        <div class="col-span-2 mt-1">
+                            <div class="grid grid-cols-2 grid-rows-1" x-cloak x-show="picked==false">
+                                <p class="text-gray-700 text-md">Search User Here</p>
+                                <input type="text" class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm" wire:model.debounce.500ms="search" >
+                                <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searched">                                
                                     @foreach ($users as $user)
-                                    <option value="{{$user->id}}">{{Str::upper($user->name)}}</option>
+                                    <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-orange-ripe-light group" x-on:click="$wire.setUser({{ $user->id }})">
+                                        <div class="flex items-center col-span-2">
+                                            <div>
+                                                {{-- gab --}}
+                                              <img class="inline-block w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                            </div>
+                                            <div class="ml-3">
+                                              <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                {{ $user->name }}
+                                              </p>
+                                              <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                Click to image to select.
+                                              </p>
+                                            </div>
+                                        </div>
+                                    </a>
                                     @endforeach
-                                </select>
+                                </div>
+                                @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="grid grid-cols-2 grid-rows-1" x-cloak x-show="picked">
+                                <a href="#">
+                                    <div class="flex items-center col-span-2">
+                                        <div>
+                                            {{-- gab --}}
+                                          <img class="inline-block w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                        </div>
+                                        <div class="ml-3">
+                                          <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                           @if ($userInfo)
+                                           {{ $userInfo->name }}
+                                           @else
+                                               NOT SET
+                                           @endif
+                                          </p>
+                                          <p class="text-xs font-semibold tracking-wider text-blue-500 cursor-pointer hover:underline group-hover:text-gray-700" x-on:click="$wire.unSetUser()">
+                                            CHANGE
+                                          </p>
+                                        </div>
+                                    </div>
+                                </a>
+                                </div>
                                 @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -156,11 +173,11 @@
 
                             @if($has_registration==false)
                             <input type="number" wire:model.lazy="registration_amt"
-                                class=" amount block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm amount focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
                                 readonly>
                             @else
                             <input type="number" wire:model.lazy="registration_amt"
-                                class=" amount block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm ">
+                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm amount focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                             @endif
                             <h3 x-show="hovered" x-cloak class="text-xs text-indigo-500">If amount is not 0 and "has
                                 Registration" checkbox is not checked. Registration amount will not be included in the
@@ -172,7 +189,7 @@
                 </div>
             </div>
 
-            <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+            <div class="pt-8 pl-4 space-y-6 sm:pt-10 sm:space-y-5">
                 <div>
                     <h3 class="text-3xl font-medium leading-6 text-gray-900">
                         Itinerary
@@ -182,21 +199,21 @@
                     </p>
                     <div class="flex mt-5">
                         <div
-                            class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
+                            class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_from"
-                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2 ">From</label>
+                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-gradient-to-t from-transparent via-main-bg to-transparent -top-2 left-2 ">From</label>
                             <input wire:model="date_from" type="date" min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" name="date_from" id="date_from"
-                                class="block w-48 p-1 text-gray-900 placeholder-gray-500 border-0 rounded-md focus:ring-0 sm:text-sm">
+                                class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
                         </div>
 
                         <span class="mx-2 my-auto text-3xl">-</span>
 
                         <div
-                            class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
+                            class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_to"
-                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2">To</label>
+                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-gradient-to-t from-transparent via-main-bg to-transparent -top-2 left-2">To</label>
                             <input wire:model="date_to" type="date" min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" name="date_to" id="date_to"
-                                class="block w-48 p-1 text-gray-900 placeholder-gray-500 border-0 rounded-md focus:ring-0 sm:text-sm">
+                                class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
                         </div>
                     </div>
                     <button wire:click.prevent="generateDays" wire:loading.attr="disabled" type="button"

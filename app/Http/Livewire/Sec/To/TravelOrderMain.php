@@ -20,9 +20,12 @@ class TravelOrderMain extends Component
 {
 
 
+    public $search;
+    public $searched = false;
+    public $picked = false;
 
     public $users_id;
-    public $user;
+    public $userInfo=[];
     public $purpose;
     public $has_registration;
     public $registration_amt;
@@ -76,7 +79,12 @@ class TravelOrderMain extends Component
 
     public function render()
     {
-        $this->user = User::orderBy('name', 'asc')->get();
+        if($this->search!= ""){
+            $this->searched = true;
+        }else{
+            $this->searched = false;
+        }
+        
         $this->region = Region::get();
         $this->province = Province::where("region_code", "=",  $this->region_codes)->get();
         $this->city = City::where("province_code", "=", $this->province_codes)->get();
@@ -84,8 +92,8 @@ class TravelOrderMain extends Component
 
 
 
-        return view('livewire.sec.to.travel-order-main')->with('regions', $this->region)->with('provinces',  $this->province)
-        ->with('cities',  $this->city)->with('users', $this->user)->with('diems', $this->per_diem);
+        return view('livewire.sec.to.travel-order-main',['users'=> User::search('name', $this->search)->get(),])->with('regions', $this->region)->with('provinces',  $this->province)
+        ->with('cities',  $this->city)->with('diems', $this->per_diem);
     }
 
     // public function mount($err_per_diem)
@@ -305,4 +313,17 @@ class TravelOrderMain extends Component
         $this->finalTotal = number_format($this->subTotal,2);
     }
     
+    public function setUser($uID){
+        $this->users_id = $uID;
+        $this->userInfo = User::find($uID);
+        $this->picked = true;
+        $this->searched =false;
+        $this->search ="";
+    }
+    public function unSetUser(){
+        $this->users_id = null;
+        $this->userInfo = [];
+        $this->picked = false;
+    }
+
 }

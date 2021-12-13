@@ -8,8 +8,8 @@
         <div class="my-3 overflow-x-auto rounded-lg">
             <div class="inline-block py-2 align-middle min-w-ful">
                 <div class="overflow-hidden border-b border-white shadow">
-                    <table class="min-w-full m-2 divide-y divide-white rounded-lg table-fixed" id="itineraryTable">
-                        <thead class="bg-primary-bg">
+                    <table class="min-w-full m-2 divide-y divide-white rounded-lg table-fixed md:max-w-screen lg:max-w-sm" id="itineraryTable">
+                        <thead class="break-all bg-primary-bg">
 
                             <tr>
                                 <th scope="col" colspan="8"
