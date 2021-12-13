@@ -20,7 +20,7 @@ class CreateLastActionsTable extends Migration
             $table->foreignID('sender_id');
             $table->foreignID('action_type_id');
             $table->string('description');
-            $table->boolean('read');
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }

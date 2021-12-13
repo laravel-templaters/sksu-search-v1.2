@@ -17,8 +17,8 @@ class CreateDepartmentsTable extends Migration
             $table->id();
             $table->text('department_name');
             $table->text('department_short_code');
-            $table->foreignId('admin_user')->nullable();
-            $table->foreignId('head_user')->nullable();
+            $table->foreignId('admin_user_id')->nullable();
+            $table->foreignId('head_user_id')->nullable();
             $table->foreignId('campus_id');
             $table->timestamps();
         });

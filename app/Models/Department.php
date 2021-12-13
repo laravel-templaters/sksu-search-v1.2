@@ -22,9 +22,9 @@ class Department extends Model
         return $this->hasOne('App\Models\Campus','id','campus_id');
     }
     public function admin_user(){
-        return $this->hasOne('App\Models\User','id','admin_user');
+        return $this->hasOne('App\Models\User','id','admin_user_id');
     }
     public function head_user(){
-        return $this->hasOne('App\Models\User','id','head_user');
+        return $this->hasOne('App\Models\User','id','head_user_id');
     }
 }

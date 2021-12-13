@@ -1,10 +1,14 @@
 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{showStatus: false,showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
     @entangle('showReturnModal'), active :
     @entangle('active'),personalClicked :
-    @entangle('personalClicked'),pendingClicked : @entangle('pendingClicked'), show_Banner :@entangle('showBanner') }"
+    @entangle('personalClicked'),pendingClicked : @entangle('pendingClicked'), show_Banner :@entangle('showBanner') , show_Error :@entangle('showError')  }"
     x-init="$watch('show_Banner', value => {
         if(value == true){
             setTimeout(function(){ show_Banner = false; }, 5000);
+        }
+    }), $watch('show_Error', value => {
+        if(value == true){
+            setTimeout(function(){ show_Error = false; }, 5000);
         }
     })">
     {{-- notif --}}
@@ -59,6 +63,50 @@
         </div>
     </div>
 
+     {{-- error start --}}
+     <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
+        <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
+            <div class="w-full max-w-md overflow-hidden bg-red-200 rounded-lg shadow-lg pointer-events-auto bg-opacity-95 ring-1 ring-black ring-opacity-5"
+                x-cloak x-show="show_Error" x-transition:enter="transform ease-out duration-300 transition"
+                x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+                x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
+                x-transition:leave="opacity-100 duration-500" x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0">
+                <div class="p-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                        </div>
+                        <div class="ml-3 w-0 flex-1 pt-0.5">
+                            <p class="text-sm font-medium text-black">
+                                {{$greeting}}!
+                            </p>
+                            <p class="mt-1 text-sm text-gray-700">
+                                DV Number Not Set
+                          </p>
+                        </div>
+                        <div class="flex flex-shrink-0 ml-4">
+                            <button
+                                class="inline-flex bg-transparent rounded-md text-secondary-bg-alt hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                x-on:click="show_Banner = false">
+                                <span class="sr-only">Close</span>
+                                <!-- Heroicon name: solid/x -->
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- error end --}}
 
 
     <div class="" id="nav">
@@ -315,7 +363,7 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                        @if ($last_actions->action_type->description == "FORWARDED")
+                                         @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -324,7 +372,7 @@
                                         @elseif($last_actions->action_type->description == "RECEIVED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
-                                            wire:click="forwardDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
+                                            wire:click="checkFunding({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
                                             Forward voucher
                                         </button>
                                         @endif
@@ -398,7 +446,7 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                        @if ($last_actions->action_type->description == "FORWARDED")
+                                         @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -407,7 +455,7 @@
                                         @elseif($last_actions->action_type->description == "RECEIVED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
-                                            wire:click="forwardDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
+                                            wire:click="checkFunding({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
                                             Forward voucher
                                         </button>
                                         @endif
@@ -537,18 +585,41 @@
                             @foreach ($sigsReturn as $key => $mssig)
                             <li>
                                 <div class="space-y-4 text-left">
-                                    <button class="flex-shrink-0 block "
-                                        wire:click.prevent="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->assigned_user}})">
+                                    <button class="flex-shrink-0 block " x-on:click="showModalReturn = false"
+                                 wire:click="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->department->admin_user_id}})">
                                         <!-- This example requires Tailwind CSS v2.0+ -->
 
                                         <div
                                             class="flex items-center rounded-lg group-hover:bg-primary-text group-hover:bg-opacity-95 group-focus:ring-2 group-focus:ring-primary-text">
                                             <div>
+                                                @if ($mssig->assigned == null)
                                                 <img class="inline-block truncate rounded-full h-14 w-14"
-                                                    src="{{$mssig->assigned->avatar != null ? asset($mssig->assigned->avatar) : asset($mssig->assigned->profile_photo_url)}}"
-                                                    alt="{{$mssig->assigned->name}}">
+                                                src="{{$mssig->department->admin_user->avatar != null ? asset($mssig->department->admin_user->avatar) : asset($mssig->department->admin_user->profile_photo_url)}}"
+                                                alt="{{$mssig->department->admin_user->name}}">
+                                                @else
+                                                <img class="inline-block truncate rounded-full h-14 w-14"
+                                                src="{{$mssig->assigned->avatar != null ? asset($mssig->assigned->avatar) : asset($mssig->assigned->profile_photo_url)}}"
+                                                alt="{{$mssig->assigned->name}}">
+                                                @endif
+                                               
                                             </div>
                                             <div class="ml-3 text-left">
+                                                @if ($mssig->assigned == null)
+                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                    {{$mssig->department->admin_user->name}}
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    @if ($mssig->department->admin_user->position != null)
+                                                    {{$mssig->department->admin_user->position->position_name}}
+                                                    @endif
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    @if ($mssig->department->admin_user->department != null)
+                                                    {{$mssig->department->admin_user->department_name}}
+                                                    @endif
+                                                </p>
+                                                
+                                                @else
                                                 <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                                                     {{$mssig->assigned->name}}
                                                 </p>
@@ -562,6 +633,11 @@
                                                     {{$mssig->assigned->department->department_name}}
                                                     @endif
                                                 </p>
+                                                @endif
+                                               
+
+                                                
+                                               
 
 
                                             </div>

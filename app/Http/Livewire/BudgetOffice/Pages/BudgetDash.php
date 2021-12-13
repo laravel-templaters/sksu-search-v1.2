@@ -10,15 +10,20 @@ use App\Models\Particular;
 //use App\Models\LastAction;
 use App\Models\DvProgress;
 use App\Models\LastAction;
-use App\Models\Milestone;   
-use App\Models\Department;    
+use App\Models\Milestone;    
 use Carbon\Carbon;   
 use App\Models\User;
 use App\Events\ForwardDV;
+use App\Models\Department;
 use App\Models\Signatory;
 
 class BudgetDash extends Component
-{//view voucher info
+{
+//budget ex
+public $showError = false;
+
+
+    //view voucher info
     public $showViewModal= false;
     public $showForwardModal= false;
     public $showReturnModal= false;
@@ -29,7 +34,7 @@ class BudgetDash extends Component
     public $isHead=false;
     public $isAdmin=false;
     public $isAssigned=false;
-    
+
     public $searchPending="";
     public $searchPersonal="";
     public $personalClicked=true;
@@ -50,12 +55,12 @@ class BudgetDash extends Component
     {
         $user_id = auth()->user()->id;
         $this->department = Department::with(['admin_user','head_user'])->where('id',auth()->user()->department_id)->first();
-        if( $this->department->admin_user ==  $user_id ||$this->department->head_user == $user_id ){
+        if( $this->department->admin_user_id ==  $user_id ||$this->department->head_user_id == $user_id ){
             $this->milestones = Milestone::where('department_id','=',auth()->user()->department_id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
             $this->isHeadOrAdmin=true;
-            if ($this->department->admin_user ==  $user_id){
+            if ($this->department->admin_user_id ==  $user_id){
                 $this->isAdmin=true;
-            }elseif ($this->department->head_user ==  $user_id){
+            }elseif ($this->department->head_user_id ==  $user_id){
                 $this->isHead=true;
             }
         }elseif(Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->first()){
@@ -78,8 +83,6 @@ class BudgetDash extends Component
             "echo-private:forward-dv.".auth()->user()->id.",ForwardDV" => 'populateTable',
         ];
     }
-      
-    
     public function recieveDocument($dvID,$mID,$uID){
         $la = new LastAction();
              $la->disbursement_voucher_id=$dvID;
@@ -100,13 +103,13 @@ class BudgetDash extends Component
          $ms->isActive =false;
          $ms->is_completed=true;
          $ms->save();
-         $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','=',($ms->step_number)+1)->first();
+         $next_step_id=Milestone::where('disbursement_voucher_id','=',$dvID)->where('step_number','>',($ms->step_number))->where('is_completed','=',false)->first();
              $la = new LastAction();
              $la->disbursement_voucher_id=$dvID;
              if($next_step_id->assigned_user != null){
                  $la->reciever_id=$next_step_id->assigned_user; 
              }else{
-                 $la->reciever_id=$next_step_id->department->head_user; 
+                 $la->reciever_id=$next_step_id->department->head_user_id; 
              }
              $la->sender_id=auth()->user()->id;
              $la->action_type_id= 1;
@@ -122,12 +125,56 @@ class BudgetDash extends Component
           Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',auth()->user()->id)->update(['signed'=>true,'date_signed'=>Carbon::now()]);
           if($next_step_id->assigned_user == null){
              $temp = Department::with(['admin_user','head_user'])->where('id',$ms1->department_id)->first();
-             event(new ForwardDV($temp->admin_user));
-             event(new ForwardDV($temp->head_user));
+             event(new ForwardDV($temp->admin_user_id));
+             event(new ForwardDV($temp->head_user_id));
           }else{
              event(new ForwardDV($next_step_id->assigned_user));
           }
          
+     }
+     public function returnDoc($dvID,$mID,$assignedU){
+        
+        
+        $ms = Milestone::where('disbursement_voucher_id','=',$dvID)->where('isActive','=',true)->first();
+        $ms->isActive =false;
+        $ms->is_completed=false;
+        $ms->save();
+        // dd($ms);
+        $next_step_id=Milestone::find($mID);
+        // dd($next_step_id);
+            $la = new LastAction();
+            $la->disbursement_voucher_id=$dvID;
+            if($next_step_id->assigned_user != null){
+                $la->reciever_id=$next_step_id->assigned_user; 
+            }else{
+                $la->reciever_id=$next_step_id->department->head_user_id; 
+            }
+            $la->sender_id=auth()->user()->id;
+            $la->action_type_id= 3;
+            if($next_step_id->assigned_user != null){
+                $la->reciever_id=$next_step_id->assigned_user; 
+                $la->description ="to ".(User::find($next_step_id->assigned_user)->department->department_name);
+            }else{
+                $la->description ="to ". $next_step_id->department->department_name;
+            }
+          
+            $la->save();
+           
+        $ms1 = Milestone::find($next_step_id->id);
+        $ms1->date_started = Carbon::now();
+        $ms1->date_completed= null;
+        $ms1->isActive =true;
+        $ms1->is_completed =false;
+        $ms1->save();
+         DvProgress::where('disbursement_voucher_id','=',$dvID)->update(['last_action_id'=>$la->id]);
+         Signatory::where('disbursement_voucher_id','=',$dvID)->where('user_id','=',$assignedU)->update(['signed'=>false,'date_signed'=>null]);
+         if($next_step_id->assigned_user == null){
+            $temp = Department::with(['admin_user','head_user'])->where('id',$ms1->department_id)->first();
+            event(new ForwardDV($temp->admin_user_id));
+            event(new ForwardDV($temp->head_user_id));
+         }else{
+            event(new ForwardDV($next_step_id->assigned_user));
+         }
      }
  
      public function showModal($disbursementID){
@@ -163,6 +210,15 @@ class BudgetDash extends Component
              $this->showViewModal = false;
              $this->showModal($dvID);
          }
+    }
+    public function checkFunding($dvID,$mID,$uID){
+        $fundC = DisbursementVoucher::find($dvID)->value('fund_cluster');
+        
+        if($fundC != null){
+            $this->forwardDocument($dvID,$mID,$uID);
+        }else{
+            $this->showError =true;
+        }
     }
        
 }

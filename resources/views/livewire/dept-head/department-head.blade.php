@@ -316,7 +316,7 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                        @if ($last_actions->action_type->description == "FORWARDED")
+                                        @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -399,7 +399,7 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                        @if ($last_actions->action_type->description == "FORWARDED")
+                                        @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -536,9 +536,10 @@
                             @foreach ($sigsReturn as $key => $mssig)
                             <li>
                                 <div class="space-y-4 text-left">
-                                    <button class="flex-shrink-0 block "
-                                        wire:click.prevent="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->assigned_user}})">
+                                    <button class="flex-shrink-0 block " x-on:click="showModalReturn = false"
+                                 wire:click="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->department->admin_user_id}})">
                                         <!-- This example requires Tailwind CSS v2.0+ -->
+                                        
 
                                         <div
                                             class="flex items-center rounded-lg group-hover:bg-primary-text group-hover:bg-opacity-95 group-focus:ring-2 group-focus:ring-primary-text">
