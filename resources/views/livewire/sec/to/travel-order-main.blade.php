@@ -27,14 +27,14 @@
                                         <div class="flex items-center col-span-2">
                                             <div>
                                                 {{-- gab --}}
-                                              <img class="inline-block w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                              <img class="inline-block w-10 h-10 rounded-full" src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}" alt="">
                                             </div>
                                             <div class="ml-3">
                                               <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                                                 {{ $user->name }}
                                               </p>
                                               <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                                                Click to image to select.
+                                                Click an image to select.
                                               </p>
                                             </div>
                                         </div>
@@ -187,7 +187,8 @@
 
                     </div>
                 </div>
-            </div>
+
+            {{-- </div> --}}
 
             <div class="pt-8 pl-4 space-y-6 sm:pt-10 sm:space-y-5">
                 <div>
@@ -224,6 +225,7 @@
                 <div wire:loading wire:target="generateDays">
                     Loading...
                 </div>
+                 </div>
                 @if($showDays)
 
 
