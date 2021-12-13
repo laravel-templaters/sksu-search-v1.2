@@ -156,11 +156,11 @@
 
                             @if($has_registration==false)
                             <input type="number" wire:model.lazy="registration_amt"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
+                                class=" amount block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
                                 readonly>
                             @else
                             <input type="number" wire:model.lazy="registration_amt"
-                                class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm ">
+                                class=" amount block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm ">
                             @endif
                             <h3 x-show="hovered" x-cloak class="text-xs text-indigo-500">If amount is not 0 and "has
                                 Registration" checkbox is not checked. Registration amount will not be included in the
@@ -185,7 +185,7 @@
                             class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_from"
                                 class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2 ">From</label>
-                            <input wire:model="date_from" type="date" name="date_from" id="date_from"
+                            <input wire:model="date_from" type="date" min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" name="date_from" id="date_from"
                                 class="block w-48 p-1 text-gray-900 placeholder-gray-500 border-0 rounded-md focus:ring-0 sm:text-sm">
                         </div>
 
@@ -195,7 +195,7 @@
                             class="relative px-3 py-2 border border-gray-200 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_to"
                                 class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2">To</label>
-                            <input wire:model="date_to" type="date" name="date_to" id="date_to"
+                            <input wire:model="date_to" type="date" min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" name="date_to" id="date_to"
                                 class="block w-48 p-1 text-gray-900 placeholder-gray-500 border-0 rounded-md focus:ring-0 sm:text-sm">
                         </div>
                     </div>
@@ -227,15 +227,15 @@
 
                 @elseif($err_from_to)
                 <div wire.loading.remove class="mt-5">
-                    <span class="text-red-400">Please fill out all fields.</span>
+                    <span class="text-red-400">Please fill out all fields. (Don't leave any blanks on the fields)</span>
                 </div>
                 @elseif($err_diff)
                 <div wire.loading.remove class="mt-5">
-                    <span class="text-red-400">Invalid Dates.</span>
+                    <span class="text-red-400">'From Date' must be less than the 'To Date'</span>
                 </div>
                 @elseif($err_diem)
                 <div wire.loading.remove class="mt-5">
-                    <span class="text-red-400">Pick Region.</span>
+                    <span class="text-red-400">Pick Region. (Select Region, Province and Municipality from the options above)</span>
                 </div>
                 @endif
 
@@ -255,5 +255,14 @@
                 </button>
             </div>
         </div>
+        <script>
+        document.querySelector(".amount").addEventListener("keypress", function (evt) {
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+        {
+            evt.preventDefault();
+        }
+        });
+        </script>
     </form>
+
 </div>

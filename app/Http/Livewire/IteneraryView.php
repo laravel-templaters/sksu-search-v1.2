@@ -179,7 +179,7 @@ class IteneraryView extends Component
         
         if($dep_time != "" && $arr_time != "") 
         {
-            if($dep_time > $arr_time)
+            if($dep_time >= $arr_time)
             {
 
                 // $this->alert('warning', 'Invalid Time!', [
