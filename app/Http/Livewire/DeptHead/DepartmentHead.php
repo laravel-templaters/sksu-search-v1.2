@@ -126,6 +126,9 @@ class DepartmentHead extends Component
             event(new ForwardDV($temp->admin_user_id));
             event(new ForwardDV($temp->head_user_id));
          }else{
+            $temp = Department::with(['admin_user','head_user'])->where('id',$ms1->department_id)->first();
+            event(new ForwardDV($temp->admin_user_id));
+            event(new ForwardDV($temp->head_user_id));
             event(new ForwardDV($next_step_id->assigned_user));
          }
         
@@ -171,6 +174,9 @@ class DepartmentHead extends Component
            event(new ForwardDV($temp->admin_user_id));
            event(new ForwardDV($temp->head_user_id));
         }else{
+            $temp = Department::with(['admin_user','head_user'])->where('id',$ms1->department_id)->first();
+            event(new ForwardDV($temp->admin_user_id));
+            event(new ForwardDV($temp->head_user_id));
            event(new ForwardDV($next_step_id->assigned_user));
         }
     }
