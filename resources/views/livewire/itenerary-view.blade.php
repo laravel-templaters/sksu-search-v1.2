@@ -8,7 +8,7 @@
         <div class="my-3 overflow-x-auto rounded-lg">
             <div class="inline-block py-2 align-middle min-w-ful">
                 <div class="overflow-hidden border-b border-white shadow">
-                    <table class="min-w-full m-2 divide-y divide-white rounded-lg table-fixed md:max-w-screen lg:max-w-sm" id="itineraryTable">
+                    <table class="min-w-full m-2 divide-y divide-white rounded-lg table-fixed md:max-w-screen lg:max-w-screen xl:max-w-xl" id="itineraryTable">
                         <thead class="break-all bg-primary-bg">
 
                             <tr>
@@ -28,36 +28,36 @@
                             </tr>
                             <tr>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Date ({{Carbon\Carbon::createFromFormat('Y-m-d', $gen)->format('Y')}})
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Place to be visited
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Departure Time
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Arrival Time
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Mode of Trans.
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Trans. Exp
                                 </th>
 
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Others
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-white uppercase truncate">
                                     Per Diem
                                 </th>
                                 {{-- <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -65,23 +65,23 @@
                                 </th> --}}
 
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase truncate">
                                     Breakfast
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase truncate">
                                     Lunch
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase truncate">
                                     Dinner
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase">
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-white uppercase truncate">
                                     Lodging
                                 </th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-xs font-extrabold tracking-wider text-left uppercase text-secondary-bg">
+                                    class="px-6 py-3 text-xs font-extrabold tracking-wider text-left uppercase truncate text-secondary-bg">
                                     Total
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Edit</span>

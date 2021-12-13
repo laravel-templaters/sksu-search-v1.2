@@ -47,8 +47,12 @@
                                 <a href="#">
                                     <div class="flex items-center col-span-2">
                                         <div>
-                                            {{-- gab --}}
-                                          <img class="inline-block w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                                            @if ($userInfo)
+                                             <img class="inline-block w-10 h-10 rounded-full" src="{{$userInfo->avatar != null ? asset($userInfo->avatar) : asset($userInfo->profile_photo_url)}}" alt="">
+                                            @else
+                                            <img class="inline-block w-10 h-10 rounded-full" src="" alt="X">
+                                            @endif
+                                           
                                         </div>
                                         <div class="ml-3">
                                           <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
@@ -202,7 +206,7 @@
                         <div
                             class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_from"
-                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-gradient-to-t from-transparent via-main-bg to-transparent -top-2 left-2 ">From</label>
+                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2 ">From</label>
                             <input wire:model="date_from" type="date" min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" name="date_from" id="date_from"
                                 class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
                         </div>
@@ -212,7 +216,7 @@
                         <div
                             class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                             <label for="date_to"
-                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-gradient-to-t from-transparent via-main-bg to-transparent -top-2 left-2">To</label>
+                                class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2">To</label>
                             <input wire:model="date_to" type="date" min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" name="date_to" id="date_to"
                                 class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
                         </div>
@@ -236,11 +240,12 @@
 
                 @if(isset($gen))
                 <div class="relative min-w-full my-4 ml-4 mr-7">
-                    <div class="absolute bottom-0 pr-0 mt-2 mr-4 bg-white right-2 "><a
-                            class="pl-3 pr-2 my-auto text-sm font-bold uppercase bg-white border-2 border-r-0 cursor-pointer hover:bg-primary-bg-alt hover:text-secondary-bg-alt rounded-l-md border-primary-bg-alt text-secondary-bg"
-                            wire:click="TotalCalculation">Calculate</a> <span
-                            class="font-extrabold text-gray-900 text-md">TOTAL:</span><span
-                            class="pl-3 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div>   
+                    <div class="absolute bottom-0 pr-0 my-3 mt-2 mr-10 bg-white right-2 ">
+                        <button type="button" x-on:click="$wire.TotalCalculation()" class="pl-3 pr-2 my-auto mr-10 font-bold text-indigo-300 uppercase bg-indigo-500 border border-transparent rounded text-md hover:bg-indigo-400 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Calculate
+                          </button> <span
+                            class="mr-5 font-extrabold text-gray-900 text-md"> GRAND TOTAL:</span><span
+                            class="pl-3 mr-2 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div>   
                 </div>
                 @endif
 
@@ -250,7 +255,7 @@
                 </div>
                 @elseif($err_diff)
                 <div wire.loading.remove class="mt-5">
-                    <span class="text-red-400">'From Date' must be less than the 'To Date'</span>
+                    <span class="text-red-400">Check inputs: 'From Date' must be less than the 'To Date'</span>
                 </div>
                 @elseif($err_diem)
                 <div wire.loading.remove class="mt-5">
@@ -268,7 +273,7 @@
                     class="px-4 py-2 font-bold bg-white border border-gray-300 rounded-md shadow-sm text-md text-primary-bg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Cancel
                 </button>
-                <button type="submit"
+                <button type="button"
                     class="px-4 py-2 mx-2 font-bold border border-gray-300 rounded-md shadow-sm bg-primary-bg-alt text-md text-secondary-text hover:bg-gray-50 hover:text-primary-text-alt focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Save
                 </button>
