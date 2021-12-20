@@ -90,4 +90,8 @@ class User extends Authenticatable
     public function milestone(){
           return $this->belongsTo('App\Models\Milestone');
     }
+    public function folder_document(){
+        return $this->belongsTo('App\Models\FolderDocument');
+    }
+    
 }

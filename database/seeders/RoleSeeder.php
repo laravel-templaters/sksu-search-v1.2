@@ -21,7 +21,8 @@ class RoleSeeder extends Seeder
                 ['role_name' => 'Secretary'],//3
                 ['role_name' => 'Accountant'],//4
                 ['role_name' => 'Budget Officer'],//5
-                ['role_name' => 'President']//6
+                ['role_name' => 'President'],//6
+                ['role_name' => 'Archiver']//7
             ]);
     }
 }

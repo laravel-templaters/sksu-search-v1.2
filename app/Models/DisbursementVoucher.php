@@ -48,6 +48,9 @@ class DisbursementVoucher extends Model
     public function milestone(){
         return $this->belongsTo('App\Models\Milestone');
     }
+    public function folderDocument(){
+        return $this->belongsTo('App\Models\FolderDocument');
+    }
     
     
 }

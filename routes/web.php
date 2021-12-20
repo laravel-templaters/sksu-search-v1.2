@@ -101,3 +101,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/email',function(){
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/act/dashboard', \App\Http\Livewire\Accountant\Pages\Dashboard::class)->name('accountant-dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->get('/budoff/dashboard', \App\Http\Livewire\BudgetOffice\Pages\BudgetDash::class)->name('budget-dashboard');
+
+
+//archive
+Route::middleware(['auth:sanctum','verified'])->get('/archives/document/list',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentList::class)->name('archive-list');
+Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentDetails::class)->name('archive-detail');
+Route::middleware(['auth:sanctum','verified'])->get('/archiver/main',App\Http\Livewire\Accountant\Pages\Archives\ArchiverMainView::class)->name('archiver-main');
+Route::middleware(['auth:sanctum','verified'])->get('/archiver/new/archive',App\Http\Livewire\Accountant\Pages\Archives\ArchiverNew::class)->name('archive-new');
