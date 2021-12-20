@@ -12,7 +12,7 @@
 
         @if ($typesorter->id != 1 && $typesorter->sorter == 1)
         @if (strtoupper($typesorter->dv_type->dv_type)!="TRAVEL ORDER")
-        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-primary-text bg-opacity-70"
+        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-secondary-bg-alt bg-opacity-70"
             x-data="{showMe : false}">
             @if(strtoupper($typesorter->dv_type->dv_type)=="DISBURSEMENTS")
             <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
@@ -45,7 +45,7 @@
                 </div>
             </a>
             @endif
-            <div class="p-3 mt-1 mb-1 ml-3 mr-1 bg-opacity-75 rounded-md bg-primary-text " x-cloak x-show="showMe">
+            <div class="p-3 mt-1 mb-1 ml-3 mr-1 bg-opacity-75 rounded-md bg-secondary-bg-alt " x-cloak x-show="showMe">
                 @foreach ($categories as $category)
                 <div x-data="{openCA:false}">
 

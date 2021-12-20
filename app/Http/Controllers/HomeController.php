@@ -39,6 +39,12 @@ class HomeController extends Controller
             return redirect()->route('department-head'); 
                       
          }
+         else if($role == 7){
+
+            return redirect()->route('accountant-dashboard');
+                      
+         }
+         
     }
     public function test()
     {

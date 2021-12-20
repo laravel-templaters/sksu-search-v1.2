@@ -39,6 +39,7 @@ class PositionSeeder extends Seeder
                 ['position_name' => 'University Cashier'],//21
                 ['position_name' => 'Accounting Officer'],//22
                 ['position_name' => 'Admin Officer'],//23
+                ['position_name' => 'Archiver'],//24
 
             ]);
     }

@@ -4391,7 +4391,16 @@ class adminseeder extends Seeder
       ]);
 
 
-
+      //Archiver
+        DB::table('users')->insert([
+           'name'=> 'Johnrex T. Naceda',
+           'birth_day'=>  Carbon::create('1999', '06', '10'),   
+           'contact_number'=>'09123456789',        
+           'email'=>'johnrexnaceda@sksu.edu.ph',
+           'password'=> Hash::make('naceda123'),
+           'role_id'=>7,
+           'department_id'=>3,
+           'position_id'=>24]);
 
 
 

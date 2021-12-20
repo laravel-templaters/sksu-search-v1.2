@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="py-2 bg-secondary-bg drop-shadow-md bg-opacity-70">
     <!-- Primary Navigation Menu -->
-    <div class="px-2 mx-auto max-w-7xl">
+    <div class="px-2 mx-auto max-w-screen">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -27,7 +27,7 @@
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
                     
-                    @elseif(auth()->user()->role_id == 4)
+                    @elseif(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
                     
                         <x-jet-nav-link href="{{ route('accountant-dashboard') }}" :active="request()->routeIs('accountant-dashboard')">
                             {{ __('Dashboard') }}
@@ -55,6 +55,11 @@
                     <x-jet-nav-link href="{{route('travel-order', 3)}}" :active="request()->routeIs('travel-order')">
                         {{ __('Create Travel Order') }}
                     </x-jet-nav-link>
+                    @if(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
+                    <x-jet-nav-link href="{{route('archive-list')}}" :active="request()->routeIs('archive-list')">
+                        {{ __('Archives') }}
+                    </x-jet-nav-link>
+                    @endif
                     
                 </div>
             </div>
@@ -64,14 +69,20 @@
                 <!-- Teams Dropdown -->
 
                 <!-- Settings Dropdown -->
-                <div class="ml-3" x-cloak>
+                <div class="ml-3 mr-3" x-cloak>
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button
-                                class="flex items-center text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
+                                class="flex items-center p-2 text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
+                                @if ( Auth::user()->avatar != null)
                                 <img class="object-cover w-8 h-8 rounded-full"
-                                    src="{{ Auth::user()->avatar != null ? Auth::user()->avatar: Auth::user()->profile_photo_url }}" alt="" />
+                                    src="{{ Auth::user()->avatar}}" alt="" />
+                                @elseif( Auth::user()->profile_photo_url != null)
+                                <img class="object-cover w-8 h-8 rounded-full"
+                                src="{{ Auth::user()->profile_photo_url }}" alt="" />   
+                                @endif
+                                
                                 <h1 class="inline-flex ml-2 text-sm uppercase truncate text-primary-bg">
                                     {{ Auth::user()->name}}</h1>
                             </button>
