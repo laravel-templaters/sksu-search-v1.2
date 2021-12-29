@@ -41,10 +41,13 @@
     </header>
     @endif
 
+    @if (request()->routeIs('archiver-main'))
+    <div class="bg-secondary-alt-600 pb-34 h-32"></div> 
+    @endif
+    
     <!-- Page Content -->
     <main class="bg-transparent">
         {{ $slot }}
-
     </main>
 
     </div>

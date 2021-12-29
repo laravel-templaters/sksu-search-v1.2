@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="py-2 bg-secondary-bg drop-shadow-md bg-opacity-70">
+<nav x-data="{ open: false }" class="py-2 bg-secondary-alt-600">
     <!-- Primary Navigation Menu -->
     <div class="px-2 mx-auto max-w-screen">
         <div class="flex justify-between h-16">
@@ -58,6 +58,11 @@
                     @if(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
                     <x-jet-nav-link href="{{route('archive-list')}}" :active="request()->routeIs('archive-list')">
                         {{ __('Archives') }}
+                    </x-jet-nav-link>
+                    @endif
+                    @if(auth()->user()->role_id == 7)
+                    <x-jet-nav-link href="{{route('archiver-main')}}" :active="request()->routeIs('archiver-main')">
+                        {{ __('Archiver') }}
                     </x-jet-nav-link>
                     @endif
                     

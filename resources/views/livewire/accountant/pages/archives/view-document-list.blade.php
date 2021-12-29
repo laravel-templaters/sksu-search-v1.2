@@ -5,7 +5,7 @@
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg bg-gray-50 ">
+                    <div class="overflow-hidden border-b border-gray-200 shadow-md shadow-secondary-alt-500/50 sm:rounded-lg bg-gray-50 ">
                         <div class="flex justify-between max-w-full m-4">
                             <div class="flex justify-start max-w-full m-4">
                                 <div class="m-2">
@@ -125,7 +125,7 @@
                                 </div>
                             </div>
                             <div>
-                                <input type="text" name="search" id="search" placeholder="Search here"
+                                <input type="text" name="search" id="search" wire:model.debounce='searchText' placeholder="Search here"
                                     class="px-5 rounded-full max-h-16 w-md active:border-secondary-alt-500 focus:border-secondary-alt-500 focus:border-2 focus:ring-0">
                             </div>
                         </div>
@@ -152,7 +152,8 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($users as $user)
+                                @if (count($disbursement_vouchers)>0)
+                                @foreach ($disbursement_vouchers as $disbursement_voucher)
                                 <tr>
                                                         {{-- <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -170,7 +171,7 @@
                                         </div>
                                         </td> --}}
                                     <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                      {{ $user->name }}
+                                      {{ $disbursement_voucher->name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">Construction</div>
@@ -196,16 +197,19 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                
+                                @else
+                                <tr>
+                                    <td class="px-6 py-4 italic text-center text-gray-500 text-md whitespace-nowrap" colspan="4">
+                                    NOTHING TO SHOW
+                                    </td>
+                                </tr>
+                                @endif
 
                                 <!-- More people... -->
                             </tbody>
-                            <tfoot class="bg-gray-50">
-                                <tr colspan="4">
-                                    {{ $users->onEachSide(5)->links() }}
-                                </tr>
-                            </tfoot>
+                            
                         </table>
+                        {{ $disbursement_vouchers->onEachSide(1)->links() }}
                     </div>
                 </div>
             </div>
