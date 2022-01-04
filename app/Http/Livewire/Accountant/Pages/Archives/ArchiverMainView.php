@@ -10,8 +10,9 @@ class ArchiverMainView extends Component
 {
     public $searchText;
     public $dateFilter;
+    
     public function render()
-    {  $disbursement_vouchers = [];
+    {   $disbursement_vouchers = [];
         if (isset($dateFilter)) {
           if ($dateFilter =='none') {
             $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->paginate(5);
@@ -44,13 +45,14 @@ class ArchiverMainView extends Component
                         $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->search12months('closed_date',"")->paginate(5);
                         break;
                       default:
-                         
-                          break;
+                        break;
                   }
               }
           }
+        }else{
+            $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->paginate(5);
         }
-        $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->paginate(5);
-        return view('livewire.accountant.pages.archives.archiver-main-view')->with('disbursement_vouchers')->layout('layouts.accountant');
+       
+        return view('livewire.accountant.pages.archives.archiver-main-view')->with('disbursement_vouchers',$disbursement_vouchers)->layout('layouts.accountant');
     }
 }
