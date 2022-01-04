@@ -41,9 +41,10 @@ class HomeController extends Controller
          }
          else if($role == 7){
 
-            return redirect()->route('accountant-dashboard');
+            return redirect()->route('archiver-main');
                       
          }
+
          
     }
     public function test()

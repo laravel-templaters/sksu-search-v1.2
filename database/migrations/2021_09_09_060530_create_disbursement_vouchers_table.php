@@ -22,6 +22,7 @@ class CreateDisbursementVouchersTable extends Migration
             $table->foreignId('mop_id');
             $table->foreignId('status_id');
             $table->foreignId('dv_type_sorter_id');
+            $table->dateTime('closed_date')->nullable();
             $table->timestamps();
         });
     }
