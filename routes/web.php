@@ -108,3 +108,8 @@ Route::middleware(['auth:sanctum','verified'])->get('/archives/document/list',Ap
 Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail/{id}',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentDetails::class)->name('archive-detail');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/main',App\Http\Livewire\Accountant\Pages\Archives\ArchiverMainView::class)->name('archiver-main');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/new/archive',App\Http\Livewire\Accountant\Pages\Archives\ArchiverNew::class)->name('archive-new');
+
+
+//usermgt
+
+Route::middleware(['auth:sanctum','verified'])->get('user/mgt/new',App\Http\Livewire\Client\Users\CreateNewUser::class)->name('create-new-user');

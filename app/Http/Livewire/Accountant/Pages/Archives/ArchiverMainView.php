@@ -48,7 +48,7 @@ class ArchiverMainView extends Component
                         break;
                   }
               }
-          }
+          } 
         }else{
             $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->paginate(5);
         }
