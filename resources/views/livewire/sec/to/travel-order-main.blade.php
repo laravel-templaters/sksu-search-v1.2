@@ -170,7 +170,7 @@
                 <div class="col-span-1 col-start-2 row-span-1 row-start-1 mt-1">
 
                     <div class="relative flex items-start">
-                        <input wire:model="has_registration" id="comments" aria-describedby="comments-description"
+                        <input wire:model="has_registration" x-on:leave="$wire.finalTotalCalculation({{ 0 }})" id="comments" aria-describedby="comments-description"
                             name="comments" type="checkbox"
                             class="w-4 h-4 my-auto border-gray-300 rounded text-secondary-bg focus:ring-primary-bg">
                         <div class="my-auto ml-3 text-sm">
@@ -265,10 +265,11 @@
         @if(isset($gen))
         <div class="relative min-w-full my-4 ml-4 mr-7">
             <div class="absolute bottom-0 pr-0 my-3 mt-2 mr-10 bg-white right-2 ">
-                <button type="button" x-on:click="$wire.TotalCalculation()"
+                {{-- <button type="button" x-on:click="$wire.TotalCalculation()"
                     class="pl-3 pr-2 my-auto mr-10 font-bold text-indigo-300 uppercase bg-indigo-500 border border-transparent rounded text-md hover:bg-indigo-400 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Calculate
-                </button> <span class="mr-5 font-extrabold text-gray-900 text-md"> GRAND TOTAL:</span><span
+                </button> --}}
+                <span class="mr-5 font-extrabold text-gray-900 text-md"> GRAND TOTAL:</span><span
                     class="pl-3 mr-2 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div>
         </div>
         @endif

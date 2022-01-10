@@ -297,21 +297,26 @@ class TravelOrderMain extends Component
     public $subTotal;
     public function TotalCalculation(){
         if ($this->has_registration == true) {
-         $this->emit('sendTotalVal');
-         $this->emit('valIE');
-
-         $this->finalTotal = $this->subTotal= $this->registration_amt;
+        if ($this->subTotal>0) {
+            $this->finalTotal_raw = $this->subTotal= $this->registration_amt;
+            $this->emit('sendTotalVal');
+        }else{
+            $this->finalTotal_raw = $this->subTotal= $this->registration_amt;
+        }
         } else {
-            $this->finalTotal = $this->subTotal = 0.0;
-        $this->emit('sendTotalVal');
+            $this->finalTotal_raw = $this->subTotal = 0.0;
         }
         
     }
     public $finalTotal_raw=0.0;
     public function finalTotalCalculation($value){
-        $this->subTotal += $value;
-         $this->finalTotal_raw = $this->subTotal;
-        $this->finalTotal = number_format($this->subTotal,2);
+        $this->TotalCalculation();
+        if ($value > 0) {
+            $this->subTotal += $value;
+            $this->finalTotal_raw = $this->subTotal;
+           $this->finalTotal = number_format($this->subTotal,2); 
+        }
+        
     }
     
     public function setUser($uID){

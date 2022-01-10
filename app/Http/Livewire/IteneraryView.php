@@ -323,6 +323,7 @@ class IteneraryView extends Component
                     $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']) + ((float)$this->input[intval($key)]['raw_diem']);
                     $this->input[intval($key)]['raw_total'] = $this->total;
                     $this->input[intval($key)]['total'] = number_format($this->total,2);
+                    $this->sendTotalVal();
                 }
                    
                }else{
@@ -343,9 +344,10 @@ class IteneraryView extends Component
                     $this->total =  ((float)$this->input[intval($key)]['trans_exp']) + ((float)$this->input[intval($key)]['others']);
                     $this->input[intval($key)]['raw_total'] = $this->total;
                     $this->input[intval($key)]['total'] = number_format($this->total,2);
+                    $this->sendTotalVal();
                 }
                }
-
+               
     }
     
     //test for saving
@@ -384,7 +386,7 @@ class IteneraryView extends Component
 
     public function sendTotalVal(){
        
-            $this->validateIEs();
+           // $this->validateIEs();
             $this->finalTotalperDay =0.0;
             foreach ($this->input as $key => $value) {
                 $this->finalTotalperDay += (float)  $this->input[intval($key)]['raw_total'];
