@@ -181,9 +181,6 @@
 
                 <div class="col-span-1 col-start-3 row-span-1 row-start-1 mt-1" x-data="{hovered : false}">
 
-
-
-
                     @if($has_registration==false)
                     <input type="number" wire:model.lazy="registration_amt"
                         class="hidden w-full min-w-full border-gray-300 rounded-md shadow-sm amount focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
@@ -213,7 +210,7 @@
         </div>
 
         {{-- </div> --}}
-
+        @if($has_registration==true)
         <div class="pt-8 pl-4 space-y-6 sm:pt-10 sm:space-y-5">
             <div>
                 <h3 class="text-3xl font-medium leading-6 text-gray-900">
@@ -272,6 +269,8 @@
                 <span class="mr-5 font-extrabold text-gray-900 text-md"> GRAND TOTAL:</span><span
                     class="pl-3 mr-2 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div>
         </div>
+        @endif
+
         @endif
 
         @elseif($err_from_to)
