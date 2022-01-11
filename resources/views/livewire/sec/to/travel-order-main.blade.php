@@ -113,7 +113,7 @@
                     class="block col-span-1 col-start-1 row-span-2 font-medium text-md text-primary-bg sm:mt-px sm:pt-2">
                     Place to visit
                 </label>
-                <div class="col-span-1 row-span-1 mt-1">
+                <div class="col-span-1 row-span-1 mt-1"> 
                     <h3 class="ml-1 text-sm text-gray-600 ">Region</h3>
                     <select wire:model="region_codes" id="country" name="country" autocomplete="country"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">

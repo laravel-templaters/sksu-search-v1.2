@@ -14,8 +14,9 @@
                         First Name
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <input type="text" name="fname" id="fname" autocomplete="given-name"
+                        <input wire:model="first_name" type="text" name="fname" id="fname" autocomplete="given-name"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                        @error('first_name')<span class="mt-2 text-red-700 error">{{ $message }}</span>@enderror
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
@@ -23,8 +24,9 @@
                         Middle Name
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <input type="text" name="fname" id="fname" autocomplete="given-name"
+                        <input wire:model="middle_name" type="text" name="fname" id="fname" autocomplete="given-name"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            @error('middle_name')<span class="mt-2 text-red-700 error">{{ $message }}</span>@enderror
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
@@ -32,8 +34,9 @@
                         Last Name
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <input type="text" name="fname" id="fname" autocomplete="given-name"
+                        <input wire:model="last_name" type="text" name="fname" id="fname" autocomplete="given-name"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            @error('last_name')<span class="mt-2 text-red-700 error">{{ $message }}</span>@enderror
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
@@ -41,8 +44,9 @@
                         Suffix (if any)
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <input type="text" name="suffix" id="suffix"
+                        <input wire:model="suffix" type="text" name="suffix" id="suffix"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                            @error('suffix')<span class="mt-2 text-red-700 error">{{ $message }}</span>@enderror 
                     </div>
                 </div>
 
@@ -51,8 +55,9 @@
                         Email address
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <input id="email" name="email" type="email" autocomplete="email"
+                        <input wire:model="email" id="email" name="email" type="email" autocomplete="email"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('email')<span class="mt-2 text-red-700 error">{{ $message }}</span>@enderror 
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
@@ -60,8 +65,9 @@
                         Birthday
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <input type="date" name="suffix" id="suffix"
+                        <input wire:model="birthday" type="date" name="suffix" id="suffix"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                        @error('birthday')<span class="mt-2 text-red-700 error">{{ $message }}</span>@enderror 
                     </div>
                 </div>
 
@@ -70,10 +76,11 @@
                         Contact Number
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <input type="tel" name="contact-no" id="contact-no"  pattern="[0-9]{4}-[0-9]{4}-[0-9]{3}"
+                        <input wire:model="contact" type="tel" name="contact-no" id="contact-no"  pattern="[0-9]{4}-[0-9]{4}-[0-9]{3}"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                             <h1 class="text-sm text-secondary-500"><span class="tracking-widest"> Format ( " - " not required ): 0912-1234-123 </span> </h1>
-                    </div>
+                        @error('contact')<span class="mt-2 text-red-700 error">{{ $message }}</span>@enderror 
+                    </div> 
                 </div>
                 
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-secondary-500 sm:pt-5">
@@ -90,6 +97,7 @@
                         <button type="button" class="px-3 py-2 ml-5 text-sm font-medium leading-4 text-gray-700 bg-white border rounded-md shadow-sm border-secondary-500 hover:bg-secondary-alt-400 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                           Change
                         </button>
+                        
                       </div>
                     </div>
                 </div>
@@ -99,7 +107,7 @@
                         Department
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <select id="department" name="department" autocomplete=""
+                        <select wire:model="department" id="department" name="department" autocomplete=""
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                        @foreach ($departments as $dept)
                        <option value="{{ $dept->id }}">{{ $dept->department_name }}</option>
@@ -113,7 +121,7 @@
                         Position
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <select id="position" name="position" autocomplete="position"
+                        <select wire:model="position" id="position" name="position" autocomplete="position"
                             class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
                             @foreach ($positions as $post)
                             <option value="{{ $post->id }}">{{ $post->position_name }}</option>
@@ -130,7 +138,7 @@
             class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md shadow-sm border-secondary-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Cancel
         </button>
-        <button type="submit"
+        <button type="submit" wire:click.prevent="submit_user"
             class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-secondary-600 hover:bg-secondary-alt-400 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Save
         </button>

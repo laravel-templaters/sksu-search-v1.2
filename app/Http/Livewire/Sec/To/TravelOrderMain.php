@@ -7,7 +7,7 @@ use DateTime;
 use DateInterval;
 
 use Livewire\Component;
-use App\Models\Region;
+use App\Models\Region; 
 use App\Models\Province;
 use App\Models\City;
 use App\Models\User;
