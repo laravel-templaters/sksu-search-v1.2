@@ -11,7 +11,25 @@
             <div class="space-y-6 sm:space-y-5">
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
                     <label for="fname" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                        Full Name
+                        First Name
+                    </label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <input type="text" name="fname" id="fname" autocomplete="given-name"
+                            class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                    </div>
+                </div>
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
+                    <label for="fname" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                        Middle Name
+                    </label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <input type="text" name="fname" id="fname" autocomplete="given-name"
+                            class="block w-full max-w-lg rounded-md shadow-sm border-secondary-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                    </div>
+                </div>
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
+                    <label for="fname" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                        Last Name
                     </label>
                     <div class="mt-1 sm:mt-0 sm:col-span-2">
                         <input type="text" name="fname" id="fname" autocomplete="given-name"
