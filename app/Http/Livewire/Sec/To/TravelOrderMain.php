@@ -20,6 +20,7 @@ class TravelOrderMain extends Component
 {
 
 
+    public $toType="offtime";
     public $search;
     public $searched = false;
     public $picked = false;

@@ -14,7 +14,38 @@
 
             <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5"
                 x-data="{picked:@entangle('picked'), searched :@entangle('searched')}">
+                <div
+                    class="pt-2 border-t border-gray-200 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="about" class="block font-medium text-md text-primary-bg sm:mt-px sm:pt-2">
+                        Please Select One:
+                    </label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <fieldset class="m-4">
+                            <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+
+                                <div class="flex items-center">
+                                    <input id="sms" name="toType" wire:model="toType" checked type="radio"
+                                        value="offtime"
+                                        class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                                    <label for="sms" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Official Time
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <input id="email" name="toType" wire:model="toType" type="radio" value="offtravel"
+                                        class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                                    <label for="email" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Official Travel
+                                    </label>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
                 <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
+
                     <label for="username" class="block pt-2 mt-px font-medium text-md text-primary-bg">
                         Name
                     </label>
@@ -107,13 +138,42 @@
                     @error('purpose') <span class="text-red-700 error">{{ $message }}</span> @enderror
                 </div>
             </div>
+            @if ($toType=="offtime")
+            <div
+                class="pt-2 border-t border-gray-200 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="dateoftravel" class="block font-medium text-md text-primary-bg sm:mt-px sm:pt-2">
+                    Date of Travel
+                </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <div
+                        class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
+                        <div class="justify-start m-2" id="dateoftravel">
+                            <label for="dateoftravelfrom"
+                                class="block text-sm font-medium text-primary-bg sm:mt-px sm:pt-2">
+                               From
+                            </label>
+                            <input type="date" id="dateoftravelfrom" name="dateoftravelfrom"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
+                                class="w-full border-gray-300 rounded-md shadow-sm min-w-fit focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
+                        </div>
+                        <div class="justify-start m-2" id="dateoftravel">
+                            <label for="dateoftravelto"
+                                class="block text-sm font-medium text-primary-bg sm:mt-px sm:pt-2">
+                                To
+                            </label>
+                            <input type="date" id="dateoftravelto" name="dateoftravelto"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
+                                class="w-full border-gray-300 rounded-md shadow-sm min-w-md focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
 
             <div class="grid items-start grid-cols-3 grid-rows-2 gap-4 pt-2 border-t border-gray-200">
                 <label for=""
                     class="block col-span-1 col-start-1 row-span-2 font-medium text-md text-primary-bg sm:mt-px sm:pt-2">
                     Place to visit
                 </label>
-                <div class="col-span-1 row-span-1 mt-1"> 
+                <div class="col-span-1 row-span-1 mt-1">
                     <h3 class="ml-1 text-sm text-gray-600 ">Region</h3>
                     <select wire:model="region_codes" id="country" name="country" autocomplete="country"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
@@ -161,6 +221,7 @@
                 </div>
             </div>
 
+            @if ($toType=="offtravel")
             <div class="grid items-start grid-cols-3 gap-4 pt-2 border-t border-gray-200">
                 <label for=""
                     class="block col-span-1 col-start-1 row-span-2 font-medium text-md text-primary-bg sm:mt-px sm:pt-2">
@@ -170,8 +231,8 @@
                 <div class="col-span-1 col-start-2 row-span-1 row-start-1 mt-1">
 
                     <div class="relative flex items-start">
-                        <input wire:model="has_registration" x-on:leave="$wire.finalTotalCalculation({{ 0 }})" id="comments" aria-describedby="comments-description"
-                            name="comments" type="checkbox"
+                        <input wire:model="has_registration" x-on:leave="$wire.finalTotalCalculation({{ 0 }})"
+                            id="comments" aria-describedby="comments-description" name="comments" type="checkbox"
                             class="w-4 h-4 my-auto border-gray-300 rounded text-secondary-bg focus:ring-primary-bg">
                         <div class="my-auto ml-3 text-sm">
                             <label for="comments" class="font-medium text-gray-700">Has Registration</label>
@@ -207,6 +268,8 @@
                 </div>
 
             </div>
+            @endif
+
         </div>
 
         {{-- </div> --}}

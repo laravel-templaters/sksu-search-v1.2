@@ -17,24 +17,24 @@
             @csrf
 
             <div>
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block w-full mt-1 placeholder-opacity-50 placeholder-primary-text-alt"
+                <x-jet-label for="email" value="{{ __('Email') }}" class="text-white " />
+                <x-jet-input id="email" class="block w-full mt-1 placeholder-opacity-50 placeholder-primary-400"
                     type="email" name="email" placeholder="Email" required autofocus />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block w-full mt-1 placeholder-opacity-50 placeholder-primary-text-alt"
+                <x-jet-label for="password" value="{{ __('Password') }}" class="text-white "  />
+                <x-jet-input id="password" class="block w-full mt-1 placeholder-opacity-50 placeholder-primary-400"
                     type="password" name="password" required placeholder="Enter Password" />
             </div>
 
             <div class="flex items-center justify-between mt-4">
-                <label for="remember_me" class="flex items-center">
+                <label for="remember_me" class="flex items-center text-gray-100">
                     <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-gray-100">{{ __('Remember me') }}</span>
                 </label>
                 @if (Route::has('password.request'))
-                <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('password.request') }}">
+                <a class="text-sm text-gray-100 underline hover:text-gray-900" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
                 @endif
@@ -44,7 +44,7 @@
             <div class="flex items-center justify-end mt-4">
 
 
-                <x-jet-button class="ml-4 min-w-sm">
+                <x-jet-button class="ml-4 min-w-sm text-primary-700">
                     {{ __('Log in') }}
                 </x-jet-button>
 

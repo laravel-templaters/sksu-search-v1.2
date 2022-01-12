@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div class="font-sans antialiased text-primary-text">
+    <div class="font-sans antialiased text-primary-500">
         {{ $slot }}
     </div>
 </body>

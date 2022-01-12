@@ -18,7 +18,7 @@ module.exports = {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                "primary-bg": "#283618",
+                "primary-bg": "#0c6600",
                 "primary-bg-alt": "#606c38",
                 "secondary-bg": "#bc6c25",
                 "secondary-bg-alt": "#f5d1a9",
@@ -28,17 +28,18 @@ module.exports = {
                 "orange-ripe": "#FF8840",
                 "orange-ripe-light": "#F59963",
                 "main-bg": "#fedfa2",
-
+                
+                
                 'primary': {
-                        100: "#d4d7d1",
-                        200: "#a9afa3",
-                        300: "#7e8674",
-                        400: "#535e46",
-                        500: "#283618",
-                        600: "#202b13",
-                        700: "#18200e",
-                        800: "#10160a",
-                        900: "#080b05"
+                        100: "#cee0cc",
+                        200: "#9ec299",
+                        300: "#6da366",
+                        400: "#3d8533",
+                        500: "#0c6600",
+                        600: "#0a5200",
+                        700: "#073d00",
+                        800: "#052900",
+                        900: "#021400"
                 },
                 'primary-alt' :{
                         100: "#dfe2d7",
