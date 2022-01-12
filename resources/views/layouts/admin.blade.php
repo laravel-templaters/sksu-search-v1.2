@@ -28,7 +28,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
-<body class="h-full min-h-screen font-sans bg-gradient-to-b from-main-bg via-white to-main-bg">
+<body class="h-full min-h-screen font-sans bg-gradient-to-b from-primary-300 via-white to-white">
     <div>
         @livewire('navigation-menu')
 

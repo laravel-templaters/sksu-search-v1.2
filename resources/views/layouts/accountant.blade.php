@@ -28,7 +28,7 @@
 
 </head>
 
-<body class="min-h-screen font-sans bg-gradient-to-b from-main-bg via-white to-main-bg">
+<body class="min-h-screen font-sansbg-gradient-to-b from-primary-300 via-white to-white">
     @livewire('navigation-menu')
 
 
@@ -42,11 +42,11 @@
     @endif
 
     @if (request()->routeIs('archiver-main'))
-    <div class="bg-secondary-alt-600 pb-34 h-32"></div> 
+    <div class="h-32 bg-primary-500 pb-34"></div> 
     @endif
     
     <!-- Page Content -->
-    <main class="bg-transparent">
+    <main class="">
         {{ $slot }}
     </main>
 

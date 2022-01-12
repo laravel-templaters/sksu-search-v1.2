@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="py-2 bg-secondary-alt-600">
+<nav x-data="{ open: false }" class="py-2 bg-primary-500">
     <!-- Primary Navigation Menu -->
     <div class="px-2 mx-auto max-w-screen">
         <div class="flex justify-between h-16">
@@ -88,7 +88,7 @@
                                 src="{{ Auth::user()->profile_photo_url }}" alt="" />   
                                 @endif
                                 
-                                <h1 class="inline-flex ml-2 text-sm uppercase truncate text-primary-bg">
+                                <h1 class="inline-flex ml-2 text-sm text-white uppercase truncate">
                                     {{ Auth::user()->name}}</h1>
                             </button>
                             @else

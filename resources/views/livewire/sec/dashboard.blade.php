@@ -12,7 +12,7 @@
 
         @if ($typesorter->id != 1 && $typesorter->sorter == 1)
         @if (strtoupper($typesorter->dv_type->dv_type)!="TRAVEL ORDER")
-        <li class="flex flex-col col-span-1 text-left rounded-md shadow-sm bg-secondary-bg-alt bg-opacity-70"
+        <li class="flex flex-col col-span-1 text-left bg-white rounded-md shadow-sm shadow-primary-500"
             x-data="{showMe : false}">
             @if(strtoupper($typesorter->dv_type->dv_type)=="DISBURSEMENTS")
             <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
@@ -45,7 +45,7 @@
                 </div>
             </a>
             @endif
-            <div class="p-3 mt-1 mb-1 ml-3 mr-1 bg-opacity-75 rounded-md bg-secondary-bg-alt " x-cloak x-show="showMe">
+            <div class="p-3 mt-1 mb-1 ml-3 mr-1 bg-white bg-opacity-75 rounded-md shadow-primary-500" x-cloak x-show="showMe">
                 @foreach ($categories as $category)
                 <div x-data="{openCA:false}">
 
@@ -54,12 +54,12 @@
                     (App\Models\DVSubCategory::where('dv_category_id',$category->id)->count())!=0)
                     <h3 class="p-2 font-semibold rounded-md text-primary-bg text-md hover:bg-primary-bg hover:text-secondary-text"
                         x-on:click="openCA = !openCA ">{{$category->dv_category}}</h3>
-                    <div class="grid flex-col grid-cols-1 p-3 ml-3 rounded-md bg-primary-bg-alt " x-cloak
+                    <div class="grid flex-col grid-cols-1 p-3 ml-3 rounded-md bg-primary-300 " x-cloak
                         x-show="openCA">
                         @foreach ($sub_categories as $sub_category)
                         @if ($sub_category->dv_category_id == $category->id)
                         <a href="{{route('cdv', ['id' => $sub_category->id, 'sorter' => '3'])}}"
-                            class="p-2 rounded-md text-secondary-text text-md hover:bg-gray-300 hover:text-primary-bg">{{$sub_category->dv_sub_category}}</a>
+                            class="p-2 text-white rounded-md text-md hover:bg-white hover:text-primary-500">{{$sub_category->dv_sub_category}}</a>
                         @endif
                         @endforeach
                     </div>

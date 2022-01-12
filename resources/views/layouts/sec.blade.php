@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="h-full min-h-screen font-sans bg-gradient-to-b from-main-bg via-white to-main-bg" x-data="{active : 'dv', showFeed : false,}">
+<body class="h-full min-h-screen font-sans bg-gradient-to-b from-primary-500 via-white to-white" x-data="{active : 'dv', showFeed : false,}">
 
 
 
@@ -37,8 +37,8 @@
 
     <div class="flex flex-col">
         @livewire('navigation-menu')
-        <div class="flex-grow w-full max-w-full bg-gray-100 lg:flex">
-            <div class="flex-1 min-w-0 bg-primary-text xl:flex">
+        <div class="flex-grow h-screen max-w-full bg-gray-100 w- lg:flex">
+            <div class="flex-1 min-w-0 bg-primary-500 xl:flex">
                 <div class="bg-opacity-25 bg-secondary-bg xl:flex-shrink-0 xl:w-64">
                     <div class="h-full py-6 pl-6 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
                         <!-- Start left column area -->
@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-100 lg:min-w-0 lg:flex-1">
+                <div class="bg-gradient-to-b from-primary-300 via-white to-white lg:min-w-0 lg:flex-1">
                     <div class="h-full px-4 py-6 sm:px-6 lg:px-8">
                         <!-- Start main area-->
                         <div class="h-full" style="min-height: 36rem;">
@@ -105,9 +105,9 @@
                                 </button>
                             </div>
 
-                            <div class="flex flex-col h-full py-6 overflow-y-auto shadow-xl bg-secondary-bg">
+                            <div class="flex flex-col h-full py-6 overflow-y-auto shadow-xl bg-primary-500">
                                 <div class="px-4 sm:px-6">
-                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
+                                    <h2 class="text-lg font-medium text-white" id="slide-over-title">
                                         DV Status Feed
                                     </h2>
                                 </div>
