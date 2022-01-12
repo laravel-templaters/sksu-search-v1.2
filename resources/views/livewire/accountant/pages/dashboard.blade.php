@@ -115,9 +115,9 @@
             <div class="border-b border-primary-bg">
                 <nav class="flex -mb-px space-x-8" aria-label="Tabs">
                     <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
-                    <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
+                    <a href="#" class="flex px-1 py-4 text-sm font-bold border-b-2 whitespace-nowrap"
                         x-on:click="active = 'myacc'; personalClicked = true;"
-                        x-bind:class="active == 'myacc' ? 'border-secondary-text text-primary-bg-alt ' : ' border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'myacc' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
                         My Account
 
 
@@ -129,9 +129,9 @@
 
 
                     @if ($isHeadOrAdmin || $isAssigned)
-                    <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
+                    <a href="#" class="flex px-1 py-4 text-sm font-bold border-b-2 whitespace-nowrap"
                         x-on:click="active = 'pdv'; pendingClicked = true;"
-                        x-bind:class="active == 'pdv' ? 'border-secondary-text text-primary-bg-alt ' : 'border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'pdv' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
                         Pending Disbursement Vouchers
                         @if (count($milestones)>0)
                         <span x-bind:class="pendingClicked == false ?  'animate-pulse':'animate-none'"
@@ -152,16 +152,16 @@
         x-transition:enter="transition ease-in-out duration-500 " x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in-out duration-500"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-secondary-bg-alt">
+        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-primary-200">
             <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
                 <div class="mt-2 ml-4">
-                    <h3 class="text-lg font-medium leading-6 text-primary-bg">
+                    <h3 class="text-lg font-medium leading-6 tracking-wider text-primary-700">
                         Personal Disbursement Vouchers
                     </h3>
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
                     <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPersonal"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-secondary-bg text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
                 </div>
             </div>
             <div class="px-4 py-5 sm:p-6">
@@ -319,16 +319,16 @@
     <div class="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8" id="pending" x-cloak x-show="active=='pdv'"
         x-transition:enter="transition ease-in-out delay-700 duration-500 " x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100">
-        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-secondary-bg-alt">
+        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-primary-200">
             <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
                 <div class="mt-2 ml-4">
-                    <h3 class="text-lg font-medium leading-6 text-primary-bg">
+                    <h3 class="text-lg font-medium leading-6 text-primary-700">
                         Pending Disbursement Vouchers
                     </h3>
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
                     <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPending"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-secondary-bg text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
                 </div>
             </div>
             <div class="px-4 py-5 sm:p-6">
@@ -668,7 +668,7 @@
      x-cloak x-show="showModal">
      <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
 
-         <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+         <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-300" aria-hidden="true" x-cloak
              x-show="showModal"></div>
 
 
@@ -681,7 +681,7 @@
              x-transition:leave="ease-in duration-200"
              x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
              x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-             class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+             class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-500 max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
              <div class="max-w-full mx-auto">
                  <!-- card start -->
                  <!-- This example requires Tailwind CSS v2.0+ -->
@@ -714,7 +714,7 @@
                                         != auth()->user()->id)
                                         <span x-show="showInput==false">Voucher number not yet set</span> <a
                                             x-show="showInput==false" x-on:click="showInput=true"
-                                            class="p-2 ml-3 text-gray-800 bg-green-300 border border-gray-200 rounded-lg hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">Set
+                                            class="p-2 ml-3 text-gray-800 border border-gray-200 rounded-lg bg-primary-300 hover:bg-primary-text hover:border-gray-100 hover:text-gray-300 active:bg-green-600 focus:ring-1 focus:ring-green-600">Set
                                             Voucher
                                             Number</a>
                                         <div class="flex" x-show="showInput">
@@ -914,15 +914,15 @@
                         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
                         x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
                         x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-0">
-                        <div class="flex flex-col h-full py-6 overflow-y-scroll shadow-xl bg-orange-ripe-light">
+                        <div class="flex flex-col h-full py-6 overflow-y-scroll shadow-xl bg-primary-500">
                             <div class="px-4 sm:px-6">
                                 <div class="flex items-start justify-between">
-                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
+                                    <h2 class="text-lg font-medium text-white" id="slide-over-title">
                                         Disbursement Feed
                                     </h2>
                                     <div class="flex items-center ml-3 h-7">
                                         <button type="button" x-on:click="showStatus =false"
-                                            class="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            class="text-gray-200 rounded-md bg-primary-500 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             <span class="sr-only">Close panel</span>
                                             <!-- Heroicon name: outline/x -->
                                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none"

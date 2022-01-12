@@ -520,7 +520,7 @@
                                     aria-hidden="true">&#8203;</span>
 
 
-                                <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-text sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+                                <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-500 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
                                     x-transition:enter="ease-out duration-300"
                                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"

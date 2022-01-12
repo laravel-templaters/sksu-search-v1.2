@@ -28,7 +28,7 @@
 
 </head>
 
-<body class="min-h-screen font-sansbg-gradient-to-b from-primary-300 via-white to-white">
+<body class="min-h-screen font-sans bg-gradient-to-b from-primary-300 via-white to-white">
     @livewire('navigation-menu')
 
 
@@ -46,7 +46,7 @@
     @endif
     
     <!-- Page Content -->
-    <main class="">
+    <main class="bg-transparent">
         {{ $slot }}
     </main>
 
