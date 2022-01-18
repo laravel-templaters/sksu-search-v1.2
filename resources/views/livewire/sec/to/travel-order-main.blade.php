@@ -24,18 +24,18 @@
                             <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
 
                                 <div class="flex items-center">
-                                    <input id="sms" name="toType" wire:model="toType" checked type="radio"
+                                    <input id="official_time" name="toType" wire:model="toType" checked type="radio"
                                         value="offtime"
                                         class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                                    <label for="sms" class="block ml-3 text-sm font-medium text-gray-700">
+                                    <label for="official_time" class="block ml-3 text-sm font-medium text-gray-700">
                                         Official Time
                                     </label>
                                 </div>
 
                                 <div class="flex items-center">
-                                    <input id="email" name="toType" wire:model="toType" type="radio" value="offtravel"
+                                    <input id="official_time" name="toType" wire:model="toType" type="radio" value="offtravel"
                                         class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                                    <label for="email" class="block ml-3 text-sm font-medium text-gray-700">
+                                    <label for="official_time" class="block ml-3 text-sm font-medium text-gray-700">
                                         Official Travel
                                     </label>
                                 </div>
@@ -152,7 +152,7 @@
                                 class="block text-sm font-medium text-primary-bg sm:mt-px sm:pt-2">
                                From
                             </label>
-                            <input type="date" id="dateoftravelfrom" name="dateoftravelfrom"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
+                            <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom" name="dateoftravelfrom"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-fit focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
                         <div class="justify-start m-2" id="dateoftravel">
@@ -160,7 +160,7 @@
                                 class="block text-sm font-medium text-primary-bg sm:mt-px sm:pt-2">
                                 To
                             </label>
-                            <input type="date" id="dateoftravelto" name="dateoftravelto"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
+                            <input type="date" id="dateoftravelto"  wire:model="dateoftravelto" name="dateoftravelto"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-md focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                 </div>
                 <div class="col-span-1 col-start-3 row-span-1 row-start-2 mt-1">
                     <h3 class="ml-1 text-sm text-gray-600 ">Others</h3>
-                    <input type="text"
+                    <input type="text"  wire:model="others"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                     <p class="mt-2 ml-1 text-sm text-gray-500"><span
                             class="font-extrabold text-secondary-bg">NOTE:</span> Input specific address excluding

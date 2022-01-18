@@ -83,7 +83,7 @@
                     </div> 
                 </div>
                 
-                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-secondary-500 sm:pt-5">
+                {{-- <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-secondary-500 sm:pt-5">
                     <label for="photo" class="block text-sm font-medium text-gray-700">
                       Photo
                     </label>
@@ -100,7 +100,11 @@
                         
                       </div>
                     </div>
-                </div>
+                </div> --}}
+
+                    {{-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos()) --}}
+          
+        {{-- @endif --}}
                 
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-secondary-500 sm:pt-5">
                     <label for="department" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
