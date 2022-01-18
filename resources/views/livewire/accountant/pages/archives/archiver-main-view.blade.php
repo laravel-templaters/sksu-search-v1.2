@@ -6,7 +6,7 @@
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                         <div
-                            class="overflow-hidden border-b border-gray-200 shadow-md shadow-secondary-alt-500/50 sm:rounded-lg bg-gray-50 ">
+                            class="overflow-hidden border-b border-gray-200 shadow-md shadow-primary-500/50 sm:rounded-lg bg-gray-50 ">
                             <div class="flex justify-between max-w-full m-4">
                                 <div class="flex justify-start max-w-full m-4">
                                     <div class="m-2">
@@ -246,7 +246,7 @@
     {{-- table end --}}
     <aside class="relative flex-shrink-0 hidden overflow-hidden xl:order-first xl:flex xl:flex-col w-96">
         <div class="absolute inset-0 py-6 pl-8 ">
-            <div class="flex-shrink max-w-full max-h-full p-3 rounded-md shadow-md bg-gray-50 shadow-secondary-alt-500/50">
+            <div class="flex-shrink max-w-full max-h-full p-3 rounded-md shadow-md bg-gray-50 shadow-primary-500/50">
             <nav class="space-y-1 " aria-label="Sidebar">
              
                 <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-md"
