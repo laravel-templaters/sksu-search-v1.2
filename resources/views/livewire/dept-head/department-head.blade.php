@@ -10,7 +10,7 @@
     {{-- notif --}}
     <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
         <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
-            <div class="w-full max-w-md overflow-hidden rounded-lg shadow-lg pointer-events-auto bg-opacity-95 bg-primary-bg ring-1 ring-black ring-opacity-5"
+            <div class="w-full max-w-md overflow-hidden rounded-lg shadow-lg pointer-events-auto bg-opacity-95 bg-primary-700 ring-1 ring-black ring-opacity-5"
                 x-cloak x-show="show_Banner" x-transition:enter="transform ease-out duration-300 transition"
                 x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
                 x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
@@ -19,29 +19,29 @@
                 <div class="p-4">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-secondary-bg" fill="none"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
-                            <p class="text-sm font-medium text-secondary-bg">
+                            <p class="text-sm font-semibold text-white">
                                 {{$greeting}}!
                             </p>
                            @if ($isHeadOrAdmin || $isAssigned)
-                              <p class="mt-1 text-sm text-primary-text">
+                              <p class="mt-1 text-sm text-primary-300">
                                     A new voucher has been forwarded to you!
                               </p>
                            @else
-                            <p class="mt-1 text-sm text-primary-text">
+                            <p class="mt-1 text-sm text-primary-300">
                                  A voucher of yours has been updated!
                             </p>
                            @endif
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
-                                class="inline-flex bg-transparent rounded-md text-secondary-bg-alt hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                class="inline-flex bg-transparent rounded-md text-secondary-white hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400"
                                 x-on:click="show_Banner = false">
                                 <span class="sr-only">Close</span>
                                 <!-- Heroicon name: solid/x -->
@@ -69,7 +69,7 @@
                     <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'myacc'; personalClicked = true;"
-                        x-bind:class="active == 'myacc' ? 'border-secondary-text text-primary-bg-alt ' : ' border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'myacc' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
                         My Account
 
 
@@ -83,7 +83,7 @@
                     @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'pdv'; pendingClicked = true;"
-                        x-bind:class="active == 'pdv' ? 'border-secondary-text text-primary-bg-alt ' : 'border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'pdv' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
                         Pending Disbursement Vouchers
                         @if (count($milestones)>0)
                         <span x-bind:class="pendingClicked == false ?  'animate-pulse':'animate-none'"
@@ -104,16 +104,16 @@
         x-transition:enter="transition ease-in-out duration-500 " x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in-out duration-500"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-secondary-bg-alt">
+        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-primary-200">
             <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
                 <div class="mt-2 ml-4">
-                    <h3 class="text-lg font-medium leading-6 text-primary-bg">
+                    <h3 class="text-lg font-medium leading-6 tracking-wider text-primary-700">
                         Personal Disbursement Vouchers
                     </h3>
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
                     <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPersonal"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-secondary-bg text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400">
                 </div>
             </div>
             <div class="px-4 py-5 sm:p-6">
@@ -272,16 +272,16 @@
     <div class="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8" id="pending" x-cloak x-show="active=='pdv'"
         x-transition:enter="transition ease-in-out delay-700 duration-500 " x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100">
-        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-secondary-bg-alt">
+        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-primary-200">
             <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
                 <div class="mt-2 ml-4">
-                    <h3 class="text-lg font-medium leading-6 text-primary-bg">
+                    <h3 class="text-lg font-medium leading-6 text-primary-700">
                         Pending Disbursement Vouchers
                     </h3>
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
                     <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPending"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-secondary-bg text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
                 </div>
             </div>
             <div class="px-4 py-5 sm:p-6">
@@ -316,7 +316,7 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                        @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
+                                         @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -325,7 +325,7 @@
                                         @elseif($last_actions->action_type->description == "RECEIVED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
-                                            wire:click="forwardDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
+                                            wire:click="checkFunding({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
                                             Forward voucher
                                         </button>
                                         @endif
@@ -399,7 +399,7 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                        @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
+                                         @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -408,7 +408,7 @@
                                         @elseif($last_actions->action_type->description == "RECEIVED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-green-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
-                                            wire:click="forwardDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
+                                            wire:click="checkFunding({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
                                             Forward voucher
                                         </button>
                                         @endif
@@ -593,7 +593,7 @@
         x-cloak x-show="showModal">
         <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
 
-            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-text" aria-hidden="true" x-cloak
+            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-300" aria-hidden="true" x-cloak
                 x-show="showModal"></div>
 
 
@@ -605,7 +605,7 @@
                 x-transition:leave="ease-in duration-200"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-bg-alt max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-500 max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
                 <div class="max-w-full mx-auto">
                     <!-- card start -->
                     <!-- This example requires Tailwind CSS v2.0+ -->
@@ -712,7 +712,7 @@
                             </dl>
                             @else
                             <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                                    class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
                             @endif
                         </div>
                         <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
@@ -784,11 +784,11 @@
                             @endforeach
                             @else
                             <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                                    class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
                             @endif
                             @else
                             <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                    class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                                    class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
                             @endif
                         </div>
                     </div>
