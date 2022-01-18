@@ -45,7 +45,7 @@
 
 
                 <x-jet-button class="ml-4 min-w-sm text-primary-700">
-                    {{ __('Log in') }}
+                    <span class="mx-auto">{{ __('Log in') }}</span>
                 </x-jet-button>
 
             </div>
@@ -54,14 +54,14 @@
                     <div class="absolute inset-0 flex items-center">
                         <div class="w-full border-t border-gray-300"></div>
                     </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 text-gray-500 bg-white">
+                    <div class="relative flex justify-center w-full text-sm">
+                        <span class="px-3 py-2 text-gray-500 bg-white rounded-full">
                             or
                         </span>
                     </div>
                 </div>
                 <a href="auth/google"
-                    class="inline-flex items-center w-full py-2 mt-2 text-xs font-semibold tracking-widest uppercase transition bg-white border border-gray-800 rounded-md from-primary-bg-alt to-secondary-bg hover:from-blue-600 hover:to-blue-400 hover:text-primary-text active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25">
+                    class="inline-flex items-center w-full py-2 mt-5 text-xs font-semibold tracking-widest uppercase transition bg-white border border-gray-800 rounded-md from-primary-bg-alt to-secondary-bg hover:from-blue-600 hover:to-blue-400 hover:text-primary-text active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25">
                     <span class="inline-flex m-auto text-center"><img
                             src="https://img.icons8.com/color/48/000000/google-logo.png"
                             class="inline h-8 mx-0 px-auto" /> <span

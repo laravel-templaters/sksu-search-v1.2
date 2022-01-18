@@ -2258,6 +2258,12 @@ select {
 .via-primary-300 {
   --tw-gradient-stops: var(--tw-gradient-from), #6da366, var(--tw-gradient-to, rgb(109 163 102 / 0));
 }
+.via-primary-500 {
+  --tw-gradient-stops: var(--tw-gradient-from), #0c6600, var(--tw-gradient-to, rgb(12 102 0 / 0));
+}
+.via-primary-200 {
+  --tw-gradient-stops: var(--tw-gradient-from), #9ec299, var(--tw-gradient-to, rgb(158 194 153 / 0));
+}
 .to-white {
   --tw-gradient-to: #fff;
 }
@@ -2269,6 +2275,12 @@ select {
 }
 .to-primary-300 {
   --tw-gradient-to: #6da366;
+}
+.to-primary-200 {
+  --tw-gradient-to: #9ec299;
+}
+.to-primary-500 {
+  --tw-gradient-to: #0c6600;
 }
 .bg-cover {
   background-size: cover;
@@ -2411,6 +2423,14 @@ select {
 .py-24 {
   padding-top: 6rem;
   padding-bottom: 6rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 .pt-6 {
   padding-top: 1.5rem;
@@ -2903,6 +2923,10 @@ select {
   --tw-shadow-color: rgb(12 102 0 / 0.5);
   --tw-shadow: var(--tw-shadow-colored);
 }
+.shadow-secondary-alt-500\/50 {
+  --tw-shadow-color: rgb(255 136 64 / 0.5);
+  --tw-shadow: var(--tw-shadow-colored);
+}
 .ring-1 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -3125,8 +3149,31 @@ select {
   --tw-gradient-from: #2563eb;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(37 99 235 / 0));
 }
+.hover\:from-primary-600:hover {
+  --tw-gradient-from: #0a5200;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(10 82 0 / 0));
+}
+.hover\:from-primary-200:hover {
+  --tw-gradient-from: #9ec299;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(158 194 153 / 0));
+}
+.hover\:via-blue-200:hover {
+  --tw-gradient-stops: var(--tw-gradient-from), #bfdbfe, var(--tw-gradient-to, rgb(191 219 254 / 0));
+}
+.hover\:via-primary-200:hover {
+  --tw-gradient-stops: var(--tw-gradient-from), #9ec299, var(--tw-gradient-to, rgb(158 194 153 / 0));
+}
+.hover\:via-primary-500:hover {
+  --tw-gradient-stops: var(--tw-gradient-from), #0c6600, var(--tw-gradient-to, rgb(12 102 0 / 0));
+}
 .hover\:to-blue-400:hover {
   --tw-gradient-to: #60a5fa;
+}
+.hover\:to-blue-200:hover {
+  --tw-gradient-to: #bfdbfe;
+}
+.hover\:to-primary-200:hover {
+  --tw-gradient-to: #9ec299;
 }
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
