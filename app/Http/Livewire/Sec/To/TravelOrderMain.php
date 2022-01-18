@@ -106,9 +106,17 @@ class TravelOrderMain extends Component
     // {
         
     // }
+    
     public function validateTo(){
          $this->emit('valIE');
-         $this->validate([
+    }
+    public $toValidated =false;
+    public $iteneraryValidated =false;
+    public function isiteneraryvalidated($isval){
+     
+        if($isval == true || $isval == 1){
+        $this->iteneraryValidated = true;
+        $this->validate([
             'users_id' => 'required',
             'purpose' => 'required',
             'region_codes' => 'required',
@@ -122,43 +130,56 @@ class TravelOrderMain extends Component
             'province_codes.required' => 'The province field is required.',
             'city_codes.required' => 'The city field is required.',   
             ]);
-            $this->toValidated=true;
-    }
-    public $toValidated =false;
-    public $iteneraryValidated =false;
-    public function isiteneraryvalidated($isval){
-        if($isval){
-        $this->iteneraryValidated =true;
-        }else if ($isval==false){
-        $this->iteneraryValidated =false;
-        }else{
-        $this->iteneraryValidated =false;
-        $this->finalTotal = 0.0;
-        }
-    }
-
-    public function validateToAgain(){
-        $this->validateTo();
-         $this->submit();
-    }
-
-    public function submit()
-    {
+        $this->toValidated=true;
         if($this->toType == "offtime")
         {
             $this->save_official_time();
         }else if($this->toType == "offtravel")
         {
-            $this->save_official_travel();
+           $this->save_official_travel();
         }
-
-
-        // $this->emit('showAlert',$travel_order->id);
         
+        }else if ($isval==false){
+        $this->iteneraryValidated = false;
+        }else{
+        $this->iteneraryValidated = false;
+        $this->finalTotal = 0.0;
+        }
+    }
+
+    public function validateToAgain(){
+         $this->validateTo();
+         $this->submit();
+    }
+
+    public function submit()
+    {
+        $this->validateTo();
+        if($this->toType == "offtime")
+        {
+            $this->validate([
+                'users_id' => 'required',
+                'purpose' => 'required',
+                'region_codes' => 'required',
+                'province_codes' => 'required',
+                'city_codes' => 'required',
+                 ],
+                [
+                'users_id.required' => 'The name field is required.',
+                'purpose.required' => 'The purpose field is required.',
+                'region_codes.required' => 'The region field is required.',
+                'province_codes.required' => 'The province field is required.',
+                'city_codes.required' => 'The city field is required.',   
+                ]);
+            $this->toValidated=true;
+            $this->save_official_time();
+        }else if($this->toType == "offtravel")
+        {
+           $this->validateTo();
+        }
     }
 
     public function save_official_time(){
-        $this->validateTo();
         // $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
         // $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
         // $date_string = $from_date ." - ".$to_date;
@@ -196,8 +217,6 @@ class TravelOrderMain extends Component
     }
 
     public function save_official_travel(){
-        $this->validateTo();
-      
         $reg = Region::where("region_code", "=",  $this->region_codes)->first();
         $prov = Province::where("province_code", "=",  $this->province_codes)->first();
         $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
@@ -211,8 +230,7 @@ class TravelOrderMain extends Component
 
             if (isset($this->finalTotal) && $this->finalTotal != 0) {
 
-                if ($this->toValidated && $this->iteneraryValidated) {
-                    dd("ss2");
+                if ($this->toValidated == true && $this->iteneraryValidated == true) {
                     $travel_order = new TravelOrder;
                     $travel_order->purpose = $this->purpose;
                     $travel_order->philippine_regions_id =  $reg['id'];
@@ -233,7 +251,7 @@ class TravelOrderMain extends Component
                     Sleep(2);
                     return redirect()->route('redirect');
                 }else{
-                    dd($this->toValidated ."-".$this->iteneraryValidated);
+                    //dd($this->toValidated ."-".$this->iteneraryValidated);
                 }
             }else{
                

@@ -18,10 +18,14 @@ class ModeOfPaymentSeeder extends Seeder
             'mode_of_payment'=> 'MDS Check',
             ]);
             DB::table('mode_of_payments')->insert([
-                'mode_of_payment'=> 'Commercial Check ADA',
+                'mode_of_payment'=> 'Commercial Check',
                 ]);
+                DB::table('mode_of_payments')->insert([
+                    'mode_of_payment'=> 'ADA',
+                    ]);
                 DB::table('mode_of_payments')->insert([
                     'mode_of_payment'=> 'Others',
                     ]);
+
     }
 }

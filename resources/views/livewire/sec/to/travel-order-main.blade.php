@@ -59,7 +59,7 @@
 
                                 @if(count($users)>0)
                                 @foreach ($users as $user)
-                                <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-orange-ripe-light group"
+                                <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
                                     x-on:click="$wire.setUser({{ $user->id }})">
                                     <div class="flex items-center col-span-2">
                                         <div>
