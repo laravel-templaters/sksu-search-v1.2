@@ -161,7 +161,7 @@
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
                     <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPersonal"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400">
                 </div>
             </div>
             <div class="px-4 py-5 sm:p-6">
@@ -812,7 +812,7 @@
                          </dl>
                          @else
                          <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                 class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                                 class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
                          @endif
                      </div>
                      <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
@@ -884,11 +884,11 @@
                          @endforeach
                          @else
                          <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                 class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                                 class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
                          @endif
                          @else
                          <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                 class="tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
+                                 class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
                          @endif
                      </div>
                  </div>

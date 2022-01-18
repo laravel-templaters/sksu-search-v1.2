@@ -132,7 +132,7 @@
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
                     <textarea wire:model="purpose" id="about" name="about" rows="3"
                         class="block w-full max-w-2xl border border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:text-sm"></textarea>
-                    <p class="mt-2 text-sm text-gray-500"><span class="font-extrabold text-secondary-bg">NOTE:</span>
+                    <p class="mt-2 text-sm text-gray-500"><span class="font-extrabold text-indigo-400">NOTE:</span>
                         This will also serve as the
                         entry for your disbursement voucher in the future.</p>
                     @error('purpose') <span class="text-red-700 error">{{ $message }}</span> @enderror
@@ -149,7 +149,7 @@
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         <div class="justify-start m-2" id="dateoftravel">
                             <label for="dateoftravelfrom"
-                                class="block text-sm font-medium text-primary-bg sm:mt-px sm:pt-2">
+                                class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
                                From
                             </label>
                             <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom" name="dateoftravelfrom"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
@@ -157,7 +157,7 @@
                         </div>
                         <div class="justify-start m-2" id="dateoftravel">
                             <label for="dateoftravelto"
-                                class="block text-sm font-medium text-primary-bg sm:mt-px sm:pt-2">
+                                class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
                                 To
                             </label>
                             <input type="date" id="dateoftravelto"  wire:model="dateoftravelto" name="dateoftravelto"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("7 days")),"Y-m-d") }}" 
@@ -216,7 +216,7 @@
                     <input type="text"  wire:model="others"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                     <p class="mt-2 ml-1 text-sm text-gray-500"><span
-                            class="font-extrabold text-secondary-bg">NOTE:</span> Input specific address excluding
+                            class="font-extrabold text-indigo-400">NOTE:</span> Input specific address excluding
                         the city, province and region of your destination</p>
                 </div>
             </div>
@@ -233,7 +233,7 @@
                     <div class="relative flex items-start">
                         <input wire:model="has_registration" x-on:leave="$wire.finalTotalCalculation({{ 0 }})"
                             id="comments" aria-describedby="comments-description" name="comments" type="checkbox"
-                            class="w-4 h-4 my-auto border-gray-300 rounded text-secondary-bg focus:ring-primary-bg">
+                            class="w-4 h-4 my-auto border-gray-300 rounded text-primary-500 focus:ring-primary-700">
                         <div class="my-auto ml-3 text-sm">
                             <label for="comments" class="font-medium text-gray-700">Has Registration</label>
                         </div>
