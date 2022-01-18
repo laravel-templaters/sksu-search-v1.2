@@ -197,40 +197,76 @@ class TravelOrderMain extends Component
 
     public function save_official_travel(){
         $this->validateTo();
-        $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
-        $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
-        $date_string = $from_date ." - ".$to_date;
+      
         $reg = Region::where("region_code", "=",  $this->region_codes)->first();
         $prov = Province::where("province_code", "=",  $this->province_codes)->first();
         $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
         
-       
-        if (isset($this->finalTotal) && $this->finalTotal != 0) {
+        if(isset($this->has_registration))
+        {
 
-            if ($this->toValidated && $this->iteneraryValidated) {
-                $travel_order = new TravelOrder;
-                $travel_order->purpose = $this->purpose;
-                $travel_order->philippine_regions_id =  $reg['id'];
-                $travel_order->philippine_provinces_id = $prov['id'];
-                $travel_order->philippine_cities_id = $cit['id'];
-                $travel_order->others =  isset($this->others) ? $this->others : "";
-                $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
-                $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
-                $travel_order->total = $this->finalTotal_raw;
-                $travel_order->user_id = $this->users_id;
-                $travel_order->date_range = $date_string;
-                $travel_order->dv_type_sorter_id = "1"; 
-                $travel_order->dte_id =  $reg['id'];
-                $travel_order->to_type =  $this->toType;
-                $travel_order->save();  
-                $this->emit('storeItenerary',$travel_order->id);
-                
-                Sleep(2);
-                return redirect()->route('redirect');
+            $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
+            $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
+            $date_string = $from_date ." - ".$to_date;
+
+            if (isset($this->finalTotal) && $this->finalTotal != 0) {
+
+                if ($this->toValidated && $this->iteneraryValidated) {
+                    dd("ss2");
+                    $travel_order = new TravelOrder;
+                    $travel_order->purpose = $this->purpose;
+                    $travel_order->philippine_regions_id =  $reg['id'];
+                    $travel_order->philippine_provinces_id = $prov['id'];
+                    $travel_order->philippine_cities_id = $cit['id'];
+                    $travel_order->others =  isset($this->others) ? $this->others : "";
+                    $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+                    $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+                    $travel_order->total = $this->finalTotal_raw;
+                    $travel_order->user_id = $this->users_id;
+                    $travel_order->date_range = $date_string;
+                    $travel_order->dv_type_sorter_id = "1"; 
+                    $travel_order->dte_id =  $reg['id'];
+                    $travel_order->to_type =  $this->toType;
+                    $travel_order->save();  
+                    $this->emit('storeItenerary',$travel_order->id);
+                    
+                    Sleep(2);
+                    return redirect()->route('redirect');
+                }else{
+                    dd($this->toValidated ."-".$this->iteneraryValidated);
+                }
+            }else{
+               
             }
+
         }else{
-            dd("here");
+                            
+            $travel_order = new TravelOrder;
+            $travel_order->purpose = $this->purpose;
+            $travel_order->date_of_travel_from = $this->dateoftravelfrom;
+            $travel_order->date_of_travel_to = $this->dateoftravelto;
+            $travel_order->philippine_regions_id =  $reg['id'];
+            $travel_order->philippine_provinces_id = $prov['id'];
+            $travel_order->philippine_cities_id = $cit['id'];
+            $travel_order->others =  isset($this->others) ? $this->others : "";
+            $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+            $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+            $travel_order->total = $this->finalTotal_raw;
+            $travel_order->user_id = $this->users_id;
+            // $travel_order->date_range = $date_string;
+            $travel_order->dv_type_sorter_id = "1"; 
+            $travel_order->dte_id =  $reg['id'];
+            $travel_order->to_type =  $this->toType;
+            $travel_order->save();  
+            // /$this->emit('storeItenerary',$travel_order->id);
+            
+            Sleep(2);
+            return redirect()->route('redirect');
+
         }
+
+
+
     }
 
     public function clearFields()
