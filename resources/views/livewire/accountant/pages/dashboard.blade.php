@@ -126,7 +126,16 @@
                             text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
                         @endif
                     </a>
-
+                         
+                    <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
+                        x-on:click="active = 'drafts'"
+                        x-bind:class="active == 'drafts' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
+                        Drafts
+                        @if (count($pending_dv)>0)
+                        <span x-bind:class="personalClicked == false ? 'animate-pulse':'animate-none'" class="bg-gray-100 text-gray-900 ml-3 py-0.5 px-2.5 rounded-full items-center text-center
+                            text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
+                        @endif
+                    </a>
 
                     @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-bold border-b-2 whitespace-nowrap"
