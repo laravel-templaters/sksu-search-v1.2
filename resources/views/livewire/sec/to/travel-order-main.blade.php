@@ -274,7 +274,7 @@
         </div>
 
         {{-- </div> --}}
-        @if($has_registration==true)
+        @if($toType=="offtravel")
         <div class="pt-8 pl-4 space-y-6 sm:pt-10 sm:space-y-5">
             <div>
                 <h3 class="text-3xl font-medium leading-6 text-gray-900">
