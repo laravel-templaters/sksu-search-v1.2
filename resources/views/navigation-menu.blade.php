@@ -36,7 +36,7 @@
                 
                     @elseif(auth()->user()->role_id == 5)
                     
-                        <x-jet-nav-link href="{{ route('budget-head') }}" :active="request()->routeIs('budget-head')">
+                        <x-jet-nav-link href="{{ route('budget-dashboard') }}" :active="request()->routeIs('budget-dashboard')">
                             {{ __('Dashboard') }}
                         </x-jet-nav-link>
                     

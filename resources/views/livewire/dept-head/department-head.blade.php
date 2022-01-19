@@ -41,7 +41,7 @@
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
-                                class="inline-flex bg-transparent rounded-md text-secondary-white hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400"
+                                class="inline-flex bg-transparent rounded-md text-white hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400"
                                 x-on:click="show_Banner = false">
                                 <span class="sr-only">Close</span>
                                 <!-- Heroicon name: solid/x -->

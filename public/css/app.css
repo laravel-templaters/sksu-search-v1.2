@@ -1303,9 +1303,6 @@ select {
 .ml-auto {
   margin-left: auto;
 }
-.ml-5 {
-  margin-left: 1.25rem;
-}
 .-ml-8 {
   margin-left: -2rem;
 }
@@ -1320,6 +1317,9 @@ select {
 }
 .mt-0 {
   margin-top: 0px;
+}
+.ml-5 {
+  margin-left: 1.25rem;
 }
 .block {
   display: block;
@@ -1844,9 +1844,9 @@ select {
   --tw-divide-opacity: 1;
   border-color: rgb(254 250 224 / var(--tw-divide-opacity));
 }
-.divide-secondary-500 > :not([hidden]) ~ :not([hidden]) {
+.divide-primary-400 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
-  border-color: rgb(221 161 94 / var(--tw-divide-opacity));
+  border-color: rgb(61 133 51 / var(--tw-divide-opacity));
 }
 .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
@@ -1855,10 +1855,6 @@ select {
 .divide-white > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-divide-opacity));
-}
-.divide-primary-400 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(61 133 51 / var(--tw-divide-opacity));
 }
 .overflow-hidden {
   overflow: hidden;
@@ -2032,9 +2028,9 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(31 41 55 / var(--tw-border-opacity));
 }
-.border-secondary-500 {
+.border-primary-400 {
   --tw-border-opacity: 1;
-  border-color: rgb(221 161 94 / var(--tw-border-opacity));
+  border-color: rgb(61 133 51 / var(--tw-border-opacity));
 }
 .border-gray-500 {
   --tw-border-opacity: 1;
@@ -2047,10 +2043,6 @@ select {
 .border-black {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-.border-primary-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(61 133 51 / var(--tw-border-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -2186,10 +2178,6 @@ select {
 .bg-orange-ripe-light {
   --tw-bg-opacity: 1;
   background-color: rgb(245 153 99 / var(--tw-bg-opacity));
-}
-.bg-secondary-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(177 129 75 / var(--tw-bg-opacity));
 }
 .bg-primary-700 {
   --tw-bg-opacity: 1;
@@ -3102,9 +3090,9 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(245 209 169 / var(--tw-bg-opacity));
 }
-.hover\:bg-secondary-alt-400:hover {
+.hover\:bg-green-400:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 160 102 / var(--tw-bg-opacity));
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 .hover\:bg-primary-200:hover {
   --tw-bg-opacity: 1;
@@ -3114,9 +3102,9 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
-.hover\:bg-orange-ripe-light:hover {
+.hover\:bg-primary-300:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 153 99 / var(--tw-bg-opacity));
+  background-color: rgb(109 163 102 / var(--tw-bg-opacity));
 }
 .hover\:bg-primary-text-alt:hover {
   --tw-bg-opacity: 1;
@@ -3126,6 +3114,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(67 56 202 / var(--tw-bg-opacity));
 }
+.hover\:bg-secondary-alt-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 160 102 / var(--tw-bg-opacity));
+}
 .hover\:bg-indigo-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(199 210 254 / var(--tw-bg-opacity));
@@ -3133,14 +3125,6 @@ select {
 .hover\:bg-indigo-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(129 140 248 / var(--tw-bg-opacity));
-}
-.hover\:bg-primary-300:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(109 163 102 / var(--tw-bg-opacity));
-}
-.hover\:bg-green-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 .hover\:bg-opacity-75:hover {
   --tw-bg-opacity: 0.75;
@@ -3386,10 +3370,6 @@ select {
 .focus\:ring-white:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
-}
-.focus\:ring-primary-300:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(109 163 102 / var(--tw-ring-opacity));
 }
 .focus\:ring-primary-700:focus {
   --tw-ring-opacity: 1;
@@ -3828,18 +3808,13 @@ select {
     border-color: rgb(229 231 235 / var(--tw-border-opacity));
   }
 
-  .sm\:border-secondary-500 {
+  .sm\:border-primary-400 {
     --tw-border-opacity: 1;
-    border-color: rgb(221 161 94 / var(--tw-border-opacity));
+    border-color: rgb(61 133 51 / var(--tw-border-opacity));
   }
 
   .sm\:border-transparent {
     border-color: transparent;
-  }
-
-  .sm\:border-primary-400 {
-    --tw-border-opacity: 1;
-    border-color: rgb(61 133 51 / var(--tw-border-opacity));
   }
 
   .sm\:bg-opacity-25 {

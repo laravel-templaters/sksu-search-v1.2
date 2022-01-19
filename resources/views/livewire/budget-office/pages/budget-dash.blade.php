@@ -14,7 +14,7 @@
     {{-- notif --}}
     <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
         <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
-            <div class="w-full max-w-md overflow-hidden rounded-lg shadow-lg pointer-events-auto bg-opacity-95 bg-primary-bg ring-1 ring-black ring-opacity-5"
+            <div class="w-full max-w-md overflow-hidden rounded-lg shadow-lg pointer-events-auto bg-opacity-95 bg-primary-700 ring-1 ring-black ring-opacity-5"
                 x-cloak x-show="show_Banner" x-transition:enter="transform ease-out duration-300 transition"
                 x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
                 x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
@@ -23,29 +23,29 @@
                 <div class="p-4">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-secondary-bg" fill="none"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
-                            <p class="text-sm font-medium text-secondary-bg">
+                            <p class="text-sm font-medium text-white">
                                 {{$greeting}}!
                             </p>
                             @if ($isHeadOrAdmin || $isAssigned)
-                            <p class="mt-1 text-sm text-primary-text">
+                            <p class="mt-1 text-sm text-primary-300">
                                   A new voucher has been forwarded to you!
                             </p>
                             @else
-                            <p class="mt-1 text-sm text-primary-text">
+                            <p class="mt-1 text-sm text-primary-300">
                                 A voucher of yours has been updated!
                             </p>
                             @endif
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
-                                class="inline-flex bg-transparent rounded-md text-secondary-bg-alt hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                class="inline-flex text-white bg-transparent rounded-md hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 x-on:click="show_Banner = false">
                                 <span class="sr-only">Close</span>
                                 <!-- Heroicon name: solid/x -->
@@ -118,7 +118,7 @@
                     <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'myacc'; personalClicked = true;"
-                        x-bind:class="active == 'myacc' ? 'border-secondary-text text-primary-bg-alt ' : ' border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'myacc' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
                         My Account
 
 
@@ -132,7 +132,7 @@
                     @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'pdv'; pendingClicked = true;"
-                        x-bind:class="active == 'pdv' ? 'border-secondary-text text-primary-bg-alt ' : 'border-transparent text-orange-ripe-light hover:text-primary-bg hover:border-secondary-text'">
+                        x-bind:class="active == 'pdv' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
                         Pending Disbursement Vouchers
                         @if (count($milestones)>0)
                         <span x-bind:class="pendingClicked == false ?  'animate-pulse':'animate-none'"
