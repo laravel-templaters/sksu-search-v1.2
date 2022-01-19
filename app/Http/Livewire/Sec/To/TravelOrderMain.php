@@ -176,6 +176,7 @@ class TravelOrderMain extends Component
         }else if($this->toType == "offtravel")
         {
            $this->validateTo();
+           $this->save_official_travel();
         }
     }
 
@@ -251,10 +252,10 @@ class TravelOrderMain extends Component
                     Sleep(2);
                     return redirect()->route('redirect');
                 }else{
-                    //dd($this->toValidated ."-".$this->iteneraryValidated);
+                   
                 }
             }else{
-               
+             
             }
 
         }else{

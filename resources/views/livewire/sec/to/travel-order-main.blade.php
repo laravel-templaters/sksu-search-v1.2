@@ -259,6 +259,7 @@
                     </div>
                     <input type="number" wire:model.lazy="registration_amt"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm amount focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
+                          @error('purpose') <span class="text-red-700 error">{{ $message }}</span> @enderror
                     <h3 x-show="hovered" x-cloak class="text-xs text-indigo-500">If amount is not 0 and "has
                         Registration" checkbox is not checked. Registration amount will not be included in the
                         grand total</h3>

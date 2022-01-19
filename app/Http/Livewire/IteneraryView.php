@@ -421,8 +421,8 @@ class IteneraryView extends Component
             'input.*.dep_time' => 'required',
             'input.*.arr_time' => 'required',
             'input.*.mot' => 'required',
-            'input.*.trans_exp' => 'required',
-            'input.*.others' => 'required',
+            // 'input.*.trans_exp' => 'required',
+            // 'input.*.others' => 'required',
             'input.*.total' => 'required',
         ],
         [
@@ -430,8 +430,8 @@ class IteneraryView extends Component
             'input.*.dep_time' => 'This field is required',
             'input.*.arr_time' => 'This field is required',
             'input.*.mot' => 'This field is required',
-            'input.*.trans_exp' => 'This field is required',
-            'input.*.others' => 'This field is required',
+            // 'input.*.trans_exp' => 'This field is required',
+            // 'input.*.others' => 'This field is required',
             'input.*.total' => 'This field is required',
 
         ]
@@ -463,8 +463,8 @@ class IteneraryView extends Component
                             $itenerary_entries->place_to_be_visited = $this->input[$key1]['place'];
                             $itenerary_entries->departure_time =  $this->input[$key1]['dep_time'];
                             $itenerary_entries->arrival_time = $this->input[$key1]['arr_time'];
-                            $itenerary_entries->mode_of_transport = $this->input[$key1]['mot'];
-                            $itenerary_entries->transport_expenses = $this->input[$key1]['trans_exp'];
+                            $itenerary_entries->mode_of_transport = isset($this->input[$key1]['mot']) ? $this->input[$key1]['mot'] : 0;
+                            $itenerary_entries->transport_expenses = isset($this->input[$key1]['trans_exp']) ? $this->input[$key1]['trans_exp'] : 0;
                             $itenerary_entries->others = $this->input[$key1]['others'];
                             $itenerary_entries->total = $this->input[$key1]['total'];;
                             $itenerary_entries->itenerary_id = $itenerary->id;
