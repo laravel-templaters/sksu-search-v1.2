@@ -69,7 +69,7 @@ public $showError = false;
         }
        
          $this->pending_dv = DisbursementVoucher::where('user_id','=',auth()->user()->id)->get();
-        return view('livewire.budget-office.pages.budget-dash')->layout('layouts.accountant');
+        return view('livewire.budget-office.pages.budget-dash',['department' => $this->department,'milestones'=>$this->milestones,'pending_dv'=>$this->pending_dv, 'drafts_dvs'=>DisbursementVoucher::where('user_id','=',auth()->user()->id)->where('isDraft','=',true)->get()])->layout('layouts.accountant');
     }
     
     public function populateTable(){

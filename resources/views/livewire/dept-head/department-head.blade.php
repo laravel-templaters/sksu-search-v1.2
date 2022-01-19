@@ -41,7 +41,7 @@
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
-                                class="inline-flex bg-transparent rounded-md text-white hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400"
+                                class="inline-flex text-white bg-transparent rounded-md hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400"
                                 x-on:click="show_Banner = false">
                                 <span class="sr-only">Close</span>
                                 <!-- Heroicon name: solid/x -->
@@ -78,8 +78,17 @@
                             text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
                         @endif
                     </a>
-
-
+                    
+     
+                    <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
+                        x-on:click="active = 'drafts'"
+                        x-bind:class="active == 'drafts' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
+                        Drafts
+                        @if (count($pending_dv)>0)
+                        <span x-bind:class="personalClicked == false ? 'animate-pulse':'animate-none'" class="bg-gray-100 text-gray-900 ml-3 py-0.5 px-2.5 rounded-full items-center text-center
+                            text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
+                        @endif
+                    </a>
                     @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'pdv'; pendingClicked = true;"
@@ -281,7 +290,7 @@
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
                     <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPending"
-                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-bg">
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-700">
                 </div>
             </div>
             <div class="px-4 py-5 sm:p-6">
