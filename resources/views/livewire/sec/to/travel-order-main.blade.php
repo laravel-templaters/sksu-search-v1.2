@@ -1,7 +1,7 @@
 <div class="m-4 bg-white rounded-md">
     {{-- implicit submission --}}
     <form class="p-5 space-y-8 divide-y divide-gray-200" wire:submit.prevent="submit"
-        onkeydown="return event.key != 'Enter';">
+        >
         <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div>
 
@@ -130,7 +130,7 @@
                     You are here by directed to: (?)
                 </label>
                 <div class="mt-1 sm:mt-0 sm:col-span-2">
-                    <textarea wire:model="purpose" id="about" name="about" rows="3"
+                    <textarea wire:model="purpose" id="about" name="about" rows="10"
                         class="block w-full max-w-2xl border border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:text-sm"></textarea>
                     <p class="mt-2 text-sm text-gray-500"><span class="font-extrabold text-indigo-400">NOTE:</span>
                         This will also serve as the
