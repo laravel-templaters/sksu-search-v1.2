@@ -75,7 +75,7 @@ public $showError = false;
         'milestones'=>$this->milestones,
         'pending_dv'=>$this->pending_dv,
         'drafts_dvs'=>DisbursementVoucher::where('user_id','=',$user_id)->where('isDraft','=',true)->get(),
-        'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->searchexactly('user_id',$user_id)->with('user')->with('province')->with('region')->with('city')->orderByDesc('id')->paginate(5)])
+        'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->searchexactly('user_id',$user_id)->with('user')->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
         ->layout('layouts.accountant');
     }
     

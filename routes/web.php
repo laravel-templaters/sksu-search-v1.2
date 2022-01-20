@@ -113,3 +113,6 @@ Route::middleware(['auth:sanctum','verified'])->get('/archiver/new/archive',App\
 //usermgt
 
 Route::middleware(['auth:sanctum','verified'])->get('user/mgt/new',App\Http\Livewire\Client\Users\CreateNewUser::class)->name('create-new-user');
+
+//travelorder pages
+Route::middleware(['auth:sanctum','verified'])->get('travel-order/view/34d4c659bb9a93d6b{id}76bd4d016a69aa9d92e1ca81a4c19eb62f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\ViewTravelOrder::class)->name('view-to');

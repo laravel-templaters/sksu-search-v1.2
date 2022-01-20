@@ -542,15 +542,10 @@
                                         <span class="uppercase">{{$travel_order->purpose}}</span>
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <button x-on:click="$wire.showModal({{$travel_order->id}})"
+                                        <a href="{{ route('view-to',$travel_order->id) }}" target="_blank"
                                             class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                            View voucher information
-                                        </button>
-                                        <button
-                                            x-on:click="showStatus = true; $wire.emit('dvClicked',{{$travel_order->id}});"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
-                                            View voucher feed
-                                        </button>
+                                            View Travel Order
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="mt-2 sm:flex sm:justify-between">

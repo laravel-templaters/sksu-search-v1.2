@@ -39,6 +39,7 @@ public $showError = false;
     
     public $searchPending="";
     public $searchPersonal="";
+    public $searchTo="";
     public $personalClicked=true;
     public $pendingClicked=true;
     public $showBanner=false;
@@ -65,14 +66,19 @@ public $showError = false;
             }elseif ($this->department->head_user_id ==  $user_id){
                 $this->isHead=true;
             }
-        }elseif(Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->first()){
-            $this->milestones = Milestone::where('assigned_user','=',auth()->user()->id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->get();
+        }elseif(Milestone::where('assigned_user','=',$user_id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id','desc')->first()){
+            $this->milestones = Milestone::where('assigned_user','=',$user_id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id')->get();
             $this->isAssigned=true;
         }
        
-         $this->pending_dv = DisbursementVoucher::where('user_id','=',auth()->user()->id)->get();
-        
-        return view('livewire.accountant.pages.dashboard')->layout('layouts.accountant');
+         $this->pending_dv = DisbursementVoucher::where('user_id','=',$user_id)->get();
+        return view('livewire.budget-office.pages.budget-dash',
+        ['department' => $this->department,
+        'milestones'=>$this->milestones,
+        'pending_dv'=>$this->pending_dv,
+        'drafts_dvs'=>DisbursementVoucher::where('user_id','=',$user_id)->where('isDraft','=',true)->get(),
+        'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->searchexactly('user_id',$user_id)->with('user')->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
+        ->layout('layouts.accountant');
     }
 
    public function populateTable(){
