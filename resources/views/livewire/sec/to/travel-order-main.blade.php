@@ -138,7 +138,6 @@
                     @error('purpose') <span class="text-red-700 error">{{ $message }}</span> @enderror
                 </div>
             </div>
-            @if ($toType=="offtime")
             <div
                 class="pt-2 border-t border-gray-200 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label for="dateoftravel" class="block font-medium text-md text-primary-bg sm:mt-px sm:pt-2">
@@ -166,7 +165,6 @@
                     </div>
                 </div>
             </div>
-            @endif
 
             <div class="grid items-start grid-cols-3 grid-rows-2 gap-4 pt-2 border-t border-gray-200">
                 <label for=""

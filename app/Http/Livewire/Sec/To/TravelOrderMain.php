@@ -235,6 +235,8 @@ class TravelOrderMain extends Component
                 if ($this->toValidated == true && $this->iteneraryValidated == true) {
                     $travel_order = new TravelOrder;
                     $travel_order->purpose = $this->purpose;
+                    $travel_order->date_of_travel_from = $this->dateoftravelfrom;
+                    $travel_order->date_of_travel_to = $this->dateoftravelto;
                     $travel_order->philippine_regions_id =  $reg['id'];
                     $travel_order->philippine_provinces_id = $prov['id'];
                     $travel_order->philippine_cities_id = $cit['id'];

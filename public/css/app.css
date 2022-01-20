@@ -2792,6 +2792,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(165 180 252 / var(--tw-text-opacity));
 }
+.text-orange-ripe-light {
+  --tw-text-opacity: 1;
+  color: rgb(245 153 99 / var(--tw-text-opacity));
+}
 .text-opacity-90 {
   --tw-text-opacity: 0.9;
 }
@@ -3486,6 +3490,12 @@ select {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(10 82 0 / var(--tw-ring-opacity));
 }
+[dir="rtl"] .rtl\:m-3 {
+  margin: 0.75rem;
+}
+[dir="rtl"] .rtl\:mr-3 {
+  margin-right: 0.75rem;
+}
 @media (prefers-color-scheme: dark) {
 
   .dark\:border-gray-700 {
@@ -3511,6 +3521,12 @@ select {
   .dark\:text-gray-400 {
     --tw-text-opacity: 1;
     color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+}
+@media print {
+
+  .print\:block {
+    display: block;
   }
 }
 @media (min-width: 640px) {
