@@ -1168,13 +1168,17 @@ select {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
 .mx-5 {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
+}
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .my-1 {
   margin-top: 0.25rem;
@@ -1183,10 +1187,6 @@ select {
 .mx-0 {
   margin-left: 0px;
   margin-right: 0px;
-}
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 .my-3 {
   margin-top: 0.75rem;
@@ -2749,6 +2749,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(109 163 102 / var(--tw-text-opacity));
 }
+.text-primary-600 {
+  --tw-text-opacity: 1;
+  color: rgb(10 82 0 / var(--tw-text-opacity));
+}
 .text-secondary-700 {
   --tw-text-opacity: 1;
   color: rgb(133 97 56 / var(--tw-text-opacity));
@@ -3359,13 +3363,13 @@ select {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));
 }
-.focus\:ring-green-600:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(22 163 74 / var(--tw-ring-opacity));
-}
 .focus\:ring-primary-400:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(61 133 51 / var(--tw-ring-opacity));
+}
+.focus\:ring-green-600:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(22 163 74 / var(--tw-ring-opacity));
 }
 .focus\:ring-primary-700:focus {
   --tw-ring-opacity: 1;

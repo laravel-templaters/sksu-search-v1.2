@@ -15,6 +15,7 @@ class CreateTravelOrdersTable extends Migration
     {
         Schema::create('travel_orders', function (Blueprint $table) {
             $table->id();
+            $table ->string('tracking_code')->nullable();
             $table->string('purpose');
             $table->string('place_to_go');
             $table->string('has_registration');

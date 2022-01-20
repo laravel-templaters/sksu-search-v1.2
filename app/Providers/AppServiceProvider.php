@@ -28,6 +28,15 @@ class AppServiceProvider extends ServiceProvider
         Builder::macro('search',function($field, $string){
             return $string ? $this->where($field,'like','%'.$string.'%') : $this;
         });
+        Builder::macro('searchexactly',function($field, $string){
+            return $string ? $this->where($field,'=',$string) : $this;
+        });
+        Builder::macro('searchOr',function($field, $string){
+            return $string ? $this->orWhere($field,'like','%'.$string.'%') : $this;
+        });
+        Builder::macro('searchexactlyOr',function($field, $string){
+            return $string ? $this->orWhere($field,'=',$string) : $this;
+        });
         Builder::macro('search7days',function($field, $string){
             return $string ? $this->whereDate($field,'>=',Carbon::today()->toDateString())->whereDate($field,'<=',Carbon::today()->addDays(7)->toDateString()) : $this;
         });

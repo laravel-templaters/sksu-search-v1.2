@@ -191,6 +191,7 @@ class TravelOrderMain extends Component
 
             // if ($this->toValidated && $this->iteneraryValidated) {
                 $travel_order = new TravelOrder;
+                $travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
                 $travel_order->purpose = $this->purpose;
                 $travel_order->date_of_travel_from = $this->dateoftravelfrom;
                 $travel_order->date_of_travel_to = $this->dateoftravelto;

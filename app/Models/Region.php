@@ -14,4 +14,8 @@ class Region extends Model
       protected $primaryKey = 'id';
      
     use HasFactory;
+
+    public function travel_order(){
+      return $this->belongsTo('App\Models\TravelOrder');
+    }
 }

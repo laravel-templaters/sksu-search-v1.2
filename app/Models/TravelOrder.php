@@ -35,5 +35,14 @@ class TravelOrder extends Model
     public function dv_type_sorter(){
         return $this->hasMany('App\Models\DVTypeSorter');
     }
+    public function region(){
+        return $this->hasOne('App\Models\Region','id','philippine_regions_id');
+    }
+    public function province(){
+        return $this->hasOne('App\Models\Province','id','philippine_provinces_id');
+    }
+    public function city(){
+        return $this->hasOne('App\Models\City','id','philippine_cities_id');
+    }
 
 }
