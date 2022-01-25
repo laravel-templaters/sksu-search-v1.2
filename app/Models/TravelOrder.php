@@ -24,8 +24,8 @@ class TravelOrder extends Model
         return $this->belongsTo('App\Models\DVTravelOrderPivot');
     }
 
-    public function user(){
-        return $this->belongsTo('App\Models\User');
+    public function side_note(){
+        return $this->belongsTo('App\Models\SideNote');
     }
 
     public function dte(){
@@ -43,6 +43,13 @@ class TravelOrder extends Model
     }
     public function city(){
         return $this->hasOne('App\Models\City','id','philippine_cities_id');
+    }
+
+    public function travel_order_applicant(){  
+        return $this->belongsTo('App\Models\TravelOrderApplicant');
+    }
+    public function travel_order_signatory(){  
+        return $this->belongsTo('App\Models\TravelOrderSignatory');
     }
 
 }

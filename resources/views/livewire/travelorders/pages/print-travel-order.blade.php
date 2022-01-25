@@ -1,6 +1,6 @@
 <div id="toPrint"
     class="h-full m-10 text-center bg-white divide-y divide-black rounded-lg print:divide-y-4 print:rounded-none print:m-0 divide-solid">
-    <div class="flex w-full p-6 print:flex">
+    <div class="flex w-full p-6 print:flex ">
         <div class="inline my-auto"><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png"
                 alt="sksu logo" class="object-scale-down w-20 h-full"></div>
         <div id="header" class="inline ml-3 -space-y-2 text-left">
@@ -27,8 +27,8 @@
     </div>
     <div class="w-full">
         <div class="m-6 divide-y divide-black divide-solid print:divide-y-2">
-            <div class="flex items-start w-full h-auto p-6 print:block ">
-                <div id="header" class="items-start block w-full space-y-4 text-left">
+            <div class="flex items-start w-full h-auto px-6 pb-6 print:block ">
+                <div id="header" class="items-start block w-full space-y-5 text-left">
                     <div class="block">
                         <span
                             class="text-sm font-semibold tracking-wide text-left text-black">{{ $travel_order->created_at->format('F d, Y') }}</span>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="grid grid-cols-4 ">
                         <span class="col-span-1 text-sm font-semibold tracking-wide text-black uppercase">Memorandum to:</span>
-                        <div class="col-span-1 text-sm font-semibold tracking-wide text-black uppercase">
+                        <div class="col-span-3 text-sm font-semibold tracking-wide text-left text-black uppercase">
                             @foreach ($applicants as $applicant)
                                 <span class="block">{{ $applicant->user->name }}</span>
                             @endforeach
@@ -51,7 +51,7 @@
                 <div id="header" class="items-start block w-full space-y-4 text-left">
                     <div class="flex-wrap block -space-y-1">
                         <span class="font-semibold tracking-wide text-left text-black text-md">You are hereby directed
-                            to proceed <strong>
+                            to proceed to <strong>
                             @if ($travel_order->others!="")
                             {{$travel_order->others}}, {{$travel_order->city->city_municipality_description}}, {{$travel_order->province->province_description}}, {{ $travel_order->region->region_description }}
                             @else
@@ -63,21 +63,25 @@
                             {{ $travel_order->purpose}}
                         </span>
                         @foreach ($signatories as $signatory)
-                        <span class="block pt-16 font-semibold tracking-wide text-center text-black text-md">
+                        <span class="block font-semibold tracking-wide text-center text-black pt-28 text-md print:pt-10">
                             {{ $signatory->user->name}}
                         </span>
-                        <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md">
+                        <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md print:pt-1">
                             {{ $signatory->user->role->role_name}}/{{ $signatory->user->position->position_name}}
                         </span>
+                       
                         @endforeach
-                        
                        
                     </div>
                 </div>
             </div>
-            
         </div>
-        
     </div>
-    <a href="{{ route('print-to',$travel_order->id) }}" target="_blank" id="printto" class="max-w-sm px-4 py-2 font-semibold tracking-wider rounded-full w-sm bg-primary-500 text-primary-200 hover:bg-primary-200 hover:text-primary-500 active:bg-primary-700 active:text-white">Print Travel Order</a>    
+    @push('scripts')
+    <script>
+        window.onload = function () {
+             window.print();
+        }
+    </script>
+    @endpush
 </div>

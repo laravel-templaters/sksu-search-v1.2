@@ -1,7 +1,7 @@
-<div class="m-4 bg-white rounded-md">
+<div class="m-4 bg-white rounded-md"
+    x-data="{showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
     {{-- implicit submission --}}
-    <form class="p-5 space-y-8 divide-y divide-gray-200" wire:submit.prevent="submit"
-        >
+    <form class="p-5 space-y-8 divide-y divide-gray-200" wire:submit.prevent="submit">
         <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div>
 
@@ -12,8 +12,7 @@
                 </p>
             </div>
 
-            <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5"
-                x-data="{picked:@entangle('picked'), searched :@entangle('searched')}">
+            <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5">
                 <div
                     class="pt-2 border-t border-gray-200 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label for="about" class="block font-medium text-md text-primary-bg sm:mt-px sm:pt-2">
@@ -33,7 +32,8 @@
                                 </div>
 
                                 <div class="flex items-center">
-                                    <input id="official_time" name="toType" wire:model="toType" type="radio" value="offtravel"
+                                    <input id="official_time" name="toType" wire:model="toType" type="radio"
+                                        value="offtravel"
                                         class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
                                     <label for="official_time" class="block ml-3 text-sm font-medium text-gray-700">
                                         Official Travel
@@ -44,55 +44,20 @@
                         </fieldset>
                     </div>
                 </div>
+                {{-- USER --}}
                 <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
 
                     <label for="username" class="block pt-2 mt-px font-medium text-md text-primary-bg">
-                        Name
+                       Applicant(s)
                     </label>
                     <div class="col-span-2 mt-1">
-                        <div class="grid grid-cols-2 grid-rows-1" x-cloak x-show="picked==false">
-                            <p class="text-gray-700 text-md">Search User Here</p>
-                            <input type="text"
-                                class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
-                                wire:model.debounce.500ms="search">
-                            <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searched">
-
-                                @if(count($users)>0)
-                                @foreach ($users as $user)
-                                <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
-                                    x-on:click="$wire.setUser({{ $user->id }})">
-                                    <div class="flex items-center col-span-2">
-                                        <div>
-                                            {{-- gab --}}
-                                            <img class="inline-block w-10 h-10 rounded-full"
-                                                src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}"
-                                                alt="">
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                                                {{ $user->name }}
-                                            </p>
-                                            <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                                                Click image to select.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                                @endforeach
-                                @else
-                                <h1 class="col-span-2 text-sm text-secondary-500">'{{ $search }}' was not found. Try
-                                    retyping the {{ 'keyword' }} or Click this <a href="{{ route('create-new-user') }}"
-                                        target="_blank"
-                                        class="text-indigo-500 hover:underline hover:underline-offset-4">link to create
-                                        a new account</a></h1>
-                                @endif
-
-                            </div>
-                            @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="grid grid-cols-2 grid-rows-1" x-cloak x-show="picked">
-                            <a href="#">
-                                <div class="flex items-center col-span-2">
+                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500" x-cloak x-show="pickedUsers==true">
+                            @if (count($userInfos)==0)
+                            <span class="col-span-1 p-3 text-lg tracking-widest text-white uppercase">{{ 'Applicant Needed.'}}<br>{{ 'try Searching Below.' }}</span>
+                            @else
+                            @foreach ($userInfos as $key =>$userInfo)
+                            <a href="#" class="flex items-center m-2 rounded-full shadow-md bg-primary-200 shadow-primary-300" id="{{  $key.rand(1,499) }}">
+                                <div class="flex items-center col-span-1">
                                     <div>
                                         @if ($userInfo)
                                         <img class="inline-block w-10 h-10 rounded-full"
@@ -111,15 +76,144 @@
                                             NOT SET
                                             @endif
                                         </p>
-                                        <p class="text-xs font-semibold tracking-wider text-blue-500 cursor-pointer hover:underline group-hover:text-gray-700"
-                                            x-on:click="$wire.unSetUser()">
-                                            CHANGE
+                                        <p class="text-xs font-semibold tracking-wider text-blue-700 cursor-pointer hover:underline group-hover:text-white"
+                                            x-on:click="$wire.unSetUser({{ $userInfo->id }})">
+                                            Remove
                                         </p>
                                     </div>
                                 </div>
                             </a>
+                            @endforeach
+                            @endif
                         </div>
                         @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
+                        <div class="grid grid-cols-2 grid-rows-1" >
+                            <p class="text-gray-700 text-md">Search for applicant here</p>
+                            <input type="text" id="username"
+                                class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
+                                wire:model.debounce.500ms="searchUsers">
+                            <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searchedUsers">
+                               
+                                    @if(count($users)>0)
+                                    @foreach ($users as $user)
+
+                                    <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
+                                        x-on:click="$wire.setUser({{ $user->id }})">
+                                        <div class="flex items-center col-span-2">
+                                            <div>
+                                                {{-- gab --}}
+                                                <img class="inline-block w-10 h-10 rounded-full"
+                                                    src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}"
+                                                    alt="">
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                    {{ $user->name }}
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    Click image to select.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                    @else
+                                    <h1 class="col-span-2 text-sm text-secondary-500">User with '{{ $searchUsers }}' on their name was not found. Check the spelling or Click this <a
+                                            href="{{ route('create-new-user') }}" target="_blank"
+                                            class="text-indigo-500 hover:underline hover:underline-offset-4">link to
+                                            create
+                                            a new account</a></h1>
+                                    @endif
+                               
+
+                            </div>
+                            <span class="col-span-2 mt-2 text-red-700 uppercase error" x-cloak x-show="showApplicantError==true">atleast 1(one) applicant is needed</span>
+                        </div>
+                      
+                    </div>
+                </div>
+                {{-- Sigs --}}
+                <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
+
+                    <label for="signame" class="block pt-2 mt-px font-medium text-md text-primary-bg">
+                        Signatory/Signatories
+                    </label>
+                    <div class="col-span-2 mt-1">
+                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500" x-cloak x-show="pickedSigs==true">
+                            @if (count($sigsInfos)==0)
+                            <span class="col-span-5 p-3 text-lg tracking-widest text-white uppercase">{{ 'Atleast one(1) signatory is Needed.'}}<br>{{ 'try Searching Below.' }}</span>
+                            @else
+                            @foreach ($sigsInfos as $key =>$sigInfo)
+                            <a href="#" class="flex items-center m-2 rounded-full shadow-md bg-primary-200 shadow-primary-300" id="{{ $key.rand(500,999)}}">
+                                <div class="flex items-center col-span-1">
+                                    <div>
+                                        @if ($sigInfo)
+                                        <img class="inline-block w-10 h-10 rounded-full"
+                                            src="{{$sigInfo->avatar != null ? asset($sigInfo->avatar) : asset($sigInfo->profile_photo_url)}}"
+                                            alt="">
+                                        @else
+                                        <img class="inline-block w-10 h-10 rounded-full" src="" alt="X">
+                                        @endif
+
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                            @if ($sigInfo)
+                                            {{ $sigInfo->name }}
+                                            @else
+                                            NOT SET
+                                            @endif
+                                        </p>
+                                        <p class="text-xs font-semibold tracking-wider text-blue-700 cursor-pointer hover:underline group-hover:text-white"
+                                            x-on:click="$wire.unSetSignatory({{ $sigInfo->id }})">
+                                            Remove
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
+                            @endif
+                        </div>
+                        @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
+                        <div class="grid grid-cols-2 grid-rows-1" >
+                            <p class="text-gray-700 text-md">Search for signatory here</p>
+                            <input type="text" id="signame"
+                                class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
+                                wire:model.debounce.500ms="searchSigs">
+                            <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searchedSigs">
+                               
+                                    @if(count($sigs)>0)
+                                    @foreach ($sigs as $user)
+
+                                    <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
+                                        x-on:click="$wire.setSignatory({{ $user->id }})">
+                                        <div class="flex items-center col-span-2">
+                                            <div>
+                                                {{-- gab --}}
+                                                <img class="inline-block w-10 h-10 rounded-full"
+                                                    src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}"
+                                                    alt="">
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                    {{ $user->name }}
+                                                </p>
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                    Click image to select.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                    @else
+                                    <h1 class="col-span-2 text-sm text-secondary-500">Signatory with '{{ $searchSigs }}' on their name was not found. Check the spelling or contact support.
+                                    @endif
+                               
+
+                            </div>
+                            <span class="col-span-2 mt-2 text-red-700 uppercase error" x-cloak x-show="showSignatoryError==true">atleast 1(one) signatory is needed</span>
+                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -149,9 +243,11 @@
                         <div class="justify-start m-2" id="dateoftravel">
                             <label for="dateoftravelfrom"
                                 class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
-                               From
+                                From
                             </label>
-                            <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom" name="dateoftravelfrom"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}" 
+                            <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom"
+                                name="dateoftravelfrom"
+                                min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-fit focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
                         <div class="justify-start m-2" id="dateoftravel">
@@ -159,7 +255,8 @@
                                 class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
                                 To
                             </label>
-                            <input type="date" id="dateoftravelto"  wire:model="dateoftravelto" name="dateoftravelto"  min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}" 
+                            <input type="date" id="dateoftravelto" wire:model="dateoftravelto" name="dateoftravelto"
+                                min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-md focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
                     </div>
@@ -211,10 +308,10 @@
                 </div>
                 <div class="col-span-1 col-start-3 row-span-1 row-start-2 mt-1">
                     <h3 class="ml-1 text-sm text-gray-600 ">Others</h3>
-                    <input type="text"  wire:model="others"
+                    <input type="text" wire:model="others"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
-                    <p class="mt-2 ml-1 text-sm text-gray-500"><span
-                            class="font-extrabold text-indigo-400">NOTE:</span> Input specific address excluding
+                    <p class="mt-2 ml-1 text-sm text-gray-500"><span class="font-extrabold text-indigo-400">NOTE:</span>
+                        Input specific address excluding
                         the city, province and region of your destination</p>
                 </div>
             </div>
@@ -257,7 +354,7 @@
                     </div>
                     <input type="number" wire:model.lazy="registration_amt"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm amount focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
-                          @error('php artisn serve') <span class="text-red-700 error">{{ $message }}</span> @enderror
+                    @error('php artisn serve') <span class="text-red-700 error">{{ $message }}</span> @enderror
                     <h3 x-show="hovered" x-cloak class="text-xs text-indigo-500">If amount is not 0 and "has
                         Registration" checkbox is not checked. Registration amount will not be included in the
                         grand total</h3>
@@ -272,8 +369,7 @@
         </div>
 
         {{-- </div> --}}
-        @if($toType=="offtravel")
-        <div class="pt-8 pl-4 space-y-6 sm:pt-10 sm:space-y-5">
+        <div class="pt-8 pl-4 space-y-6 sm:pt-10 sm:space-y-5" x-cloak x-show="totype=='offtravel'">
             <div>
                 <h3 class="text-3xl font-medium leading-6 text-gray-900">
                     Itinerary
@@ -322,7 +418,7 @@
         @endforeach
 
         @if(isset($gen))
-        <div class="relative min-w-full my-4 ml-4 mr-7">
+        <div class="relative min-w-full my-4 ml-4 mr-7" x-cloak x-show="totype=='offtravel'">
             <div class="absolute bottom-0 pr-0 my-3 mt-2 mr-10 bg-white right-2 ">
                 {{-- <button type="button" x-on:click="$wire.TotalCalculation()"
                     class="pl-3 pr-2 my-auto mr-10 font-bold text-indigo-300 uppercase bg-indigo-500 border border-transparent rounded text-md hover:bg-indigo-400 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -333,18 +429,18 @@
         </div>
         @endif
 
-        @endif
+
 
         @elseif($err_from_to)
-        <div wire.loading.remove class="mt-5">
+        <div wire.loading.remove class="mt-5" x-cloak x-show="totype=='offtravel'">
             <span class="text-red-400">Please fill out all fields. (Don't leave any blanks on the fields)</span>
         </div>
         @elseif($err_diff)
-        <div wire.loading.remove class="mt-5">
+        <div wire.loading.remove class="mt-5" x-cloak x-show="totype=='offtravel'">
             <span class="text-red-400">Check inputs: 'From Date' must be less than the 'To Date'</span>
         </div>
         @elseif($err_diem)
-        <div wire.loading.remove class="mt-5">
+        <div wire.loading.remove class="mt-5" x-cloak x-show="totype=='offtravel'">
             <span class="text-red-400">Pick Region. (Select Region, Province and Municipality from the options
                 above)</span>
         </div>
@@ -356,7 +452,7 @@
                     Cancel
                 </button>
                 <button type="button" wire:click.prevent="submit"
-                    class="px-4 py-2 mx-2 font-bold border border-gray-300 rounded-md shadow-sm bg-primary-bg-alt text-md text-secondary-text hover:bg-gray-50 hover:text-primary-text-alt focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    class="px-4 py-2 mx-2 font-bold border border-gray-300 rounded-md shadow-sm bg-primary-500 text-md text-secondary-text hover:bg-primary-300 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-700">
                     Save
                 </button>
             </div>

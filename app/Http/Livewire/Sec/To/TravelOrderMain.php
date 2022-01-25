@@ -13,20 +13,27 @@ use App\Models\City;
 use App\Models\User;
 use App\Models\TravelOrder;  
 use App\Models\Dte;
+use App\Models\TravelOrderApplicant;
+use App\Models\TravelOrderSignatory;
 use Carbon\Carbon;
 use App\Notifications\TravelOrderSaved;
 
 class TravelOrderMain extends Component
 {
 
-
+    public $showApplicantError=false;
+    public $showSignatoryError=false;
     public $toType="offtime";
-    public $search;
-    public $searched = false;
-    public $picked = false;
+    public $searchUsers;
+    public $searchSigs;
+    public $searchedUsers = false;
+    public $pickedUsers = false;
+    public $searchedSigs = false;
+    public $pickedSigs = false;
 
     public $users_id;
-    public $userInfo=[];
+    public $applicant_ids=[];
+    public $signatory_ids=[];
     public $purpose;
     public $has_registration;
     public $registration_amt;
@@ -85,10 +92,22 @@ class TravelOrderMain extends Component
 
     public function render()
     {
-        if($this->search!= ""){
-            $this->searched = true;
+        $searchUsrRes=[];
+        if($this->searchUsers!= ""){
+            $this->searchedUsers = true;
+            $searchUsrRes = User::search('name', $this->searchUsers)->get();
         }else{
-            $this->searched = false;
+            $searchUsrRes=[];
+            $this->searchedUsers = false;           
+        }
+
+        $searchSigsRes= [];
+        if($this->searchSigs!= ""){
+            $this->searchedSigs = true;
+            $searchSigsRes= User::search('name', $this->searchSigs)->get();
+        }else{
+            $searchSigsRes= [];
+            $this->searchedSigs = false;
         }
         
         $this->region = Region::get();
@@ -98,7 +117,9 @@ class TravelOrderMain extends Component
 
 
 
-        return view('livewire.sec.to.travel-order-main',['users'=> User::search('name', $this->search)->get(),])->with('regions', $this->region)->with('provinces',  $this->province)
+        return view('livewire.sec.to.travel-order-main',['users'=> $searchUsrRes,'sigs'=> $searchSigsRes,
+        'userInfos'=> User::whereIn('id',$this->applicant_ids)->get(),
+        'sigsInfos'=> User::whereIn('id',$this->signatory_ids)->get()])->with('regions', $this->region)->with('provinces',  $this->province)
         ->with('cities',  $this->city)->with('diems', $this->per_diem);
     }
 
@@ -154,6 +175,7 @@ class TravelOrderMain extends Component
 
     public function submit()
     {
+       if (count($this->applicant_ids)>0 && count($this->signatory_ids)>0 ) {
         $this->validateTo();
         if($this->toType == "offtime")
         {
@@ -178,18 +200,15 @@ class TravelOrderMain extends Component
            $this->validateTo();
            $this->save_official_travel();
         }
+       }else{
+        $this->showApplicantError = $this->showSignatoryError = true;
+       }
     }
 
     public function save_official_time(){
-        // $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
-        // $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
-        // $date_string = $from_date ." - ".$to_date;
         $reg = Region::where("region_code", "=",  $this->region_codes)->first();
         $prov = Province::where("province_code", "=",  $this->province_codes)->first();
         $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
-
-
-            // if ($this->toValidated && $this->iteneraryValidated) {
                 $travel_order = new TravelOrder;
                 $travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
                 $travel_order->purpose = $this->purpose;
@@ -202,19 +221,14 @@ class TravelOrderMain extends Component
                 $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
                 $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
                 $travel_order->total = $this->finalTotal_raw;
-                $travel_order->user_id = $this->users_id;
-                // $travel_order->date_range = $date_string;
                 $travel_order->dv_type_sorter_id = "1"; 
                 $travel_order->dte_id =  $reg['id'];
                 $travel_order->to_type =  $this->toType;
-                $travel_order->save();  
-                // /$this->emit('storeItenerary',$travel_order->id);
+                $travel_order->isDraft =false;
+                $travel_order->save(); 
+
+                $this->saveApplicants($travel_order->id);
                 
-                Sleep(2);
-                return redirect()->route('redirect');
-            // }else{
-            //     dd("gg again");
-            // }
          
     }
 
@@ -245,16 +259,15 @@ class TravelOrderMain extends Component
                     $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
                     $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
                     $travel_order->total = $this->finalTotal_raw;
-                    $travel_order->user_id = $this->users_id;
                     $travel_order->date_range = $date_string;
                     $travel_order->dv_type_sorter_id = "1"; 
                     $travel_order->dte_id =  $reg['id'];
                     $travel_order->to_type =  $this->toType;
+                    $travel_order->isDraft =false;
                     $travel_order->save();  
                     $this->emit('storeItenerary',$travel_order->id);
                     
-                    Sleep(2);
-                    return redirect()->route('redirect');
+                   
                 }else{
                    
                 }
@@ -276,16 +289,12 @@ class TravelOrderMain extends Component
             $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
             $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
             $travel_order->total = $this->finalTotal_raw;
-            $travel_order->user_id = $this->users_id;
-            // $travel_order->date_range = $date_string;
+            $travel_order->isDraft =false;
             $travel_order->dv_type_sorter_id = "1"; 
             $travel_order->dte_id =  $reg['id'];
             $travel_order->to_type =  $this->toType;
             $travel_order->save();  
-            // /$this->emit('storeItenerary',$travel_order->id);
-            
-            Sleep(2);
-            return redirect()->route('redirect');
+            $this->saveApplicants($travel_order->id);
 
         }
 
@@ -436,15 +445,55 @@ class TravelOrderMain extends Component
     
     public function setUser($uID){
         $this->users_id = $uID;
-        $this->userInfo = User::find($uID);
-        $this->picked = true;
-        $this->searched =false;
-        $this->search ="";
+        $this->pickedUsers = true;
+        $this->searchedUsers =false;
+        $this->searchUsers ="";
+        $this->applicant_ids[] = $uID;
+        $this->showApplicantError=false;
+        $this->applicant_ids = array_unique($this->applicant_ids);
+        array_values($this->applicant_ids);
     }
-    public function unSetUser(){
-        $this->users_id = null;
-        $this->userInfo = [];
-        $this->picked = false;
+    public function unSetUser($id){
+        $index = array_search($id, $this->applicant_ids);
+        unset($this->applicant_ids[$index]);
+        array_values($this->applicant_ids);
+    }
+    public function setSignatory($uID){
+        $this->pickedSigs = true;
+        $this->searchedSigs =false;
+        $this->searchSigs ="";
+        $this->signatory_ids[] = $uID;
+        $this->signatory_ids = array_unique($this->signatory_ids);
+        $this->showSignatoryError=false;
+        array_values($this->signatory_ids);
+    }
+    public function unSetSignatory($id){
+        $index = array_search($id, $this->signatory_ids);
+        unset($this->signatory_ids[$index]);
+        array_values($this->signatory_ids);
     }
 
+
+    public function saveApplicants($toID){
+        
+        foreach($this->applicant_ids as $value){
+            $toApplicants = new TravelOrderApplicant();
+            $toApplicants->travel_order_id = $toID;
+            $toApplicants->user_id = $value;
+            $toApplicants->save();
+        }
+        $this->saveSignatories($toID);
+       
+    }
+    public function saveSignatories($toID){
+        foreach($this->signatory_ids as $value){
+            $toSignatories = new TravelOrderSignatory();
+            $toSignatories->travel_order_id = $toID;
+            $toSignatories->user_id = $value;
+            $toSignatories->save();
+        }
+
+        Sleep(2);
+        return redirect()->route('redirect');
+    }
 }

@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Events\ForwardDV;
 use App\Models\Signatory;
+use App\Models\TravelOrderApplicant;
 
 class Dashboard extends Component
 {
@@ -70,14 +71,18 @@ public $showError = false;
             $this->milestones = Milestone::where('assigned_user','=',$user_id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id')->get();
             $this->isAssigned=true;
         }
-       
+        $toID=[];
+        if ($this->isHeadOrAdmin==true) {
+            
+        }
+        $toID = TravelOrderApplicant::searchexactly('user_id',$user_id)->get('travel_order_id');
          $this->pending_dv = DisbursementVoucher::where('user_id','=',$user_id)->get();
         return view('livewire.budget-office.pages.budget-dash',
         ['department' => $this->department,
         'milestones'=>$this->milestones,
         'pending_dv'=>$this->pending_dv,
         'drafts_dvs'=>DisbursementVoucher::where('user_id','=',$user_id)->where('isDraft','=',true)->get(),
-        'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->searchexactly('user_id',$user_id)->with('user')->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
+        'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
         ->layout('layouts.accountant');
     }
 

@@ -7,15 +7,16 @@ use App\Models\TravelOrderApplicant;
 use App\Models\TravelOrderSignatory;
 use Livewire\Component;
 
-class ViewTravelOrder extends Component
+class PrintTravelOrder extends Component
 {
     public function render()
     {
-        return view('livewire.travelorders.pages.view-travel-order',[
-        'travel_order'=>TravelOrder::searchexactly('id',$this->travelorderID)->with('province')->with('region')->with('city')->orderByDesc('id')->first(),
+        return view('livewire.travelorders.pages.print-travel-order',[
+            'travel_order'=>TravelOrder::searchexactly('id',$this->travelorderID)->with('province')->with('region')->with('city')->orderByDesc('id')->first(),
         'applicants' =>TravelOrderApplicant::searchexactly('travel_order_id',$this->travelorderID)->with('user')->get(),
         'signatories' =>TravelOrderSignatory::searchexactly('travel_order_id',$this->travelorderID)->with('user')->get(),
-        ])->layout('layouts.app');
+        ])->layout('layouts.blank-template');
+
     }
     public $travelorderID;
 

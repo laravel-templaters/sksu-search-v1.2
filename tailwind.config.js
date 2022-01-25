@@ -19,15 +19,15 @@ module.exports = {
             },
             colors: {
                 "primary-bg": "#0c6600",
-                "primary-bg-alt": "#606c38",
-                "secondary-bg": "#bc6c25",
-                "secondary-bg-alt": "#f5d1a9",
-                "primary-text": "#dda15e",
-                "primary-text-alt": "#dc2f02",
-                "secondary-text": "#fefae0",
-                "orange-ripe": "#FF8840",
-                "orange-ripe-light": "#F59963",
-                "main-bg": "#fedfa2",
+                "primary-bg-alt": "#cee0cc",
+                "secondary-bg": "#cee0cc",
+                "secondary-bg-alt": "#cee0cc",
+                "primary-text": "#cee0cc",
+                "primary-text-alt": "#cee0cc",
+                "secondary-text": "#cee0cc",
+                "orange-ripe": "#cee0cc",
+                "orange-ripe-light": "#cee0cc",
+                "main-bg": "#cee0cc",
                 
                 
                 'primary': {

@@ -19,9 +19,9 @@ class CreateTravelOrdersTable extends Migration
             $table->string('purpose');
             $table->string('place_to_go');
             $table->string('has_registration');
-            $table->foreignId('user_id');
             $table->foreignId('dv_type_sorter_id');
             $table->foreignId('dte_id');
+            $table->boolean('isDraft')->default(true);
             $table->timestamps();
         });
     }
