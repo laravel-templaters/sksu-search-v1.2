@@ -22,12 +22,11 @@ class Dashboard extends Component
 {
 //for accounting only
 
-public $voucher_number = "";
-public $showError = false;
+    public $voucher_number = "";
+    public $showError = false;
 
 
-
-   public $showViewModal= false;
+    public $showViewModal= false;
     public $showForwardModal= false;
     public $showReturnModal= false;
     public $dvInfo = [];
