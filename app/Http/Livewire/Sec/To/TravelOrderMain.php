@@ -513,6 +513,7 @@ class TravelOrderMain extends Component
             $toSignatories = new TravelOrderSignatory();
             $toSignatories->travel_order_id = $toID;
             $toSignatories->user_id = $value;
+            $toSignatories->approval_status = "pending";
             $toSignatories->save();
         }
 

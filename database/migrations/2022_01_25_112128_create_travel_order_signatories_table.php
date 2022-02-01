@@ -17,7 +17,7 @@ class CreateTravelOrderSignatoriesTable extends Migration
             $table->id();
             $table->foreignId('travel_order_id');
             $table->foreignId('user_id');
-            $table->text('approval_status')->default('pending');
+            $table->text('approval_status');
             $table->timestamps();
         });
     }
