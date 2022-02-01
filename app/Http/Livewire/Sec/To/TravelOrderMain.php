@@ -98,6 +98,8 @@ class TravelOrderMain extends Component
  //lifecycle hooks
 
  public function updated($name,$value){
+
+
      if ($this->travel_draft_made == false) {
          $this->travel_order = new TravelOrder;
          $this->isSaved = "Saving changes as draft";
