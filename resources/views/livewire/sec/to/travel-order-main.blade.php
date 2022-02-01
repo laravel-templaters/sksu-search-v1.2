@@ -1,6 +1,70 @@
-<div class="m-4 bg-white rounded-md"
-    x-data="{showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
+<div class="m-4 bg-white rounded-md" x-init="$watch('show_Banner', value => {
+    if(value == true){
+        setTimeout(function(){ show_Banner = false;  window.location.replace('/redirects');}, 5000);
+       
+    }
+})"
+    x-data="{show_Banner :@entangle('showBanner'),showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
     {{-- implicit submission --}}
+
+ {{-- notif --}}
+    <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
+        x-cloak x-show="show_Banner">
+        <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
+            <!--
+        Notification panel, dynamically insert this into the live region when it needs to be displayed
+  
+        Entering: "transform ease-out duration-300 transition"
+          From: "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+          To: "translate-y-0 opacity-100 sm:translate-x-0"
+        Leaving: "transition ease-in duration-100"
+          From: "opacity-100"
+          To: "opacity-0"
+      -->
+            <div class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5"
+                x-cloak x-show="show_Banner" x-transition-enter="transform ease-out duration-300 transition"
+                x-transition-enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+                x-transition-enter-end="translate-y-0 opacity-100 sm:translate-x-0"
+                x-transition-leave="transition ease-in duration-100" x-transition-leave-start="opacity-100"
+                x-transition-leave-end="opacity-0">
+                <div class="p-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <!-- Heroicon name: outline/check-circle -->
+                            <svg class="w-6 h-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3 w-0 flex-1 pt-0.5">
+                            <p class="text-sm font-medium text-gray-900">
+                                Travel order successfully saved!
+                            </p>
+                            <p class="mt-1 text-sm text-gray-500">
+                               Redirecting to dashboard after a few seconds!
+                            </p>
+                        </div>
+                        <div class="flex flex-shrink-0 ml-4">
+                            <button
+                                class="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <span class="sr-only">Close</span>
+                                <!-- Heroicon name: solid/x -->
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{-- notif END--}}
+
     <form class="p-5 space-y-8 divide-y divide-gray-200" wire:submit.prevent="submit">
         <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div>
@@ -8,7 +72,8 @@
                 <h3 class="text-3xl font-medium leading-6 text-gray-900">
                     Create Travel Order
                 </h3>
-                <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                <p class="max-w-2xl mt-1 text-sm italic text-gray-500">
+                    {{ $isSaved }}
                 </p>
             </div>
 
@@ -48,15 +113,19 @@
                 <div class="grid items-start grid-cols-3 gap-4 pt-5 border-t border-gray-200">
 
                     <label for="username" class="block pt-2 mt-px font-medium text-md text-primary-bg">
-                       Applicant(s)
+                        Applicant(s)
                     </label>
                     <div class="col-span-2 mt-1">
-                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500" x-cloak x-show="pickedUsers==true">
+                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500"
+                            x-cloak x-show="pickedUsers==true">
                             @if (count($userInfos)==0)
-                            <span class="col-span-1 p-3 text-lg tracking-widest text-white uppercase">{{ 'Applicant Needed.'}}<br>{{ 'try Searching Below.' }}</span>
+                            <span
+                                class="col-span-1 p-3 text-lg tracking-widest text-white uppercase">{{ 'Applicant Needed.'}}<br>{{ 'try Searching Below.' }}</span>
                             @else
                             @foreach ($userInfos as $key =>$userInfo)
-                            <a href="#" class="flex items-center m-2 rounded-full shadow-md bg-primary-200 shadow-primary-300" id="{{  $key.rand(1,499) }}">
+                            <a href="#"
+                                class="flex items-center m-2 rounded-full shadow-md bg-primary-200 shadow-primary-300"
+                                id="{{  $key.rand(1,499) }}">
                                 <div class="flex items-center col-span-1">
                                     <div>
                                         @if ($userInfo)
@@ -87,49 +156,51 @@
                             @endif
                         </div>
                         @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
-                        <div class="grid grid-cols-2 grid-rows-1" >
+                        <div class="grid grid-cols-2 grid-rows-1">
                             <p class="text-gray-700 text-md">Search for applicant here</p>
                             <input type="text" id="username"
                                 class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
                                 wire:model.debounce.500ms="searchUsers">
                             <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searchedUsers">
-                               
-                                    @if(count($users)>0)
-                                    @foreach ($users as $user)
 
-                                    <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
-                                        x-on:click="$wire.setUser({{ $user->id }})">
-                                        <div class="flex items-center col-span-2">
-                                            <div>
-                                                {{-- gab --}}
-                                                <img class="inline-block w-10 h-10 rounded-full"
-                                                    src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}"
-                                                    alt="">
-                                            </div>
-                                            <div class="ml-3">
-                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                                                    {{ $user->name }}
-                                                </p>
-                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                                                    Click image to select.
-                                                </p>
-                                            </div>
+                                @if(count($users)>0)
+                                @foreach ($users as $user)
+
+                                <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
+                                    x-on:click="$wire.setUser({{ $user->id }})">
+                                    <div class="flex items-center col-span-2">
+                                        <div>
+                                            {{-- gab --}}
+                                            <img class="inline-block w-10 h-10 rounded-full"
+                                                src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}"
+                                                alt="">
                                         </div>
-                                    </a>
-                                    @endforeach
-                                    @else
-                                    <h1 class="col-span-2 text-sm text-secondary-500">User with '{{ $searchUsers }}' on their name was not found. Check the spelling or Click this <a
-                                            href="{{ route('create-new-user') }}" target="_blank"
-                                            class="text-indigo-500 hover:underline hover:underline-offset-4">link to
-                                            create
-                                            a new account</a></h1>
-                                    @endif
-                               
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                {{ $user->name }}
+                                            </p>
+                                            <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                Click image to select.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                                @endforeach
+                                @else
+                                <h1 class="col-span-2 text-sm text-secondary-500">User with '{{ $searchUsers }}' on
+                                    their name was not found. Check the spelling or Click this <a
+                                        href="{{ route('create-new-user') }}" target="_blank"
+                                        class="text-indigo-500 hover:underline hover:underline-offset-4">link to
+                                        create
+                                        a new account</a></h1>
+                                @endif
+
 
                             </div>
-                            <span class="col-span-2 mt-2 text-red-700 uppercase error" x-cloak x-show="showApplicantError==true">atleast 1(one) applicant is needed</span>
+                            <span class="col-span-2 mt-2 text-red-700 uppercase error" x-cloak
+                                x-show="showApplicantError==true">atleast 1(one) applicant is needed</span>
                         </div>
-                      
+
                     </div>
                 </div>
                 {{-- Sigs --}}
@@ -139,12 +210,16 @@
                         Signatory/Signatories
                     </label>
                     <div class="col-span-2 mt-1">
-                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500" x-cloak x-show="pickedSigs==true">
+                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500"
+                            x-cloak x-show="pickedSigs==true">
                             @if (count($sigsInfos)==0)
-                            <span class="col-span-5 p-3 text-lg tracking-widest text-white uppercase">{{ 'Atleast one(1) signatory is Needed.'}}<br>{{ 'try Searching Below.' }}</span>
+                            <span
+                                class="col-span-5 p-3 text-lg tracking-widest text-white uppercase">{{ 'Atleast one(1) signatory is Needed.'}}<br>{{ 'try Searching Below.' }}</span>
                             @else
                             @foreach ($sigsInfos as $key =>$sigInfo)
-                            <a href="#" class="flex items-center m-2 rounded-full shadow-md bg-primary-200 shadow-primary-300" id="{{ $key.rand(500,999)}}">
+                            <a href="#"
+                                class="flex items-center m-2 rounded-full shadow-md bg-primary-200 shadow-primary-300"
+                                id="{{ $key.rand(500,999)}}">
                                 <div class="flex items-center col-span-1">
                                     <div>
                                         @if ($sigInfo)
@@ -175,45 +250,47 @@
                             @endif
                         </div>
                         @error('users_id') <span class="mt-2 text-red-700 error">{{ $message }}</span> @enderror
-                        <div class="grid grid-cols-2 grid-rows-1" >
+                        <div class="grid grid-cols-2 grid-rows-1">
                             <p class="text-gray-700 text-md">Search for signatory here</p>
                             <input type="text" id="signame"
                                 class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
                                 wire:model.debounce.500ms="searchSigs">
                             <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searchedSigs">
-                               
-                                    @if(count($sigs)>0)
-                                    @foreach ($sigs as $user)
 
-                                    <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
-                                        x-on:click="$wire.setSignatory({{ $user->id }})">
-                                        <div class="flex items-center col-span-2">
-                                            <div>
-                                                {{-- gab --}}
-                                                <img class="inline-block w-10 h-10 rounded-full"
-                                                    src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}"
-                                                    alt="">
-                                            </div>
-                                            <div class="ml-3">
-                                                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                                                    {{ $user->name }}
-                                                </p>
-                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                                                    Click image to select.
-                                                </p>
-                                            </div>
+                                @if(count($sigs)>0)
+                                @foreach ($sigs as $user)
+
+                                <a class="p-2 m-1 rounded-lg hover:cursor-pointer hover:bg-opacity-75 hover:bg-primary-300 group"
+                                    x-on:click="$wire.setSignatory({{ $user->id }})">
+                                    <div class="flex items-center col-span-2">
+                                        <div>
+                                            {{-- gab --}}
+                                            <img class="inline-block w-10 h-10 rounded-full"
+                                                src="{{$user->avatar != null ? asset($user->avatar) : asset($user->profile_photo_url)}}"
+                                                alt="">
                                         </div>
-                                    </a>
-                                    @endforeach
-                                    @else
-                                    <h1 class="col-span-2 text-sm text-secondary-500">Signatory with '{{ $searchSigs }}' on their name was not found. Check the spelling or contact support.
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                {{ $user->name }}
+                                            </p>
+                                            <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                Click image to select.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                                @endforeach
+                                @else
+                                <h1 class="col-span-2 text-sm text-secondary-500">Signatory with '{{ $searchSigs }}' on
+                                    their name was not found. Check the spelling or contact support.
                                     @endif
-                               
+
 
                             </div>
-                            <span class="col-span-2 mt-2 text-red-700 uppercase error" x-cloak x-show="showSignatoryError==true">atleast 1(one) signatory is needed</span>
+                            <span class="col-span-2 mt-2 text-red-700 uppercase error" x-cloak
+                                x-show="showSignatoryError==true">atleast 1(one) signatory is needed</span>
                         </div>
-                      
+
                     </div>
                 </div>
             </div>

@@ -36,6 +36,7 @@ public $showError = false;
     public $isAdmin=false;
     public $isAssigned=false;
 
+    
     public $searchPending="";
     public $searchPersonal="";
     public $searchTo="";
