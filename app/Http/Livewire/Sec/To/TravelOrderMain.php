@@ -98,8 +98,7 @@ class TravelOrderMain extends Component
  //lifecycle hooks
 
  public function updated($name,$value){
-
-
+     
      if ($this->travel_draft_made == false) {
          $this->travel_order = new TravelOrder;
          $this->isSaved = "Saving changes as draft";
@@ -239,6 +238,11 @@ class TravelOrderMain extends Component
        }else{
         $this->showApplicantError = $this->showSignatoryError = true;
        }
+    }
+
+    public function changeDate(){
+        $this->date_from = $this->dateoftravelfrom;
+        $this->date_to = $this->dateoftravelto;  
     }
 
     public function save_official_time(){

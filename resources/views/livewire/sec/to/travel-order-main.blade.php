@@ -322,7 +322,7 @@
                                 class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
                                 From
                             </label>
-                            <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom"
+                            <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom" wire:change="changeDate"
                                 name="dateoftravelfrom"
                                 min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-fit focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
@@ -332,7 +332,7 @@
                                 class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
                                 To
                             </label>
-                            <input type="date" id="dateoftravelto" wire:model="dateoftravelto" name="dateoftravelto"
+                            <input type="date" id="dateoftravelto" wire:model="dateoftravelto" name="dateoftravelto" wire:change="changeDate"
                                 min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-md focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
@@ -459,7 +459,7 @@
                         class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                         <label for="date_from"
                             class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2 ">From</label>
-                        <input wire:model="date_from" type="date"
+                        <input wire:model="date_from" type="date" disabled
                             min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                             name="date_from" id="date_from"
                             class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
@@ -471,7 +471,7 @@
                         class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                         <label for="date_to"
                             class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2">To</label>
-                        <input wire:model="date_to" type="date"
+                        <input wire:model="date_to" type="date" disabled
                             min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                             name="date_to" id="date_to"
                             class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
