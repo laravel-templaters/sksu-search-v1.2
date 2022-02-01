@@ -21,6 +21,8 @@ use App\Notifications\TravelOrderSaved;
 class TravelOrderMain extends Component
 {
 
+    public $travel_order;
+    public $travel_draft_made=false;
     public $showApplicantError=false;
     public $showSignatoryError=false;
     public $toType="offtime";
@@ -89,6 +91,14 @@ class TravelOrderMain extends Component
         "dinner" => "",
         "lodging" => "",
  ],];
+
+
+ //lifecycle hooks
+
+ public function updated($name,$value){
+ }
+
+
 
     public function render()
     {
@@ -206,28 +216,27 @@ class TravelOrderMain extends Component
     }
 
     public function save_official_time(){
-        $reg = Region::where("region_code", "=",  $this->region_codes)->first();
-        $prov = Province::where("province_code", "=",  $this->province_codes)->first();
-        $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
-                $travel_order = new TravelOrder;
-                $travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
-                $travel_order->purpose = $this->purpose;
-                $travel_order->date_of_travel_from = $this->dateoftravelfrom;
-                $travel_order->date_of_travel_to = $this->dateoftravelto;
-                $travel_order->philippine_regions_id =  $reg['id'];
-                $travel_order->philippine_provinces_id = $prov['id'];
-                $travel_order->philippine_cities_id = $cit['id'];
-                $travel_order->others =  isset($this->others) ? $this->others : "";
-                $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
-                $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
-                $travel_order->total = $this->finalTotal_raw;
-                $travel_order->dv_type_sorter_id = "1"; 
-                $travel_order->dte_id =  $reg['id'];
-                $travel_order->to_type =  $this->toType;
-                $travel_order->isDraft =false;
-                $travel_order->save(); 
-
-                $this->saveApplicants($travel_order->id);
+                $reg = Region::where("region_code", "=",  $this->region_codes)->first();
+                $prov = Province::where("province_code", "=",  $this->province_codes)->first();
+                $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
+                $this->travel_order = new TravelOrder;
+                $this->travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
+                $this->travel_order->purpose = $this->purpose;
+                $this->travel_order->date_of_travel_from = $this->dateoftravelfrom;
+                $this->travel_order->date_of_travel_to = $this->dateoftravelto;
+                $this->travel_order->philippine_regions_id =  $reg['id'];
+                $this->travel_order->philippine_provinces_id = $prov['id'];
+                $this->travel_order->philippine_cities_id = $cit['id'];
+                $this->travel_order->others =  isset($this->others) ? $this->others : "";
+                $this->travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+                $this->travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+                $this->travel_order->total = $this->finalTotal_raw;
+                $this->travel_order->dv_type_sorter_id = "1"; 
+                $this->travel_order->dte_id =  $reg['id'];
+                $this->travel_order->to_type =  $this->toType;
+                $this->travel_order->isDraft =false;
+                $this->ravel_order->save();
+                $this->saveApplicants($this->travel_order->id);
                 
          
     }
@@ -247,25 +256,25 @@ class TravelOrderMain extends Component
             if (isset($this->finalTotal) && $this->finalTotal != 0) {
 
                 if ($this->toValidated == true && $this->iteneraryValidated == true) {
-                    $travel_order = new TravelOrder;
-                    $travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
-                    $travel_order->purpose = $this->purpose;
-                    $travel_order->date_of_travel_from = $this->dateoftravelfrom;
-                    $travel_order->date_of_travel_to = $this->dateoftravelto;
-                    $travel_order->philippine_regions_id =  $reg['id'];
-                    $travel_order->philippine_provinces_id = $prov['id'];
-                    $travel_order->philippine_cities_id = $cit['id'];
-                    $travel_order->others =  isset($this->others) ? $this->others : "";
-                    $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
-                    $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
-                    $travel_order->total = $this->finalTotal_raw;
-                    $travel_order->date_range = $date_string;
-                    $travel_order->dv_type_sorter_id = "1"; 
-                    $travel_order->dte_id =  $reg['id'];
-                    $travel_order->to_type =  $this->toType;
-                    $travel_order->isDraft =false;
-                    $travel_order->save();  
-                    $this->emit('storeItenerary',$travel_order->id);
+                    $this->travel_order = new TravelOrder;
+                    $this->travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
+                    $this->travel_order->purpose = $this->purpose;
+                    $this->travel_order->date_of_travel_from = $this->dateoftravelfrom;
+                    $this->travel_order->date_of_travel_to = $this->dateoftravelto;
+                    $this->travel_order->philippine_regions_id =  $reg['id'];
+                    $this->travel_order->philippine_provinces_id = $prov['id'];
+                    $this->travel_order->philippine_cities_id = $cit['id'];
+                    $this->travel_order->others =  isset($this->others) ? $this->others : "";
+                    $this->travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+                    $this->travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+                    $this->travel_order->total = $this->finalTotal_raw;
+                    $this->travel_order->date_range = $date_string;
+                    $this->travel_order->dv_type_sorter_id = "1"; 
+                    $this->travel_order->dte_id =  $reg['id'];
+                    $this->travel_order->to_type =  $this->toType;
+                    $this->travel_order->isDraft =false;
+                    $this->travel_order->save();  
+                    $this->emit('storeItenerary',$this->travel_order->id);
                     
                    
                 }else{
@@ -276,25 +285,24 @@ class TravelOrderMain extends Component
             }
 
         }else{
-                            
-            $travel_order = new TravelOrder;
-            $travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
-            $travel_order->purpose = $this->purpose;
-            $travel_order->date_of_travel_from = $this->dateoftravelfrom;
-            $travel_order->date_of_travel_to = $this->dateoftravelto;
-            $travel_order->philippine_regions_id =  $reg['id'];
-            $travel_order->philippine_provinces_id = $prov['id'];
-            $travel_order->philippine_cities_id = $cit['id'];
-            $travel_order->others =  isset($this->others) ? $this->others : "";
-            $travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
-            $travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
-            $travel_order->total = $this->finalTotal_raw;
-            $travel_order->isDraft =false;
-            $travel_order->dv_type_sorter_id = "1"; 
-            $travel_order->dte_id =  $reg['id'];
-            $travel_order->to_type =  $this->toType;
-            $travel_order->save();  
-            $this->saveApplicants($travel_order->id);
+
+            $this->travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
+            $this->travel_order->purpose = $this->purpose;
+            $this->travel_order->date_of_travel_from = $this->dateoftravelfrom;
+            $this->travel_order->date_of_travel_to = $this->dateoftravelto;
+            $this->travel_order->philippine_regions_id =  $reg['id'];
+            $this->travel_order->philippine_provinces_id = $prov['id'];
+            $this->travel_order->philippine_cities_id = $cit['id'];
+            $this->travel_order->others =  isset($this->others) ? $this->others : "";
+            $this->travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+            $this->travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+            $this->travel_order->total = $this->finalTotal_raw;
+            $this->travel_order->isDraft =false;
+            $this->travel_order->dv_type_sorter_id = "1"; 
+            $this->travel_order->dte_id =  $reg['id'];
+            $this->travel_order->to_type =  $this->toType;
+            $this->travel_order->save();  
+            $this->saveApplicants($this->travel_order->id);
 
         }
 
@@ -316,7 +324,6 @@ class TravelOrderMain extends Component
         $this->i = $i;
   
             array_push($this->input ,$i);
-        
        
     }
     public function removemain($i)
@@ -475,15 +482,31 @@ class TravelOrderMain extends Component
 
 
     public function saveApplicants($toID){
-        
-        foreach($this->applicant_ids as $value){
-            $toApplicants = new TravelOrderApplicant();
-            $toApplicants->travel_order_id = $toID;
-            $toApplicants->user_id = $value;
-            $toApplicants->save();
+        $applicantsFromTbl = TravelOrderApplicant::searchexactly('travel_order_id',$toID)->delete();
+
+        if (count($applicantsFromTbl)>0) {
+            foreach($this->applicant_ids as $value){
+
+                if (in_array($value,$applicantsFromTbl)) {
+
+                }else{
+                    $toApplicants = new TravelOrderApplicant();
+                    $toApplicants->travel_order_id = $toID;
+                    $toApplicants->user_id = $value;
+                    $toApplicants->save();
+                }
+               
+            }
+            $this->saveSignatories($toID);
+        }else{
+            foreach($this->applicant_ids as $value){
+                $toApplicants = new TravelOrderApplicant();
+                $toApplicants->travel_order_id = $toID;
+                $toApplicants->user_id = $value;
+                $toApplicants->save();
+            }
+            $this->saveSignatories($toID);
         }
-        $this->saveSignatories($toID);
-       
     }
     public function saveSignatories($toID){
         foreach($this->signatory_ids as $value){

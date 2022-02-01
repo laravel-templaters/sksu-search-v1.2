@@ -147,6 +147,12 @@
                         x-bind:class="active == 'travelorders' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
                         Travel Orders
                     </a>
+                    
+                    <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
+                    x-on:click="active = 'travelordersdraft';"
+                    x-bind:class="active == 'travelordersdraft' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
+                    Travel Orders (Draft)
+                    </a>
 
 
                     @if ($isHeadOrAdmin || $isAssigned)
@@ -662,6 +668,105 @@
                     </li>
                     @endif 
                     @endif--}}
+                    @endforeach
+                    @endif
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8" id="travelOrderPanel" x-cloak x-show="active == 'travelordersdraft'"
+        x-transition:enter="transition ease-in-out delay-700 duration-500 " x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100">
+        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-primary-200">
+            <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
+                <div class="mt-2 ml-4">
+                    <h3 class="text-lg font-medium leading-6 tracking-wider text-primary-700">
+                        Travel Orders
+                    </h3>
+                </div>
+                <div class="flex-shrink-0 mt-2 ml-4">
+                    <input type="text" id="tosearch" placeholder="Enter keyword or tracking code"
+                        wire:model.debounce.300ms="searchTo"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400">
+                </div>
+            </div>
+            <div class="px-4 py-5 sm:p-6">
+                <ul role="list" class="divide-y divide-secondary-text">
+                    @if(count($travel_orders_draft)==0)
+                    <li class="rounded-lg">
+                        <a class="block rounded-lg ">
+                            <div class="px-4 py-4 mx-auto text-center sm:px-6">
+                                <span class="text-sm tracking-widest text-center text-gray-600 uppercase">No Travel Orders To Display</span>
+                            </div>
+                        </a>
+                    </li>
+                    
+                    @else
+                   
+                    @foreach ($travel_orders_draft as $travel_order)
+                    <li class="rounded-lg">
+                        <a class="block rounded-lg hover:bg-gray-50">
+                            <div class="px-4 py-4 sm:px-6">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium truncate text-primary-600">
+                                        {{$travel_order->tracking_code}} -
+                                        <span class="uppercase">{{$travel_order->purpose}}</span>
+                                    </p>
+                                    <div class="flex flex-shrink-0 ml-2">
+                                        <a href="{{ route('view-to',$travel_order->id) }}" target="_blank"
+                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                            View Travel Order
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="mt-2 sm:flex sm:justify-between">
+                                    <div class="sm:flex">
+                                        <p class="flex items-center text-sm text-gray-500">
+                                            <!-- Heroicon name: solid/users -->
+                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor" aria-hidden="true">
+                                                <path
+                                                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                                            </svg>
+                                            {{-- name dapat dri --}}
+                                        </p>
+                                        <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                            <!-- Heroicon name: solid/location-marker -->
+                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            @if ($travel_order->others!="")
+                                            <span class="truncate">{{$travel_order->others}},{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            @else
+                                            <span class="truncate">{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            @endif
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
+                                        <!-- Heroicon name: solid/calendar -->
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <p>
+                                            Created 
+                                            <time datetime="2020-01-07">{{$travel_order->created_at->diffForHumans()}}</time>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     @endforeach
                     @endif
                 </ul>

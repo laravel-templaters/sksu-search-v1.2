@@ -16,11 +16,11 @@ class CreateTravelOrdersTable extends Migration
         Schema::create('travel_orders', function (Blueprint $table) {
             $table->id();
             $table ->string('tracking_code')->nullable();
-            $table->string('purpose');
+            $table->string('purpose')->nullable();
             $table->string('place_to_go');
-            $table->string('has_registration');
-            $table->foreignId('dv_type_sorter_id');
-            $table->foreignId('dte_id');
+            $table->string('has_registration')->nullable();
+            $table->foreignId('dv_type_sorter_id')->nullable();
+            $table->foreignId('dte_id')->nullable();
             $table->boolean('isDraft')->default(true);
             $table->timestamps();
         });

@@ -1052,6 +1052,9 @@ select {
 .col-span-2 {
   grid-column: span 2 / span 2;
 }
+.col-span-5 {
+  grid-column: span 5 / span 5;
+}
 .col-span-4 {
   grid-column: span 4 / span 4;
 }
@@ -1060,9 +1063,6 @@ select {
 }
 .col-span-8 {
   grid-column: span 8 / span 8;
-}
-.col-span-5 {
-  grid-column: span 5 / span 5;
 }
 .col-span-7 {
   grid-column: span 7 / span 7;
@@ -1197,10 +1197,6 @@ select {
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
-}
-.mx-3 {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -1406,9 +1402,6 @@ select {
 .h-auto {
   height: auto;
 }
-.h-11 {
-  height: 2.75rem;
-}
 .max-h-screen {
   max-height: 100vh;
 }
@@ -1504,9 +1497,6 @@ select {
 }
 .w-24 {
   width: 6rem;
-}
-.w-11 {
-  width: 2.75rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1675,11 +1665,11 @@ select {
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-9 {
   grid-template-columns: repeat(9, minmax(0, 1fr));
@@ -1831,6 +1821,11 @@ select {
   margin-right: calc(1.75rem * var(--tw-space-x-reverse));
   margin-left: calc(1.75rem * calc(1 - var(--tw-space-x-reverse)));
 }
+.space-y-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1840,11 +1835,6 @@ select {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
-}
-.space-y-5 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
@@ -2242,14 +2232,6 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
-.bg-primary-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(61 133 51 / var(--tw-bg-opacity));
-}
-.bg-primary-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(206 224 204 / var(--tw-bg-opacity));
-}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -2532,14 +2514,11 @@ select {
 .pl-5 {
   padding-left: 1.25rem;
 }
-.pt-28 {
-  padding-top: 7rem;
+.pt-16 {
+  padding-top: 4rem;
 }
 .pt-3 {
   padding-top: 0.75rem;
-}
-.pt-16 {
-  padding-top: 4rem;
 }
 .pr-5 {
   padding-right: 1.25rem;
@@ -2562,11 +2541,11 @@ select {
 .pl-4 {
   padding-left: 1rem;
 }
-.pt-12 {
-  padding-top: 3rem;
-}
 .pb-6 {
   padding-bottom: 1.5rem;
+}
+.pt-28 {
+  padding-top: 7rem;
 }
 .text-left {
   text-align: left;
@@ -2846,9 +2825,9 @@ select {
 .text-current {
   color: currentColor;
 }
-.text-blue-500 {
+.text-blue-700 {
   --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
+  color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 .text-indigo-400 {
   --tw-text-opacity: 1;
@@ -2861,10 +2840,6 @@ select {
 .text-indigo-300 {
   --tw-text-opacity: 1;
   color: rgb(165 180 252 / var(--tw-text-opacity));
-}
-.text-blue-700 {
-  --tw-text-opacity: 1;
-  color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 .text-opacity-90 {
   --tw-text-opacity: 0.9;
@@ -3637,16 +3612,8 @@ select {
     padding-top: 1.25rem;
   }
 
-  .print\:pt-8 {
-    padding-top: 2rem;
-  }
-
   .print\:pt-10 {
     padding-top: 2.5rem;
-  }
-
-  .print\:pt-6 {
-    padding-top: 1.5rem;
   }
 
   .print\:pt-1 {

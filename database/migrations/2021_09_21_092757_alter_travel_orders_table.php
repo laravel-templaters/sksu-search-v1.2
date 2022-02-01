@@ -17,10 +17,10 @@ class AlterTravelOrdersTable extends Migration
             $table->dropColumn('place_to_go');    
             $table->string('date_of_travel_from')->after('purpose')->nullable();
             $table->string('date_of_travel_to')->after('date_of_travel_from')->nullable();
-            $table->integer('philippine_regions_id')->after('date_of_travel_to');
-            $table->integer('philippine_provinces_id')->after('philippine_regions_id');
-            $table->integer('philippine_cities_id')->after('philippine_provinces_id');
-            $table->string('others')->after('philippine_cities_id');
+            $table->integer('philippine_regions_id')->after('date_of_travel_to')->nullable();
+            $table->integer('philippine_provinces_id')->after('philippine_regions_id')->nullable();
+            $table->integer('philippine_cities_id')->after('philippine_provinces_id')->nullable();
+            $table->string('others')->after('philippine_cities_id')->nullable();
             $table->string('date_range')->after('philippine_cities_id')->nullable();
             $table->string('to_type')->after('dte_id')->nullable();
         });
