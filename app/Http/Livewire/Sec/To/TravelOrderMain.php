@@ -20,7 +20,9 @@ use App\Notifications\TravelOrderSaved;
 
 class TravelOrderMain extends Component
 {
-
+    public $showBanner =false;
+    public $isDraft= true;
+    public $isSaved ="";
     public $travel_order;
     public $travel_draft_made=false;
     public $showApplicantError=false;
@@ -96,6 +98,28 @@ class TravelOrderMain extends Component
  //lifecycle hooks
 
  public function updated($name,$value){
+     if ($this->travel_draft_made == false) {
+         $this->travel_order = new TravelOrder;
+         $this->isSaved = "Saving changes as draft";
+         if($this->toType == "offtime")
+        {
+            $this->save_draft_official_time();
+        }else if($this->toType == "offtravel")
+        {
+           $this->save_draft_official_time();
+        }
+     }else{
+        // $this->isSaved =$this->travel_order->id;
+        $this->travel_order = TravelOrder::find($this->travel_order->id);
+        //$this->isSaved =$this->travel_order->id;
+        if($this->toType == "offtime")
+        {
+            $this->save_draft_official_time();
+        }else if($this->toType == "offtravel")
+        {
+           $this->save_draft_official_time();
+        }
+     }
  }
 
 
@@ -219,7 +243,9 @@ class TravelOrderMain extends Component
                 $reg = Region::where("region_code", "=",  $this->region_codes)->first();
                 $prov = Province::where("province_code", "=",  $this->province_codes)->first();
                 $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
+               if ($this->travel_draft_made == false) {
                 $this->travel_order = new TravelOrder;
+               }
                 $this->travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
                 $this->travel_order->purpose = $this->purpose;
                 $this->travel_order->date_of_travel_from = $this->dateoftravelfrom;
@@ -235,11 +261,37 @@ class TravelOrderMain extends Component
                 $this->travel_order->dte_id =  $reg['id'];
                 $this->travel_order->to_type =  $this->toType;
                 $this->travel_order->isDraft =false;
-                $this->ravel_order->save();
+                $this->travel_order->save();
+                $this->isDraft = false;
                 $this->saveApplicants($this->travel_order->id);
                 
          
     }
+
+    public function save_draft_official_time(){
+        $reg = Region::where("region_code", "=",  $this->region_codes)->first();
+        $prov = Province::where("province_code", "=",  $this->province_codes)->first();
+        $cit = City::where("city_municipality_code", "=",  $this->city_codes)->first();
+        $this->travel_order->tracking_code ='TO'.Carbon::now()->format('YmdHis').auth()->user()->id.auth()->user()->department->campus->campus_shortCode;
+        $this->travel_order->purpose = $this->purpose == '' ? '': $this->purpose;
+        $this->travel_order->date_of_travel_from = $this->dateoftravelfrom ==''?null:$this->dateoftravelfrom;
+        $this->travel_order->date_of_travel_to = $this->dateoftravelto ==''?null:$this->dateoftravelto;
+        $this->travel_order->philippine_regions_id = isset( $reg['id']) ?  $reg['id'] : 0;
+        $this->travel_order->philippine_provinces_id =isset(  $prov['id']) ?   $prov['id'] : 0;
+        $this->travel_order->philippine_cities_id = isset(  $cit['id']) ?   $cit['id'] : 9;
+        $this->travel_order->others =  isset($this->others) ? $this->others : "";
+        $this->travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+        $this->travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
+        $this->travel_order->total = $this->finalTotal_raw;
+        $this->travel_order->dv_type_sorter_id = "1"; 
+        $this->travel_order->dte_id =  isset( $reg['id']) ?  $reg['id'] : 0;
+        $this->travel_order->to_type =  $this->toType;
+        $this->travel_order->isDraft =true;
+        $this->travel_order->save();
+        $this->isDraft = true;
+        $this->saveApplicants($this->travel_order->id);      
+ 
+}
 
     public function save_official_travel(){
         $reg = Region::where("region_code", "=",  $this->region_codes)->first();
@@ -458,11 +510,13 @@ class TravelOrderMain extends Component
         $this->applicant_ids[] = $uID;
         $this->showApplicantError=false;
         $this->applicant_ids = array_unique($this->applicant_ids);
+        $this->updated("searchSigs","");
         array_values($this->applicant_ids);
     }
     public function unSetUser($id){
         $index = array_search($id, $this->applicant_ids);
         unset($this->applicant_ids[$index]);
+        $this->updated("searchSigs","");
         array_values($this->applicant_ids);
     }
     public function setSignatory($uID){
@@ -472,11 +526,13 @@ class TravelOrderMain extends Component
         $this->signatory_ids[] = $uID;
         $this->signatory_ids = array_unique($this->signatory_ids);
         $this->showSignatoryError=false;
+        $this->updated("searchSigs","");
         array_values($this->signatory_ids);
     }
     public function unSetSignatory($id){
         $index = array_search($id, $this->signatory_ids);
         unset($this->signatory_ids[$index]);
+        $this->updated("searchSigs","");
         array_values($this->signatory_ids);
     }
 
@@ -484,31 +540,16 @@ class TravelOrderMain extends Component
     public function saveApplicants($toID){
         $applicantsFromTbl = TravelOrderApplicant::searchexactly('travel_order_id',$toID)->delete();
 
-        if (count($applicantsFromTbl)>0) {
-            foreach($this->applicant_ids as $value){
-
-                if (in_array($value,$applicantsFromTbl)) {
-
-                }else{
-                    $toApplicants = new TravelOrderApplicant();
-                    $toApplicants->travel_order_id = $toID;
-                    $toApplicants->user_id = $value;
-                    $toApplicants->save();
-                }
-               
-            }
-            $this->saveSignatories($toID);
-        }else{
-            foreach($this->applicant_ids as $value){
-                $toApplicants = new TravelOrderApplicant();
-                $toApplicants->travel_order_id = $toID;
-                $toApplicants->user_id = $value;
-                $toApplicants->save();
-            }
-            $this->saveSignatories($toID);
+        foreach($this->applicant_ids as $value){
+            $toApplicants = new TravelOrderApplicant();
+            $toApplicants->travel_order_id = $toID;
+            $toApplicants->user_id = $value;
+            $toApplicants->save();
         }
+        $this->saveSignatories($toID);
     }
     public function saveSignatories($toID){
+        $applicantsFromTbl = TravelOrderSignatory::searchexactly('travel_order_id',$toID)->delete();
         foreach($this->signatory_ids as $value){
             $toSignatories = new TravelOrderSignatory();
             $toSignatories->travel_order_id = $toID;
@@ -516,8 +557,12 @@ class TravelOrderMain extends Component
             $toSignatories->approval_status = "pending";
             $toSignatories->save();
         }
-
-        Sleep(2);
-        return redirect()->route('redirect');
+        if ($this->isDraft == false) {
+        $this->showBanner =true;
+        
+        }else{
+            $this->isSaved = "Changes Saved as Draft";
+            $this->travel_draft_made = true;
+        }
     }
 }

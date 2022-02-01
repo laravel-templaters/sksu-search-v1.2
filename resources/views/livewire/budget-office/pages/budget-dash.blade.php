@@ -694,6 +694,7 @@
             </div>
             <div class="px-4 py-5 sm:p-6">
                 <ul role="list" class="divide-y divide-secondary-text">
+                    @if(isset($travel_orders_draft))
                     @if(count($travel_orders_draft)==0)
                     <li class="rounded-lg">
                         <a class="block rounded-lg ">
@@ -768,6 +769,15 @@
                         </a>
                     </li>
                     @endforeach
+                    @endif
+                    @else
+                    <li class="rounded-lg">
+                        <a class="block rounded-lg ">
+                            <div class="px-4 py-4 mx-auto text-center sm:px-6">
+                                <span class="text-sm tracking-widest text-center text-gray-600 uppercase">No Travel Orders To Display</span>
+                            </div>
+                        </a>
+                    </li>
                     @endif
                 </ul>
 
