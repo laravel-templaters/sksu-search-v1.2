@@ -14,6 +14,14 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
+        //TACURONG CAMPUS
+        DB::table('campuses')->insert([
+            'campus_name'=> 'TACURONG',
+            'campus_address'=> 'EJC Montilla, Tacurong City, 9800, Philippines',
+            'campus_shortCode'=> 'ACSC',
+        ]);
+
+
         //ACCESS CAMPUS
         DB::table('campuses')->insert([
             'campus_name'=> 'ACCESS',
@@ -54,22 +62,26 @@ class DepartmentSeeder extends Seeder
                     DB::table('departments')->insert([
                         'department_name'=> 'Academic Affairs',
                         'department_short_code'=>'acc-acaf',
+                        'admin_user_id'=>'1',
                         'campus_id'=>'1',
                         ]);//6
                     DB::table('departments')->insert([
                         'department_name'=> 'Research Development and Extension Services',
                         'department_short_code'=>'acc-rdes',
+                        'admin_user_id'=>'2',
                         'campus_id'=>'1',
                         ]);//7
                     DB::table('departments')->insert([
                         'department_name'=> 'Finance, Administration and Resource Generation',
                         'department_short_code'=>'acc-rdes',
+                        'admin_user_id'=>'50',
                         'campus_id'=>'1',
                         ]);//8 
                         
                     DB::table('departments')->insert([
-                        'department_name'=> 'Student Admission and Records Office',
+                        'department_name'=> 'Student Admission and Record Office',
                         'department_short_code'=>'acc-saro',
+                        'admin_user_id'=>'3',
                         'campus_id'=>'1',
                         ]);//9
 
