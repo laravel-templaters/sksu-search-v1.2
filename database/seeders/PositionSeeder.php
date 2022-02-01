@@ -20,7 +20,7 @@ class PositionSeeder extends Seeder
                 ['position_name' => 'Department Head'], //2
                 ['position_name' => 'Secretary'],//3
                 ['position_name' => 'Accountant'],//4
-                ['position_name' => 'President'],//5
+                ['position_name' => 'University President'],//5
                 ['position_name' => 'Campus Head'],//6
                 ['position_name' => 'Budget Officer'],//7
                 ['position_name' => 'President\'s Secretary'],//8
