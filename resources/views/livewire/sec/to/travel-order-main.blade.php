@@ -375,7 +375,7 @@
                     <h3 class="ml-1 text-sm text-gray-600 ">City / Municipality</h3>
                     <select wire:model="city_codes"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
-                        <option selected>--SELECT CITY/MUNICIPALITY--</option>
+                    <option selected>--SELECT CITY/MUNICIPALITY--</option>
                         @foreach ($cities as $city)
                         <option value="{{$city->city_municipality_code}}">
                             {{$city->city_municipality_description}}</option>
@@ -528,7 +528,7 @@
                     class="px-4 py-2 font-bold bg-white border border-gray-300 rounded-md shadow-sm text-md text-primary-bg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Cancel
                 </button>
-                <button type="button" wire:click.prevent="submit"
+                <button type="button" x-cloak x-show="show_Banner==false" wire:click.prevent="submit"
                     class="px-4 py-2 mx-2 font-bold border border-gray-300 rounded-md shadow-sm bg-primary-500 text-md text-secondary-text hover:bg-primary-300 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-700">
                     Save
                 </button>

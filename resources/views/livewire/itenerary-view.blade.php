@@ -156,9 +156,21 @@
 
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                <input wire:model.defer='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot"
+                                <select wire:model.defer='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot"
                                     id="input.{{$key}}.mot"
                                     class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    <option value="Tricycle">Tricycle</option>
+                                    <option value="Bus">Bus</option>
+                                    <option value="Taxi">Taxi</option>
+                                    <option value="Habal-habal">Habal-habal</option>
+                                    <option value="Sikad">Sikad</option>
+                                    <option value="Multicab">Multicab</option>
+                                    <option value="Jeepney">Jeepney</option>
+                                    <option value="Airplane">Airplane</option>
+                                    <option value="Van">Van</option>
+                                    <option value="Train">Train</option>
+                                    <option value="Grab">Grab</option>
+                                </select>
 
                                 @if(isset($input[intval($key)]['mot']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['mot']}}</h1>
