@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\TravelOrder;  
 use App\Models\Dte;
 use App\Models\Itenerary;
+use App\Models\IteneraryEntry;
 use App\Models\TravelOrderApplicant;
 use App\Models\TravelOrderSignatory;
 use Carbon\Carbon;
@@ -307,11 +308,16 @@ class TravelOrderMain extends Component
         $from_date="";
         $to_date="";
         if(isset($this->date_from)){
-            $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
+           
+            if($this->date_from != ""){
+                $from_date = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('F d, Y');
+               }
         } 
         
         if(isset($this->date_to)){
+           if($this->date_to != ""){
             $to_date = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('F d, Y');
+           }
         } 
         
         $date_string = $from_date ." - ".$to_date;
@@ -418,6 +424,8 @@ class TravelOrderMain extends Component
 
     public function generateDays()
     {
+        
+        
         $this->finalTotal = $this->subTotal= 0.0;
         if(is_null($this->date_from) || is_null($this->date_to))
         {
@@ -445,7 +453,9 @@ class TravelOrderMain extends Component
             }
             else{     
                 // dd( $this->per_diem);
-
+                $IteneraryIDs = Itenerary::where('travel_order_id','=',$this->travel_order->id)->get('id');
+                $delEntries = IteneraryEntry::whereIn('itenerary_id',$IteneraryIDs)->delete();
+                $deleteAll = Itenerary::where('travel_order_id','=',$this->travel_order->id)->delete();
                     $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
                     
                     $this->showDays = true;
@@ -556,10 +566,10 @@ class TravelOrderMain extends Component
 
 
     public function saveApplicants($toID){
-        $applicantsFromTbl = TravelOrderApplicant::searchexactly('travel_order_id',$toID)->delete();
+        $applicantsFromTbl = TravelOrderApplicant::where('travel_order_id','=',$toID)->delete();
 
         foreach($this->applicant_ids as $value){
-            $toApplicants = new TravelOrderApplicant();
+            $toApplicants = new TravelOrderApplicant;
             $toApplicants->travel_order_id = $toID;
             $toApplicants->user_id = $value;
             $toApplicants->save();
@@ -567,9 +577,9 @@ class TravelOrderMain extends Component
         $this->saveSignatories($toID);
     }
     public function saveSignatories($toID){
-        $applicantsFromTbl = TravelOrderSignatory::searchexactly('travel_order_id',$toID)->delete();
+        $applicantsFromTbl = TravelOrderSignatory::where('travel_order_id',"=",$toID)->delete();
         foreach($this->signatory_ids as $value){
-            $toSignatories = new TravelOrderSignatory();
+            $toSignatories = new TravelOrderSignatory;
             $toSignatories->travel_order_id = $toID;
             $toSignatories->user_id = $value;
             $toSignatories->approval_status = "pending";
@@ -580,8 +590,10 @@ class TravelOrderMain extends Component
         
         }else{
            if($this->toType=="offtravel"){
-            $deleteAllItenerary = Itenerary::searchexactly('travel_order_id',$toID)->delete();
-            $this->emit('storeIteneraryDraft',$toID);
+            //$deleteAllItenerary = Itenerary::where('travel_order_id','=',$toID)->delete();
+            if($this->showDays == true){
+                $this->emit('storeIteneraryDraft',$toID);
+            }
            }
             $this->travel_draft_made = true;
         }

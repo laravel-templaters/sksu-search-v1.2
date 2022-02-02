@@ -2,7 +2,6 @@
     @php
     $this->per_diem = $per_diem;
     @endphp
-
     <div class="flex flex-col" wire:init="generateDays">
 
         <div class="my-3 overflow-x-auto rounded-lg">
@@ -104,9 +103,9 @@
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                 {{-- <input type="text" class="min-h-full border-transparent min-w-24"> --}}
-                                <input wire:model.lazy='input.{{$key}}.place' type="text" name="input.{{$key}}.place"
+                                <input wire:model='input.{{$key}}.place' type="text" name="input.{{$key}}.place"
                                     id="input.{{$key}}.place"
-                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:key='{{ $loop->index.$this->input[intval($key)]['date'].'place' }}'>
                                 @if(isset($input[intval($key)]['place']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['place']}}</h1>
                                 <script>
@@ -119,9 +118,9 @@
                                 @enderror
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-center text-gray-900 break-all">
-                                <input wire:model.lazy='input.{{$key}}.dep_time' wire:change="validateTime({{$key}})"
+                                <input wire:model='input.{{$key}}.dep_time' wire:change="validateTime({{$key}})"
                                     type="time" name="input.{{$key}}.dep_time" id="input.{{$key}}.dep_time"
-                                    class="min-w-full min-h-full border-transparent">
+                                    class="min-w-full min-h-full border-transparent" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}dep_time'>
 
                                 @if(isset($input[intval($key)]['dep_time']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['dep_time']}}</h1>
@@ -138,9 +137,9 @@
 
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                <input wire:model.defer='input.{{$key}}.arr_time' wire:change="validateTime({{$key}})"
+                                <input wire:model='input.{{$key}}.arr_time' wire:change="validateTime({{$key}})"
                                     type="time" name="input.{{$key}}.arr_time" id="input.{{$key}}.arr_time"
-                                    class="min-w-full min-h-full border-transparent">
+                                    class="min-w-full min-h-full border-transparent" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}arr_time'>
 
                                 @if(isset($input[intval($key)]['arr_time']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['arr_time']}}</h1>
@@ -156,9 +155,9 @@
 
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                <select wire:model.defer='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot"
+                                <select wire:model='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot"
                                     id="input.{{$key}}.mot"
-                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}mot'>
                                     <option value="Tricycle">Tricycle</option>
                                     <option value="Bus">Bus</option>
                                     <option value="Taxi">Taxi</option>
@@ -184,10 +183,10 @@
                                 @enderror
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                <input wire:model.lazy='input.{{$key}}.trans_exp' type="number" min="0"
+                                <input wire:model='input.{{$key}}.trans_exp' type="number" min="0"
                                     name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp"
                                     class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm"
-                                    wire:leave="ComputeDiem({{$key}},'doesntmatter')">
+                                    wire:leave="ComputeDiem({{$key}},'doesntmatter')" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}trans_exp'>
                                 @if(isset($input[intval($key)]['trans_exp']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['trans_exp']}}</h1>
 
@@ -203,9 +202,9 @@
                             </td>
 
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                <input wire:model.lazy='input.{{$key}}.others' type="number" min="0"
+                                <input wire:model='input.{{$key}}.others' type="number" min="0"
                                     name="input.{{$key}}.others" id="input.{{$key}}.others"
-                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}others'>
 
                                 @if(isset($input[intval($key)]['others']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['others']}}</h1>
@@ -224,7 +223,7 @@
                                 <input wire:model='input.{{$key}}.per_diem' type="text" name="input.{{$key}}.per_diem"
                                     id="input.{{$key}}.per_diem"
                                     class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm"
-                                    value="" readonly>
+                                    value="" readonly wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}per_diem'>
 
                                 @if(isset($input[intval($key)]['per_diem']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['per_diem']}}</h1>
@@ -243,7 +242,7 @@
                                 <input wire:model='input.{{$key}}.breakfast' type="checkbox"
                                     name="input.{{$key}}.breakfast" id="input.{{$key}}.breakfast"
                                     class="w-4 h-4 mx-auto border-gray-300 rounded text-secondary-bg disable-btn focus:ring-primary-bg"
-                                    wire:click="ComputeDiem({{$key}},'breakfast')">
+                                    wire:click="ComputeDiem({{$key}},'breakfast')" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}breakfast'>
 
                                 @if(isset($input[intval($key)]['breakfast']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['breakfast']}}</h1>
@@ -259,7 +258,7 @@
                                 <input wire:model='input.{{$key}}.lunch' type="checkbox" name="input.{{$key}}.lunch"
                                     id="input.{{$key}}.lunch"
                                     class="w-4 h-4 border-gray-300 rounded text-secondary-bg focus:ring-primary-bg"
-                                    wire:click="ComputeDiem({{$key}},'lunch')">
+                                    wire:click="ComputeDiem({{$key}},'lunch')" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}lunch'>
 
                                 @if(isset($input[intval($key)]['lunch']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['lunch']}}</h1>
@@ -275,7 +274,7 @@
                                 <input wire:model='input.{{$key}}.dinner' type="checkbox" name="input.{{$key}}.dinner"
                                     id="input.{{$key}}.dinner"
                                     class="w-4 h-4 border-gray-300 rounded text-secondary-bg focus:ring-primary-bg"
-                                    wire:click="ComputeDiem({{$key}},'dinner')">
+                                    wire:click="ComputeDiem({{$key}},'dinner')" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}dinner'>
 
                                 @if(isset($input[intval($key)]['dinner']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['dinner']}}</h1>
@@ -290,7 +289,7 @@
                                 <input wire:model='input.{{$key}}.lodging' type="checkbox"
                                     name="input.{{$key}}.lodging"" id=" input.{{$key}}.lodging""
                                     class="w-4 h-4 border-gray-300 rounded text-secondary-bg focus:ring-primary-bg"
-                                    wire:click="ComputeDiem({{$key}},'lodging')">
+                                    wire:click="ComputeDiem({{$key}},'lodging')" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}lodging'>
 
                                 @if(isset($input[intval($key)]['lodging']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['lodging']}}</h1>
@@ -306,7 +305,7 @@
                                 <input wire:model='input.{{$key}}.total' type="text" name="input.{{$key}}.total"
                                     id="input.{{$key}}.total"
                                     class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm"
-                                    readonly>
+                                    readonly wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}total'>
 
                                 @if(isset($input[intval($key)]['total']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['total']}}</h1>
@@ -333,7 +332,7 @@
                                 {{-- <input type="text" class="min-h-full border-transparent min-w-24"> --}}
                                 <input wire:model.debounce='input.{{$key}}.place' type="text"
                                     name="input.{{$key}}.place" id="input.{{$key}}.place"
-                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}'place>
                                 @if(isset($input[intval($key)]['place']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['place']}}</h1>
                                 <script>
@@ -348,7 +347,7 @@
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
                                 <input wire:model.debounce='input.{{$key}}.dep_time'
                                     wire:change="validateTime({{$key}})" type="time" name="input.{{$key}}.dep_time"
-                                    id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent">
+                                    id="input.{{$key}}.dep_time" class="min-w-full min-h-full border-transparent" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}dep_time'>
 
                                 @if(isset($input[intval($key)]['dep_time']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['dep_time']}}</h1>
@@ -364,9 +363,9 @@
 
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                <input wire:model.defer='input.{{$key}}.arr_time' type="time"
+                                <input wire:model='input.{{$key}}.arr_time' type="time"
                                     wire:change="validateTime({{$key}})" name="input.{{$key}}.arr_time"
-                                    id="input.{{$key}}.arr_time" class="min-w-full min-h-full border-transparent">
+                                    id="input.{{$key}}.arr_time" class="min-w-full min-h-full border-transparent" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}arr_time'>
 
                                 @if(isset($input[intval($key)]['arr_time']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['arr_time']}}</h1>
@@ -382,10 +381,21 @@
 
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                <input wire:model.defer='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot"
-                                    id="input.{{$key}}.mot"
-                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
-
+                                <select wire:model='input.{{$key}}.mot' type="text" name="input.{{$key}}.mot"
+                                id="input.{{$key}}.mot"
+                                class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}mot'>
+                                <option value="Tricycle">Tricycle</option>
+                                <option value="Bus">Bus</option>
+                                <option value="Taxi">Taxi</option>
+                                <option value="Habal-habal">Habal-habal</option>
+                                <option value="Sikad">Sikad</option>
+                                <option value="Multicab">Multicab</option>
+                                <option value="Jeepney">Jeepney</option>
+                                <option value="Airplane">Airplane</option>
+                                <option value="Van">Van</option>
+                                <option value="Train">Train</option>
+                                <option value="Grab">Grab</option>
+                            </select>
                                 @if(isset($input[intval($key)]['mot']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['mot']}}</h1>
                                 <script>
@@ -396,7 +406,7 @@
 
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 break-all ">
-                                <input wire:model.lazy='input.{{$key}}.trans_exp' type="number" min="0"
+                                <input wire:model='input.{{$key}}.trans_exp' type="number" min="0"
                                     name="input.{{$key}}.trans_exp" id="input.{{$key}}.trans_exp"
                                     class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm"
                                     wire:leave="ComputeDiem({{$key}},'doesntmatter')">
@@ -415,9 +425,9 @@
                             </td>
 
                             <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                <input wire:model.lazy='input.{{$key}}.others' type="number" min="0"
+                                <input wire:model='input.{{$key}}.others' type="number" min="0"
                                     name="input.{{$key}}.others" id="input.{{$key}}.others"
-                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm">
+                                    class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm" wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}others'>
 
                                 @if(isset($input[intval($key)]['others']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['others']}}</h1>
@@ -446,7 +456,7 @@
                                 <input wire:model='input.{{$key}}.total' type="text" name="input.{{$key}}.total"
                                     id="input.{{$key}}.total"
                                     class="block w-24 border-0 border-b border-transparent focus:border-indigo-600 focus:ring-0 sm:text-sm"
-                                    readonly>
+                                    readonly wire:key='{{ $loop->index.$this->input[intval($key)]['date'] }}total'>
 
                                 @if(isset($input[intval($key)]['total']))
                                 <h1 class="" style="display:none;">{{$input[intval($key)]['total']}}</h1>

@@ -55,6 +55,8 @@ class IteneraryView extends Component
 //hooks
     public function updated($name,$value){
         $this->emit('childUpdated',$name,$value);
+        $temp=explode('.',$name);
+        $this->ComputeDiem($temp[1],'notimportant');
     }
 
     public function mount($gen, $per_diem)
@@ -424,7 +426,7 @@ class IteneraryView extends Component
 
     public function storeDraft($toID){
         
-        $deleteAllEntries = IteneraryEntry::searchexactly('itenerary_id',$this->itenerary->id)->delete();
+      //  $deleteAllEntries = IteneraryEntry::where('itenerary_id','=',$this->itenerary->id)->delete();
         $this->itenerary->is_breakfast_covered = $this->input[0]['breakfast'] == 1 ? '1' : '0';
         $this->itenerary->is_lunch_covered =  $this->input[0]['lunch'] == 1 ? '1' : '0';
         $this->itenerary->is_dinner_covered = $this->input[0]['dinner'] == 1 ? '1' : '0';
@@ -436,12 +438,12 @@ class IteneraryView extends Component
         
         foreach($this->input as $key1 => $value1){
             $itenerary_entries = new IteneraryEntry;
-            $itenerary_entries->place_to_be_visited = $this->input[$key1]['place'] == '' ? $this->input[$key1]['place'] :'';
-            $itenerary_entries->departure_time =  $this->input[$key1]['dep_time'] == '' ? $this->input[$key1]['dep_time'] :'';
-            $itenerary_entries->arrival_time = $this->input[$key1]['arr_time'] == '' ? $this->input[$key1]['arr_time'] :'';
+            $itenerary_entries->place_to_be_visited = $this->input[$key1]['place'] != '' ? $this->input[$key1]['place'] :'';
+            $itenerary_entries->departure_time =  $this->input[$key1]['dep_time'] != '' ? $this->input[$key1]['dep_time'] :'';
+            $itenerary_entries->arrival_time = $this->input[$key1]['arr_time'] != '' ? $this->input[$key1]['arr_time'] :'';
             $itenerary_entries->mode_of_transport = isset($this->input[$key1]['mot']) ? $this->input[$key1]['mot'] : 0;
             $itenerary_entries->transport_expenses = isset($this->input[$key1]['trans_exp']) ? $this->input[$key1]['trans_exp'] : 0;
-            $itenerary_entries->others = $this->input[$key1]['others'] == '' ? $this->input[$key1]['others'] :'';
+            $itenerary_entries->others = isset($this->input[$key1]['others']) ? $this->input[$key1]['others'] : 0;
             $itenerary_entries->total = $this->input[$key1]['total'];
             $itenerary_entries->itenerary_id = $this->itenerary->id;
             $itenerary_entries->save(); 
@@ -455,6 +457,7 @@ class IteneraryView extends Component
             $this->itenerary = new Itenerary;
             $this->draftSaved = true;
             $this->storeDraft($trans_id);
+         
         }else{
             $this->draftSaved = true;
             $this->storeDraft($trans_id);

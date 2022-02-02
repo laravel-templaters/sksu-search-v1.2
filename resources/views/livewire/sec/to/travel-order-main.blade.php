@@ -7,7 +7,7 @@
     x-data="{show_Banner :@entangle('showBanner'),showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
     {{-- implicit submission --}}
 
- {{-- notif --}}
+    {{-- notif --}}
     <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
         x-cloak x-show="show_Banner">
         <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
@@ -42,7 +42,7 @@
                                 Travel order successfully saved!
                             </p>
                             <p class="mt-1 text-sm text-gray-500">
-                               Redirecting to dashboard after a few seconds!
+                                Redirecting to dashboard after a few seconds!
                             </p>
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-{{-- notif END--}}
+    {{-- notif END--}}
 
     <form class="p-5 space-y-8 divide-y divide-gray-200" wire:submit.prevent="submit">
         <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -322,8 +322,8 @@
                                 class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
                                 From
                             </label>
-                            <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom" wire:change="changeDate"
-                                name="dateoftravelfrom"
+                            <input type="date" id="dateoftravelfrom" wire:model="dateoftravelfrom"
+                                wire:change="changeDate" name="dateoftravelfrom"
                                 min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-fit focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
@@ -332,7 +332,8 @@
                                 class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
                                 To
                             </label>
-                            <input type="date" id="dateoftravelto" wire:model="dateoftravelto" name="dateoftravelto" wire:change="changeDate"
+                            <input type="date" id="dateoftravelto" wire:model="dateoftravelto" name="dateoftravelto"
+                                wire:change="changeDate"
                                 min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-md focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
@@ -375,7 +376,7 @@
                     <h3 class="ml-1 text-sm text-gray-600 ">City / Municipality</h3>
                     <select wire:model="city_codes"
                         class="block w-full min-w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
-                    <option selected>--SELECT CITY/MUNICIPALITY--</option>
+                        <option selected>--SELECT CITY/MUNICIPALITY--</option>
                         @foreach ($cities as $city)
                         <option value="{{$city->city_municipality_code}}">
                             {{$city->city_municipality_description}}</option>
@@ -459,7 +460,7 @@
                         class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                         <label for="date_from"
                             class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2 ">From</label>
-                        <input wire:model="date_from" type="date" disabled
+                        <input wire:model="dateoftravelfrom" type="date" disabled
                             min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                             name="date_from" id="date_from"
                             class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
@@ -471,7 +472,7 @@
                         class="relative px-3 py-2 border border-gray-500 rounded-md shadow-sm focus-within:ring-1 focus-within:ring-primary-bg focus-within:border-primary-bg">
                         <label for="date_to"
                             class="absolute inline-block px-1 -mt-px text-xs font-medium text-gray-900 bg-white -top-2 left-2">To</label>
-                        <input wire:model="date_to" type="date" disabled
+                        <input wire:model="dateoftravelto" type="date" disabled
                             min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                             name="date_to" id="date_to"
                             class="block w-48 p-1 text-gray-900 placeholder-gray-500 bg-transparent border-0 rounded-md focus:ring-0 sm:text-sm">
@@ -486,14 +487,15 @@
                 Loading...
             </div>
         </div>
+
         @if($showDays)
 
-
-        @foreach ($gen as $g)
-        {{-- @livewire('itenerary', ['gen' => $g], key($g)) --}}
-        @include('wrappers.itinerary-daily-wrapper')
-        @endforeach
-
+        
+        <div x-cloak x-show="totype=='offtravel'">
+            @foreach ($gen as $g)
+            @include('wrappers.itinerary-daily-wrapper')
+            @endforeach
+        </div>
         @if(isset($gen))
         <div class="relative min-w-full my-4 ml-4 mr-7" x-cloak x-show="totype=='offtravel'">
             <div class="absolute bottom-0 pr-0 my-3 mt-2 mr-10 bg-white right-2 ">
@@ -502,7 +504,7 @@
                     Calculate
                 </button> --}}
                 <span class="mr-5 font-extrabold text-gray-900 text-md"> GRAND TOTAL:</span><span
-                    class="pl-3 mr-2 font-bold text-gray-700 text-md">{{$finalTotal}}</span></div>
+                    class="pl-3 mr-2 font-bold text-gray-700 text-md" wire:key='123456789'>{{$finalTotal}}</span></div>
         </div>
         @endif
 
