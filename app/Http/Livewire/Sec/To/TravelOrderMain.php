@@ -454,7 +454,7 @@ class TravelOrderMain extends Component
             else{     
                 
                 $IteneraryIDs = Itenerary::where('travel_order_id','=',$this->travel_order->id)->get('id');
-                dd($IteneraryIDs);
+                //dd($IteneraryIDs);
                 foreach ($IteneraryIDs as $key => $value) {
                     $delEntries = IteneraryEntry::where('itenerary_id','=',$value)->delete();
 
