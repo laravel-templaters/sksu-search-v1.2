@@ -452,11 +452,15 @@ class TravelOrderMain extends Component
                 $this->err_diem = true;
             }
             else{     
-                // dd( $this->per_diem);
+                
                 $IteneraryIDs = Itenerary::where('travel_order_id','=',$this->travel_order->id)->get('id');
-                $delEntries = IteneraryEntry::whereIn('itenerary_id',$IteneraryIDs)->delete();
+                dd($IteneraryIDs);
+                foreach ($IteneraryIDs as $key => $value) {
+                    $delEntries = IteneraryEntry::where('itenerary_id','=',$value)->delete();
+
+                }
                 $deleteAll = Itenerary::where('travel_order_id','=',$this->travel_order->id)->delete();
-                    $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+                $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
                     
                     $this->showDays = true;
  
