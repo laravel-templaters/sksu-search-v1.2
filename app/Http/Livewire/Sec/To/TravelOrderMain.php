@@ -140,7 +140,7 @@ class TravelOrderMain extends Component
         $searchSigsRes= [];
         if($this->searchSigs!= ""){
             $this->searchedSigs = true;
-            $searchSigsRes= User::search('name', $this->searchSigs)->whereIn('position_id',[5,12,13,11,14,15,16,17,18,19,21,25])->get();
+            $searchSigsRes= User::search('name', $this->searchSigs)->whereIn('position_id',[5,12,13,11,14,15,16,17,18,19,20,21,25])->get();
         }else{
             $searchSigsRes= [];
             $this->searchedSigs = false;
