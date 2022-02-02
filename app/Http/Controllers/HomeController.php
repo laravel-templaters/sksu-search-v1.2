@@ -22,7 +22,7 @@ class HomeController extends Controller
         
          }else if($role == 3){
 
-           return redirect()->route('client-dash');
+           return redirect()->route('department-head');
 
          }else if($role == 4){
               

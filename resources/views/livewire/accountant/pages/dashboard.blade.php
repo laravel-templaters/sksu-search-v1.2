@@ -1,4 +1,5 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{showStatus: false,showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
+<div class="mx-auto max-w-7xl sm:px-6 lg:px-8"
+    x-data="{showStatus: false,showModal : @entangle('showViewModal'),showModalForward : @entangle('showForwardModal'),showModalReturn :
     @entangle('showReturnModal'), active :
     @entangle('active'),personalClicked :
     @entangle('personalClicked'),pendingClicked : @entangle('pendingClicked'), show_Banner :@entangle('showBanner') , show_Error :@entangle('showError')  }"
@@ -35,13 +36,13 @@
                             </p>
                             @if ($isHeadOrAdmin || $isAssigned)
                             <p class="mt-1 text-sm text-primary-text">
-                                  A new voucher has been forwarded to you!
+                                A new voucher has been forwarded to you!
                             </p>
-                         @else
-                          <p class="mt-1 text-sm text-primary-text">
-                               A voucher of yours has been updated!
-                          </p>
-                         @endif
+                            @else
+                            <p class="mt-1 text-sm text-primary-text">
+                                A voucher of yours has been updated!
+                            </p>
+                            @endif
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
@@ -63,8 +64,8 @@
         </div>
     </div>
 
-     {{-- error start --}}
-     <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
+    {{-- error start --}}
+    <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
         <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
             <div class="w-full max-w-md overflow-hidden bg-red-200 rounded-lg shadow-lg pointer-events-auto bg-opacity-95 ring-1 ring-black ring-opacity-5"
                 x-cloak x-show="show_Error" x-transition:enter="transform ease-out duration-300 transition"
@@ -75,9 +76,11 @@
                 <div class="p-4">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-800" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
                             <p class="text-sm font-medium text-black">
@@ -85,7 +88,7 @@
                             </p>
                             <p class="mt-1 text-sm text-gray-700">
                                 DV Number Not Set
-                          </p>
+                            </p>
                         </div>
                         <div class="flex flex-shrink-0 ml-4">
                             <button
@@ -126,8 +129,8 @@
                             text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
                         @endif
                     </a>
-                         
-                    
+
+
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'drafts';"
                         x-bind:class="active == 'drafts' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
@@ -141,7 +144,11 @@
                         Travel Orders
                     </a>
 
-
+                    <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
+                        x-on:click="active = 'travelordersdraft';"
+                        x-bind:class="active == 'travelordersdraft' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
+                        Travel Orders (Draft)
+                    </a>
 
                     @if ($isHeadOrAdmin || $isAssigned)
                     <a href="#" class="flex px-1 py-4 text-sm font-bold border-b-2 whitespace-nowrap"
@@ -154,7 +161,7 @@
                         @endif
                     </a>
                     @endif
-                    
+
                 </nav>
             </div>
         </div>
@@ -175,7 +182,7 @@
                 </div>
                 <div class="flex-shrink-0 mt-2 ml-4">
                     <input type="text" placeholder="Enter tracking number" wire:model.debounce.300ms="searchPersonal"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400">
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400">
                 </div>
             </div>
             <div class="px-4 py-5 sm:p-6">
@@ -346,149 +353,151 @@
             </div>
             <div class="px-4 py-5 sm:p-6">
                 <ul role="list" class="divide-y divide-secondary-text">
-                    @if(count($drafts_dvs)==0)
-                    <li class="rounded-lg">
-                        <a class="block rounded-lg ">
-                            <div class="px-4 py-4 mx-auto text-center sm:px-6">
-                                <span class="text-sm tracking-widest text-center text-gray-600 uppercase">No Drafts to display</span>
-                            </div>
-                        </a>
-                    </li>
-                    @else
-                    @foreach ($drafts_dvs as $draft_dv)
-                    @if ($searchPersonal=="")
-                    <li class="rounded-lg">
-                        <a class="block rounded-lg hover:bg-gray-50">
-                            <div class="px-4 py-4 sm:px-6">
-                                <div class="flex items-center justify-between">
-                                    <p class="text-sm font-medium text-indigo-600 truncate">
-                                        {{$draft_dv->dv_tracking_number}} -
-                                        {{$draft_dv->user->name}}
-                                    </p>
-                                    <div class="flex flex-shrink-0 ml-2">
-                                        <button x-on:click="$wire.showModal({{$draft_dv->id}})"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                            View voucher information
-                                        </button>
-                                        <button
-                                            x-on:click="showStatus = true; $wire.emit('dvClicked',{{$draft_dv->id}});"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
-                                            View voucher feed
-                                        </button>
-                                    </div>
+                    @if(isset($drafts_dvs))    
+                        @if(count($drafts_dvs)==0)
+                        <li class="rounded-lg">
+                            <a class="block rounded-lg ">
+                                <div class="px-4 py-4 mx-auto text-center sm:px-6">
+                                    <span class="text-sm tracking-widest text-center text-gray-600 uppercase">No Drafts to display</span>
                                 </div>
-                                <div class="mt-2 sm:flex sm:justify-between">
-                                    <div class="sm:flex">
-                                        <p class="flex items-center text-sm text-gray-500">
-                                            <!-- Heroicon name: solid/users -->
-                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path
-                                                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                                            </svg>
-                                            {{$draft_dv->user->department->department_name}},
-                                            {{$draft_dv->user->department->campus->campus_name}}
-                                        </p>
-                                        <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                            <!-- Heroicon name: solid/location-marker -->
-                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            {{$draft_dv->user->department->campus->campus_address}}
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
-                                        <!-- Heroicon name: solid/calendar -->
-                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <p>
-                                            Created on
-                                            <time datetime="2020-01-07">{{$draft_dv->created_at}}</time>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    @else
-                    @if(str_contains(strtolower($draft_dv->dv_tracking_number),strtolower($searchPending)))
-                    <li class="rounded-lg">
-                        <a class="block rounded-lg hover:cursor-pointer hover:bg-gray-50"
-                            x-on:click="$wire.showModal({{$dv->id}})">
-                            <div class="px-4 py-4 sm:px-6">
-                                <div class="flex items-center justify-between">
-                                    <p class="text-sm font-medium text-indigo-600 truncate">
-                                        {{$draft_dv->dv_tracking_number}} -
-                                        {{$draft_dv->user->name}}
-                                    </p>
-                                    <div class="flex flex-shrink-0 ml-2">
-                                        <button x-on:click="$wire.showModal({{$draft_dv->id}})"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                            View voucher information
-                                        </button>
-                                        <button
-                                            x-on:click="showStatus = true; $wire.emit('dvClicked',{{$draft_dv->id}});"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
-                                            View voucher feed
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="mt-2 sm:flex sm:justify-between">
-                                    <div class="sm:flex">
-                                        <p class="flex items-center text-sm text-gray-500">
-                                            <!-- Heroicon name: solid/users -->
-                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path
-                                                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                                            </svg>
-                                            {{$draft_dv->user->department->department_name}},
-                                            {{$draft_dv->user->department->campus->campus_name}}
-                                        </p>
-                                        <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                            <!-- Heroicon name: solid/location-marker -->
-                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            {{$draft_dv->user->department->campus->campus_address}}
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
-                                        <!-- Heroicon name: solid/calendar -->
-                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <p>
-                                            Created on
-                                            <time datetime="2020-01-07">{{$draft_dv->created_at}}</time>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    @endif
-                    @endif
-                    @endforeach
+                            </a>
+                        </li>
+                        @else
+                            @foreach ($drafts_dvs as $draft_dv)
+                                @if ($searchPersonal=="")
+                                <li class="rounded-lg">
+                                    <a class="block rounded-lg hover:bg-gray-50">
+                                        <div class="px-4 py-4 sm:px-6">
+                                            <div class="flex items-center justify-between">
+                                                <p class="text-sm font-medium text-indigo-600 truncate">
+                                                    {{$draft_dv->dv_tracking_number}} -
+                                                    {{$draft_dv->user->name}}
+                                                </p>
+                                                <div class="flex flex-shrink-0 ml-2">
+                                                    <button x-on:click="$wire.showModal({{$draft_dv->id}})"
+                                                        class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                                        View voucher information
+                                                    </button>
+                                                    <button
+                                                        x-on:click="showStatus = true; $wire.emit('dvClicked',{{$draft_dv->id}});"
+                                                        class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
+                                                        View voucher feed
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 sm:flex sm:justify-between">
+                                                <div class="sm:flex">
+                                                    <p class="flex items-center text-sm text-gray-500">
+                                                        <!-- Heroicon name: solid/users -->
+                                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                            fill="currentColor" aria-hidden="true">
+                                                            <path
+                                                                d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                                                        </svg>
+                                                        {{$draft_dv->user->department->department_name}},
+                                                        {{$draft_dv->user->department->campus->campus_name}}
+                                                    </p>
+                                                    <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                                        <!-- Heroicon name: solid/location-marker -->
+                                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                            fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd"
+                                                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        {{$draft_dv->user->department->campus->campus_address}}
+                                                    </p>
+                                                </div>
+                                                <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
+                                                    <!-- Heroicon name: solid/calendar -->
+                                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                                        aria-hidden="true">
+                                                        <path fill-rule="evenodd"
+                                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                    <p>
+                                                        Created on
+                                                        <time datetime="2020-01-07">{{$draft_dv->created_at}}</time>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @else
+                                    @if(str_contains(strtolower($draft_dv->dv_tracking_number),strtolower($searchPending)))
+                                    <li class="rounded-lg">
+                                        <a class="block rounded-lg hover:cursor-pointer hover:bg-gray-50"
+                                            x-on:click="$wire.showModal({{$dv->id}})">
+                                            <div class="px-4 py-4 sm:px-6">
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-sm font-medium text-indigo-600 truncate">
+                                                        {{$draft_dv->dv_tracking_number}} -
+                                                        {{$draft_dv->user->name}}
+                                                    </p>
+                                                    <div class="flex flex-shrink-0 ml-2">
+                                                        <button x-on:click="$wire.showModal({{$draft_dv->id}})"
+                                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                                            View voucher information
+                                                        </button>
+                                                        <button
+                                                            x-on:click="showStatus = true; $wire.emit('dvClicked',{{$draft_dv->id}});"
+                                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
+                                                            View voucher feed
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-2 sm:flex sm:justify-between">
+                                                    <div class="sm:flex">
+                                                        <p class="flex items-center text-sm text-gray-500">
+                                                            <!-- Heroicon name: solid/users -->
+                                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                                fill="currentColor" aria-hidden="true">
+                                                                <path
+                                                                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                                                            </svg>
+                                                            {{$draft_dv->user->department->department_name}},
+                                                            {{$draft_dv->user->department->campus->campus_name}}
+                                                        </p>
+                                                        <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                                            <!-- Heroicon name: solid/location-marker -->
+                                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                                fill="currentColor" aria-hidden="true">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                                    clip-rule="evenodd" />
+                                                            </svg>
+                                                            {{$draft_dv->user->department->campus->campus_address}}
+                                                        </p>
+                                                    </div>
+                                                    <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
+                                                        <!-- Heroicon name: solid/calendar -->
+                                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                                            aria-hidden="true">
+                                                            <path fill-rule="evenodd"
+                                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        <p>
+                                                            Created on
+                                                            <time datetime="2020-01-07">{{$draft_dv->created_at}}</time>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endif
+                                @endif
+                            @endforeach
+                        @endif
                     @endif
                 </ul>
 
@@ -551,6 +560,7 @@
                                                 <path
                                                     d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                                             </svg>
+                                            {{-- name dapat dri --}}
                                         </p>
                                         <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                             <!-- Heroicon name: solid/location-marker -->
@@ -661,6 +671,114 @@
             </div>
         </div>
     </div>
+    <div class="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8" id="travelOrderPanelDraft" x-cloak x-show="active == 'travelordersdraft'"
+        x-transition:enter="transition ease-in-out delay-700 duration-500 " x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100">
+        <div class="overflow-hidden divide-y divide-gray-500 rounded-lg shadow bg-primary-200">
+            <div class="flex flex-wrap items-center justify-between px-4 py-5 sm:px-6 sm:flex-nowrap">
+                <div class="mt-2 ml-4">
+                    <h3 class="text-lg font-medium leading-6 tracking-wider text-primary-700">
+                        Travel Orders
+                    </h3>
+                </div>
+                <div class="flex-shrink-0 mt-2 ml-4">
+                    <input type="text" id="tosearch" placeholder="Enter keyword or tracking code"
+                        wire:model.debounce.300ms="searchTo"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 border rounded-md shadow-sm border-primary-700 text-primaty-bg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-400">
+                </div>
+            </div>
+            <div class="px-4 py-5 sm:p-6">
+                <ul role="list" class="divide-y divide-secondary-text">
+                    @if(isset($travel_orders_draft))
+                    @if(count($travel_orders_draft)==0)
+                    <li class="rounded-lg">
+                        <a class="block rounded-lg ">
+                            <div class="px-4 py-4 mx-auto text-center sm:px-6">
+                                <span class="text-sm tracking-widest text-center text-gray-600 uppercase">No Travel Orders To Display</span>
+                            </div>
+                        </a>
+                    </li>
+                    
+                    @else
+                   
+                    @foreach ($travel_orders_draft as $travel_order)
+                    <li class="rounded-lg">
+                        <a class="block rounded-lg hover:bg-gray-50">
+                            <div class="px-4 py-4 sm:px-6">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm font-medium truncate text-primary-600">
+                                        {{$travel_order->tracking_code}} -
+                                        <span class="uppercase">{{$travel_order->purpose}}</span>
+                                    </p>
+                                    <div class="flex flex-shrink-0 ml-2">
+                                        <a href="{{ route('view-to',$travel_order->id) }}" target="_blank"
+                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                            View Travel Order
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="mt-2 sm:flex sm:justify-between">
+                                    <div class="sm:flex">
+                                        <p class="flex items-center text-sm text-gray-500">
+                                            <!-- Heroicon name: solid/users -->
+                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor" aria-hidden="true">
+                                                <path
+                                                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                                            </svg>
+                                            {{-- name dapat dri --}}
+                                        </p>
+                                        <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                            <!-- Heroicon name: solid/location-marker -->
+                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            @if ($travel_order->others!="")
+                                            <span class="truncate">{{$travel_order->others}},{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            @else
+                                            <span class="truncate">{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            @endif
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
+                                        <!-- Heroicon name: solid/calendar -->
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                            aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <p>
+                                            Created 
+                                            <time datetime="2020-01-07">{{$travel_order->created_at->diffForHumans()}}</time>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    @endforeach
+                    @endif
+                    @else
+                    <li class="rounded-lg">
+                        <a class="block rounded-lg ">
+                            <div class="px-4 py-4 mx-auto text-center sm:px-6">
+                                <span class="text-sm tracking-widest text-center text-gray-600 uppercase">No Travel Orders To Display</span>
+                            </div>
+                        </a>
+                    </li>
+                    @endif
+                </ul>
+
+            </div>
+        </div>
+    </div>
 
     @if ($isHeadOrAdmin || $isAssigned)
     <div class="mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8" id="pending" x-cloak x-show="active=='pdv'"
@@ -710,7 +828,8 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                         @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
+                                        @if ($last_actions->action_type->description == "FORWARDED" ||
+                                        $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -793,7 +912,8 @@
                                         $last_actions=App\Models\LastAction::where('disbursement_voucher_id','=',$milestone->disbursement_voucher->id)->latest()->first();
 
                                         @endphp
-                                         @if ($last_actions->action_type->description == "FORWARDED" || $last_actions->action_type->description == "RETURNED")
+                                        @if ($last_actions->action_type->description == "FORWARDED" ||
+                                        $last_actions->action_type->description == "RETURNED")
                                         <button
                                             class="inline-flex px-2 py-1 mx-2 my-auto text-xs font-semibold leading-5 text-blue-600 bg-blue-200 rounded-full hover:bg-blue-400 active:bg-secondary-bg"
                                             wire:click="recieveDocument({{$milestone->disbursement_voucher->id}},{{$milestone->id}},{{$milestone->disbursement_voucher->user->id}})">
@@ -868,7 +988,7 @@
     </div>
 
 
-   
+
     <!-- modal forward start-->
     <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
         x-cloak x-show="showModalForward">
@@ -933,7 +1053,7 @@
                             <li>
                                 <div class="space-y-4 text-left">
                                     <button class="flex-shrink-0 block " x-on:click="showModalReturn = false"
-                                 wire:click="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->department->admin_user_id}})">
+                                        wire:click="returnDoc({{$mssig->disbursement_voucher_id}},{{$mssig->id}},{{$mssig->department->admin_user_id}})">
                                         <!-- This example requires Tailwind CSS v2.0+ -->
 
                                         <div
@@ -941,14 +1061,14 @@
                                             <div>
                                                 @if ($mssig->assigned == null)
                                                 <img class="inline-block truncate rounded-full h-14 w-14"
-                                                src="{{$mssig->department->admin_user->avatar != null ? asset($mssig->department->admin_user->avatar) : asset($mssig->department->admin_user->profile_photo_url)}}"
-                                                alt="{{$mssig->department->admin_user->name}}">
+                                                    src="{{$mssig->department->admin_user->avatar != null ? asset($mssig->department->admin_user->avatar) : asset($mssig->department->admin_user->profile_photo_url)}}"
+                                                    alt="{{$mssig->department->admin_user->name}}">
                                                 @else
                                                 <img class="inline-block truncate rounded-full h-14 w-14"
-                                                src="{{$mssig->assigned->avatar != null ? asset($mssig->assigned->avatar) : asset($mssig->assigned->profile_photo_url)}}"
-                                                alt="{{$mssig->assigned->name}}">
+                                                    src="{{$mssig->assigned->avatar != null ? asset($mssig->assigned->avatar) : asset($mssig->assigned->profile_photo_url)}}"
+                                                    alt="{{$mssig->assigned->name}}">
                                                 @endif
-                                               
+
                                             </div>
                                             <div class="ml-3 text-left">
                                                 @if ($mssig->assigned == null)
@@ -965,7 +1085,7 @@
                                                     {{$mssig->department->admin_user->department_name}}
                                                     @endif
                                                 </p>
-                                                
+
                                                 @else
                                                 <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                                                     {{$mssig->assigned->name}}
@@ -981,10 +1101,10 @@
                                                     @endif
                                                 </p>
                                                 @endif
-                                               
 
-                                                
-                                               
+
+
+
 
 
                                             </div>
@@ -1009,54 +1129,54 @@
     </div>
     <!-- modal return end -->
     @endif
-    
-     <!-- modal view Info start -->
-     <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
-     x-cloak x-show="showModal">
-     <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
 
-         <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-300" aria-hidden="true" x-cloak
-             x-show="showModal"></div>
+    <!-- modal view Info start -->
+    <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+        x-cloak x-show="showModal">
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+
+            <div class="fixed inset-0 transition-opacity bg-opacity-75 bg-primary-300" aria-hidden="true" x-cloak
+                x-show="showModal"></div>
 
 
-         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-         <div x-cloak x-data="{showInput : false}" x-show="showModal" @click.away="showModal=false"
-             x-transition:enter="ease-out duration-300"
-             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-             x-transition:leave="ease-in duration-200"
-             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-             class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-500 max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
-             <div class="max-w-full mx-auto">
-                 <!-- card start -->
-                 <!-- This example requires Tailwind CSS v2.0+ -->
-                 <div class="overflow-hidden bg-white shadow sm:rounded-lg" @click.away="showInput = false">
-                     <div class="px-4 py-5 sm:px-6">
-                         <h3 class="text-lg font-medium leading-6 text-gray-900">
-                             Disbursement Voucher Information
-                         </h3>
-                         <p class="max-w-2xl mt-1 text-sm text-gray-500">
-                             Voucher Details
-                         </p>
-                     </div>
-                     <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
-                         @if ($dvInfo)
-                         <dl class="sm:divide-y sm:divide-gray-200">
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Disbursement Voucher Number
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <div x-cloak x-data="{showInput : false}" x-show="showModal" @click.away="showModal=false"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                class="inline-block px-4 pt-5 pb-4 mx-auto overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-primary-500 max-w-7xl sm:px-6 lg:px-8 sm:my-8 sm:align-middle sm:w-full sm:p-6">
+                <div class="max-w-full mx-auto">
+                    <!-- card start -->
+                    <!-- This example requires Tailwind CSS v2.0+ -->
+                    <div class="overflow-hidden bg-white shadow sm:rounded-lg" @click.away="showInput = false">
+                        <div class="px-4 py-5 sm:px-6">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">
+                                Disbursement Voucher Information
+                            </h3>
+                            <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                                Voucher Details
+                            </p>
+                        </div>
+                        <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
+                            @if ($dvInfo)
+                            <dl class="sm:divide-y sm:divide-gray-200">
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Disbursement Voucher Number
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
 
-                                     @if($isHead)
+                                        @if($isHead)
                                         @if ($dvInfo->dv_number == null || $dvInfo->dv_number =="")
                                         Voucher number not yet set
                                         @else
                                         {{$dvInfo->dv_number}}
                                         @endif
-                                     @elseif($isAdmin)
+                                        @elseif($isAdmin)
                                         @if (($dvInfo->dv_number == null || $dvInfo->dv_number =="")&& $dvInfo->user_id
                                         != auth()->user()->id)
                                         <span x-show="showInput==false">Voucher number not yet set</span> <a
@@ -1079,176 +1199,179 @@
                                         @else
                                         {{$dvInfo->dv_number}}
                                         @endif
-                                     @endif
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Disbursement Voucher Tracking Number
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                     {{$dvInfo->dv_tracking_number}}
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Payee
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                     {{$dvInfo->user->name}}
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Application for
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                     @php
-                                     $dv_type ="";
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Disbursement Voucher Tracking Number
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->dv_tracking_number}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Payee
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->user->name}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Application for
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        @php
+                                        $dv_type ="";
 
-                                     if($dvInfo->dv_type_sorter->sorter == '3'){
-                                     $dv_type =$dvInfo->dv_type_sorter->dv_sub_categories->dv_sub_category;
-                                     }elseif ($dvInfo->dv_type_sorter->sorter == '2') {
-                                     $dv_type =$dvInfo->dv_type_sorter->dv_categories->dv_category;
-                                     }elseif ($dvInfo->dv_type_sorter->sorter == '1'){
-                                     $dv_type =$dvInfo->dv_type_sorter->dv_type->dv_type;
-                                     }else{
-                                     $dv_type = "Couldn't be Found";
-                                     }
-                                     @endphp
-                                     {{$dv_type}}
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Email address
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                     {{$dvInfo->user->email}}
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Amount Expected
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                     {{$dvModalTotalAmount}}
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Fund Cluster
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+                                        if($dvInfo->dv_type_sorter->sorter == '3'){
+                                        $dv_type =$dvInfo->dv_type_sorter->dv_sub_categories->dv_sub_category;
+                                        }elseif ($dvInfo->dv_type_sorter->sorter == '2') {
+                                        $dv_type =$dvInfo->dv_type_sorter->dv_categories->dv_category;
+                                        }elseif ($dvInfo->dv_type_sorter->sorter == '1'){
+                                        $dv_type =$dvInfo->dv_type_sorter->dv_type->dv_type;
+                                        }else{
+                                        $dv_type = "Couldn't be Found";
+                                        }
+                                        @endphp
+                                        {{$dv_type}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Email address
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->user->email}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Amount Expected
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvModalTotalAmount}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Fund Cluster
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
 
-                                     @if ($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")
-                                     Fund cluster not set yet
-                                     @else
-                                     {{$dvInfo->fund_cluster}}
-                                     @endif
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Mode of Payment
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                     {{$dvInfo->mop->mode_of_payment}}
-                                 </dd>
-                             </div>
-                         </dl>
-                         @else
-                         <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                 class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
-                         @endif
-                     </div>
-                     <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
-                         <h3 class="text-lg font-medium leading-6 text-gray-900">
-                             Particulars
-                         </h3>
-                         <p class="max-w-2xl mt-1 text-sm text-gray-500">
-                             Voucher Entries
-                         </p>
-                     </div>
-                     <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
-                         @if ($dvInfo)
-                         @php
-                         $dvparticulars =
-                         App\Models\Particular::where('disbursement_voucher_id','=',$dvInfo->id)->get();
-                         @endphp
-                         @if($dvparticulars)
-                         @foreach ($dvparticulars as $key => $dvparticular)
-                         <dl class="sm:divide-y sm:divide-gray-200">
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Entry No. {{$key +1}}
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                     {{$dvparticular->entry}}
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Responsibility Center
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+                                        @if ($dvInfo->fund_cluster == null || $dvInfo->fund_cluster =="")
+                                        Fund cluster not set yet
+                                        @else
+                                        {{$dvInfo->fund_cluster}}
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Mode of Payment
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvInfo->mop->mode_of_payment}}
+                                    </dd>
+                                </div>
+                            </dl>
+                            @else
+                            <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                    class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span>
+                            </dl>
+                            @endif
+                        </div>
+                        <div class="px-4 py-5 border-t border-gray-200 sm:px-6">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">
+                                Particulars
+                            </h3>
+                            <p class="max-w-2xl mt-1 text-sm text-gray-500">
+                                Voucher Entries
+                            </p>
+                        </div>
+                        <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
+                            @if ($dvInfo)
+                            @php
+                            $dvparticulars =
+                            App\Models\Particular::where('disbursement_voucher_id','=',$dvInfo->id)->get();
+                            @endphp
+                            @if($dvparticulars)
+                            @foreach ($dvparticulars as $key => $dvparticular)
+                            <dl class="sm:divide-y sm:divide-gray-200">
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Entry No. {{$key +1}}
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {{$dvparticular->entry}}
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Responsibility Center
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
 
-                                     @if ($dvparticular->responsibility_center== null
-                                     ||$dvparticular->responsibility_center=="")
-                                     -----
-                                     @else
-                                     {{$dvparticular->responsibility_center}}
-                                     @endif
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     MFO/PAP
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+                                        @if ($dvparticular->responsibility_center== null
+                                        ||$dvparticular->responsibility_center=="")
+                                        -----
+                                        @else
+                                        {{$dvparticular->responsibility_center}}
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        MFO/PAP
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
 
-                                     @if ($dvparticular->mfo_pap== null ||$dvparticular->mfo_pap=="")
-                                     -----
-                                     @else
-                                     {{$dvparticular->mfo_pap}}
-                                     @endif
-                                 </dd>
-                             </div>
-                             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                 <dt class="text-sm font-medium text-gray-500">
-                                     Amount
-                                 </dt>
-                                 <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
+                                        @if ($dvparticular->mfo_pap== null ||$dvparticular->mfo_pap=="")
+                                        -----
+                                        @else
+                                        {{$dvparticular->mfo_pap}}
+                                        @endif
+                                    </dd>
+                                </div>
+                                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt class="text-sm font-medium text-gray-500">
+                                        Amount
+                                    </dt>
+                                    <dd class="mt-1 text-sm text-gray-900 uppercase sm:mt-0 sm:col-span-2">
 
-                                     @if ($dvparticular->amount== null || $dvparticular->amount==0)
-                                     -----
-                                     @else
-                                     {{$dvparticular->amount}}
-                                     @endif
-                                 </dd>
-                             </div>
-                         </dl>
-                         @endforeach
-                         @else
-                         <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                 class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
-                         @endif
-                         @else
-                         <dl class="sm:divide-y sm:divide-gray-200"> <span
-                                 class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span></dl>
-                         @endif
-                     </div>
-                 </div>
+                                        @if ($dvparticular->amount== null || $dvparticular->amount==0)
+                                        -----
+                                        @else
+                                        {{$dvparticular->amount}}
+                                        @endif
+                                    </dd>
+                                </div>
+                            </dl>
+                            @endforeach
+                            @else
+                            <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                    class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span>
+                            </dl>
+                            @endif
+                            @else
+                            <dl class="sm:divide-y sm:divide-gray-200"> <span
+                                    class="mx-5 my-2 tracking-widest text-gray-400 uppercase">nothing to show</span>
+                            </dl>
+                            @endif
+                        </div>
+                    </div>
 
-                 <!-- card end -->
+                    <!-- card end -->
 
 
-             </div>
-         </div>
-     </div>
- </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
- <!-- modal view Info end -->
+    <!-- modal view Info end -->
     <!-- feed slide over start -->
     <div class="fixed inset-0 overflow-hidden" x-cloak x-show="showStatus" aria-labelledby="slide-over-title"
         role="dialog" aria-modal="true">

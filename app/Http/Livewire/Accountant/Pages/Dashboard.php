@@ -36,6 +36,7 @@ class Dashboard extends Component
     public $isHead=false;
     public $isAdmin=false;
     public $isAssigned=false;
+
     
     public $searchPending="";
     public $searchPersonal="";
@@ -80,8 +81,8 @@ class Dashboard extends Component
         ['department' => $this->department,
         'milestones'=>$this->milestones,
         'pending_dv'=>$this->pending_dv,
-        'drafts_dvs'=>DisbursementVoucher::where('user_id','=',$user_id)->where('isDraft','=',true)->get(),
-        'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
+        'travel_orders_draft'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->where('isDraft','=',1)->with('province')->with('region')->with('city')->orderByDesc('id')->get(),
+        'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->where('isDraft','=',0)->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
         ->layout('layouts.accountant');
     }
 
