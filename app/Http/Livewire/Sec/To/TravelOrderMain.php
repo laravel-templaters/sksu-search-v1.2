@@ -79,7 +79,6 @@ class TravelOrderMain extends Component
 
     public $finalTotal;
 
-
     public $input = [[
         "date" => "",
         "place" => "",
@@ -163,14 +162,17 @@ class TravelOrderMain extends Component
     // {
         
     // }
-    
+
+
     public function validateTo(){
+       
          $this->emit('valIE');
     }
     public $toValidated =false;
     public $iteneraryValidated =false;
+
     public function isiteneraryvalidated($isval){
-     
+
         if($isval == true || $isval == 1){
         $this->iteneraryValidated = true;
         $this->validate([
@@ -377,6 +379,8 @@ class TravelOrderMain extends Component
                     $this->emit('storeItenerary',$this->travel_order->id);
                     
                    
+                }else if($this->toValidated == false || $this->iteneraryValidated == false){
+                    //  dd($this->toValidated." - ".$this->iteneraryValidated);
                 }
             }
 
@@ -505,7 +509,7 @@ class TravelOrderMain extends Component
 
     public $listeners = [
         'calculatetotalfromothers'=>'finalTotalCalculation',
-        'iteneraryvalidated'=>'isiteneraryvalidated',
+        'iteneraryValidated'=>'isiteneraryvalidated',
         'childUpdated'=>'updated',
     ];
 

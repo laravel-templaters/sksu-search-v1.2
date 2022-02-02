@@ -366,11 +366,17 @@ class IteneraryView extends Component
         'storeItenerary'=>'storeItenerary',
         'sendTotalVal'=>'sendTotalVal',
         'valIE' => 'validateIEs',
+        'tests' => 'testing',
        
     ];
 
+    public function testing(){
+        dd("weees");
+    }
+
     public function validateIEs(){
-        $validatedDate = $this->validate([
+        
+        $this->validate([
             'input.*.place' => 'required',
             'input.*.dep_time' => 'required',
             'input.*.arr_time' => 'required',
@@ -390,7 +396,7 @@ class IteneraryView extends Component
 
         ]
         );
-        $this->emitUp('iteneraryvalidated', true);
+        $this->emit('iteneraryValidated', true);
     }
 
 
