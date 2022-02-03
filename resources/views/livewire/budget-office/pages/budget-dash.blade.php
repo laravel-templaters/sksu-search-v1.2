@@ -578,9 +578,10 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                             @if ($travel_order->others!="")
-                                            <span class="truncate">{{$travel_order->others}},{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            {{-- ga error sa dashboard huhu --}}
+                                            {{-- <span class="truncate">{{$travel_order->others}},{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span> --}}
                                             @else
-                                            <span class="truncate">{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            {{-- <span class="truncate">{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span> --}}
                                             @endif
                                         </p>
                                     </div>
@@ -745,9 +746,10 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                             @if ($travel_order->others!="")
-                                            <span class="truncate">{{$travel_order->others}},{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            {{-- ga error sa dashboard huhu --}}
+                                            {{-- <span class="truncate">{{$travel_order->others}},{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span> --}}
                                             @else
-                                            <span class="truncate">{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span>
+                                            {{-- <span class="truncate">{{$travel_order->city->city_municipality_description}},{{$travel_order->province->province_description}},{{ $travel_order->region->region_description }}</span> --}}
                                             @endif
                                         </p>
                                     </div>

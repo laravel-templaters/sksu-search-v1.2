@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Events\ForwardDV;
 use App\Models\Signatory;
 use App\Models\TravelOrderApplicant;
+use App\Models\TravelOrderSignatory;
 
 //use Illuminate\Support\Facades\Auth;
 class DepartmentHead extends Component
@@ -72,12 +73,16 @@ class DepartmentHead extends Component
             
         }
         $toID = TravelOrderApplicant::searchexactly('user_id',$user_id)->get('travel_order_id');
+        $toIDSig = TravelOrderSignatory::searchexactly('user_id',$user_id)->first();
+
+       
 
          $this->pending_dv = DisbursementVoucher::where('user_id','=',$user_id)->get();
-        return view('livewire.budget-office.pages.budget-dash',
+        return view('livewire.dept-head.department-head',
         ['department' => $this->department,
         'milestones'=>$this->milestones,
         'pending_dv'=>$this->pending_dv,
+        'travel_orders_pending'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->where('isDraft','=',1)->with('province')->with('region')->with('city')->orderByDesc('id')->get(),
         'travel_orders_draft'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->where('isDraft','=',1)->with('province')->with('region')->with('city')->orderByDesc('id')->get(),
         'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->where('isDraft','=',0)->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
         ->layout('layouts.accountant');

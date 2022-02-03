@@ -4,7 +4,7 @@
        
     }
 })"
-    x-data="{show_Banner :@entangle('showBanner'),showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
+    x-data="{show_Banner :@entangle('showBanner'),showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),showFromDateError:@entangle('showFromDateError'),showToDateError:@entangle('showToDateError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
     {{-- implicit submission --}}
 
     {{-- notif --}}
@@ -224,7 +224,7 @@
                                     <div>
                                         @if ($sigInfo)
                                         <img class="inline-block w-10 h-10 rounded-full"
-                                            src="{{$sigInfo->avatar != null ? asset($sigInfo->avatar) : asset($sigInfo->profile_photo_url)}}"
+                                            src="{{$sigInfo->user->avatar != null ? asset($sigInfo->user->avatar) : asset($sigInfo->user->profile_photo_url)}}"
                                             alt="">
                                         @else
                                         <img class="inline-block w-10 h-10 rounded-full" src="" alt="X">
@@ -234,13 +234,13 @@
                                     <div class="ml-3">
                                         <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
                                             @if ($sigInfo)
-                                            {{ $sigInfo->name }}
+                                            {{ $sigInfo->user->name }}
                                             @else
                                             NOT SET
                                             @endif
                                         </p>
                                         <p class="text-xs font-semibold tracking-wider text-blue-700 cursor-pointer hover:underline group-hover:text-white"
-                                            x-on:click="$wire.unSetSignatory({{ $sigInfo->id }})">
+                                            x-on:click="$wire.unSetSignatory({{ $sigInfo->user->id }})">
                                             Remove
                                         </p>
                                     </div>
@@ -255,6 +255,8 @@
                             <input type="text" id="signame"
                                 class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
                                 wire:model.debounce.500ms="searchSigs">
+                                <p class="my-auto ml-2 text-sm text-gray-500"><span class="font-extrabold text-indigo-400">PLEASE NOTE:</span>
+                                    Signatories will be displayed in your travel order <strong>in the order of your input.</strong></p>
                             <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searchedSigs">
 
                                 @if(count($sigs)>0)
@@ -327,6 +329,8 @@
                                 min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-fit focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
+                        @error('dateoftravelfrom') <span class="mt-3 ml-2 text-red-700 error">{{ $message }}</span>
+                        @enderror
                         <div class="justify-start m-2" id="dateoftravel">
                             <label for="dateoftravelto"
                                 class="block text-sm font-medium text-gray-600 sm:mt-px sm:pt-2">
@@ -337,6 +341,8 @@
                                 min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-md focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
+                        @error('dateoftravelto') <span class="mt-3 ml-2 text-red-700 error">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
             </div>

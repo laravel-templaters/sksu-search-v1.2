@@ -26,15 +26,15 @@
         </div>
     </div>
     <div class="w-full">
-        <div class="m-6 divide-y divide-black divide-solid print:divide-y-2">
-            <div class="flex items-start w-full h-auto px-6 pb-6 print:block ">
-                <div id="header" class="items-start block w-full space-y-5 text-left">
+        <div class="m-4 divide-y divide-black divide-solid print:divide-y-2">
+            <div class="flex items-start w-full h-auto px-4 pb-2 print:block ">
+                <div id="header" class="items-start block w-full space-y-2 text-left">
                     <div class="block">
                         <span
                             class="text-sm font-semibold tracking-wide text-left text-black">{{ $travel_order->created_at->format('F d, Y') }}</span>
                     </div>
                     <div class="flex">
-                        <span class="mx-auto text-5xl font-extrabold tracking-wide text-black uppercase print:text-xl">travel
+                        <span class="mx-auto -m-1 text-2xl font-extrabold tracking-wide text-black uppercase">travel
                             order</span>
                     </div>
                     <div class="grid grid-cols-4 ">
@@ -47,9 +47,9 @@
                     </div>
                 </div>
             </div>
-            <div id="contents" class="flex w-full h-auto px-6 pt-10 print:pt-5">
-                <div id="header" class="items-start block w-full space-y-4 text-left">
-                    <div class="flex-wrap block -space-y-1">
+            <div id="contents" class="flex w-full h-auto px-4 pt-2">
+                <div id="header" class="items-start block w-full space-y-3 text-left">
+                    <div class="flex-wrap block -space-y-2">
                         <span class="font-semibold tracking-wide text-left text-black text-md">You are hereby directed
                             to proceed to <strong>
                             @if ($travel_order->others!="")
@@ -59,16 +59,62 @@
                             @endif
                         </strong> on the <strong class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('F Y')}}</strong> to do the following:
                         </span>
-                        <span class="block pl-5 font-semibold tracking-wide text-left text-black whitespace-pre-line text-md">
+                        <span class="block pl-5 my-auto font-semibold tracking-wide text-left text-black whitespace-pre-line text-md">
                             {{ $travel_order->purpose}}
                         </span>
                         @foreach ($signatories as $signatory)
-                        <span class="block font-semibold tracking-wide text-center text-black pt-28 text-md print:pt-10">
+                        <span class="block pt-16 font-semibold tracking-wide text-center text-black text-md">
                             {{ $signatory->user->name}}
                         </span>
-                        <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md print:pt-1">
-                            {{ $signatory->user->role->role_name}}/{{ $signatory->user->position->position_name}}
-                        </span>
+                        
+                        @php
+                            $sigpositions = App\Models\Department::orWhere('admin_user_id','=',$signatory->user_id)->orWhere('head_user_id','=',$signatory->user_id)->get();
+                            $campuses = App\Models\Campus::orWhere('admin_user_id','=',$signatory->user_id)->get();
+                            $campusCount= count($campuses);
+                            $posCount= count($sigpositions);
+                        @endphp
+                         <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md">
+                             @if ($campusCount >= 1)
+
+                                @foreach ($campuses as $campus)
+
+                                    @if (strtoupper($campus->campus_name)=="PRESIDENT'S OFFICE")
+                                        @if ($campusCount==$loop->index+1)
+                                        {{ $signatory->user->position->position_name}} 
+                                        @else
+                                        {{ $signatory->user->position->position_name}} /
+                                        @endif
+                                    @else
+                                        @if ($campusCount==$loop->index+1)
+                                        {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} Campus
+                                        @else
+                                        {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} /
+                                        @endif
+                                    @endif
+                                    
+                                @endforeach
+                                 
+                             @elseif ($campusCount == 0 && $posCount >= 1)
+                                    @foreach ($sigpositions as $sigpos)
+
+                                        @if (strtoupper($sigpos->department_name)=="PRESIDENT'S OFFICE")
+                                            @if ($posCount==$loop->index+1)
+                                            {{ $signatory->user->position->position_name}} 
+                                            @else
+                                            {{ $signatory->user->position->position_name}} /
+                                            @endif
+                                        @else
+                                            @if ($posCount==$loop->index+1)
+                                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}}
+                                            @else
+                                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}} /
+                                            @endif
+                                        @endif
+                                        
+                                    @endforeach
+                             @endif
+                        
+                         </span>
                        
                         @endforeach
                        

@@ -66,9 +66,55 @@
                         <span class="block pt-16 font-semibold tracking-wide text-center text-black text-md">
                             {{ $signatory->user->name}}
                         </span>
-                        <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md">
-                            {{ $signatory->user->role->role_name}}/{{ $signatory->user->position->position_name}}
-                        </span>
+
+                        @php
+                            $sigpositions = App\Models\Department::orWhere('admin_user_id','=',$signatory->user_id)->orWhere('head_user_id','=',$signatory->user_id)->get();
+                            $campuses = App\Models\Campus::orWhere('admin_user_id','=',$signatory->user_id)->get();
+                            $campusCount= count($campuses);
+                            $posCount= count($sigpositions);
+                        @endphp
+                         <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md">
+                             @if ($campusCount >= 1)
+
+                                @foreach ($campuses as $campus)
+
+                                    @if (strtoupper($campus->campus_name)=="PRESIDENT'S OFFICE")
+                                        @if ($campusCount==$loop->index+1)
+                                        {{ $signatory->user->position->position_name}} 
+                                        @else
+                                        {{ $signatory->user->position->position_name}} /
+                                        @endif
+                                    @else
+                                        @if ($campusCount==$loop->index+1)
+                                        {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} Campus
+                                        @else
+                                        {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} /
+                                        @endif
+                                    @endif
+                                    
+                                @endforeach
+                                 
+                             @elseif ($campusCount == 0 && $posCount >= 1)
+                                    @foreach ($sigpositions as $sigpos)
+
+                                        @if (strtoupper($sigpos->department_name)=="PRESIDENT'S OFFICE")
+                                            @if ($posCount==$loop->index+1)
+                                            {{ $signatory->user->position->position_name}} 
+                                            @else
+                                            {{ $signatory->user->position->position_name}} /
+                                            @endif
+                                        @else
+                                            @if ($posCount==$loop->index+1)
+                                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}}
+                                            @else
+                                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}} /
+                                            @endif
+                                        @endif
+                                        
+                                    @endforeach
+                             @endif
+                        
+                         </span>
                         @endforeach
                         
                        

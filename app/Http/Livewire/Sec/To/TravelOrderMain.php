@@ -29,6 +29,8 @@ class TravelOrderMain extends Component
     public $travel_draft_made = false;
     public $showApplicantError = false;
     public $showSignatoryError = false;
+    public $showFromDateError = false;
+    public $showToDateError = false;
     public $toType = "offtime";
     public $searchUsers;
     public $searchSigs;
@@ -159,13 +161,17 @@ class TravelOrderMain extends Component
         $this->province = Province::where("region_code", "=",  $this->region_codes)->get();
         $this->city = City::where("province_code", "=", $this->province_codes)->get();
         $this->per_diem = Dte::where('region_code', '=', $this->region_codes)->first();
-
-
+        $sigsInfos ="";
+        if(isset($this->travel_order)){
+            $sigsInfos = TravelOrderSignatory::whereIn('user_id', $this->signatory_ids)->where('travel_order_id',$this->travel_order->id)->orderBy('stepNumber')->with('user')->get();
+        }else{
+            $sigsInfos = User::whereIn('id', $this->signatory_ids)->get();
+        }
 
         return view('livewire.sec.to.travel-order-main', [
             'users' => $searchUsrRes, 'sigs' => $searchSigsRes,
             'userInfos' => User::whereIn('id', $this->applicant_ids)->get(),
-            'sigsInfos' => User::whereIn('id', $this->signatory_ids)->get()
+            'sigsInfos' => $sigsInfos
         ])->with('regions', $this->region)->with('provinces',  $this->province)
             ->with('cities',  $this->city)->with('diems', $this->per_diem);
     }
@@ -203,6 +209,8 @@ class TravelOrderMain extends Component
                     'region_codes' => 'required',
                     'province_codes' => 'required',
                     'city_codes' => 'required',
+                    'dateoftravelfrom' =>'required',
+                    'dateoftravelto' => 'required',
                 ],
                 [
                    
@@ -210,6 +218,8 @@ class TravelOrderMain extends Component
                     'region_codes.required' => 'The region field is required.',
                     'province_codes.required' => 'The province field is required.',
                     'city_codes.required' => 'The city field is required.',
+                    'dateoftravelfrom.required' => 'This field is required.',
+                    'dateoftravelto.required' => 'This field is required.',
                 ]
             );
             $this->toValidated = true;
@@ -230,7 +240,7 @@ class TravelOrderMain extends Component
         if (count($this->applicant_ids) > 0 && count($this->signatory_ids) > 0) {
 
             if ($this->toType == "offtime") {
-
+                
                 $this->validate(
                     [
                         'users_id' => 'required',
@@ -238,6 +248,8 @@ class TravelOrderMain extends Component
                         'region_codes' => 'required',
                         'province_codes' => 'required',
                         'city_codes' => 'required',
+                        'dateoftravelfrom' =>'required',
+                        'dateoftravelto' => 'required',
                     ],
                     [
                         'users_id.required' => 'The name field is required.',
@@ -245,6 +257,8 @@ class TravelOrderMain extends Component
                         'region_codes.required' => 'The region field is required.',
                         'province_codes.required' => 'The province field is required.',
                         'city_codes.required' => 'The city field is required.',
+                        'dateoftravelfrom.required' => 'This field is required.',
+                        'dateoftravelto.required' => 'This field is required.',
                     ]
                 );
                 $this->toValidated = true;
@@ -255,7 +269,7 @@ class TravelOrderMain extends Component
                 $this->validateTo();
             }
         } else {
-
+            
             $this->showApplicantError = $this->showSignatoryError = true;
         }
     }
@@ -349,9 +363,9 @@ class TravelOrderMain extends Component
         $this->travel_order->date_of_travel_to = $this->dateoftravelto == '' ? null : $this->dateoftravelto;
         $this->travel_order->philippine_regions_id = isset($reg['id']) ?  $reg['id'] : 0;
         $this->travel_order->philippine_provinces_id = isset($prov['id']) ?   $prov['id'] : 0;
-        $this->travel_order->philippine_cities_id = isset($cit['id']) ?   $cit['id'] : 9;
+        $this->travel_order->philippine_cities_id = isset($cit['id']) ?   $cit['id'] : 0;
         $this->travel_order->others =  isset($this->others) ? $this->others : "";
-        $this->travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+        $this->travel_order->has_registration = isset($this->has_registration) ? $this->has_registration : "0";
         $this->travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
         $this->travel_order->total = $this->finalTotal_raw;
         $this->travel_order->date_range = $date_string;
@@ -386,7 +400,7 @@ class TravelOrderMain extends Component
                 $this->travel_order->philippine_provinces_id = $prov['id'];
                 $this->travel_order->philippine_cities_id = $cit['id'];
                 $this->travel_order->others =  isset($this->others) ? $this->others : "";
-                $this->travel_order->has_registration = isset($this->has_registration) ? "1" : "0";
+                $this->travel_order->has_registration = isset($this->has_registration) ? $this->has_registration : "0";
                 $this->travel_order->registration_amount = isset($this->has_registration) ? $this->registration_amt : "0";
                 $this->travel_order->total = $this->finalTotal_raw;
                 $this->travel_order->date_range = $date_string;
@@ -589,11 +603,12 @@ class TravelOrderMain extends Component
     public function saveSignatories($toID)
     {
         $applicantsFromTbl = TravelOrderSignatory::where('travel_order_id', "=", $toID)->delete();
-        foreach ($this->signatory_ids as $value) {
+        foreach ($this->signatory_ids as $key=> $value) {
             $toSignatories = new TravelOrderSignatory;
             $toSignatories->travel_order_id = $toID;
             $toSignatories->user_id = $value;
             $toSignatories->approval_status = "pending";
+            $toSignatories->stepNumber = $key+1;
             $toSignatories->save();
         }
         if ($this->isDraft == false) {
