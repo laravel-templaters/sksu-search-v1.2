@@ -17,7 +17,7 @@ class DepartmentSeeder extends Seeder
 
         //ACCESS CAMPUS 1
         DB::table('campuses')->insert([
-            'campus_name'=> 'ACCESS',
+            'campus_name'=> 'Access',
             'campus_address'=> 'EJC Montilla, Tacurong City, 9800, Philippines',
             'campus_shortCode'=> 'ACSC',
             ]);
@@ -32,7 +32,7 @@ class DepartmentSeeder extends Seeder
 
           //ISULAN CAMPUS 3
           DB::table('campuses')->insert([
-            'campus_name'=> 'ISULAN',
+            'campus_name'=> 'Isulan',
             'campus_address'=> 'Isulan, 9805, Sultan Kudarat',
             'campus_shortCode'=> 'ISUC',
             'admin_user_id'=>'264',
@@ -40,7 +40,7 @@ class DepartmentSeeder extends Seeder
 
           //KALAMANSIG CAMPUS 4
         DB::table('campuses')->insert([
-            'campus_name'=> 'KALAMANSIG',
+            'campus_name'=> 'Kalamansig',
             'campus_address'=> 'Kalamansig, 9808, Sultan Kudarat',
             'campus_shortCode'=> 'KALC',
             'admin_user_id'=>'169',
@@ -48,7 +48,7 @@ class DepartmentSeeder extends Seeder
 
          //LUTAYAN CAMPUS 5
         DB::table('campuses')->insert([
-            'campus_name'=> 'LUTAYAN',
+            'campus_name'=> 'Lutayan',
             'campus_address'=> 'Blingkong, Lutayan, 9803, Sultan Kudarat',
             'campus_shortCode'=> 'LUTC',
             'admin_user_id'=>'295',
@@ -56,7 +56,7 @@ class DepartmentSeeder extends Seeder
 
         //PALIMBANG CAMPUS 6
         DB::table('campuses')->insert([
-            'campus_name'=> 'PALIMBANG',
+            'campus_name'=> 'Palimbang',
             'campus_address'=> 'Palimbang, 9809, Sultan Kudarat',
             'campus_shortCode'=> 'PALC',
             'admin_user_id'=>'397',
@@ -64,7 +64,7 @@ class DepartmentSeeder extends Seeder
 
         //BAGUMBAYAN CAMPUS 7
         DB::table('campuses')->insert([
-            'campus_name'=> 'BAGUMBAYAN',
+            'campus_name'=> 'Bagumbayan',
             'campus_address'=> 'Bagumbayan, 9801, Sultan Kudarat',
             'campus_shortCode'=> 'BAGC',
             'admin_user_id'=>'276',
