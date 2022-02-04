@@ -31,6 +31,7 @@ class IteneraryView extends Component
     public $total;
 
     public $finalTotalperDay;
+
     
     public $input = [
         [
@@ -51,13 +52,16 @@ class IteneraryView extends Component
         'raw-total'=>0.0,
         ],
                     ];
+           
 
     public $listeners = [
         'storeIteneraryDraft'=>'storeIteneraryDraft',
         'storeItenerary'=>'storeItenerary',
         'sendTotalVal'=>'sendTotalVal',
-        'valIE' => 'validateIEs',        
+        'valIE' => 'validateIEs', 
     ];
+
+ 
                 
 //hooks
     public function updated($name,$value){
@@ -366,12 +370,10 @@ class IteneraryView extends Component
                }
                
     }
+
     
     //test for saving
-  
-    public function testing(){
-        dd("weees");
-    }
+
 
     public function validateIEs(){
         // dd('sup?');
@@ -399,6 +401,8 @@ class IteneraryView extends Component
 
 
 
+
+
     public function sendTotalVal(){
        
            // $this->validateIEs();
@@ -410,6 +414,7 @@ class IteneraryView extends Component
        
         
     }
+
     // public function showAlert($key){
         
     //     $this->alert('success', 'EMIT FROM PARENT LOLS'. $key, [
