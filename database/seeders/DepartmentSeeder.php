@@ -24,7 +24,7 @@ class DepartmentSeeder extends Seeder
 
         //TACURONG CAMPUS 2
         DB::table('campuses')->insert([
-            'campus_name'=> 'TACURONG',
+            'campus_name'=> 'Tacurong',
             'campus_address'=> 'Pan-Philippine Highway, Tacurong City, 9800, Sultan Kudarat',
             'campus_shortCode'=> 'TACC',
             'admin_user_id'=>'175',
