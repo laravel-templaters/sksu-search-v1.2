@@ -31,6 +31,7 @@ class TravelOrderMain extends Component
     public $showBanner = false;
     public $isDraft = true;
     public $isSaved = "";
+    public $travel_order_applicants;
     public $travel_order;
     public $travel_draft_made = false;
     public $showApplicantError = false;
@@ -116,6 +117,7 @@ class TravelOrderMain extends Component
         'iteneraryStored' =>'iteneraryStored',
     ];
 
+    public $userInfos = [];
 
     //lifecycle hooks
     public function mount()
@@ -123,6 +125,9 @@ class TravelOrderMain extends Component
         $this->isEdit = request()->isEdit;
         if($this->isEdit == true || $this->isEdit == 1){
             $this->travel_order = TravelOrder::find(request()->travelOrderID);
+
+            // $this->travel_order_applicants = TravelOrderApplicant::find(request()->travelOrderID);
+
             $this->TOforEditID = request()->travelOrderID;
             $this->ispopulating =true;
             $this->populateForEdit();
@@ -132,6 +137,7 @@ class TravelOrderMain extends Component
     public function updated($name, $value)
     {
         if($this->ispopulating == false){
+
             if($name != "showBanner"){
                 if ($this->travel_draft_made == false) {
                     $this->travel_order = new TravelOrder;
@@ -176,7 +182,7 @@ class TravelOrderMain extends Component
             $searchSigsRes = [];
             $this->searchedSigs = false;
         }
-
+        $this->userInfos = User::whereIn('id', $this->applicant_ids)->get();
         $this->region = Region::get();
         $this->province = Province::where("region_code", "=",  $this->region_codes)->get();
         $this->city = City::where("province_code", "=", $this->province_codes)->get();
@@ -190,7 +196,7 @@ class TravelOrderMain extends Component
 
         return view('livewire.sec.to.travel-order-main', [
             'users' => $searchUsrRes, 'sigs' => $searchSigsRes,
-            'userInfos' => User::whereIn('id', $this->applicant_ids)->get(),
+            'userInfos' => $this->userInfos,
             'sigsInfos' => $sigsInfos
         ])->with('regions', $this->region)->with('provinces',  $this->province)
             ->with('cities',  $this->city)->with('diems', $this->per_diem);
@@ -648,9 +654,37 @@ class TravelOrderMain extends Component
     }
 
     public function populateForEdit(){
+        $applicantstbl = TravelOrderApplicant::where('travel_order_id', '=', $this->TOforEditID)->get('user_id');
+        $applicantsFromTbl = TravelOrderSignatory::where('travel_order_id', "=", $this->TOforEditID)->get('user_id');
+        if($applicantstbl != null)
+        {
+           foreach ($applicantstbl as $key => $value) {
+                  $this->setUser($value->user_id);
+           }
+        }
+
+        if($applicantsFromTbl != null)
+        {
+           foreach ($applicantsFromTbl as $key => $value) {
+                  $this->setSignatory($value->user_id);
+           }
+        //    $this->userInfos = User::whereIn('id', $this->applicant_ids)->get();
+        }
+
         $this->toType = $this->travel_order->to_type;
         $this->purpose = $this->travel_order->purpose;
-      
+        
+        // $this->searchUsers = $applicantstbl->user->name;
+
+        $this->dateoftravelfrom = $this->travel_order->date_of_travel_from;
+        $this->dateoftravelto = $this->travel_order->date_of_travel_to;
+        $this->region_codes = $this->travel_order->philippine_regions_id == 0 ? 'Region Not Set': $this->travel_order->region->region_code;
+        $this->province_codes = $this->travel_order->philippine_provinces_id == 0 ? 'Province Not Set': $this->travel_order->province->province_code;
+        $this->city_codes = $this->travel_order->philippine_cities_id == 0 ? 'City Not Set': $this->travel_order->city->city_municipality_code;
+        $this->others = $this->travel_order->others;
+        $this->has_registration = $this->travel_order->has_registration;
+        $this->registration_amt = $this->travel_order->registration_amount;
+        //  dd( $this->province_codes);
         $this->ispopulating = false;
     }
 }
