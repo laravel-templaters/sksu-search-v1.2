@@ -82,7 +82,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('redirects', 'App\Http\Cont
 //for create dv dont delete
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/cdv/2y10XGG0AJ7EyQj1tWaGwP4O-Jex{id}ZBpCtK8-{sorter}gCyDNDF8n-Nq3QVjN1BzzXS', [CreateDVWrapperController::class, 'show'])->name('cdv');
-Route::middleware(['auth:sanctum', 'verified'])->get('/travel-order/3z21YHH1BK8FzRk2uXbHxQ5P-Kfy{id}ACqDuL9-hDzEOEG9o-Or4RWkO2CaaYT', [RoutingController::class, 'show'])->name('travel-order');
+Route::middleware(['auth:sanctum', 'verified'])->get('/travel-order/3z21YHH1BK8FzRk2uXbHxQ5P-Kfy{id}ACqDuL9-hDz{isEdit}EOEG9o-Or4RW{travelOrderID}kO2CaaYT', [RoutingController::class, 'show'])->name('travel-order');
 //for media library dont delete also hehe
 Route::mediaLibrary();
 
@@ -116,7 +116,7 @@ Route::middleware(['auth:sanctum','verified'])->get('user/mgt/new',App\Http\Live
 
 //travelorder pages
 Route::middleware(['auth:sanctum','verified'])->get('travel-order/view/34d4c659bb9a93d6b{id}76bd4d016a69aa9d92e1ca81a4c19eb62f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\ViewTravelOrder::class)->name('view-to');
-Route::middleware(['auth:sanctum','verified'])->get('travel-order/view/34d4c659bb9a93d6b{id}76bd4d016a69aa9d92e1ca81a{userType}4c19eb62f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\ViewTravelOrder::class)->name('view-to-pending');
+Route::middleware(['auth:sanctum','verified'])->get('travel-order/view/34d4c659bb9a93d6b{id}76bd4d016a69aa{isDraft}9d92e1ca81a{userType}4c19eb62f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\ViewTravelOrder::class)->name('view-to-pending');
 Route::middleware(['auth:sanctum','verified'])->get('travel-order/print/16a69aa9d92e1ca81a4c19eb634d4c659bb9a93d6b76bd4d02{id}f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\PrintTravelOrder::class)->name('print-to');
 
 Route::view('/401-page', 'errs.401-page')->name('401-error');

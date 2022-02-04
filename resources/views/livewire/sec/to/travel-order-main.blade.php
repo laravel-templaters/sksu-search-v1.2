@@ -255,8 +255,10 @@
                             <input type="text" id="signame"
                                 class="block w-full min-w-full col-span-1 col-start-1 border-gray-300 rounded-md shadow-sm focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm"
                                 wire:model.debounce.500ms="searchSigs">
-                                <p class="my-auto ml-2 text-sm text-gray-500"><span class="font-extrabold text-indigo-400">PLEASE NOTE:</span>
-                                    Signatories will be displayed in your travel order <strong>in the order of your input.</strong></p>
+                            <p class="my-auto ml-2 text-sm text-gray-500"><span
+                                    class="font-extrabold text-indigo-400">PLEASE NOTE:</span>
+                                Signatories will be displayed in your travel order <strong>in the order of your
+                                    input.</strong></p>
                             <div class="grid w-full grid-cols-4 col-span-2 gap-3 m-2" x-cloak x-show="searchedSigs">
 
                                 @if(count($sigs)>0)
@@ -337,8 +339,7 @@
                                 To
                             </label>
                             <input type="date" id="dateoftravelto" wire:model="dateoftravelto" name="dateoftravelto"
-                                wire:change="changeDate"
-                                min="{{ date_format(date_add(date_create(date("Y-m-d")),date_interval_create_from_date_string("0 days")),"Y-m-d") }}"
+                                wire:change="changeDate" min="{{ $dateoftravelfrom }}"
                                 class="w-full border-gray-300 rounded-md shadow-sm min-w-md focus:ring-primary-bg focus:border-primary-bg sm:max-w-xs sm:text-sm">
                         </div>
                         @error('dateoftravelto') <span class="mt-3 ml-2 text-red-700 error">{{ $message }}</span>
@@ -496,7 +497,7 @@
 
         @if($showDays)
 
-        
+
         <div x-cloak x-show="totype=='offtravel'">
             @foreach ($gen as $g)
             @include('wrappers.itinerary-daily-wrapper')

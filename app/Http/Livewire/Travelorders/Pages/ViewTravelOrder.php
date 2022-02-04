@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire\Travelorders\Pages;
 
+use App\Http\Livewire\IteneraryView;
+use App\Models\Itenerary;
+use App\Models\IteneraryEntry;
 use App\Models\TravelOrder;
 use App\Models\TravelOrderApplicant;
 use App\Models\TravelOrderSignatory;
@@ -11,6 +14,7 @@ class ViewTravelOrder extends Component
 {
     public $travelorderID;
     public $userType;
+    public $isDraft;
 
 
     public function render()
@@ -25,8 +29,23 @@ class ViewTravelOrder extends Component
 
     public function mount()
     {
-
         $this->travelorderID = request()->id;
         $this->userType=request()->userType;
+        $this->isDraft=request()->isDraft;
+    }
+    public function deleteTO($type){
+       if($type == 'offtime'){
+        $deleteto= TravelOrder::where('id','=',$this->travelorderID)->delete();
+        $applicantsFromTbl = TravelOrderSignatory::where('travel_order_id', "=", $this->travelorderID)->delete();
+        $applicantsFromTbl = TravelOrderApplicant::where('travel_order_id', '=', $this->travelorderID)->delete();
+       }else{
+        $deleteto= TravelOrder::where('id','=',$this->travelorderID)->delete();
+        $applicantsFromTbl = TravelOrderSignatory::where('travel_order_id', "=", $this->travelorderID)->delete();
+        $applicantsFromTbl = TravelOrderApplicant::where('travel_order_id', '=', $this->travelorderID)->delete();
+        $iteneraryIDS = Itenerary::where('travel_order_id','=',$this->travelorderID)->get('id');
+        $deleteitentries = IteneraryEntry::whereIn('itenerary_id', $iteneraryIDS)->delete();
+        $deleteits = Itenerary::where('travel_order_id','=',$this->travelorderID)->delete();
+       }
+      redirect(route('redirect'));
     }
 }

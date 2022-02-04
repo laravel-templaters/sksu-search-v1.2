@@ -52,7 +52,7 @@
                         {{ __('Transactions') }}
                     </x-jet-nav-link>
                     
-                    <x-jet-nav-link href="{{route('travel-order', 3)}}" :active="request()->routeIs('travel-order')">
+                    <x-jet-nav-link href="{{route('travel-order', ['id'=>3,'isEdit'=>0,'travelOrderID'=>'|'])}}" :active="request()->routeIs('travel-order')">
                         {{ __('Create Travel Order') }}
                     </x-jet-nav-link>
                     @if(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
