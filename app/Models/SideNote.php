@@ -13,6 +13,6 @@ class SideNote extends Model
         return $this->hasOne('App\Models\TravelOrder');
     }
     public function user(){
-        return $this->hasOne('App\Models\User');
+        return $this->hasOne('App\Models\User','id','user_id');
     }
 }
