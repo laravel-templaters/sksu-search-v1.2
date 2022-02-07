@@ -16,8 +16,11 @@ class ViewTravelOrder extends Component
     public $travelorderID;
     public $userType;
     public $isDraft;
-
+    public $isViewAll;
+    public $sideNoteNumber = 5;
     public $showModal = false;
+    public $showConfirmDisapproval = false;
+    public $showConfirmApproval = false;
     public $showError = false;
     public $showBanner = false;
     public $isSignatory = 0;
@@ -30,7 +33,8 @@ class ViewTravelOrder extends Component
         'travel_order'=>TravelOrder::searchexactly('id',$this->travelorderID)->with('province')->with('region')->with('city')->orderByDesc('id')->first(),
         'applicants' =>TravelOrderApplicant::searchexactly('travel_order_id',$this->travelorderID)->with('user')->get(),
         'signatories' =>TravelOrderSignatory::searchexactly('travel_order_id',$this->travelorderID)->orderBy('stepNumber')->with('user')->get(),
-        'side_notes' => SideNote::searchexactly('travel_order_id',$this->travelorderID)->orderBy('id')->get(),
+        'side_notes' => SideNote::searchexactly('travel_order_id',$this->travelorderID)->orderBy('id')->get()->take($this->sideNoteNumber),
+        'side_notes_count' => SideNote::searchexactly('travel_order_id',$this->travelorderID)->orderBy('id')->count(),
         ])->layout('layouts.app');
     }
     
@@ -71,10 +75,20 @@ class ViewTravelOrder extends Component
            } catch (\Throwable $th) {
                throw $th;
            }
+           $this->showModal = false;
         }
     }
 
     public function declineTO(){
-        
+        $sig = TravelOrderSignatory::where('travel_order_id',$this->travelorderID)->where('user_id',auth()->user()->id)->first();
+        $sig->approval_status = 'declined';
+        $sig->save();
+        $this->showConfirmDisapproval = true;
+    }
+    public function approveTO(){
+        $sig = TravelOrderSignatory::where('travel_order_id',$this->travelorderID)->where('user_id',auth()->user()->id)->first();
+        $sig->approval_status = 'approved';
+        $sig->save();
+        $this->showConfirmApproval = true;
     }
 }

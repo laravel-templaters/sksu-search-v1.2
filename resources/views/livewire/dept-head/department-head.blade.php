@@ -80,13 +80,13 @@
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'drafts';"
                         x-bind:class="active == 'drafts' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
-                        Drafts
+                       DV's (Drafts)
                         @if (count($pending_dv)>0)
                         <span x-bind:class="personalClicked == false ? 'animate-pulse':'animate-none'" class="bg-gray-100 text-gray-900 ml-3 py-0.5 px-2.5 rounded-full items-center text-center
                             text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
                         @endif
                     </a>
-
+                    
 
                     <a href="#" class="flex px-1 py-4 text-sm font-medium border-b-2 whitespace-nowrap"
                         x-on:click="active = 'travelorders';"
@@ -508,7 +508,7 @@
                                         <span class="uppercase">{{$travel_order->purpose}}</span>
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <a href="{{ route('view-to-pending',['id'=>$travel_order->id,'isDraft'=>false,'userType'=>'applicant']) }}"
+                                        <a href="{{ route('view-to-pending',['isSignatory'=>0,'id'=>$travel_order->id,'isDraft'=>0,'userType'=>'applicant']) }}"
                                             target="_blank"
                                             class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                             View Travel Order

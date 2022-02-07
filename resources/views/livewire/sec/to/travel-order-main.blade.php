@@ -8,7 +8,7 @@
     {{-- implicit submission --}}
 
     {{-- notif --}}
-    <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
+    <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 shadow-lg shadow-primary-400 sm:items-start"
         x-cloak x-show="show_Banner">
         <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
             <!--

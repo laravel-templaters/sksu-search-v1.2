@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Accountant\Pages;
 
+
 use Livewire\Component;
 //models
 use App\Models\TravelOrder;
@@ -17,6 +18,7 @@ use App\Models\User;
 use App\Events\ForwardDV;
 use App\Models\Signatory;
 use App\Models\TravelOrderApplicant;
+use App\Models\TravelOrderSignatory;
 
 class Dashboard extends Component
 {
@@ -26,6 +28,7 @@ class Dashboard extends Component
     public $showError = false;
 
 
+    //view voucher info
     public $showViewModal= false;
     public $showForwardModal= false;
     public $showReturnModal= false;
@@ -71,16 +74,20 @@ class Dashboard extends Component
             $this->milestones = Milestone::where('assigned_user','=',$user_id)->where('isActive','=','1')->where('is_completed','=','0')->orderBy('id')->get();
             $this->isAssigned=true;
         }
+        
         $toID=[];
         if ($this->isHeadOrAdmin==true) {
             
         }
         $toID = TravelOrderApplicant::searchexactly('user_id',$user_id)->get('travel_order_id');
+        $toIDSig = TravelOrderSignatory::searchexactly('user_id',$user_id)->get('travel_order_id');
          $this->pending_dv = DisbursementVoucher::where('user_id','=',$user_id)->get();
-        return view('livewire.budget-office.pages.budget-dash',
+        return view('livewire.accountant.pages.dashboard',
         ['department' => $this->department,
         'milestones'=>$this->milestones,
         'pending_dv'=>$this->pending_dv,
+        'drafts_dvs'=>DisbursementVoucher::where('user_id','=',$user_id)->where('isDraft','=',true)->get(),
+        'travel_orders_pending'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toIDSig)->where('isDraft','=',0)->with('province')->with('region')->with('city')->orderByDesc('id')->get(),
         'travel_orders_draft'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->where('isDraft','=',1)->with('province')->with('region')->with('city')->orderByDesc('id')->get(),
         'travel_orders'=>TravelOrder::searchOr('tracking_code',$this->searchTo)->searchOr('purpose',$this->searchTo)->whereIn('id',$toID)->where('isDraft','=',0)->with('province')->with('region')->with('city')->orderByDesc('id')->get()])
         ->layout('layouts.accountant');
