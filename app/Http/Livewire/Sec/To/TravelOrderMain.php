@@ -115,6 +115,7 @@ class TravelOrderMain extends Component
         'iteneraryValidated' => 'isiteneraryvalidated',
         'childUpdated' => 'updated',
         'iteneraryStored' =>'iteneraryStored',
+
     ];
 
     public $userInfos = [];
@@ -207,9 +208,7 @@ class TravelOrderMain extends Component
 
     public function validateTo()
     {
-
         $this->emit('valIE');
-
     }
    
 
@@ -476,7 +475,6 @@ class TravelOrderMain extends Component
     public function generateDays()
     {
 
-
         $this->finalTotal = $this->subTotal = 0.0;
         if (is_null($this->date_from) || is_null($this->date_to)) {
             $this->showDays = false;
@@ -512,6 +510,45 @@ class TravelOrderMain extends Component
             }
         }
     }
+
+    public function generateDaysForEdit(){
+        
+
+        $this->finalTotal = $this->subTotal = 0.0;
+        if (is_null($this->date_from) || is_null($this->date_to)) {
+            $this->showDays = false;
+            $this->err_diff = false;
+            $this->err_from_to = true;
+            $this->err_diem = false;
+        } else {
+            $from = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('d');
+            $to = Carbon::createFromFormat('Y-m-d', $this->date_to)->format('d');
+            $this->diff = $to - $from;
+            if ($this->date_to < $this->date_from) {
+                // dd( $from = Carbon::createFromFormat('Y-m-d', $this->date_from)->format('M'));
+                $this->showDays = false;
+                $this->err_from_to = false;
+                $this->err_diff = true;
+                $this->err_diem = false;
+            } else {
+
+                $IteneraryIDs = Itenerary::where('travel_order_id', '=', $this->travel_order->id)->get('id');
+                //dd($IteneraryIDs);
+                foreach ($IteneraryIDs as $key => $value) {
+                    $delEntries = IteneraryEntry::where('itenerary_id', '=', $value)->delete();
+                }
+                // $deleteAll = Itenerary::where('travel_order_id', '=', $this->travel_order->id)->delete();
+                $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
+
+                $this->showDays = true;
+
+
+            }
+        }
+
+    }
+
+
 
 
 
@@ -668,14 +705,10 @@ class TravelOrderMain extends Component
            foreach ($applicantsFromTbl as $key => $value) {
                   $this->setSignatory($value->user_id);
            }
-        //    $this->userInfos = User::whereIn('id', $this->applicant_ids)->get();
         }
 
         $this->toType = $this->travel_order->to_type;
         $this->purpose = $this->travel_order->purpose;
-        
-        // $this->searchUsers = $applicantstbl->user->name;
-
         $this->dateoftravelfrom = $this->travel_order->date_of_travel_from;
         $this->dateoftravelto = $this->travel_order->date_of_travel_to;
         $this->region_codes = $this->travel_order->philippine_regions_id == 0 ? 'Region Not Set': $this->travel_order->region->region_code;
@@ -684,7 +717,18 @@ class TravelOrderMain extends Component
         $this->others = $this->travel_order->others;
         $this->has_registration = $this->travel_order->has_registration;
         $this->registration_amt = $this->travel_order->registration_amount;
-        //  dd( $this->province_codes);
+
+
+        //for iteneraries
+         $iteneraryID = Itenerary::where('travel_order_id', $this->TOforEditID)->latest('id')->first();
+
+        $this->changeDate();
+        $this->generateDaysForEdit();
+        // dd( $itenerary->id);
+         dd($iteneraryID);
+
+
+
         $this->ispopulating = false;
     }
 }
