@@ -24,9 +24,10 @@ class TravelOrderMain extends Component
 {
 
     //foredit
-    public $isEdit;
+    public $isEdit=false;
     public $ispopulating= false;
     public $TOforEditID;
+    public $travelOrderForpassingID="";
 
     public $showBanner = false;
     public $isDraft = true;
@@ -129,7 +130,7 @@ class TravelOrderMain extends Component
 
             // $this->travel_order_applicants = TravelOrderApplicant::find(request()->travelOrderID);
 
-            $this->TOforEditID = request()->travelOrderID;
+            $this->TOforEditID = $this->travelOrderForpassingID = request()->travelOrderID;
             $this->ispopulating =true;
             $this->populateForEdit();
         }
@@ -149,6 +150,7 @@ class TravelOrderMain extends Component
                         $this->save_draft_official_travel();
                     }
                 } else {
+                    $this->travelOrderForpassingID=$this->travel_order->id;
                     $this->isSaved = "Saving changes as draft";
                     if ($this->toType == "offtime") {
                         $this->save_draft_official_time();
@@ -288,6 +290,7 @@ class TravelOrderMain extends Component
             } else if ($this->toType == "offtravel") {
                 $this->itViewCtr = 0;
                 $this->iteneraryValidated = false;
+                $this->isDraft = false;
                 $this->validateTo();
             }
         } else {
@@ -352,6 +355,7 @@ class TravelOrderMain extends Component
         $this->travel_order->to_type =  $this->toType;
         $this->travel_order->isDraft = true;
         $this->travel_order->save();
+        $this->travelOrderForpassingID =$this->travel_order->id;
         $this->isDraft = true;
         $this->saveApplicants($this->travel_order->id);
     }
@@ -397,6 +401,7 @@ class TravelOrderMain extends Component
         $this->travel_order->isDraft = true;
         $this->travel_order->save();
         $this->isDraft = true;
+        $this->travelOrderForpassingID =$this->travel_order->id;
         $this->saveApplicants($this->travel_order->id);
     }
     public function save_official_travel()
@@ -534,9 +539,9 @@ class TravelOrderMain extends Component
 
                 $IteneraryIDs = Itenerary::where('travel_order_id', '=', $this->travel_order->id)->get('id');
                 //dd($IteneraryIDs);
-                foreach ($IteneraryIDs as $key => $value) {
-                    $delEntries = IteneraryEntry::where('itenerary_id', '=', $value)->delete();
-                }
+                // foreach ($IteneraryIDs as $key => $value) {
+                //     $delEntries = IteneraryEntry::where('itenerary_id', '=', $value)->delete();
+                // }
                 // $deleteAll = Itenerary::where('travel_order_id', '=', $this->travel_order->id)->delete();
                 $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
 
@@ -675,15 +680,17 @@ class TravelOrderMain extends Component
             $this->showBanner = true;
             if ($this->toType == "offtravel") {
                 //$deleteAllItenerary = Itenerary::where('travel_order_id','=',$toID)->delete();
-                if ($this->showDays == true) {
-                    $this->emit('storeIteneraryDraft', $toID);
-                }
+                // if ($this->showDays == true) {
+                //     $this->emit('storeIteneraryDraft', $toID);
+                // }
             }
         } else {
             if ($this->toType == "offtravel") {
-                //$deleteAllItenerary = Itenerary::where('travel_order_id','=',$toID)->delete();
+               // $deleteAllItenerary = Itenerary::where('travel_order_id','=',$toID)->delete();
+              
                 if ($this->showDays == true) {
                     $this->emit('storeIteneraryDraft', $toID);
+                 
                 }
             }
             $this->travel_draft_made = true;
@@ -691,6 +698,8 @@ class TravelOrderMain extends Component
     }
 
     public function populateForEdit(){
+        $this->travel_order = TravelOrder::findOrFail($this->TOforEditID);
+        $this->travel_draft_made = true;
         $applicantstbl = TravelOrderApplicant::where('travel_order_id', '=', $this->TOforEditID)->get('user_id');
         $applicantsFromTbl = TravelOrderSignatory::where('travel_order_id', "=", $this->TOforEditID)->get('user_id');
         if($applicantstbl != null)
@@ -718,9 +727,7 @@ class TravelOrderMain extends Component
         $this->has_registration = $this->travel_order->has_registration;
         $this->registration_amt = $this->travel_order->registration_amount;
 
-
-        //for iteneraries
-         $iteneraryID = Itenerary::where('travel_order_id', $this->TOforEditID)->latest('id')->first();
+        // $iteneraryID = Itenerary::where('travel_order_id', $this->TOforEditID)->latest('id')->first();
 
         $this->changeDate();
         $this->generateDaysForEdit();

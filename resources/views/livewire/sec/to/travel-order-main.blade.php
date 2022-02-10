@@ -8,7 +8,7 @@
     {{-- implicit submission --}}
 
     {{-- notif --}}
-    <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 shadow-lg shadow-primary-400 sm:items-start"
+    <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 shadow-lg pointer-events-none sm:p-6 shadow-primary-400 sm:items-start"
         x-cloak x-show="show_Banner">
         <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
             <!--
@@ -116,7 +116,7 @@
                         Applicant(s)
                     </label>
                     <div class="col-span-2 mt-1">
-                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500"
+                        <div class="grid max-h-full grid-cols-3 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500"
                             x-cloak x-show="pickedUsers==true">
                             @if (count($userInfos)==0)
                             <span
@@ -210,7 +210,7 @@
                         Signatory/Signatories
                     </label>
                     <div class="col-span-2 mt-1">
-                        <div class="grid max-h-full grid-cols-4 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500"
+                        <div class="grid max-h-full grid-cols-3 grid-rows-1 gap-2 my-3 bg-opacity-75 rounded-xl bg-primary-500"
                             x-cloak x-show="pickedSigs==true">
                             @if (count($sigsInfos)==0)
                             <span
@@ -500,7 +500,8 @@
 
         <div x-cloak x-show="totype=='offtravel'">
             @foreach ($gen as $g)
-            @include('wrappers.itinerary-daily-wrapper')
+            {{-- @include('wrappers.itinerary-daily-wrapper') --}}
+            @livewire('itenerary-view', ['gen' => $g, 'per_diem' =>isset($diems) ? $diems : '0.00','travel_order_id' => $travelOrderForpassingID,'is_edit'=>$isEdit], key($g))
             @endforeach
         </div>
         @if(isset($gen))

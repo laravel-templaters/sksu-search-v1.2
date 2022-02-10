@@ -14,6 +14,10 @@ use SebastianBergmann\Environment\Console;
 
 class IteneraryView extends Component
 {
+    public $travelOrderId=0;
+    public $isEdit=false;
+    public $isPopulating=false;
+
     public $gen;
     public $i = 1;
     public $date_from;
@@ -49,7 +53,7 @@ class IteneraryView extends Component
         "dinner" => "",
         "lodging" => "",
         'raw_diem'=>"",
-        'raw-total'=>0.0,
+        'raw_total'=>0.0,
         ],
                     ];
            
@@ -65,16 +69,27 @@ class IteneraryView extends Component
                 
 //hooks
     public function updated($name,$value){
-        $this->emit('childUpdated',$name,$value);
-        $temp=explode('.',$name);
-        $this->ComputeDiem($temp[1],'notimportant');
+        if ($this->isPopulating==false) {
+            $this->emit('childUpdated',$name,$value);
+            $temp=explode('.',$name);
+            $this->ComputeDiem($temp[1],'notimportant');
+        }
+        
     }
 
-    public function mount($gen, $per_diem)
+    public function mount($gen, $per_diem, $travel_order_id,$is_edit)
     {
+        // dd($gen);
         $this->gen = $gen;
         $this->per_diem = $per_diem;
-
+        $this->travelOrderId=$travel_order_id;
+        $this->isEdit=$is_edit;
+      
+        if ($this->isEdit == 1 || $this->isEdit == true) {
+              $this->isPopulating=true;
+              $this->populateTable();
+        } 
+        
 
         if($this->per_diem != "0.00")
         {
@@ -90,6 +105,7 @@ class IteneraryView extends Component
             
         }
 
+       
         // if(isset($this->per_diem)){
         //     if(!isset($this->temp_diem[0])){
         //         $this->temp_diem[0]=$this->per_diem['amount'];
@@ -148,7 +164,7 @@ class IteneraryView extends Component
             "dinner" => "",
             "lodging" => "",
             'raw_diem'=> "",
-            'raw-total'=>0.0,
+            'raw_total'=>0.0,
         ));
         
     }
@@ -228,40 +244,6 @@ class IteneraryView extends Component
          
     }
 
-
-
-    function createDateRangeArray($strDateFrom,$strDateTo)
-    {
-    // takes two dates formatted as YYYY-MM-DD and creates an
-    // inclusive array of the dates between the from and to dates.
-
-    // could test validity of dates here but I'm already doing
-    // that in the main script
-    
-    $this->gen = [];
-
-    $iDateFrom = strtotime($strDateFrom);
-    $iDateTo = strtotime($strDateTo);
-    // $iDateFrom = mktime(1, 0, 0, substr($strDateFrom, 5, 2), substr($strDateFrom, 8, 2), substr($strDateFrom, 0, 4));
-    // $iDateTo = mktime(1, 0, 0, substr($strDateTo, 5, 2), substr($strDateTo, 8, 2), substr($strDateTo, 0, 4));
-
-        array_push($this->gen, date('Y-m-d', $iDateFrom)); // first entry
-        while ($iDateFrom<$iDateTo) {
-            $iDateFrom += 86400; // add 24 hours
-            array_push($this->gen, date('Y-m-d', $iDateFrom));
-        }
-
-
-    //   dd($this->gen);
-    
-    return $this->gen;
-    }
-
-    // function test($key)
-    // {
-  
-  
-    // }
 
     function ComputeDiem($key,$type){
         $switchk = false;
@@ -434,8 +416,8 @@ class IteneraryView extends Component
 
 
     public function storeDraft($toID){
-        
-      //  $deleteAllEntries = IteneraryEntry::where('itenerary_id','=',$this->itenerary->id)->delete();
+       
+       
         $this->itenerary->is_breakfast_covered = $this->input[0]['breakfast'] == 1 ? '1' : '0';
         $this->itenerary->is_lunch_covered =  $this->input[0]['lunch'] == 1 ? '1' : '0';
         $this->itenerary->is_dinner_covered = $this->input[0]['dinner'] == 1 ? '1' : '0';
@@ -444,7 +426,11 @@ class IteneraryView extends Component
         $this->itenerary->perdiem = $this->input[0]['per_diem'];
         $this->itenerary->travel_order_id = $toID;
         $this->itenerary->save();
-        
+          //dd($this->itenerary);
+        if ( isset($this->itenerary->id)) {
+            $deleteAllEntries = IteneraryEntry::where('itenerary_id','=',$this->itenerary->id)->delete();
+        }
+
         foreach($this->input as $key1 => $value1){
             $itenerary_entries = new IteneraryEntry;
             $itenerary_entries->place_to_be_visited = $this->input[$key1]['place'] != '' ? $this->input[$key1]['place'] :'';
@@ -500,6 +486,55 @@ class IteneraryView extends Component
 
                         $this->emitUp('iteneraryStored');
 
+    }
+
+    protected function populateTable(){
+        $itenerary_id = Itenerary::where('date','=',$this->gen)->where('travel_order_id','=',$this->travelOrderId)->get();
+        
+        if(count($itenerary_id)>0){
+            $itenerary_ents = IteneraryEntry::where('itenerary_id','=',$itenerary_id[0]->id)->get();
+            
+            foreach ($itenerary_ents as $key => $entry) {
+            if($key==0){
+                
+                $this->input[0]['date']=$itenerary_id[0]->date;
+                $this->input[0]['place']=$entry->place_to_be_visited;
+                $this->input[0]['dep_time']=$entry->departure_time;
+                $this->input[0]['arr_time']=$entry->arrival_time;
+                $this->input[0]['mot']=$entry->mode_of_transport;
+                $this->input[0]['trans_exp']=$entry->transport_expenses;
+                $this->input[0]['per_diem']=$itenerary_id[0]->perdiem;
+                $this->input[0]['others']=$entry->others;
+                $this->input[0]['total']=$entry->total;
+                $this->input[0]['breakfast']=$itenerary_id[0]->is_breakfast_covered;
+                $this->input[0]['lunch']=$itenerary_id[0]->is_lunch_covered;
+                $this->input[0]['dinner']=$itenerary_id[0]->is_dinner_covered;
+                $this->input[0]['lodging']=$itenerary_id[0]->is_lodging_covered;
+                $this->input[0]['raw_diem']=$itenerary_id[0]->perdiem;
+                $this->input[0]['raw_total']=$itenerary_id[0]->perdiem;
+            }else{
+                $this->i= $this->i+1;
+                array_push($this->input,array(
+                    "date" => $itenerary_id[0]->date,
+                    "place" => $entry->place_to_be_visited,
+                    "dep_time" => $entry->departure_time,
+                    "arr_time" => $entry->arrival_time,
+                    "mot" => $entry->mode_of_transport,
+                    "trans_exp" => $entry->transport_expenses,
+                    "per_diem"=>$itenerary_id[0]->perdiem,
+                    "others" =>$entry->others,
+                    "total" => $entry->total,
+                    "breakfast" => $itenerary_id[0]->is_breakfast_covered,
+                    "lunch" => $itenerary_id[0]->is_lunch_covered,
+                    "dinner" => $itenerary_id[0]->is_dinner_covered,
+                    "lodging" => $itenerary_id[0]->is_lodging_covered,
+                    'raw_diem'=>  $itenerary_id[0]->perdiem,
+                    'raw_total'=> $itenerary_id[0]->perdiem,
+                ));
+            }
+            }
+        }
+        $this->isPopulating=false;
     }
     
 
