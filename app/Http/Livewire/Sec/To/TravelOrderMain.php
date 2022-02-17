@@ -39,7 +39,7 @@ class TravelOrderMain extends Component
     public $showSignatoryError = false;
     public $showFromDateError = false;
     public $showToDateError = false;
-    public $toType = "offtime";
+    public $toType = "offtravel";
     public $searchUsers;
     public $searchSigs;
     public $searchedUsers = false;

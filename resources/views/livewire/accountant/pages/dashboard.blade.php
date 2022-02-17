@@ -612,74 +612,7 @@
                             </div>
                         </a>
                     </li>
-                    {{-- @else
-                    @if(str_contains(strtolower($travel_order->dv_tracking_number),strtolower($searchPending)))
-                    <li class="rounded-lg">
-                        <a class="block rounded-lg hover:cursor-pointer hover:bg-gray-50"
-                            x-on:click="$wire.showModal({{$dv->id}})">
-                            <div class="px-4 py-4 sm:px-6">
-                                <div class="flex items-center justify-between">
-                                    <p class="text-sm font-medium text-indigo-600 truncate">
-                                        {{$travel_order->dv_tracking_number}} -
-                                        {{$travel_order->user->name}}
-                                    </p>
-                                    <div class="flex flex-shrink-0 ml-2">
-                                        <button x-on:click="$wire.showModal({{$draft_dv->id}})"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                            View voucher information
-                                        </button>
-                                        <button
-                                            x-on:click="showStatus = true; $wire.emit('dvClicked',{{$draft_dv->id}});"
-                                            class="inline-flex px-3 text-xs font-semibold leading-5 text-indigo-500 bg-indigo-100 rounded-full">
-                                            View voucher feed
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="mt-2 sm:flex sm:justify-between">
-                                    <div class="sm:flex">
-                                        <p class="flex items-center text-sm text-gray-500">
-                                            <!-- Heroicon name: solid/users -->
-                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path
-                                                    d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                                            </svg>
-                                            {{$draft_dv->user->department->department_name}},
-                                            {{$draft_dv->user->department->campus->campus_name}}
-                                        </p>
-                                        <p class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                            <!-- Heroicon name: solid/location-marker -->
-                                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            {{$draft_dv->user->department->campus->campus_address}}
-                                        </p>
-                                    </div>
-                                    <div class="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
-                                        <!-- Heroicon name: solid/calendar -->
-                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                            aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <p>
-                                            Created on
-                                            <time datetime="2020-01-07">{{$draft_dv->created_at}}</time>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    @endif 
-                    @endif--}}
+                    
                     @endforeach
                     @endif
                 </ul>
@@ -727,7 +660,7 @@
                                         <span class="uppercase">{{$travel_order->purpose}}</span>
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <a href="{{ route('view-to',$travel_order->id) }}" target="_blank"
+                                        <a href="{{route('view-to-pending',['isSignatory'=>0,'id'=>$travel_order->id,'isDraft'=> true,'userType'=>'applicant']) }}" target="_blank"
                                             class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                             View Travel Order
                                         </a>

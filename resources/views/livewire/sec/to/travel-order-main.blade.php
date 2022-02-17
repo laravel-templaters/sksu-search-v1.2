@@ -88,6 +88,15 @@
                             <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
 
                                 <div class="flex items-center">
+                                    <input id="official_time" name="toType" wire:model="toType" type="radio"
+                                        value="offtravel"
+                                        class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                                    <label for="official_time" class="block ml-3 text-sm font-medium text-gray-700">
+                                        Official Travel
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center">
                                     <input id="official_time" name="toType" wire:model="toType" checked type="radio"
                                         value="offtime"
                                         class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
@@ -96,14 +105,7 @@
                                     </label>
                                 </div>
 
-                                <div class="flex items-center">
-                                    <input id="official_time" name="toType" wire:model="toType" type="radio"
-                                        value="offtravel"
-                                        class="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
-                                    <label for="official_time" class="block ml-3 text-sm font-medium text-gray-700">
-                                        Official Travel
-                                    </label>
-                                </div>
+                             
 
                             </div>
                         </fieldset>

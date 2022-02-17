@@ -38,10 +38,11 @@
                             order</span>
                     </div>
                     <div class="grid grid-cols-4 ">
-                        <span class="col-span-1 text-sm font-semibold tracking-wide text-black uppercase">Memorandum to:</span>
+                        <span class="col-span-1 text-sm font-semibold tracking-wide text-black uppercase">Memorandum
+                            to:</span>
                         <div class="col-span-3 text-sm font-semibold tracking-wide text-left text-black uppercase">
                             @foreach ($applicants as $applicant)
-                                <span class="block">{{ $applicant->user->name }}</span>
+                            <span class="block">{{ $applicant->user->name }}</span>
                             @endforeach
                         </div>
                     </div>
@@ -52,72 +53,89 @@
                     <div class="flex-wrap block -space-y-2">
                         <span class="font-semibold tracking-wide text-left text-black text-md">You are hereby directed
                             to proceed to <strong>
-                            @if ($travel_order->others!="")
-                            {{$travel_order->others}}, {{$travel_order->city->city_municipality_description}}, {{$travel_order->province->province_description}}, {{ $travel_order->region->region_description }}
-                            @else
-                            {{$travel_order->city->city_municipality_description}}, {{$travel_order->province->province_description}}, {{ $travel_order->region->region_description }}
-                            @endif
-                        </strong> on the <strong class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('F Y')}}</strong> to do the following:
+                                @if ($travel_order->others!="")
+                                {{$travel_order->others}}, {{$travel_order->city->city_municipality_description}},
+                                {{$travel_order->province->province_description}},
+                                {{ $travel_order->region->region_description }}
+                                @else
+                                {{$travel_order->city->city_municipality_description}},
+                                {{$travel_order->province->province_description}},
+                                {{ $travel_order->region->region_description }}
+                                @endif
+                            </strong> on the
+                            @if ($travel_order->date_of_travel_from == $travel_order->date_of_travel_to) <strong
+                                class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('F Y')}}</strong>
+                            to do the following:
                         </span>
-                        <span class="block pl-5 my-auto font-semibold tracking-wide text-left text-black whitespace-pre-line text-md">
+                        @else
+                        <strong
+                            class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('F Y')}}</strong> to <strong
+                            class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_to)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_to)->format('F Y')}}</strong>
+                        to do the following:
+                        </span>
+                        @endif
+
+                        <span
+                            class="block pl-5 my-auto font-semibold tracking-wide text-left text-black whitespace-pre-line text-md">
                             {{ $travel_order->purpose}}
                         </span>
                         @foreach ($signatories as $signatory)
                         <span class="block pt-16 font-semibold tracking-wide text-center text-black text-md">
                             {{ $signatory->user->name}}
                         </span>
-                        
+
                         @php
-                            $sigpositions = App\Models\Department::orWhere('admin_user_id','=',$signatory->user_id)->orWhere('head_user_id','=',$signatory->user_id)->get();
-                            $campuses = App\Models\Campus::orWhere('admin_user_id','=',$signatory->user_id)->get();
-                            $campusCount= count($campuses);
-                            $posCount= count($sigpositions);
+                        $sigpositions =
+                        App\Models\Department::orWhere('admin_user_id','=',$signatory->user_id)->orWhere('head_user_id','=',$signatory->user_id)->get();
+                        $campuses = App\Models\Campus::orWhere('admin_user_id','=',$signatory->user_id)->get();
+                        $campusCount= count($campuses);
+                        $posCount= count($sigpositions);
                         @endphp
-                         <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md">
-                             @if ($campusCount >= 1)
+                        <span class="block pt-3 font-semibold tracking-wide text-center text-black text-md">
+                            @if ($campusCount >= 1)
 
-                                @foreach ($campuses as $campus)
+                            @foreach ($campuses as $campus)
 
-                                    @if (strtoupper($campus->campus_name)=="PRESIDENT'S OFFICE")
-                                        @if ($campusCount==$loop->index+1)
-                                        {{ $signatory->user->position->position_name}} 
-                                        @else
-                                        {{ $signatory->user->position->position_name}} /
-                                        @endif
-                                    @else
-                                        @if ($campusCount==$loop->index+1)
-                                        {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} Campus
-                                        @else
-                                        {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} /
-                                        @endif
-                                    @endif
-                                    
-                                @endforeach
-                                 
-                             @elseif ($campusCount == 0 && $posCount >= 1)
-                                    @foreach ($sigpositions as $sigpos)
+                            @if (strtoupper($campus->campus_name)=="PRESIDENT'S OFFICE")
+                            @if ($campusCount==$loop->index+1)
+                            {{ $signatory->user->position->position_name}}
+                            @else
+                            {{ $signatory->user->position->position_name}} /
+                            @endif
+                            @else
+                            @if ($campusCount==$loop->index+1)
+                            {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} Campus
+                            @else
+                            {{ $signatory->user->position->position_name}} of {{ $campus->campus_name}} /
+                            @endif
+                            @endif
 
-                                        @if (strtoupper($sigpos->department_name)=="PRESIDENT'S OFFICE")
-                                            @if ($posCount==$loop->index+1)
-                                            {{ $signatory->user->position->position_name}} 
-                                            @else
-                                            {{ $signatory->user->position->position_name}} /
-                                            @endif
-                                        @else
-                                            @if ($posCount==$loop->index+1)
-                                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}}
-                                            @else
-                                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}} /
-                                            @endif
-                                        @endif
-                                        
-                                    @endforeach
-                             @endif
-                        
-                         </span>
-                       
+                            @endforeach
+
+                            @elseif ($campusCount == 0 && $posCount >= 1)
+                            @foreach ($sigpositions as $sigpos)
+
+                            @if (strtoupper($sigpos->department_name)=="PRESIDENT'S OFFICE")
+                            @if ($posCount==$loop->index+1)
+                            {{ $signatory->user->position->position_name}}
+                            @else
+                            {{ $signatory->user->position->position_name}} /
+                            @endif
+                            @else
+                            @if ($posCount==$loop->index+1)
+                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}}
+                            @else
+                            {{ $signatory->user->position->position_name}} of {{ $sigpos->department_name}} /
+                            @endif
+                            @endif
+
+                            @endforeach
+                            @endif
+
+                        </span>
+
                         @endforeach
-                       
+
                     </div>
                 </div>
             </div>
@@ -126,8 +144,9 @@
     @push('scripts')
     <script>
         window.onload = function () {
-             window.print();
+            window.print();
         }
+
     </script>
     @endpush
 </div>
