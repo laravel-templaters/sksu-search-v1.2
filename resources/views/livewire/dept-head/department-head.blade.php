@@ -508,7 +508,7 @@
                                         <span class="uppercase">{{$travel_order->purpose}}</span>
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <a href="{{ route('view-to-pending',['isSignatory'=>0,'id'=>$travel_order->id,'isDraft'=>0,'userType'=>'applicant']) }}"
+                                        <a href="{{ route('view-to',$travel_order->id) }}"
                                             target="_blank"
                                             class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                             View Travel Order
@@ -611,7 +611,7 @@
                                         <span class="uppercase">{{$travel_order->purpose}}</span>
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2">
-                                        <a href="{{ route('view-to-pending',['isSignatory'=>0,'id'=>$travel_order->id,'isDraft'=> true,'userType'=>'applicant']) }}"
+                                        <a href="{{ route('view-to-pending',['isSignatory'=>0,'id'=>$travel_order->id,'isDraft'=> true,'userType'=>'app']) }}"
                                             target="_blank"
                                             class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                             View Travel Order
@@ -933,7 +933,7 @@
                                                 <span class="uppercase">{{$travel_order->purpose}}</span>
                                             </p>
                                             <div class="flex flex-shrink-0 ml-2">
-                                                <a href="{{ route('view-to-pending',['isSignatory'=>1,'id'=>$travel_order->id,'isDraft'=> 0,'userType'=>'signatory']) }}"
+                                                <a href="{{ route('view-to-pending',['isSignatory'=>1,'id'=>$travel_order->id,'isDraft'=> 0,'userType'=>'sig']) }}"
                                                     target="_blank"
                                                     class="inline-flex px-3 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                                     View Travel Order

@@ -1,11 +1,12 @@
 <div id="toPrint"
     class="h-full m-10 text-center bg-white divide-y divide-black rounded-lg print:divide-y-4 print:rounded-none print:m-0 divide-solid">
-    <div class="flex w-full p-6 print:flex ">
-        <div class="inline my-auto"><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png"
-                alt="sksu logo" class="object-scale-down w-20 h-full"></div>
-        <div id="header" class="inline ml-3 -space-y-2 text-left">
-
-            <div class="my-auto">
+    <div class="flex justify-between w-full p-6 border-b-4 border-black print:flex">
+          
+        <div id="header" class="flex w-full ml-3 text-left">
+            <div class="inline my-auto"><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png"
+                alt="sksu logo" class="object-scale-down w-20 h-full">
+        </div>
+            <div class="my-auto ml-3">
                 <div class="block">
                     <span class="text-sm font-semibold tracking-wide text-left text-black">Republic of the
                         Philippines</span>
@@ -22,6 +23,11 @@
                 <div class="block">
                     <span class="text-sm font-semibold tracking-wide text-black">Province of Sultan Kudarat</span>
                 </div>
+            </div>
+        </div>
+        <div class="relative right-0">
+            <div class="m-auto">
+                {!! QrCode::size(100)->margin(2)->backgroundColor(0, 0, 0,0)->generate((string)$travel_order->tracking_code); !!}
             </div>
         </div>
     </div>
