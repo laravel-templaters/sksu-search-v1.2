@@ -75,17 +75,15 @@
         </div>
         {{-- approval --}}
         <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
-            x-cloak x-show="showConfirmApproval" x-transition-enter="ease-out duration-500"
-            x-transition-enter-start="opacity-0" x-transition-enter-end="opacity-100"
-            x-transition-leave="ease-in duration-200" x-transition-leave-start="opacity-100"
-            x-transition-leave-end="opacity-0">
+            x-cloak x-show="showConfirmApproval" x-transition-enter="ease-out duration-500" x-transition-enter-start="opacity-0"
+            x-transition-enter-end="opacity-100" x-transition-leave="ease-in duration-200"
+            x-transition-leave-start="opacity-100" x-transition-leave-end="opacity-0">
             <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
 
                 <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true" x-cloak
-                    x-show="showConfirmApproval" x-transition-enter="ease-out duration-500"
-                    x-transition-enter-start="opacity-0" x-transition-enter-end="opacity-100"
-                    x-transition-leave="ease-in duration-200" x-transition-leave-start="opacity-100"
-                    x-transition-leave-end="opacity-0"></div>
+                    x-show="showConfirmApproval" x-transition-enter="ease-out duration-500" x-transition-enter-start="opacity-0"
+                    x-transition-enter-end="opacity-100" x-transition-leave="ease-in duration-200"
+                    x-transition-leave-start="opacity-100" x-transition-leave-end="opacity-0"></div>
 
                 <!-- This element is to trick the browser into centering the modal contents. -->
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
@@ -95,78 +93,64 @@
                     x-transition-enter-end="opacity-100 translate-y-0 sm:scale-100"
                     x-transition-leave="ease-in duration-200"
                     x-transition-leave-start="opacity-100 translate-y-0 sm:scale-100"
-                    x-transition-leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    @click.away="showConfirmApproval = false">
+                    x-transition-leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" @click.away="showConfirmApproval = false">
                     <div>
                         <div class="flex items-center justify-center w-12 h-12 mx-auto bg-green-100 rounded-full">
-                            <!-- Heroicon name: outline/check -->
-                            <svg class="w-6 h-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
+                          <!-- Heroicon name: outline/check -->
+                          <svg class="w-6 h-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
                         <div class="mt-3 text-center sm:mt-5">
-                            <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Travel Order
-                                Approved!</h3>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-500 uppercase">Your approval of travel order <span
-                                        class="italic">{{ $travel_order->tracking_code }}</span> has been updated!</p>
-                                <p class="text-xs text-gray-300">This modal will close in a few seconds. Or just click
-                                    away!</p>
-                            </div>
+                          <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Travel Order Approved!</h3>
+                          <div class="mt-2">
+                            <p class="text-sm text-gray-500 uppercase">Your approval of travel order <span class="italic">{{ $travel_order->tracking_code }}</span> has been updated!</p>
+                            <p class="text-xs text-gray-300">This modal will close in a few seconds. Or just click away!</p>
+                          </div>
                         </div>
-                    </div>
+                      </div>
                 </div>
             </div>
         </div>
-        {{-- disapproval --}}
-        <div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
-            x-cloak x-show="showConfirmDisapproval" x-transition-enter="ease-out duration-500"
-            x-transition-enter-start="opacity-0" x-transition-enter-end="opacity-100"
-            x-transition-leave="ease-in duration-200" x-transition-leave-start="opacity-100"
-            x-transition-leave-end="opacity-0">
-            <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+{{-- disapproval --}}
+<div class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+x-cloak x-show="showConfirmDisapproval" x-transition-enter="ease-out duration-500" x-transition-enter-start="opacity-0"
+x-transition-enter-end="opacity-100" x-transition-leave="ease-in duration-200"
+x-transition-leave-start="opacity-100" x-transition-leave-end="opacity-0">
+<div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
 
-                <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true" x-cloak
-                    x-show="showConfirmDisapproval" x-transition-enter="ease-out duration-500"
-                    x-transition-enter-start="opacity-0" x-transition-enter-end="opacity-100"
-                    x-transition-leave="ease-in duration-200" x-transition-leave-start="opacity-100"
-                    x-transition-leave-end="opacity-0"></div>
+    <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" aria-hidden="true" x-cloak
+        x-show="showConfirmDisapproval" x-transition-enter="ease-out duration-500" x-transition-enter-start="opacity-0"
+        x-transition-enter-end="opacity-100" x-transition-leave="ease-in duration-200"
+        x-transition-leave-start="opacity-100" x-transition-leave-end="opacity-0"></div>
 
-                <!-- This element is to trick the browser into centering the modal contents. -->
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-                    x-cloak x-show="showConfirmDisapproval" x-transition-enter="ease-out duration-300"
-                    x-transition-enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    x-transition-enter-end="opacity-100 translate-y-0 sm:scale-100"
-                    x-transition-leave="ease-in duration-200"
-                    x-transition-leave-start="opacity-100 translate-y-0 sm:scale-100"
-                    x-transition-leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    @click.away="showConfirmDisapproval = false">
-                    <div>
-                        <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full">
-                            <!-- Heroicon name: outline/check -->
-                            <svg class="w-6 h-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <div class="mt-3 text-center sm:mt-5">
-                            <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Travel Order
-                                Declined!</h3>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-500 uppercase">Your approval of travel order <span
-                                        class="italic">{{ $travel_order->tracking_code }}</span> has been updated!</p>
-                                <p class="text-xs text-gray-300">This modal will close in a few seconds. Or just click
-                                    away!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- This element is to trick the browser into centering the modal contents. -->
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+        x-cloak x-show="showConfirmDisapproval" x-transition-enter="ease-out duration-300"
+        x-transition-enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        x-transition-enter-end="opacity-100 translate-y-0 sm:scale-100"
+        x-transition-leave="ease-in duration-200"
+        x-transition-leave-start="opacity-100 translate-y-0 sm:scale-100"
+        x-transition-leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" @click.away="showConfirmDisapproval = false">
+        <div>
+            <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full">
+              <!-- Heroicon name: outline/check -->
+              <svg class="w-6 h-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-        </div>
+            <div class="mt-3 text-center sm:mt-5">
+              <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Travel Order Declined!</h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500 uppercase">Your approval of travel order <span class="italic">{{ $travel_order->tracking_code }}</span> has been updated!</p>
+                <p class="text-xs text-gray-300">This modal will close in a few seconds. Or just click away!</p>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+</div>
         {{-- notif --}}
         <div aria-live="assertive"
             class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-cloak
@@ -203,20 +187,13 @@
 
 
 
-        <div class="flex w-full p-6 border-b-4 border-black print:flex">
-            <div class="justify-between">
+        <div class="flex justify-between w-full p-6 border-b-4 border-black print:flex">
+          
+            <div id="header" class="flex w-full ml-3 text-left">
                 <div class="inline my-auto"><img src="http://sksu.edu.ph/wp-content/uploads/2020/09/512x512-1.png"
-                        alt="sksu logo" class="object-scale-down w-20 h-full">
-                </div>
-                <div class="col-span-2 pr-2 m-2">
-                    <div class="m-3"> {!! QrCode::size(80)->margin(2)->backgroundColor(0, 0, 0,
-                        0)->generate((string)$travel_order->tracking_code); !!}
-                    </div>
-                </div>
+                    alt="sksu logo" class="object-scale-down w-20 h-full">
             </div>
-            <div id="header" class="inline ml-3 -space-y-2 text-left">
-
-                <div class="my-auto">
+                <div class="my-auto ml-3">
                     <div class="block">
                         <span class="text-sm font-semibold tracking-wide text-left text-black">Republic of the
                             Philippines</span>
@@ -233,6 +210,11 @@
                     <div class="block">
                         <span class="text-sm font-semibold tracking-wide text-black">Province of Sultan Kudarat</span>
                     </div>
+                </div>
+            </div>
+            <div class="relative right-0">
+                <div class="m-auto">
+                    {!! QrCode::size(100)->margin(2)->backgroundColor(0, 0, 0,0)->generate((string)$travel_order->tracking_code); !!}
                 </div>
             </div>
         </div>
@@ -286,19 +268,17 @@
                                     @if ($travel_order->date_of_travel_from != '')
                                     {{Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('F Y')}}
                                     @endif
-                                    @else
-                                    @if ($travel_order->date_of_travel_from != '' && $travel_order->date_of_travel_from
-                                    != '')
+                                @else
+                                    @if ($travel_order->date_of_travel_from != '' && $travel_order->date_of_travel_from != '')
                                     <strong
-                                        class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('F Y')}}</strong>
-                                    to <strong
+                                        class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_from)->format('F Y')}}</strong> to <strong
                                         class="underline">{{ Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_to)->format('jS').' of '.Carbon\Carbon::createFromFormat('Y-m-d',$travel_order->date_of_travel_to)->format('F Y')}}</strong>
-
+                                   
                                     @endif
-                                    @endif
-
-                                </strong>
-                                to do the following:
+                                @endif
+                                   
+                            </strong>
+                            to do the following:
                             </span>
                             <span
                                 class="block pl-5 font-semibold tracking-wide text-left text-black whitespace-pre-line text-md">
@@ -588,17 +568,18 @@
 
                 </ul>
             </div>
-            @if ($sideNoteNumber < $side_notes_count) <div class="mt-6">
+            @if ($sideNoteNumber < $side_notes_count)
+            <div class="mt-6">
                 <button x-on:click="$wire.set('sideNoteNumber',$wire.sideNoteNumber+5)"
                     class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50">
                     View More
                 </button>
-        </div>
+           </div>
         @endif
     </div>
 
 </div>
-<div class="col-span-1 p-4 text-left">
+<div class="col-span-1 p-4 text-left" >
     <span class="text-lg font-semibold tracking-wider text-left uppercase text-primary-700">Approval Status </span>
     <div class="">
         <div class="flow-root mt-6">
