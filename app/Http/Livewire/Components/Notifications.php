@@ -11,4 +11,13 @@ class Notifications extends Component
     {
         return view('livewire.components.notifications',['users'=>User::all()]);
     }
+    public function getListeners()
+    {
+        return [
+            "echo-private:new-notif.".auth()->user()->id.",newnotif" => 'hoy',
+        ];
+    }
+    public function hoy(){
+        $this->emit('notify');
+    }
 }

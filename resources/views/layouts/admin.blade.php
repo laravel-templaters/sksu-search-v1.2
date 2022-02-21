@@ -57,8 +57,9 @@
     </div>
     <div class="fixed bottom-0 block min-w-full pt-3">@include('footer')</div>
     @stack('modals')
-    @stack('scripts')
+   
     @livewireScripts
+    @stack('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <x-livewire-alert::scripts />
 

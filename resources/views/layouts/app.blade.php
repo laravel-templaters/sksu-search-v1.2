@@ -48,8 +48,9 @@
     </div>
     <!-- <div class="relative bottom-0">@include('footer')</div> -->
     @stack('modals')
-    @stack('scripts')
+    
     @livewireScripts
+    @stack('scripts')
     <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
     <x-livewire-alert::scripts />

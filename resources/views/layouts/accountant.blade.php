@@ -53,9 +53,10 @@
     </div>
     <!-- @include('footer') -->
     @stack('modals')
-    @stack('scripts')
+  
 
     @livewireScripts
+    @stack('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
     <x-livewire-alert::scripts />
