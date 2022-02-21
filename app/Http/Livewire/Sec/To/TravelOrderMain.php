@@ -46,6 +46,7 @@ class TravelOrderMain extends Component
     public $pickedUsers = false;
     public $searchedSigs = false;
     public $pickedSigs = false;
+    public $genUpdated = false;
 
     public $users_id;
     public $applicant_ids = [];
@@ -136,28 +137,36 @@ class TravelOrderMain extends Component
         }
     }
 
+    public function updatedShowdays(){
+        $this->render();
+    }
     public function updated($name, $value)
     {
         if($this->ispopulating == false){
 
-            if($name != "showBanner"){
-                if ($this->travel_draft_made == false) {
-                    $this->travel_order = new TravelOrder;
-                    $this->isSaved = "Saving changes as draft";
-                    if ($this->toType == "offtime") {
-                        $this->save_draft_official_time();
-                    } else if ($this->toType == "offtravel") {
-                        $this->save_draft_official_travel();
-                    }
-                } else {
-                    $this->travelOrderForpassingID=$this->travel_order->id;
-                    $this->isSaved = "Saving changes as draft";
-                    if ($this->toType == "offtime") {
-                        $this->save_draft_official_time();
-                    } else if ($this->toType == "offtravel") {
-                        $this->save_draft_official_travel();
+            if ($name != 'dateoftravelto' && $name != 'dateoftravelfrom') {
+                if($name != "showBanner"){
+                    if ($this->travel_draft_made == false) {
+                        $this->travel_order = new TravelOrder;
+                        $this->isSaved = "Saving changes as draft";
+                        if ($this->toType == "offtime") {
+                            $this->save_draft_official_time();
+                        } else if ($this->toType == "offtravel") {
+                            $this->save_draft_official_travel();
+                        }
+                    } else {
+                        $this->travelOrderForpassingID=$this->travel_order->id;
+                        $this->isSaved = "Saving changes as draft";
+                        if ($this->toType == "offtime") {
+                            $this->save_draft_official_time();
+                        } else if ($this->toType == "offtravel") {
+                            $this->save_draft_official_travel();
+                        }
                     }
                 }
+            }else{
+                $this->showDays=false;
+                $this->updatedShowdays();
             }
         }
         
@@ -479,9 +488,11 @@ class TravelOrderMain extends Component
 
     public function generateDays()
     {
-
+        
+        $this->changeDate();
+        $this->showDays = false;
         $this->finalTotal = $this->subTotal = 0.0;
-        if (is_null($this->date_from) || is_null($this->date_to)) {
+        if ($this->date_from=="" || $this->date_to=="") {
             $this->showDays = false;
             $this->err_diff = false;
             $this->err_from_to = true;
@@ -510,7 +521,10 @@ class TravelOrderMain extends Component
                 }
                 $deleteAll = Itenerary::where('travel_order_id', '=', $this->travel_order->id)->delete();
                 $temp = TravelOrderMain::createDateRangeArray($this->date_from, $this->date_to);
-
+            
+                $this->err_diff = false;
+                $this->err_from_to = false;
+                $this->err_diem = false;
                 $this->showDays = true;
             }
         }
@@ -567,7 +581,8 @@ class TravelOrderMain extends Component
         // could test validity of dates here but I'm already doing
         // that in the main script
 
-     
+        //dd( $this->genUpdated);
+        $this->genUpdated = false;
         unset($this->gen); // $foo is gone
         $this->gen  = array();
 
@@ -584,7 +599,7 @@ class TravelOrderMain extends Component
 
 
         //   dd($this->gen);
-
+        $this->genUpdated = true;
         return $this->gen;
     }
 

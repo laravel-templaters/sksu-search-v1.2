@@ -4,7 +4,7 @@
        
     }
 })"
-    x-data="{show_Banner :@entangle('showBanner'),showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),showFromDateError:@entangle('showFromDateError'),showToDateError:@entangle('showToDateError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
+    x-data="{show_Banner :@entangle('showBanner'),genUpdated :@entangle('genUpdated'),showApplicantError:@entangle('showApplicantError'),showSignatoryError:@entangle('showSignatoryError'),showFromDateError:@entangle('showFromDateError'),showToDateError:@entangle('showToDateError'),pickedSigs:@entangle('pickedSigs'),pickedUsers:@entangle('pickedUsers'), searchedUsers :@entangle('searchedUsers'), searchedSigs :@entangle('searchedSigs'), totype:@entangle('toType')}">
     {{-- implicit submission --}}
 
     {{-- notif --}}
@@ -458,6 +458,7 @@
         {{-- </div> --}}
         <div class="pt-8 pl-4 space-y-6 sm:pt-10 sm:space-y-5" x-cloak x-show="totype=='offtravel'">
             <div>
+               
                 <h3 class="text-3xl font-medium leading-6 text-gray-900">
                     Itinerary
                 </h3>
@@ -496,26 +497,27 @@
                 Loading...
             </div>
         </div>
-
+        
         @if($showDays)
 
-
+        
         <div x-cloak x-show="totype=='offtravel'" wire:key='thisiswirekeyforholderofitenerary'>
-            
+
             @foreach ($gen as $g)
-            <div class="" wire:key='{{ $loop->index }}'>
-                @if (count($gen)==1)
-                    @livewire('itenerary-view', ['gen' => $g, 'per_diem' =>isset($diems) ? $diems : '0.00','travel_order_id' => $travelOrderForpassingID,'is_edit'=>$isEdit, 'is_diem_half'=>true], key($g))
-                @else
-                    @if ($loop->index+1 == count($gen))
-                    @livewire('itenerary-view', ['gen' => $g, 'per_diem' =>isset($diems) ? $diems : '0.00','travel_order_id' => $travelOrderForpassingID,'is_edit'=>$isEdit, 'is_diem_half'=>true], key($g))
+                <div wire:key='{{ $loop->index }}'>
+                    @if (count($gen)==1)
+                        @livewire('itenerary-view', ['gen' => $g, 'per_diem' =>isset($diems) ? $diems : '0.00','travel_order_id' => $travelOrderForpassingID,'is_edit'=>$isEdit, 'is_diem_half'=>true], key($g))
                     @else
-                        @livewire('itenerary-view', ['gen' => $g, 'per_diem' =>isset($diems) ? $diems : '0.00','travel_order_id' => $travelOrderForpassingID,'is_edit'=>$isEdit, 'is_diem_half'=>false], key($g))
+                        @if ($loop->index+1 == count($gen))
+                        @livewire('itenerary-view', ['gen' => $g, 'per_diem' =>isset($diems) ? $diems : '0.00','travel_order_id' => $travelOrderForpassingID,'is_edit'=>$isEdit, 'is_diem_half'=>true], key($g))
+                        @else
+                            @livewire('itenerary-view', ['gen' => $g, 'per_diem' =>isset($diems) ? $diems : '0.00','travel_order_id' => $travelOrderForpassingID,'is_edit'=>$isEdit, 'is_diem_half'=>false], key($g))
+                        @endif
                     @endif
-                @endif
-            </div>
+                </div>
             @endforeach
-            
+
+           
         </div>
         @if(isset($gen))
         <div class="relative min-w-full my-4 ml-4 mr-7" x-cloak x-show="totype=='offtravel'">

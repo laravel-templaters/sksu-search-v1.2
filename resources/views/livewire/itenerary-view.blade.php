@@ -2,7 +2,7 @@
     @php
     $this->per_diem = $per_diem;
     @endphp
-    <div class="flex flex-col" wire:init="generateDays">
+    <div class="flex flex-col">
         <div class="my-3 overflow-x-auto rounded-lg">
             <div class="inline-block py-2 align-middle min-w-ful">
                 <div class="overflow-hidden border-b border-white shadow">
