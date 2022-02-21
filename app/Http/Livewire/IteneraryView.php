@@ -77,7 +77,7 @@ class IteneraryView extends Component
         
     }
 
-    public function mount($gen, $per_diem, $travel_order_id,$is_edit)
+    public function mount($gen, $per_diem, $travel_order_id,$is_edit,$is_diem_half)
     {
         // dd($gen);
         $this->gen = $gen;
@@ -94,8 +94,15 @@ class IteneraryView extends Component
         if($this->per_diem != "0.00")
         {
             if(!isset($this->temp_diem[0])){
-                $this->temp_diem[0]=$this->per_diem['amount'];
+                if ($is_diem_half==true) {
 
+                    $this->temp_diem[0]=$this->per_diem['amount']/2;
+
+                }else{
+
+                    $this->temp_diem[0]=$this->per_diem['amount'];
+
+                }
                 $this->input[0]['raw_diem'] =  $this->temp_diem[0];
                 $this->input[0]['per_diem'] =  number_format($this->temp_diem[0],2);
             }  

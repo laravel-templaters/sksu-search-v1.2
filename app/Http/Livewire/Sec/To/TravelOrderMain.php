@@ -567,7 +567,9 @@ class TravelOrderMain extends Component
         // could test validity of dates here but I'm already doing
         // that in the main script
 
-        $this->gen = [];
+     
+        unset($this->gen); // $foo is gone
+        $this->gen  = array();
 
         $iDateFrom = strtotime($strDateFrom);
         $iDateTo = strtotime($strDateTo);
