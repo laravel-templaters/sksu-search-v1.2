@@ -7,6 +7,7 @@ use DateTime;
 use DateInterval;
 
 use Livewire\Component;
+use App\Events\newnotif;
 use App\Models\Region;
 use App\Models\Province;
 use App\Models\City;
@@ -15,6 +16,7 @@ use App\Models\TravelOrder;
 use App\Models\Dte;
 use App\Models\Itenerary;
 use App\Models\IteneraryEntry;
+use App\Models\Notif;
 use App\Models\TravelOrderApplicant;
 use App\Models\TravelOrderSignatory;
 use Carbon\Carbon;
@@ -695,25 +697,34 @@ class TravelOrderMain extends Component
         }
         if ($this->isDraft == false) {
             $this->showBanner = true;
-            if ($this->toType == "offtravel") {
-                //$deleteAllItenerary = Itenerary::where('travel_order_id','=',$toID)->delete();
-                // if ($this->showDays == true) {
-                //     $this->emit('storeIteneraryDraft', $toID);
-                // }
-            }
+            $this->saveNotifs($toID);
+            
         } else {
             if ($this->toType == "offtravel") {
                // $deleteAllItenerary = Itenerary::where('travel_order_id','=',$toID)->delete();
               
                 if ($this->showDays == true) {
                     $this->emit('storeIteneraryDraft', $toID);
-                 
                 }
+
             }
+
             $this->travel_draft_made = true;
         }
     }
 
+    public function saveNotifs($toID){
+        foreach ($this->signatory_ids as $key=> $value) {
+            $notif = new Notif;
+            $notif->notif_type_id = 1;
+            $notif->user_id= $value;
+            $notif->read_status = false;
+            $notif->message="A new Travel Order has been submitted for your approval.";
+            $notif->route_url=route('view-to-pending',['isSignatory'=>1,'id'=>$toID,'isDraft'=> 0,'userType'=>'sig']);
+            $notif->save();
+            event(new newnotif($value));
+        }
+    }
     public function populateForEdit(){
         $this->travel_order = TravelOrder::findOrFail($this->TOforEditID);
         $this->travel_draft_made = true;
@@ -748,8 +759,11 @@ class TravelOrderMain extends Component
 
         $this->changeDate();
         $this->generateDaysForEdit();
+        
         // dd( $itenerary->id);
          //dd($iteneraryID);
+        
+         
 
 
 

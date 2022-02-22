@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 class newnotif implements ShouldBroadcast
 {
+    public $user_id;
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
@@ -19,8 +20,9 @@ class newnotif implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user_id)
     {
+        $this->user_id = $user_id;
         //
     }
 
