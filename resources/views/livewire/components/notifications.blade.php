@@ -6,4 +6,15 @@
         </li>
         @endforeach
     </ul>
+    @push('scripts')
+        <script>
+            //Listen for wire event notify
+            Livewire.on('notify', () => {
+                
+                const sound = new Audio('./ringtones/notif-pop.wav');
+                sound.play();
+
+            })
+        </script>
+    @endpush
 </div>
