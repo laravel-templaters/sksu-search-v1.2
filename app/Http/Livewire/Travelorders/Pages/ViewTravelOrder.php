@@ -36,7 +36,7 @@ class ViewTravelOrder extends Component
         'travel_order'=> $this->travel_order,
         'applicants' =>TravelOrderApplicant::searchexactly('travel_order_id',$this->travelorderID)->with('user')->get(),
         'signatories' =>TravelOrderSignatory::searchexactly('travel_order_id',$this->travelorderID)->orderBy('stepNumber')->with('user')->get(),
-        'side_notes' => SideNote::searchexactly('travel_order_id',$this->travelorderID)->orderBy('id')->get()->take($this->sideNoteNumber),
+        'side_notes' => SideNote::searchexactly('travel_order_id',$this->travelorderID)->orderBy('id','desc')->get()->take($this->sideNoteNumber),
         'side_notes_count' => SideNote::searchexactly('travel_order_id',$this->travelorderID)->orderBy('id')->count(),
         ])->layout('layouts.app');
     }
@@ -145,8 +145,8 @@ class ViewTravelOrder extends Component
                     $notif->user_id = $applicant->user_id;
                     $notif->notif_type_id = 3;
                     $notif->read_status = false;
-                    $notif->message="Your travel order ".$this->travel_order->tracking_code." was approved by".auth()->user()->name.".";
-                    $notif->route_url="route('view-to-pending',['isSignatory'=>0,'id'=>".$toID.",'isDraft'=> 0,'userType'=>'app'])";
+                    $notif->message="Your travel order ".$this->travel_order->tracking_code." was approved by ".auth()->user()->name.".";
+                    $notif->route_url=route('view-to-pending',['isSignatory'=>0,'id'=>$toID,'isDraft'=> 0,'userType'=>'app']);
                     $notif->save();
                     event(new newnotif($notif->user_id));
                 }

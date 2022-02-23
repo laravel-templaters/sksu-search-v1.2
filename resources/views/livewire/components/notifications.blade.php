@@ -13,7 +13,7 @@
     @push('scripts')
         <script>
             //Listen for wire event notify
-            Livewire.on('notify', () => {
+            windows.livewire.on('notify', () => {
                 
                 const sound = new Audio('./ringtones/notif-pop.wav');
                 sound.play();

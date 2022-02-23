@@ -8,9 +8,11 @@ use Livewire\Component;
 
 class Notifications extends Component
 {
+    public $notifs;
     public function render()
     {
-        return view('livewire.components.notifications',['notifs'=>Notif::where('user_id','=',auth()->user()->id)->get()]);
+        $this->notifs =Notif::where('user_id','=',auth()->user()->id)->orderBy('id','desc')->get();
+        return view('livewire.components.notifications',['notifs'=>$this->notifs]);
     }
     public function getListeners()
     {
@@ -20,6 +22,7 @@ class Notifications extends Component
     }
     public function hoy(){
         $this->emit('notify');
+        $this->notifs=null;
     }
     public function readNotif($url,$notif_id){
         $notifUpdate = Notif::findOrFail($notif_id);
