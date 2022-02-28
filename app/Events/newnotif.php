@@ -12,16 +12,18 @@ use Illuminate\Queue\SerializesModels;
 
 class newnotif implements ShouldBroadcast
 {
+    
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $user_id;
+    protected $message;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user_id)
     {
-        //
+        $this->user_id = $user_id;
     }
 
     /**
@@ -31,6 +33,6 @@ class newnotif implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('new-notif'.$this->user_id);
+        return new PrivateChannel('new-notif.'.$this->user_id);
     }
 }

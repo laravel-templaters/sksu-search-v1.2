@@ -507,7 +507,7 @@ x-transition-leave-start="opacity-100" x-transition-leave-end="opacity-0">
 
     </div>
 
-    <div class="col-span-1 p-4 text-left">
+    <div class="col-span-1 p-4 overflow-y-auto text-left h-screen-80">
         <span class="text-lg font-semibold tracking-wider text-left uppercase text-primary-700">Side Notes</span>
         <div class="">
             <div class="flow-root mt-6">
