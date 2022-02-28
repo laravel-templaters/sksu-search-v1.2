@@ -747,7 +747,7 @@ class TravelOrderMain extends Component
         // $iteneraryID = Itenerary::where('travel_order_id', $this->TOforEditID)->latest('id')->first();
 
         $this->changeDate();
-        $this->generateDaysForEdit();
+        $this->c;
         // dd( $itenerary->id);
          //dd($iteneraryID);
 
