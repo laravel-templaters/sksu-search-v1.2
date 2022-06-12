@@ -1028,6 +1028,9 @@ select {
 .left-4 {
   left: 1rem;
 }
+.-top-1 {
+  top: -0.25rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -1521,6 +1524,9 @@ select {
 .w-0\.5 {
   width: 0.125rem;
 }
+.w-screen-80 {
+  width: 80vh;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1632,6 +1638,11 @@ select {
 }
 .-translate-x-0 {
   --tw-translate-x: -0px;
+  transform: var(--tw-transform);
+}
+.scale-105 {
+  --tw-scale-x: -1;
+  --tw-scale-y: -1;
   transform: var(--tw-transform);
 }
 .scale-y-105 {
@@ -2572,12 +2583,6 @@ select {
 .pt-3 {
   padding-top: 0.75rem;
 }
-.pb-6 {
-  padding-bottom: 1.5rem;
-}
-.pl-1 {
-  padding-left: 0.25rem;
-}
 .pr-5 {
   padding-right: 1.25rem;
 }
@@ -2598,6 +2603,12 @@ select {
 }
 .pt-1\.5 {
   padding-top: 0.375rem;
+}
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+.pl-1 {
+  padding-left: 0.25rem;
 }
 .text-left {
   text-align: left;
@@ -2899,6 +2910,10 @@ select {
 .text-indigo-300 {
   --tw-text-opacity: 1;
   color: rgb(165 180 252 / var(--tw-text-opacity));
+}
+.text-primary-text-alt {
+  --tw-text-opacity: 1;
+  color: rgb(206 224 204 / var(--tw-text-opacity));
 }
 .text-opacity-90 {
   --tw-text-opacity: 0.9;
@@ -3707,6 +3722,10 @@ select {
 
   .sm\:col-span-2 {
     grid-column: span 2 / span 2;
+  }
+
+  .sm\:col-span-6 {
+    grid-column: span 6 / span 6;
   }
 
   .sm\:col-start-2 {
