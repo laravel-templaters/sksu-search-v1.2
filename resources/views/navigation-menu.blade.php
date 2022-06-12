@@ -149,7 +149,7 @@
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button
                                 class="flex items-center p-2 text-sm transition border-2 border-transparent rounded-full bg-primary-300 focus:outline-none focus:border-gray-300">
-                                <div class="absolute z-50 flex w-5 h-5 text-xs text-center text-white bg-red-700 rounded-full animate-pulse -right-1 -top-1"><span class="m-auto"></span></div>
+                                <div class="absolute z-50 flex w-4 h-4 text-xs text-center text-white bg-red-700 rounded-full -right-1 animate-pulse -top-0"><span class="m-auto"></span></div>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                                     stroke="white">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

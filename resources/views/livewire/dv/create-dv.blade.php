@@ -236,18 +236,20 @@
                                 wire:model.debounce.500ms="searchto" placeholder="Search Purpose Here">
                                 <p class="mt-1 ml-1 text-sm text-gray-500">
                                     <span class="font-extrabold tracking-wider text-red-400">Note: </span>
-                                    Please secure a travel order first by, creating one <a href="{{route('travel-order', 3)}}" class="text-indigo-600 underline">here</a>. <br>For more details click this <a href="#" class="text-indigo-600 underline">link</a>
+                                    Please secure a travel order first by, creating one <a href="{{route('travel-order', ['id'=>3,'isEdit'=>0,'travelOrderID'=>'|'])}}" class="text-indigo-600 underline">here</a>. <br>For more details click this <a href="#" class="text-indigo-600 underline">link</a>
                                  </p>
-                            <div class="grid grid-cols-1 gap-2 px-2 pt-2 mx-auto">
+                            <div class="grid grid-cols-2 gap-2 px-2 pt-2 mx-auto">
                                 @if(isset($searchedto)==true)
                                 @if($searchedto->count() > 0)
                                 @foreach($searchedto as $to)
-                                <div class="break-normal">
-                                    <button class="text-left " wire:click="sTOid({{$to->id}},false)">
-                                        <p class="mt-1 text-sm text-blue-53">
+                                <div class="flex break-normal rounded-lg bg-primary-100 group hover:bg-gray-100 hover:shadow-md hover:shadow-primary-500">
+                                    <div class="w-full text-left rounded-lg group-hover:cursor-pointer group-hover:bg-gray-100" wire:click="sTOid({{$to->id}},false)">
+                                        <p class="px-2 pt-2 font-medium leading-5 text-primary-700 text-md">{{$to->tracking_code}}</p>
+                                        <p class="px-4 pt-1 font-medium leading-5 text-primary-700 text-md">Purpose:</p>
+                                        <p class="px-6 pb-2 text-sm whitespace-pre-line text-primary-400">
                                             {{$to->purpose}}
                                         </p>
-                                    </button>
+                                    </div>
                                 </div>
                                 @endforeach
                                 @else
@@ -597,7 +599,7 @@
                             </ol>
                             <div class="m-2"><span class="text-indigo-600 text-md">Note: Click proceed if documents
                                     required for your disbursement voucher is <strong
-                                        class="font-bold uppercase text-md text-primary-text-alt">compiled and ready
+                                        class="font-bold uppercase text-md text-primary-400">compiled and ready
                                         for
                                         submission</strong></span></div>
 
@@ -961,7 +963,24 @@
                                 @endif
                                 @if(isset($position))
                                 <div class="col-span-3 col-start-2 row-span-1 row-start-4 font-semibold text-center">
-                                    {{$position->position_name}} of {{$department->department_name}}</div>
+                                    @switch($position->position_name)
+                                        @case('Registrar')
+                                        {{$position->position_name}}
+                                            @break
+                                        @case('Accountant')
+                                        {{$position->position_name}}
+                                            @break
+                                        @case('Treasurer')
+                                        {{$position->position_name}}
+                                            @break
+                                        @case('University President')
+                                        {{$position->position_name}}
+                                            @break
+                                    
+                                        @default
+                                        {{$position->position_name}} of {{$department->department_name}}   
+                                    @endswitch
+                                </div>
                                 @endif
                             </div>
                         </div>

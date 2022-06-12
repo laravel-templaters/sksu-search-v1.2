@@ -44,6 +44,9 @@
     @if (request()->routeIs('archiver-main'))
     <div class="h-32 bg-primary-500 pb-34"></div> 
     @endif
+    @if (request()->routeIs('archive-new'))
+    <div class="h-32 bg-primary-500 pb-34"></div> 
+    @endif
     
     <!-- Page Content -->
     <main class="bg-transparent">

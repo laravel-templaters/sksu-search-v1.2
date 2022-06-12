@@ -101,15 +101,21 @@ class CreateDv extends Component
 
     public function render()
     {
+        //get all travel_order_id from travel_order_applicant table
+        $travel_order_id = DB::table('travel_order_applicants')->where('user_id',auth()->user()->id)->get('travel_order_id');
+        $travelorderids = [];
+        foreach($travel_order_id as $id){
+            $travelorderids[] = $id->travel_order_id;
+        }
         if(isset($this->searchto)){
-            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '".strtolower($this->searchto)."%'")->orderBy('created_at')->get();
+            $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%'")->orWhere('tracking_code','like',"%".strtolower($this->searchto)."%")->whereIn('id',$travelorderids)->orderBy('created_at')->get();
             // $this->searchedto =TravelOrder::whereRaw("lower(purpose) like '%".strtolower($this->searchto)."%' or lower(place_to_go) like '%".strtolower($this->searchto)."%'")->orderBy('created_at');
         }
         if (isset($this->searchuser) && $this->searchuser != "") {
             $this->searchedusers= User::where(DB::raw('lower(name)'),"LIKE","".strtolower($this->searchuser)."%")->get();
         }
 
-        $this ->searchedsignatories = User::whereRaw("lower(name) like '".strtolower($this->searchsignatory) ."%' and role_id = 2")
+        $this ->searchedsignatories = User::search('name',$this->searchsignatory)->whereIn('position_id', [5, 12, 13, 11, 14, 15, 16, 17, 18, 19, 20, 21, 25])
         ->get();  
         
         $this->mode_of_payment = DB::table('mode_of_payments')->get();
@@ -438,7 +444,7 @@ class CreateDv extends Component
             $this->travelorderid=$id;
             $touid=TravelOrder::find($id);
             $this->entry[0]=$touid->purpose;
-            $this->user_id=$touid->user_id;
+            $this->user_id=auth()->user()->id;
             $names=User::where('id',$this->user_id)->get();
             $this->amount[0] = $touid->total;
            

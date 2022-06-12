@@ -119,4 +119,4 @@ Route::middleware(['auth:sanctum','verified'])->get('travel-order/view/34d4c659b
 Route::middleware(['auth:sanctum','verified'])->get('travel-order/view/34d4c659{isSignatory}bb9a93d6b{id}76bd4d016a69aa{isDraft}9d92e1ca81a{userType}4c19eb62f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\ViewTravelOrder::class)->name('view-to-pending');
 Route::middleware(['auth:sanctum','verified'])->get('travel-order/print/16a69aa9d92e1ca81a4c19eb634d4c659bb9a93d6b76bd4d02{id}f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\PrintTravelOrder::class)->name('print-to');
 
-Route::view('/401-page', 'errs.401-page')->name('401-error');
+Route::view('/401-page', 'errs.401-page')->name('401-error');   
