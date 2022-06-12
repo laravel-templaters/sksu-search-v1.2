@@ -8,6 +8,6 @@ class NewBuilding extends Component
 {
     public function render()
     {
-        return view('livewire.archiver.pages.new-building');
+        return view('livewire.archiver.pages.new-building')->layout('layouts.accountant');
     }
 }

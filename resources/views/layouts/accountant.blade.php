@@ -31,7 +31,7 @@
 <body class="min-h-screen font-sans bg-gradient-to-b from-primary-300 via-white to-white">
     @livewire('navigation-menu')
 
-
+    <!-- ACC -->
     <!-- Page Heading -->
     @if (isset($header))
     <header class="bg-white shadow">
@@ -44,7 +44,7 @@
     @if (request()->routeIs('archiver-main'))
     <div class="h-32 bg-primary-500 pb-34"></div> 
     @endif
-    @if (request()->routeIs('archive-new'))
+    @if (auth()->user()->role->role_name == "Archiver" && !request()->routeIs('archiver-main'))
     <div class="h-32 bg-primary-500 pb-34"></div> 
     @endif
     

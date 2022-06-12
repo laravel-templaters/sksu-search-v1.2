@@ -108,6 +108,11 @@ Route::middleware(['auth:sanctum','verified'])->get('/archives/document/list',Ap
 Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail/{id}',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentDetails::class)->name('archive-detail');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/main',App\Http\Livewire\Accountant\Pages\Archives\ArchiverMainView::class)->name('archiver-main');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/new/archive',App\Http\Livewire\Accountant\Pages\Archives\ArchiverNew::class)->name('archive-new');
+Route::middleware(['auth:sanctum','verified'])->get('/archiver/buildings',App\Http\Livewire\Archiver\Pages\NewBuilding::class)->name('manage-buildings');
+Route::middleware(['auth:sanctum','verified'])->get('/archiver/shelves',App\Http\Livewire\Archiver\Pages\NewShelf::class)->name('manage-shelves');
+Route::middleware(['auth:sanctum','verified'])->get('/archiver/folders',App\Http\Livewire\Archiver\Pages\NewFolder::class)->name('manage-folders');
+Route::middleware(['auth:sanctum','verified'])->get('/testComp',App\Http\Livewire\TestComp::class)->name('test');
+
 
 
 //usermgt

@@ -31,7 +31,7 @@
 <body class="h-full min-h-screen font-sans bg-gradient-to-b from-primary-300 via-white to-white">
     <div>
         @livewire('navigation-menu')
-
+<!-- Adm -->
         <!-- Page Heading -->
         @if (isset($header))
         <header class="bg-white shadow">
