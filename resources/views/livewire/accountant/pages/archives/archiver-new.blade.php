@@ -131,7 +131,7 @@ x-data="{folderSelected : @entangle('folderSelected'),buildingSelected : @entang
     </div>
     
     <aside class="relative flex-shrink-0 hidden overflow-hidden xl:order-first xl:flex xl:flex-col w-96">
-        <div class="py-6 pl-8 bg-red">
+        {{-- <div class="py-6 pl-8 bg-red">
             <div class="flex-shrink max-w-full max-h-full p-3 space-y-2 rounded-md shadow-md bg-gray-50 shadow-primary-500/50">
                 <div class="font-extrabold tracking-wider text-md">Tags:</div>
                 @if (isset($selectedBuilding))
@@ -183,7 +183,7 @@ x-data="{folderSelected : @entangle('folderSelected'),buildingSelected : @entang
                 </div>
                 @endif
             </div>
-        </div>
+        </div> --}}
         @livewire('archiver.components.sidenav')
         
     </aside>

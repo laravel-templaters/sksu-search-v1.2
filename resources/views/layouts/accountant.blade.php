@@ -44,7 +44,7 @@
     @if (request()->routeIs('archiver-main'))
     <div class="h-32 bg-primary-500 pb-34"></div> 
     @endif
-    @if (auth()->user()->role->role_name == "Archiver" && !request()->routeIs('archiver-main'))
+    @if (auth()->user()->role->role_name == "Archiver" && !request()->routeIs('archiver-main')  && !request()->routeIs('archive-list')  && !request()->routeIs('archive-detail'))
     <div class="h-32 bg-primary-500 pb-34"></div> 
     @endif
     

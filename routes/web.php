@@ -105,7 +105,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/budoff/dashboard', \App\H
 
 //archive
 Route::middleware(['auth:sanctum','verified'])->get('/archives/document/list',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentList::class)->name('archive-list');
-Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail/{id}',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentDetails::class)->name('archive-detail');
+Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail/{id}016a69aa9d9{islegacy}d92e1ca8',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentDetails::class)->name('archive-detail');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/main',App\Http\Livewire\Accountant\Pages\Archives\ArchiverMainView::class)->name('archiver-main');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/new/archive',App\Http\Livewire\Accountant\Pages\Archives\ArchiverNew::class)->name('archive-new');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/buildings',App\Http\Livewire\Archiver\Pages\NewBuilding::class)->name('manage-buildings');

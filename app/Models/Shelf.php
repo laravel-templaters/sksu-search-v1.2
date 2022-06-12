@@ -18,4 +18,7 @@ class Shelf extends Model
     public function drawer(){
         return $this->belongsTo('App\Models\Drawer');
     }
+    public function legacyDocument(){
+        return $this->hasMany('App\Models\LegacyDocument');
+    }
 }

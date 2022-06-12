@@ -14,9 +14,9 @@
             </span>
 
             <!-- Current: "bg-gray-50", Default: "bg-gray-200 text-gray-600" -->
-            <span class="bg-gray-50 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
+            {{-- <span class="bg-gray-50 ml-auto inline-block py-0.5 px-3 text-xs rounded-full">
                 5
-            </span>
+            </span> --}}
         </a>
 
         <a href="{{ route('archive-new') }}"

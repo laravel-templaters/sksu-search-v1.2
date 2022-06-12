@@ -17,7 +17,12 @@ class CreateLegacyDocumentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('path');
-            $table->string('archived_year_id');
+            $table->string('document_code');
+            $table->foreignId('archived_year_id')->nullable();
+            $table->foreignId('building_id')->nullable();
+            $table->foreignId('shelf_id')->nullable();
+            $table->foreignId('drawer_id')->nullable();
+            $table->foreignId('folder_id')->nullable();
             $table->timestamps();
         });
     }

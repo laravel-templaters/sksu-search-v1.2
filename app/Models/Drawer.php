@@ -21,4 +21,7 @@ class Drawer extends Model
         return $this->belongsTo('App\Models\ArchiveFolder');
 
      }
+     public function legacyDocument(){
+        return $this->hasMany('App\Models\LegacyDocument');
+    }
 }

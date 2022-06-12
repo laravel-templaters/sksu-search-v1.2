@@ -135,16 +135,19 @@
                                 {{-- <tr> --}}
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Folder Tr. No.
+                                    Folder name
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Description
+                                    Description/Document Name
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Date Archived
                                 </th>
+                                <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                     Legacy Document
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Action</span>
@@ -152,51 +155,81 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @if (count($disbursement_vouchers)>0)
-                                @foreach ($disbursement_vouchers as $disbursement_voucher)
-                                <tr>
+                            
+                                @if (count($disbursement_vouchers)>0 || count($legacy_documents)>0)
+                               
+                                    @foreach ($legacy_documents as $legacy_document)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                            {{$legacy_document->folder->folder_name}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                            {{$legacy_document->name}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                            {{$legacy_document->created_at->format('F d, Y')}}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                            YES
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                            <a href="{{  route('archive-detail', ['id'=>$legacy_document->id,'islegacy'=>1])  }}" target="_blank" class="inline-flex text-indigo-600 hover:text-indigo-900">
+                                                <span class="inline pr-3">View</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                </svg>
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                    @endforeach
+                                    @foreach ($disbursement_vouchers as $disbursement_voucher)
+                                    <tr>
                                                         {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 w-10 h-10">
-                                            <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 w-10 h-10">
+                                                <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    Jane Cooper
+                                                </div>
+                                                <div class="text-sm text-gray-500">
+                                                    jane.cooper@example.com
+                                                </div>
+                                                </div>
                                             </div>
-                                            <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">
-                                                Jane Cooper
-                                            </div>
-                                            <div class="text-sm text-gray-500">
-                                                jane.cooper@example.com
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </td> --}}
-                                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                      {{ $disbursement_voucher->name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Construction</div>
-                                        <div class="text-sm text-gray-500">Holy fukcing noodles</div>
-                                    </td>
-                                    {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                            Active
-                                        </span>
-                                        </td> --}}
-                                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                        Dec. 21, 2021
-                                    </td>
-                                    <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank" class="inline-flex text-indigo-600 hover:text-indigo-900">
-                                            <span class="inline pr-3">View</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                            </svg>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                            </td>  --}}
+                                            
+                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                        {{ $disbursement_voucher->name }} aa
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Construction</div>
+                                            <div class="text-sm text-gray-500">Holy fukcing noodles</div>
+                                        </td>
+                                        {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                                Active
+                                            </span>
+                                            </td> --}}
+                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                            Dec. 21, 2021
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                            <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank" class="inline-flex text-indigo-600 hover:text-indigo-900">
+                                                <span class="inline pr-3">View</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 @else
                                 <tr>
                                     <td class="px-6 py-4 italic text-center text-gray-500 text-md whitespace-nowrap" colspan="4">
@@ -209,7 +242,7 @@
                             </tbody>
                             
                         </table>
-                        {{ $disbursement_vouchers->onEachSide(1)->links() }}
+                        
                     </div>
                 </div>
             </div>

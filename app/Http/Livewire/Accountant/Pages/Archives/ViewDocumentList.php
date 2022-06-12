@@ -5,14 +5,38 @@ namespace App\Http\Livewire\Accountant\Pages\Archives;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use App\Models\ArchiveFolder;
+use App\Models\FolderDocument;
+use App\Models\LegacyDocument;
 
 class ViewDocumentList extends Component
 {
     public $searchText;
-    public function render()
+
+    public $folderDocs;
+    public $legacyDocs;
+    public function updated($field)
     {
+        if ($field == 'searchText') {
+            $folders = ArchiveFolder::search('folder_name',$this->searchText)->searchOr('folder_code',$this->searchText)->searchOr('folder_tracking_no',$this->searchText)->get('id');
+            if(count($folders) > 0){
+                
+                $this->folderDocs = FolderDocument::whereIn('archive_folder_id',$folders)->get();
+                $this->legacyDocs = LegacyDocument::whereIn('folder_id',$folders)->get();
+            }else{
+                
+                //$this->folderDocs = FolderDocument::search('archive_folder_id',$folders)->paginate(5);
+                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('name',$this->searchText)->get();
+            }
+        }
+    }
+    public function render()
+    {           
+       if(!isset($this->searchText)){
+               $this->updated('searchText');
+        }        
         return view('livewire.accountant.pages.archives.view-document-list',[
-            'disbursement_vouchers' => ArchiveFolder::search('folder_tracking_no',$this->searchText)->paginate(5)
+            'disbursement_vouchers' => $this->folderDocs,
+            'legacy_documents' => $this->legacyDocs,
         ])->layout('layouts.accountant');
     }
 }

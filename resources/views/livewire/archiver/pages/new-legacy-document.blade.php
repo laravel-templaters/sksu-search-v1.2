@@ -8,34 +8,101 @@
        </div>
     </div>
     <div class="block w-full ">
-        <form wire:submit.prevent="save">
-            <div class="block m-2 text-md">
+        <form wire:submit.prevent="store">
+            <div class="m-2 text-md grid grid-cols-1 gap-3">
                 
+               
                 <div class="w-full form-group">
-                    <label for="document_name" class="text-gray-500">Document Name</label>
-                    <input type="text" class="w-full text-sm rounded-full form-control focus:border-blue-800" id="document_name" name="document_name" placeholder="Document Name" wire:model.debounce.700ms="name">
-                    <span class="text-xs italic text-red-500">{{ $errors->first('name') }}</span>
+                    <label for="document_code" class="form-label inline-block text-gray-700">Document Code</label>
+                    <input type="text" class="form-control block font-normal bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none w-full text-sm rounded-full form-control focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
                 </div>
+                <div class="grid grid-cols-4 gap-3">
+                    <div class="w-full form-group col-span-1">
+                        <label for="Building" class="form-label inline-block text-gray-700 ml-3">Building</label>
+                        <select wire:model.debounce.700ms="building_id" class="form-control block font-normal bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none w-full text-sm rounded-full form-control focus:border-blue-800" id="building_id" name="building_id">
+                            <option value="">Select Building</option>
+                            @foreach ($buildings as $building)
+                                <option value="{{ $building->id }}">{{ $building->building_name }}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-sm italic text-red-500">{{ $errors->first('building_id') }}</span>
+                    </div>
+                    @if (isset($shelves ) && $building_id != "")
+                    <div class="w-full form-group col-span-1">
+                        <label for="Shelf" class="form-label inline-block text-gray-700 ml-3">Shelf</label>
+                        <select wire:model.debounce.700ms="shelf_id" class="form-control block font-normal bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none w-full text-sm rounded-full form-control focus:border-blue-800" id="shelf_id" name="shelf_id">
+                            <option value="">Select Shelf</option>
+                            @foreach ($shelves as $shelf)
+                                <option value="{{ $shelf->id }}">{{ $shelf->shelf_name }}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-sm italic text-red-500">{{ $errors->first('shelf_id') }}</span>
+                    </div>
+                    @endif
+                    @if (isset($drawers ) && $shelf_id != "")
+                    <div class="w-full form-group col-span-1">
+                        <label for="Drawer" class="form-label inline-block text-gray-700 ml-3">Drawer</label>
+                        <select wire:model.debounce.700ms="drawer_id" class="form-control block font-normal bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none w-full text-sm rounded-full form-control focus:border-blue-800" id="drawer_id" name="drawer_id">
+                            <option value="">Select Drawer</option>
+                            @foreach ($drawers as $drawer)
+                                <option value="{{ $drawer->id }}">{{ $drawer->drawer_name }}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-sm italic text-red-500">{{ $errors->first('drawer_id') }}</span>
+                    </div>
+                    @endif
+                    @if (isset($folders ) && $drawer_id != "")
+                    <div class="flex justify-center">
+                        <div class="mb-3 w-96">
+
+                            <label for="Folder" class="form-label inline-block text-gray-700 ml-3">Folder</label>
+                            <select wire:model.debounce.700ms="folder_id" class=" form-control block font-normal bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none w-full text-sm rounded-full form-control focus:border-blue-800" id="folder_id" name="folder_id">
+                                <option value="">Select Folder</option>
+                                @foreach ($folders as $folder)
+                                    <option value="{{ $folder->id }}">{{ $folder->folder_name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-sm italic text-red-500">{{ $errors->first('folder_id') }}</span>
+                        </div>
+                    </div>
+                    @endif
+               </div>
                 <div class="w-full form-group">
-                    <label for="document_code" class="text-gray-500">Document Code</label>
-                    <input type="text" class="w-full text-sm rounded-full form-control focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
-                    <span class="text-xs italic text-red-500">{{ $errors->first('document_code') }}</span>
-                </div>
-                <div class="w-full form-group">
-                    <label for="document_name" class="text-gray-500">Upload Document</label>
-                    <input type="file" class="w-full text-sm rounded-full form-control focus:border-blue-800" id="document_name" name="document_name" placeholder="Document Name" wire:model.debounce.700ms="path">
-                    <span class="text-xs italic text-red-500">{{ $errors->first('path') }}</span>
-                    @if ($path)
-                    <div class="flex mt-3">
-                        <iframe src="{{ $path->temporaryUrl() }}" class="h-screen-80 w-screen-80"  frameborder="0"></iframe>    
+                    <label for="upload_doc" class="form-label inline-block text-gray-700">Upload Document</label>
+                    <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 file:shadow-md file:shadow-green-900 py-1.5 pl-1" id="upload_doc" name="upload_doc" placeholder="Document" wire:model.debounce.700ms="path">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('path') }}</span>
+                    @if ($path && $errors->first('path') == "")
+                    <div class="inline-block mt-3 relative" x-data="{showPreview:false}">
+                        <div x-cloak x-show="showPreview"> 
+                            <label for="preview" class="form-label inline-block text-gray-700 mb-2">Document Preview</label>
+                            <iframe id="preview" name="preview" src="{{ $path->temporaryUrl() }}" class="h-screen-80 w-screen-80 mx-auto rounded-xl shadow-md shadow-green-800"  frameborder="0"></iframe>    
+                        </div>
+                        <div class="" x-cloak x-show="showPreview==false">
+                            <button type="button" class="inline-flex items-center p-1 border border-transparent text-sm tracking-wide font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" x-on:click="showPreview = !showPreview">Show Preview</button>
+                        </div>
+                        <div class="mt-3 flex absolute bottom-0 right-0" x-cloak x-show="showPreview">
+                            <button type="button" class="inline-flex items-center px-3 py-1.5  border border-transparent text-md tracking-wide font-medium rounded-lg text-white drop-shadow-sm bg-transparent hover:bg-red-200 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" x-on:click="showPreview = !showPreview">Hide Preview</button>
+                        </div>
+                       
                     </div>                
                     @endif
-                    
-
+                </div>
+                <div class="w-full form-group">
+                    <label for="document_name" class="form-label inline-block text-gray-700">Document Name</label>
+                    <input type="text" class="form-control block font-normal bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white  focus:outline-none w-full text-sm rounded-full form-control focus:border-blue-800" id="document_name" name="document_name" placeholder="Document Name" wire:model.debounce.700ms="name">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('name') }}</span>
                 </div>
               
-                
             </div>
+            <button type="submit" class="ml-2 inline-flex items-center mt-10 px-3 py-2 border border-transparent shadow-sm text-md leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Save to archive
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 -mr-0.5 h-6 w-7"viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
+                    <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
+                  </svg>
+              </button>
+            
         </form>
     </div>
     

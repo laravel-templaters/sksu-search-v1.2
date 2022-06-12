@@ -13,5 +13,8 @@ class Building extends Model
     public function shelf(){
         return $this->belongsTo('App\Models\Shelf');
     }
+    public function legacyDocument(){
+        return $this->hasMany('App\Models\LegacyDocument');
+    }
 
 }

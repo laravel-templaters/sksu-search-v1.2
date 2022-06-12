@@ -20,4 +20,7 @@ class ArchiveFolder extends Model
     public function associated_folder(){
         return $this->belongsTo('App\Models\AssociatedFolder');
     }
+    public function legacyDocument(){
+        return $this->hasMany('App\Models\LegacyDocument');
+    }
 }
