@@ -9,7 +9,7 @@ class Shelf extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['shelf_name','shelf_code'];
+    protected $fillable = ['shelf_name','shelf_code','drawer_slots','building_id'];
 
     public function building()
     {

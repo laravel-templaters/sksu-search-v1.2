@@ -1,13 +1,13 @@
 <div class="relative z-0 flex flex-1 w-full h-screen min-w-full mx-auto -mt-20 overflow-hidden bg-transparent max-w-screen"
-x-data="{folder_added:@entangle('folder_added'),show_folder_form:@entangle('show_folder_form')}"
-x-init="$watch('folder_added', value => {
+x-data="{drawer_added:@entangle('drawer_added'),show_drawer_form:@entangle('show_drawer_form')}"
+x-init="$watch('drawer_added', value => {
     if(value == true){
-        setTimeout(function(){ folder_added = false; }, 5000);
+        setTimeout(function(){ drawer_added = false; }, 5000);
     }
 })">
         {{-- notification --}}
         <!-- Global notification live region, render this permanently at the end of the document -->
-        <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-show="folder_added" x-cloak
+        <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-show="drawer_added" x-cloak
             x-transition-enter =  "transform ease-out duration-300 transition"
             x-transition-enter-start =  "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
             x-transition-enter-end =   "translate-y-0 opacity-100 sm:translate-x-0"
@@ -16,7 +16,7 @@ x-init="$watch('folder_added', value => {
             x-transition-leave-end =  "opacity-0" >
             <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
           
-            <div class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5" x-show="folder_added" x-cloak
+            <div class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5" x-show="drawer_added" x-cloak
             x-transition-enter =  "transform ease-out duration-300 transition"
             x-transition-enter-start ="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"  
             x-transition-enter-end =  "translate-y-0 opacity-100 sm:translate-x-0" 
@@ -33,7 +33,7 @@ x-init="$watch('folder_added', value => {
                     </div>
                     <div class="ml-3 w-0 flex-1 pt-0.5">
                     <p class="text-sm font-medium text-gray-900">Successfully saved!</p>
-                    <p class="mt-1 text-sm text-gray-500">Check table to see added folder</p>
+                    <p class="mt-1 text-sm text-gray-500">Check table to see added drawer</p>
                     </div>
                     <div class="flex flex-shrink-0 ml-4">
                     <button type="button" x-on:click="building_added = false" class="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -60,19 +60,19 @@ x-init="$watch('folder_added', value => {
                             <div class="px-4 py-8 sm:px-6 lg:px-8">
                                 <div class="sm:flex sm:items-center">
                                 <div class="sm:flex-auto">
-                                    <h1 class="text-xl font-semibold text-gray-900">Folders</h1>
-                                    <p class="mt-2 text-sm text-gray-700"> A list of all the folders, their codes, document slots, and what drawer, shelf and building they're in.</p>
+                                    <h1 class="text-xl font-semibold text-gray-900">Drawers</h1>
+                                    <p class="mt-2 text-sm text-gray-700"> A list of all the drawers, their codes, folder count, and what shelf and building they're in.</p>
                                    
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700">Search Here</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
-                                        <input wire:model.debounce.700ms='searchText' type="email" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Folder name or code" value="adamwathan" aria-invalid="true" aria-describedby="email-error">
+                                        <input wire:model.debounce.700ms='searchText' type="email" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Drawer name or code" value="adamwathan" aria-invalid="true" aria-describedby="email-error">
                                     </div>
                                     <p class="mt-1 text-sm text-transparent" id="email-error"><span>----</span></p>
                                 </div>
                                 <div class="mt-4 sm:mt-0 sm:ml-5 sm:flex-none">
-                                    <button type="button" wire:click="showFolderForm" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Add Folder</button>
+                                    <button type="button" wire:click="showDrawerForm" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Add Drawer</button>
                                 </div>
                                 </div>
                                 <div class="flex flex-col mt-8">
@@ -84,8 +84,7 @@ x-init="$watch('folder_added', value => {
                                             <tr>
                                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Drawer Name</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Code</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Number of Document Slots</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Folder</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Number of Folders</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Shelf</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Building</th>
                                             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -94,17 +93,16 @@ x-init="$watch('folder_added', value => {
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            @if (count($folders) > 0)
-                                                @foreach ($folders as $folder)
+                                            @if (count($drawers) > 0)
+                                                @foreach ($drawers as $drawer)
                                                 <tr>
-                                                    <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">{{ $folder->folder_name }}</td>
-                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $folder->folder_code }}</td>
-                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $folder->slot_number }}</td>
-                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $folder->drawer->drawer_name}}</td>
-                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $folder->drawer->shelf->shelf_name }}</td>
-                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $folder->drawer->shelf->building->building_name }}</td>
+                                                    <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">{{ $drawer->drawer_name }}</td>
+                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $drawer->drawer_code }}</td>
+                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $drawer->folder_slots }}</td>
+                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $drawer->shelf->shelf_name }}</td>
+                                                    <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $drawer->shelf->building->building_name }}</td>
                                                     <td class="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-6">
-                                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, {{ $folder->folder_name }}</span></a>
+                                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, {{ $drawer->drawer_name }}</span></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -129,13 +127,13 @@ x-init="$watch('folder_added', value => {
     </div>
     {{-- modal add --}}
         
-        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="show_folder_form" x-transition-enter = "ease-out duration-300"
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="show_drawer_form" x-transition-enter = "ease-out duration-300"
         x-transition-enter-start =  "opacity-0"
         x-transition-enter-end =  "opacity-100"
         x-transition-leave =  "ease-in duration-200"
         x-transition-leave-start =  "opacity-100"
         x-transition-leave-end = "opacity-0" >
-            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" x-cloak x-show="show_folder_form" x-transition-enter = "ease-out duration-300"
+            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" x-cloak x-show="show_drawer_form" x-transition-enter = "ease-out duration-300"
             x-transition-enter-start = "opacity-0" 
             x-transition-enter-end =  "opacity-100"
             x-transition-leave =  "ease-in duration-200"
@@ -145,7 +143,7 @@ x-init="$watch('folder_added', value => {
             <div class="fixed inset-0 z-10 overflow-y-auto">
             <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
                 
-            <div class="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6" x-cloak x-show="show_folder_form"
+                <div class="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6" x-cloak x-show="show_drawer_form"
                 x-transition-enter = "ease-out duration-300"
                 x-transition-enter-start = "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
                 x-transition-enter-end =  "opacity-100 translate-y-0 sm:scale-100"
@@ -163,7 +161,7 @@ x-init="$watch('folder_added', value => {
                                 <p class="mt-1 text-sm text-gray-500">Use complete drawer names and codes</p>
                                 </div>
                                 <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
-                                    <div class="sm:col-span-2">
+                                    <div class="sm:col-span-3">
                                         <label for="building_id" class="block text-sm font-medium text-gray-700">Select Building</label>
                                         <div class="mt-1">
                                         <select id="building_id" name="building_id" wire:model="building_id"  class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -175,7 +173,7 @@ x-init="$watch('folder_added', value => {
                                         <span class="text-sm italic text-red-500">{{ $errors->first('building_id') }}</span>
                                         </div>
                                     </div>
-                                    <div class="sm:col-span-2">
+                                    <div class="sm:col-span-3">
                                         <label for="shelf_id" class="block text-sm font-medium text-gray-700">Select Shelf</label>
                                         <div class="mt-1">
                                         <select id="shelf_id" name="shelf_id" wire:model="shelf_id"  class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -192,44 +190,27 @@ x-init="$watch('folder_added', value => {
                                         <span class="text-sm italic text-red-500">{{ $errors->first('shelf_id') }}</span>
                                         </div>
                                     </div>
-                                    <div class="sm:col-span-2">
-                                        <label for="drawer_id" class="block text-sm font-medium text-gray-700">Select Drawer</label>
-                                        <div class="mt-1">
-                                        <select id="drawer_id" name="drawer_id" wire:model="drawer_id"  class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                            <option value="">---Select shelf---</option>
-                                           @if ($shelf_id != null)
-                                               @if (isset($drawers))
-                                                
-                                                    @foreach ($drawers as $drawer)
-                                                    <option value="{{ $drawer->id }}">{{ $drawer->drawer_name }}</option>
-                                                    @endforeach
-                                               @endif
-                                           @endif
-                                        </select>
-                                        <span class="text-sm italic text-red-500">{{ $errors->first('shelf_id') }}</span>
-                                        </div>
-                                    </div>
                                 <div class="sm:col-span-6">
-                                    <label for="folder_name" class="block text-sm font-medium tracking-wider text-gray-700">Folder name </label>
+                                    <label for="drawer_name" class="block text-sm font-medium tracking-wider text-gray-700"> Shelf name </label>
                                     <div class="mt-1">
-                                    <input type="text" wire:model.debounce="folder_name" name="folder_name" id="folder_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <span class="text-sm italic text-red-500">{{ $errors->first('folder_name') }}</span>
+                                    <input type="text" wire:model.debounce="drawer_name" name="drawer_name" id="drawer_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('drawer_name') }}</span>
                                     </div>
                                 </div>
                         
                                 <div class="sm:col-span-6">
-                                    <label for="folder_code" class="block text-sm font-medium tracking-wider text-gray-700"> Folder Code </label>
+                                    <label for="drawer_code" class="block text-sm font-medium tracking-wider text-gray-700"> Shelf Code </label>
                                     <div class="mt-1">
-                                    <input type="text" wire:model.debounce='folder_code' name="folder_code" id="folder_code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <span class="text-sm italic text-red-500">{{ $errors->first('folder_code') }}</span>
+                                    <input type="text" wire:model.debounce='drawer_code' name="drawer_code" id="drawer_code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('drawer_code') }}</span>
                                     </div>
                                 </div>
                         
                                 <div class="sm:col-span-6">
-                                    <label for="slot_number" class="block text-sm font-medium tracking-wider text-gray-700"> Number of document slots in the folder</label>
+                                    <label for="folder_slots" class="block text-sm font-medium tracking-wider text-gray-700"> Number of drawers in the shelf</label>
                                     <div class="mt-1">
-                                    <input id="slot_number" wire:model.debounce='slot_number' name="slot_number" type="number" min="1" step="1" max="999"class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <span class="text-sm italic text-red-500">{{ $errors->first('slot_number') }}</span>
+                                    <input id="folder_slots" wire:model.debounce='folder_slots' name="folder_slots" type="number" min="1" step="1" max="999"class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('folder_slots') }}</span>
                                     </div>
                                 </div>
 {{--                         
@@ -259,7 +240,7 @@ x-init="$watch('folder_added', value => {
                     
                         <div class="pt-5">
                         <div class="flex justify-end">
-                            <button type="button" wire:click="hideFolderForm" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                            <button type="button" wire:click="hideDrawerForm" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
                             <button type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
                         </div>
                         </div>

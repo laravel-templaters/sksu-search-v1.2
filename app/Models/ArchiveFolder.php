@@ -9,7 +9,7 @@ class ArchiveFolder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['folder_name','folder_code','folder_tracking_no'];
+    protected $fillable = ['folder_name','folder_code','folder_tracking_no','drawer_id','slot_number'];
 
     public function drawer(){
         return $this->hasOne('App\Models\Drawer','id','drawer_id');

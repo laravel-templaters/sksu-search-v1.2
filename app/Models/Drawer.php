@@ -9,7 +9,7 @@ class Drawer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['drawer_name','drawer_code'];
+    protected $fillable = ['drawer_name','drawer_code','shelf_id','folder_slots'];
 
     public function shelf(){
         
