@@ -191,7 +191,7 @@ x-init="$watch('drawer_added', value => {
                                         </div>
                                     </div>
                                 <div class="sm:col-span-6">
-                                    <label for="drawer_name" class="block text-sm font-medium tracking-wider text-gray-700"> Shelf name </label>
+                                    <label for="drawer_name" class="block text-sm font-medium tracking-wider text-gray-700"> Drawer name </label>
                                     <div class="mt-1">
                                     <input type="text" wire:model.debounce="drawer_name" name="drawer_name" id="drawer_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <span class="text-sm italic text-red-500">{{ $errors->first('drawer_name') }}</span>
@@ -199,7 +199,7 @@ x-init="$watch('drawer_added', value => {
                                 </div>
                         
                                 <div class="sm:col-span-6">
-                                    <label for="drawer_code" class="block text-sm font-medium tracking-wider text-gray-700"> Shelf Code </label>
+                                    <label for="drawer_code" class="block text-sm font-medium tracking-wider text-gray-700"> Drawer Code </label>
                                     <div class="mt-1">
                                     <input type="text" wire:model.debounce='drawer_code' name="drawer_code" id="drawer_code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <span class="text-sm italic text-red-500">{{ $errors->first('drawer_code') }}</span>
@@ -207,7 +207,7 @@ x-init="$watch('drawer_added', value => {
                                 </div>
                         
                                 <div class="sm:col-span-6">
-                                    <label for="folder_slots" class="block text-sm font-medium tracking-wider text-gray-700"> Number of drawers in the shelf</label>
+                                    <label for="folder_slots" class="block text-sm font-medium tracking-wider text-gray-700"> Number of folders in the drawer</label>
                                     <div class="mt-1">
                                     <input id="folder_slots" wire:model.debounce='folder_slots' name="folder_slots" type="number" min="1" step="1" max="999"class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <span class="text-sm italic text-red-500">{{ $errors->first('folder_slots') }}</span>

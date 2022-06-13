@@ -4,7 +4,7 @@ x-init="$watch('building_added', value => {
     if(value == true){
         setTimeout(function(){ building_added = false; }, 5000);
     }
-}),">
+})">
         {{-- notification --}}
         <!-- Global notification live region, render this permanently at the end of the document -->
         <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-show="building_added" x-cloak
