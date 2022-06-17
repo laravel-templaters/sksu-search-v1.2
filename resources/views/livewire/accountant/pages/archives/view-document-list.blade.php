@@ -160,16 +160,16 @@
                                
                                     @foreach ($legacy_documents as $legacy_document)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                                             {{$legacy_document->folder->folder_name}}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                                             {{$legacy_document->name}}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                                             {{$legacy_document->created_at->format('F d, Y')}}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                                             YES
                                         </td>
                                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">

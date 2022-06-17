@@ -25,6 +25,7 @@ class ViewDocumentList extends Component
             }else{
                 
                 //$this->folderDocs = FolderDocument::search('archive_folder_id',$folders)->paginate(5);
+                $this->folderDocs = [];
                 $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('name',$this->searchText)->get();
             }
         }
