@@ -20,10 +20,10 @@ class Dashboard extends Component
         if ($field == 'searchText') {
             $folders = ArchiveFolder::search('folder_name',$this->searchText)->searchOr('folder_code',$this->searchText)->searchOr('folder_tracking_no',$this->searchText)->get('id');
             if(count($folders) > 0){
-                $this->legacyDocs = LegacyDocument::whereIn('folder_id',$folders)->paginate(2);                
+                $this->legacyDocs = LegacyDocument::whereIn('folder_id',$folders)->paginate(10);                
             }else{
               
-                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('name',$this->searchText)->paginate(5);
+                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('name',$this->searchText)->paginate(10);
             }
         }
     }

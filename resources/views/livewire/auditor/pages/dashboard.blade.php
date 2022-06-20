@@ -77,7 +77,7 @@
                                    
                                 @else
                                 <tr>
-                                    <td class="px-6 py-4 italic text-center text-gray-500 text-md whitespace-nowrap" colspan="4">
+                                    <td class="px-6 py-4 italic text-center text-gray-500 text-md whitespace-nowrap" colspan="5">
                                     NOTHING TO SHOW
                                     </td>
                                 </tr>
@@ -85,7 +85,7 @@
               </tbody>
               <tfoot class="bg-white">
                     <tr class="">
-                        <td colspan="5" class="px-3 py-1">{{ $documents->links() }}</td>
+                        <td colspan="5" class="px-3 ">{{ $documents->links() }}</td>
                     </tr>
                 </tfoot>
             </table>
