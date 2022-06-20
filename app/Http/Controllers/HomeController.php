@@ -44,6 +44,11 @@ class HomeController extends Controller
             return redirect()->route('archiver-main');
                       
          }
+         else if($role == 8){
+
+            return redirect()->route('archiver-main');
+                      
+         }
 
          
     }

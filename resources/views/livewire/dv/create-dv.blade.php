@@ -9,7 +9,7 @@
     <div class=""
         x-data="{ isstep1open : @entangle('isstep1open'),isstep2open : @entangle('isstep2open'),isstep3open : @entangle('isstep3open')}">
         {{-- steps --}}
-        <div class="bg-primary-bg lg:border-b lg:border-gray-100">
+        <div class="bg-gradient-to-b from-primary-bg via-primary-bg to-transparent lg:border-t lg:border-gray-100">
             <nav class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8" aria-label="Progress">
                 <ol role="list"
                     class="overflow-hidden rounded-md lg:flex lg:border-l lg:border-r lg:border-gray-200 lg:rounded-none">
@@ -26,7 +26,7 @@
                                     <span class="flex-shrink-0">
                                         @if($step1finished)
                                         <span
-                                            class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
+                                            class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-300">
                                             <!-- Heroicon name: solid/check -->
                                             <svg class="w-6 h-6 text-secondary-text" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -72,7 +72,7 @@
                                     <span class="flex-shrink-0">
                                         @if($step2finished)
                                         <span
-                                            class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
+                                            class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-300">
                                             <!-- Heroicon name: solid/check -->
                                             <svg class="w-6 h-6 text-secondary-text" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -125,7 +125,7 @@
                                     <span class="flex-shrink-0">
                                         @if($step3finished)
                                         <span
-                                            class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-bg">
+                                            class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-300">
                                             <!-- Heroicon name: solid/check -->
                                             <svg class="w-6 h-6 text-secondary-text" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -136,7 +136,7 @@
                                         </span>
                                         @elseif(!$step3finished)
                                         <span
-                                            x-bind:class="isstep3open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-primary-text' : step3finished ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-gray-400'">
+                                            x-bind:class="isstep3open ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-primary-text' : step3finished ? 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-secondary-bg' : 'flex items-center justify-center w-10 h-10 border-2 rounded-full border-primary-300'">
                                             <span
                                                 x-bind:class="isstep3open ? 'text-primary-text' : 'text-gray-400'">03</span>
                                         </span>
@@ -234,10 +234,12 @@
                             
                             <input class="p-2 text-sm border-gray-500 rounded-lg" type="text"
                                 wire:model.debounce.500ms="searchto" placeholder="Search Purpose Here">
+                                @if ($searchto ==null)
                                 <p class="mt-1 ml-1 text-sm text-gray-500">
                                     <span class="font-extrabold tracking-wider text-red-400">Note: </span>
-                                    Please secure a travel order first by, creating one <a href="{{route('travel-order', ['id'=>3,'isEdit'=>0,'travelOrderID'=>'|'])}}" class="text-indigo-600 underline">here</a>. <br>For more details click this <a href="#" class="text-indigo-600 underline">link</a>
+                                     If you haven't made a travel order yet, please secure a travel order by, creating one <a href="{{route('travel-order', ['id'=>3,'isEdit'=>0,'travelOrderID'=>'|'])}}" class="text-indigo-600 underline">here</a>. <br>For more details click this <a href="#" class="text-indigo-600 underline">link</a>
                                  </p>
+                                @endif
                             <div class="grid grid-cols-2 gap-2 px-2 pt-2 mx-auto">
                                 @if(isset($searchedto)==true)
                                 @if($searchedto->count() > 0)
