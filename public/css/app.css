@@ -1679,6 +1679,9 @@ select {
 .w-1\/6 {
 	width: 16.666667%;
 }
+.w-1\/4 {
+	width: 25%;
+}
 .w-screen-80 {
 	width: 80vh;
 }
@@ -1690,9 +1693,6 @@ select {
 }
 .w-52 {
 	width: 13rem;
-}
-.w-1\/4 {
-	width: 25%;
 }
 .min-w-0 {
 	min-width: 0px;
@@ -3906,16 +3906,16 @@ select {
 		margin-top: 1.5rem;
 	}
 
+	.sm\:ml-16 {
+		margin-left: 4rem;
+	}
+
 	.sm\:ml-0 {
 		margin-left: 0px;
 	}
 
 	.sm\:-ml-10 {
 		margin-left: -2.5rem;
-	}
-
-	.sm\:ml-16 {
-		margin-left: 4rem;
 	}
 
 	.sm\:block {

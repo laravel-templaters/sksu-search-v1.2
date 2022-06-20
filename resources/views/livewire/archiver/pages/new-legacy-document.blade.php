@@ -78,6 +78,9 @@
                 <div class="w-full form-group">
                     <label for="upload_doc" class="inline-block text-gray-700 form-label">Upload Document</label>
                     <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 file:shadow-md file:shadow-green-900 py-1.5 pl-1" id="upload_doc" name="upload_doc" placeholder="Document" wire:model.debounce.700ms="path">
+                    <div wire:loading wire:target="path" class="italic">
+                    Uploading...
+                    </div>
                     <span class="text-sm italic text-red-500">{{ $errors->first('path') }}</span>
                     @if ($path && $errors->first('path') == "")
                     <div class="relative inline-block mt-3" x-data="{showPreview:false}">
