@@ -52,23 +52,29 @@
 
 
                     @endif
-                    <x-jet-nav-link href="{{ route('transactions') }}" :active="request()->routeIs('transactions')">
-                        {{ __('Transactions') }}
-                    </x-jet-nav-link>
+                        @if (auth()->user()->role_id == 8)
+                        <x-jet-nav-link href="{{ route('auditor-dashboard') }}" :active="request()->routeIs('auditor-dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-jet-nav-link>
+                        @else
+                        <x-jet-nav-link href="{{ route('transactions') }}" :active="request()->routeIs('transactions')">
+                            {{ __('Transactions') }}
+                        </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{route('travel-order', ['id'=>3,'isEdit'=>0,'travelOrderID'=>'|'])}}"
-                        :active="request()->routeIs('travel-order')">
-                        {{ __('Create Travel Order') }}
-                    </x-jet-nav-link>
-                    @if(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
-                    <x-jet-nav-link href="{{route('archive-list')}}" :active="request()->routeIs('archive-list')">
-                        {{ __('Archives') }}
-                    </x-jet-nav-link>
-                    @endif
-                    @if(auth()->user()->role_id == 7)
-                    <x-jet-nav-link href="{{route('archiver-main')}}" :active="request()->routeIs('archiver-main')">
-                        {{ __('Archiver') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{route('travel-order', ['id'=>3,'isEdit'=>0,'travelOrderID'=>'|'])}}"
+                            :active="request()->routeIs('travel-order')">
+                            {{ __('Create Travel Order') }}
+                        </x-jet-nav-link>
+                        @if(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
+                        <x-jet-nav-link href="{{route('archive-list')}}" :active="request()->routeIs('archive-list')">
+                            {{ __('Archives') }}
+                        </x-jet-nav-link>
+                        @endif
+                        @if(auth()->user()->role_id == 7)
+                        <x-jet-nav-link href="{{route('archiver-main')}}" :active="request()->routeIs('archiver-main')">
+                            {{ __('Archiver') }}
+                        </x-jet-nav-link>
+                        @endif
                     @endif
 
                 </div>

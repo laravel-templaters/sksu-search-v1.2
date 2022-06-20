@@ -16,6 +16,10 @@ class TestAuditorSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('roles')->insert(
+            [
+                ['role_name' => 'Auditor'],
+            ]);
         DB::table('users')->insert([
             'name' => 'Test A. Auditor',
             'birth_day' =>  Carbon::create('2000', '04', '06'),

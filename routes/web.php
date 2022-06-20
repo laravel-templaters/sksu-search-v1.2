@@ -115,7 +115,7 @@ Route::middleware(['auth:sanctum','verified'])->get('/archiver/folders',App\Http
 Route::middleware(['auth:sanctum','verified'])->get('/testComp',App\Http\Livewire\TestComp::class)->name('test');
 
 //auditor
-Route::middleware(['auth:sanctum','verified'])->get('/auditor/main',App\Http\Livewire\Auditor\Pages\Dashboard::class)->name('auditor-dashboard');
+Route::middleware(['auth:sanctum','verified'])->get('/auditor/dashboard',App\Http\Livewire\Auditor\Pages\Dashboard::class)->name('auditor-dashboard');
 
 
 

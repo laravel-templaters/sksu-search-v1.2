@@ -46,7 +46,7 @@ class HomeController extends Controller
          }
          else if($role == 8){
 
-            return redirect()->route('archiver-main');
+            return redirect()->route('auditor-dashboard');
                       
          }
 
