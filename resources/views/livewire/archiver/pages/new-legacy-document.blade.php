@@ -17,6 +17,13 @@
                     <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
                     <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
                 </div>
+
+                 <div class="w-full form-group">
+                    <label for="archive_date" class="inline-block text-gray-700 form-label">Date</label>
+                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Document Name" wire:model.debounce.700ms="date">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
+                </div>
+                
                 <div class="grid grid-cols-4 gap-3">
                     <div class="w-full col-span-1 form-group">
                         <label for="Building" class="inline-block ml-3 text-gray-700 form-label">Building</label>
@@ -93,6 +100,8 @@
                     <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_name" name="document_name" placeholder="Document Name" wire:model.debounce.700ms="name">
                     <span class="text-sm italic text-red-500">{{ $errors->first('name') }}</span>
                 </div>
+
+               
               
             </div>
             <button type="submit" class="inline-flex items-center px-3 py-2 mt-10 ml-2 font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm text-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

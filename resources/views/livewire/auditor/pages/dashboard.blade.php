@@ -56,7 +56,7 @@
                                             {{$legacy_document->name}}
                                         </td>
                                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
-                                            {{$legacy_document->created_at->format('F d, Y')}}
+                                            {{ date('F d, Y', strtotime($legacy_document->date))}}
                                         </td>
                                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                                             YES

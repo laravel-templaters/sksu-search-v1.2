@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Archiver\Pages;
 
 use App\Models\ArchiveFolder;
 use App\Models\Building;
+use Carbon\Carbon;
 use App\Models\Drawer;
 use App\Models\LegacyDocument;
 use App\Models\Shelf;
@@ -22,6 +23,7 @@ class NewLegacyDocument extends Component
 
     public $name;
     public $path;
+    public $date;
     // public $year;
     public $document_code;
     public $archived_year_id;
@@ -53,6 +55,7 @@ class NewLegacyDocument extends Component
             'name' => 'required',
             'document_code' => 'required',
             'path' => 'required|mimes:pdf',
+            'date' => 'required',
             'building_id' => 'required',
             'shelf_id' => 'required',
             'drawer_id' => 'required',
@@ -122,6 +125,7 @@ class NewLegacyDocument extends Component
         'name.required' => 'Please enter a name for the document',
         'document_code.required' => 'Please enter a document code for the document',
         'path.required' => 'Please upload a file',
+        'date.required' => 'Please select a date',
         'path.mimes' => 'Invalid file type. Only PDFs are allowed.',
         'building_id.required' => 'Please select a building',
         'shelf_id.required' => 'Please select a shelf',
@@ -140,6 +144,7 @@ class NewLegacyDocument extends Component
             'name' => 'required',
             'document_code' => 'required',
             'path' => 'required|mimes:pdf',
+            'date' => 'required|date',
             'building_id' => 'required',
             'shelf_id' => 'required',
             'drawer_id' => 'required',
@@ -149,10 +154,12 @@ class NewLegacyDocument extends Component
             'name' => $this->name,
             'document_code' => $this->document_code,
             'path' => $this->path->store('documents'),
+            'date' => $this->date,
             'building_id' => $this->building_id,
             'shelf_id' => $this->shelf_id,
             'drawer_id' => $this->drawer_id,
-            'folder_id' => $this->folder_id,
+            'folder_id' => $this->folder_id,    
+              
         ]);
         $this->resetInput();
     }
@@ -162,6 +169,7 @@ class NewLegacyDocument extends Component
         $this->name = null;
         $this->document_code = null;
         $this->path = null;
+        $this->date = null;
         $this->building_id = null;
         $this->shelf_id = null;
         $this->drawer_id = null;
