@@ -11,7 +11,7 @@
                             <div class="flex justify-between max-w-full m-4">
                                 <div class="flex justify-start max-w-full m-4">
                                     <div class="m-2">
-                                        <details open id="filters">
+                                        <details id="filters">
                                             <summary class="text-secondary-700">Filters</summary>
                                             <fieldset>
                                             <div class="grid max-w-sm grid-cols-3 gap-3">
@@ -103,7 +103,7 @@
                                         </details>
                                     </div>
                                     <div class="m-2">
-                                        <details open id="filters">
+                                        <details id="filters">
                                             <summary class="text-secondary-700">Location</summary>
                                             <div class="grid max-w-sm grid-cols-3 gap-3">
                                                 <div class="relative flex items-start col-span-1">
@@ -159,15 +159,19 @@
                                     {{-- <tr> --}}
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Folder Tr. No.
+                                        Folder Name
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Description
+                                       DESCRIPTION/DOCUMENT NAME
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Date Archived
+                                       DATE ARCHIVED
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                      LEGACY DOCUMENT
                                     </th>
                                     </th>
                                     <th scope="col" class="relative px-6 py-3">
@@ -176,7 +180,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @if (count($disbursement_vouchers)>0)
+                                    @if (count($disbursement_vouchers)>0 )
                                     @foreach ($disbursement_vouchers as $disbursement_voucher)
                                     <tr>
                                         {{-- <td class="px-6 py-4 whitespace-nowrap">
@@ -223,6 +227,37 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @elseif (count($legacy_documents)>0)
+                                     @foreach ($legacy_documents as $legacy_document)
+                                       <tr>
+                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                            {{$legacy_document->folder->folder_name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">{{$legacy_document->name}}</div>
+                                        </td>
+                                    
+                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                            {{ $legacy_document->created_at->format('M d, Y') }}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
+                                            YES
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                            {{-- <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank" --}}
+                                            <a href="{{  route('archive-detail', ['id'=>$legacy_document->id, 'islegacy'=>1])  }}" target="_blank"
+                                                class="inline-flex text-indigo-600 hover:text-indigo-900">
+                                                <span class="inline pr-3">View</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                     @endforeach
                                     @else
                                     <tr>
                                         <td class="px-6 py-4 italic text-center text-gray-500 text-md whitespace-nowrap"

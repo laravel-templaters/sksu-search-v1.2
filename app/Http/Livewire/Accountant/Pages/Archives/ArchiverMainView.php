@@ -4,15 +4,19 @@ namespace App\Http\Livewire\Accountant\Pages\Archives;
 
 use App\Models\ArchiveFolder;
 use App\Models\DisbursementVoucher;
+use App\Models\LegacyDocument;
 use Livewire\Component;
 
 class ArchiverMainView extends Component
 {
     public $searchText;
     public $dateFilter;
-    
+    public $legacy_documents;
+
     public function render()
     {   $disbursement_vouchers = [];
+
+
         if (isset($dateFilter)) {
           if ($dateFilter =='none') {
             $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->paginate(5);
@@ -52,7 +56,10 @@ class ArchiverMainView extends Component
         }else{
             $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->paginate(5);
         }
+        //get legacy documents
+        $this->legacy_documents = LegacyDocument::get();
+
        
-        return view('livewire.accountant.pages.archives.archiver-main-view')->with('disbursement_vouchers',$disbursement_vouchers)->layout('layouts.accountant');
+        return view('livewire.accountant.pages.archives.archiver-main-view')->with('disbursement_vouchers',$disbursement_vouchers)->with('legacy_documents',$this->legacy_documents)->layout('layouts.accountant');
     }
 }
