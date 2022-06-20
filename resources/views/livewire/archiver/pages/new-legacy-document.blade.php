@@ -8,7 +8,7 @@
        </div>
     </div>
     <div class="block w-full ">
-        <form wire:submit.prevent="store">
+        <form wire:submit.prevent="store" enctype="multipart/form-data">
             <div class="grid grid-cols-1 gap-3 m-2 text-md">
                 
                
