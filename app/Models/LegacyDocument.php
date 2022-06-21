@@ -12,6 +12,7 @@ class LegacyDocument extends Model
     protected $fillable = [
         'name',
         'path',
+        'date',
         'document_code',
         'building_id',
         'shelf_id',

@@ -17,6 +17,13 @@
                     <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
                     <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
                 </div>
+
+                 <div class="w-full form-group">
+                    <label for="archive_date" class="inline-block text-gray-700 form-label">Date</label>
+                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Document Name" wire:model.debounce.700ms="date">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
+                </div>
+                
                 <div class="grid grid-cols-4 gap-3">
                     <div class="w-full col-span-1 form-group">
                         <label for="Building" class="inline-block ml-3 text-gray-700 form-label">Building</label>
@@ -71,6 +78,9 @@
                 <div class="w-full form-group">
                     <label for="upload_doc" class="inline-block text-gray-700 form-label">Upload Document</label>
                     <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 file:shadow-md file:shadow-green-900 py-1.5 pl-1" id="upload_doc" name="upload_doc" placeholder="Document" wire:model.debounce.700ms="path">
+                    <div wire:loading wire:target="path" class="italic">
+                    Uploading...
+                    </div>
                     <span class="text-sm italic text-red-500">{{ $errors->first('path') }}</span>
                     @if ($path && $errors->first('path') == "")
                     <div class="relative inline-block mt-3" x-data="{showPreview:false}">
@@ -93,6 +103,8 @@
                     <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_name" name="document_name" placeholder="Document Name" wire:model.debounce.700ms="name">
                     <span class="text-sm italic text-red-500">{{ $errors->first('name') }}</span>
                 </div>
+
+               
               
             </div>
             <button type="submit" class="inline-flex items-center px-3 py-2 mt-10 ml-2 font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm text-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
