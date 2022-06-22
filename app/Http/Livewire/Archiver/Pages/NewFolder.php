@@ -18,7 +18,7 @@ class NewFolder extends Component
     public $folder_code;
     public $drawer_id;
     public $shelf_id;
-    public $building_id;
+    public $building_id; 
     public $folder_added = false;
     public $show_folder_form = false;
     public $slot_number;

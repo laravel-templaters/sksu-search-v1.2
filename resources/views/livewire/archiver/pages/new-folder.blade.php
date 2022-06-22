@@ -3,7 +3,7 @@ x-data="{folder_added:@entangle('folder_added'),show_folder_form:@entangle('show
 x-init="$watch('folder_added', value => {
     if(value == true){
         setTimeout(function(){ folder_added = false; }, 5000);
-    }
+    } 
 })">
         {{-- notification --}}
         <!-- Global notification live region, render this permanently at the end of the document -->

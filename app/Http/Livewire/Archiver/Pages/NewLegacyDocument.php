@@ -39,6 +39,7 @@ class NewLegacyDocument extends Component
     public $old_drawer_id;
     public $folder_id;
     public $old_folder_id;
+    public $legacy_added = false;
     //mount
     // public function mount($folder, $drawer, $shelf, $building)
     // {
@@ -161,6 +162,7 @@ class NewLegacyDocument extends Component
             'folder_id' => $this->folder_id,    
               
         ]);
+        $this->legacy_added = true;
         $this->resetInput();
     }
 
