@@ -11,6 +11,7 @@ class Dte extends Model
     //Change Primary Key
     protected $primaryKey = 'id';
 
+    protected $fillable = ['amount','region'];
 
     use HasFactory;
 
