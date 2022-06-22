@@ -120,8 +120,7 @@ Route::middleware(['auth:sanctum','verified'])->get('/auditor/dashboard',App\Htt
 
 
 //usermgt
-
-Route::middleware(['auth:sanctum','verified'])->get('user/mgt/new',App\Http\Livewire\Client\Users\CreateNewUser::class)->name('create-new-user');
+Route::middleware(['auth:sanctum','verified'])->get('/user/mgt/new',App\Http\Livewire\Client\Users\CreateNewUser::class)->name('create-new-user');
 
 //travelorder pages
 Route::middleware(['auth:sanctum','verified'])->get('travel-order/view/34d4c659bb9a93d6b{id}76bd4d016a69aa9d92e1ca81a4c19eb62f5aefda56d653d',App\Http\Livewire\Travelorders\Pages\ViewTravelOrder::class)->name('view-to');
@@ -132,3 +131,8 @@ Route::view('/401-page', 'errs.401-page')->name('401-error');
 
 //infophp
 Route::middleware(['auth:sanctum','verified'])->get('/infophp',App\Http\Livewire\Infophp::class);
+
+//sysadmin
+Route::middleware(['auth:sanctum','verified'])->get('/sysadmin/dashboard',function(){
+    return view('system_admin.system-admin-dashboard');
+})->name('sysadmin-dashboard');
