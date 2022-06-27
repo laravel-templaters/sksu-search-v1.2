@@ -133,6 +133,6 @@ Route::view('/401-page', 'errs.401-page')->name('401-error');
 Route::middleware(['auth:sanctum','verified'])->get('/infophp',App\Http\Livewire\Infophp::class);
 
 //sysadmin
-Route::middleware(['auth:sanctum','verified'])->get('/sysadmin/dashboard',function(){
+Route::middleware(['auth:sanctum','verified'])->get('/system/dashboard',function(){
     return view('system_admin.system-admin-dashboard');
 })->name('sysadmin-dashboard');

@@ -163,6 +163,10 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                       document code
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                        DESCRIPTION/DOCUMENT NAME
                                     </th>
                                     <th scope="col"
@@ -174,7 +178,7 @@
                                       LEGACY DOCUMENT
                                     </th>
                                     </th>
-                                    <th scope="col" class="relative px-6 py-3">
+                                    <th scope="col" class="relative px-3 py-3">
                                         <span class="sr-only">Action</span>
                                     </th>
                                     </tr>
@@ -232,6 +236,9 @@
                                        <tr>
                                         <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                                             {{$legacy_document->folder->folder_name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-500">{{$legacy_document->document_code}}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-500">{{$legacy_document->name}}</div>

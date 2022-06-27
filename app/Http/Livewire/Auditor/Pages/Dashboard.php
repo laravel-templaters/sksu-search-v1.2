@@ -23,7 +23,7 @@ class Dashboard extends Component
                 $this->legacyDocs = LegacyDocument::whereIn('folder_id',$folders)->paginate(10);                
             }else{
               
-                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('name',$this->searchText)->paginate(10);
+                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('document_code',$this->searchText)->searchOr('name',$this->searchText)->paginate(10);
             }
         }
     }
