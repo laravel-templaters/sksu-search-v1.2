@@ -1,15 +1,19 @@
 <div class="block px-5 py-3 mt-3 bg-gray-100 rounded-lg "
-x-data="{legacy_added:@entangle('legacy_added')}"
+x-data="{legacy_added:@entangle('legacy_added'), copiedToClipboard:@entangle('copiedToClipboard')}"
 x-init="$watch('legacy_added', value => {
     if(value == true){
-        setTimeout(function(){ legacy_added = false; }, 5000);
+        setTimeout(function(){ legacy_added = false; }, 10000);
+    } 
+}),$watch('copiedToClipboard', value => {
+    if(value == true){
+        setTimeout(function(){ copiedToClipboard = false; }, 5000);
     } 
 })">
 
 
       {{-- notification --}}
         <!-- Global notification live region, render this permanently at the end of the document -->
-        <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start" x-show="legacy_added" x-cloak
+        <div aria-live="assertive" class="fixed inset-x-0 bottom-0 flex items-end px-4 py-10 pointer-events-none sm:items-start" x-show="legacy_added" x-cloak
             x-transition-enter =  "transform ease-out duration-300 transition"
             x-transition-enter-start =  "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
             x-transition-enter-end =   "translate-y-0 opacity-100 sm:translate-x-0"
@@ -67,8 +71,10 @@ x-init="$watch('legacy_added', value => {
                
                 <div class="w-full form-group">
                     <label for="document_code" class="inline-block text-gray-700 form-label">Document Code</label>
-                    <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
+                    <input readonly type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
                     <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
+                    <span class="text-sm italic text-primary-500" x-show="copiedToClipboard == false"><strong class="italic">Note:</strong> you may click <span x-on:click="copiedToClipboard=true;navigator.clipboard.writeText('{{ $document_code }}');" class="font-bold text-indigo-500 underline hover:cursor-pointer hover:text-indigo-700">this to copy document code to clipboard.</span></span>
+                    <span class="text-sm italic font-extrabold text-indigo-700" x-show="copiedToClipboard">Copied!</span>
                 </div>
 
                  <div class="w-full form-group">
