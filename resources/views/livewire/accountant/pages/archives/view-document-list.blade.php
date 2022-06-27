@@ -139,6 +139,10 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Document Code
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Description/Document Name
                                 </th>
                                 <th scope="col"
@@ -162,6 +166,9 @@
                                     <tr>
                                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                                             {{$legacy_document->folder->folder_name}}
+                                        </td>
+                                        <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
+                                            {{$legacy_document->document_code}}
                                         </td>
                                         <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap">
                                             {{$legacy_document->name}}

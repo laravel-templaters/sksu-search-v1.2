@@ -6,8 +6,10 @@ use App\Models\ArchiveFolder;
 use App\Models\Building;
 use Carbon\Carbon;
 use App\Models\Drawer;
+use App\Models\FolderDocument;
 use App\Models\LegacyDocument;
 use App\Models\Shelf;
+use Illuminate\Support\Facades\Date;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
@@ -40,6 +42,8 @@ class NewLegacyDocument extends Component
     public $folder_id;
     public $old_folder_id;
     public $legacy_added = false;
+    public $copiedToClipboard = false;
+    public $document;
     //mount
     // public function mount($folder, $drawer, $shelf, $building)
     // {
@@ -135,6 +139,12 @@ class NewLegacyDocument extends Component
     ];
     public function render()
     {      
+        if($this->document_code == null || !isset($this->document_code)){
+            $lg = LegacyDocument::count();
+            $ad = FolderDocument::count();
+            $sum = $lg + $ad;
+            $this->document_code = "ARDC".date('omd-Gi-s').$sum;
+        }
         $this->buildings = Building::all();
         return view('livewire.archiver.pages.new-legacy-document');
     }
@@ -151,7 +161,7 @@ class NewLegacyDocument extends Component
             'drawer_id' => 'required',
             'folder_id' => 'required',
         ]);
-        $document = LegacyDocument::create([
+        $this->document = LegacyDocument::create([
             'name' => $this->name,
             'document_code' => $this->document_code,
             'path' => $this->path->store('documents'),
@@ -159,8 +169,7 @@ class NewLegacyDocument extends Component
             'building_id' => $this->building_id,
             'shelf_id' => $this->shelf_id,
             'drawer_id' => $this->drawer_id,
-            'folder_id' => $this->folder_id,    
-              
+            'folder_id' => $this->folder_id, 
         ]);
         $this->legacy_added = true;
         $this->resetInput();

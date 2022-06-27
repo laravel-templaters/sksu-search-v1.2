@@ -11,6 +11,7 @@ class ManagePerDiem extends Component
     public $per_diem;
     public $per_diem_old;
     public $showSaveButton = false;
+    public $changes_saved = false;
     public function updated($fieldset){
         if($fieldset == "selectedRegion"){
             if($this->selectedRegion != null){
@@ -41,6 +42,7 @@ class ManagePerDiem extends Component
         $dte->amount = $this->per_diem + 0;
         $dte->save();
         $this->selectedRegion = $this->per_diem = $this->per_diem_old = null;
+        $this->changes_saved = true;
         $this->showSaveButton = false;
     }
 }
