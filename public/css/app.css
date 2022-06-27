@@ -989,6 +989,14 @@ select {
   left: 0px;
   right: 0px;
 }
+.inset-y-5 {
+  top: 1.25rem;
+  bottom: 1.25rem;
+}
+.inset-y-10 {
+  top: 2.5rem;
+  bottom: 2.5rem;
+}
 .left-0 {
   left: 0px;
 }
@@ -2965,6 +2973,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(165 180 252 / var(--tw-text-opacity));
 }
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
 .text-opacity-90 {
   --tw-text-opacity: 0.9;
 }
@@ -3500,6 +3512,10 @@ select {
 .hover\:text-indigo-600:hover {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+.hover\:text-indigo-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 .hover\:underline:hover {
   -webkit-text-decoration-line: underline;
