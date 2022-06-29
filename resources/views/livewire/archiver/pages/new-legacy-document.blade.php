@@ -112,17 +112,27 @@ x-init="$watch('legacy_added', value => {
                     <span class="text-sm italic font-extrabold text-indigo-700" x-show="copiedToClipboard">Copied!</span>
                 </div>
                  
-                 
+                  <div class="w-full form-group">
+                    <label for="archive_date" class="inline-block text-gray-700 form-label">Payee Name</label>
+                    <input type="text" class="block w-1/2 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Full Name" wire:model.debounce.700ms="name">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
+                </div>
 
                  <div class="w-full form-group">
-                    <label for="archive_date" class="inline-block text-gray-700 form-label">Date</label>
-                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Document Name" wire:model.debounce.700ms="date">
+                    <label for="archive_date" class="inline-block text-gray-700 form-label">Particular</label>
+                    <input type="text" class="block w-1/2 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Particular" wire:model.debounce.700ms="particular">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
+                </div>
+
+                 <div class="w-full form-group">
+                    <label for="archive_date" class="inline-block text-gray-700 form-label">Archive Date</label>
+                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Archive Date" wire:model.debounce.700ms="date">
                     <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
                 </div>
                 
                 <div class="grid grid-cols-4 gap-3">
                     <div class="w-full col-span-1 form-group">
-                        <label for="Building" class="inline-block ml-3 text-gray-700 form-label">Building</label>
+                        <label for="Building" class="inline-block text-gray-700 form-label">Building</label>
                         <select wire:model.debounce.700ms="building_id" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="building_id" name="building_id">
                             <option value="">Select Building</option>
                             @foreach ($buildings as $building)
