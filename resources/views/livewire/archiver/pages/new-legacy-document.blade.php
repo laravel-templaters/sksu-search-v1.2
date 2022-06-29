@@ -1,5 +1,5 @@
 <div class="block px-5 py-3 mt-3 bg-gray-100 rounded-lg "
-x-data="{legacy_added:@entangle('legacy_added'), copiedToClipboard:@entangle('copiedToClipboard'), showQr:@entangle('showQr'),}"
+x-data="{legacy_added:@entangle('legacy_added'), copiedToClipboard:@entangle('copiedToClipboard'), showQr:false,}"
 x-init="$watch('legacy_added', value => {
     if(value == true){
         setTimeout(function(){ legacy_added = false; }, 10000);
@@ -58,18 +58,18 @@ x-init="$watch('legacy_added', value => {
         </div>
 
         <!-- Small Modal -->
-        <div id="small-modal" tabindex="-1" class="overflow-y-auto overflow-x-hidden top-0 right-0 left-0 z-0 w-full md:inset-0 h-modal md:h-full"  x-show="showQr" x-cloak
+        <div id="small-modal" tabindex="-1" class="top-0 left-0 right-0 z-0 w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"  x-show="showQr" x-cloak
          x-transition-enter =  "transform ease-out duration-300 transition"
             x-transition-enter-start =  "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
             x-transition-enter-end =   "translate-y-0 opacity-100 sm:translate-x-0"
             x-transition-leave =  "transition ease-in duration-100"
             x-transition-leave-start =  "opacity-100"
             x-transition-leave-end =  "opacity-0">
-            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            <div class="relative w-full h-full max-w-md p-4 md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
-                    <div class="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
+                    <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
                         <h3 class="text-xl font-medium text-gray-900 dark:text-white">
                             Small modal
                         </h3>
@@ -79,10 +79,13 @@ x-init="$watch('legacy_added', value => {
                     </div>
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
-                        {!! QrCode::size(100)->generate($document_code); !!}
+                        
+                        
+                       
+                        
                     </div>
                     <!-- Modal footer -->
-                    <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                         <button data-modal-toggle="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Download</button>
                     </div>
                 </div>
@@ -104,7 +107,7 @@ x-init="$watch('legacy_added', value => {
             <div class="grid grid-cols-1 gap-3 m-2 text-md">
                 
                 
-                <div class="w-full  form-group">
+                <div class="w-full form-group">
                     <label for="document_code" class="inline-block text-gray-700 form-label">Document Code</label>
                     <input readonly type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
                     <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
@@ -113,15 +116,16 @@ x-init="$watch('legacy_added', value => {
                 </div>
                  
                   <div class="w-full form-group">
-                    <label for="archive_date" class="inline-block text-gray-700 form-label">Payee Name</label>
-                    <input type="text" class="block w-1/2 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Full Name" wire:model.debounce.700ms="name">
-                    <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
+                    <label for="payee" class="inline-block text-gray-700 form-label">Payee Name</label>
+                    <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800 " id="payee" name="payee" placeholder="Full Name" wire:model.debounce.700ms="payee">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('payee') }}</span>
                 </div>
 
                  <div class="w-full form-group">
-                    <label for="archive_date" class="inline-block text-gray-700 form-label">Particular</label>
-                    <input type="text" class="block w-1/2 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Particular" wire:model.debounce.700ms="particular">
-                    <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
+                    <label for="particular" class="inline-block text-gray-700 form-label">Particular</label>
+                    <textarea cols="10" rows="5" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="particular" name="particular" placeholder="Particular" wire:model.debounce.700ms="particular">
+                    </textarea>
+                    <span class="text-sm italic text-red-500">{{ $errors->first('particular') }}</span>
                 </div>
 
                  <div class="w-full form-group">
