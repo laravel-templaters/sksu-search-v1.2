@@ -20,7 +20,7 @@ class AuditorSeeder extends Seeder
             'name' => 'Joan M. Nieveras',
             'birth_day' =>  Carbon::create('2000', '04', '06'),
             'contact_number' => '09123456789',
-            'email' => 'joanmnieveras@yahoo.com',
+            'email' => 'joanmnieveras0613@gmail.com',
             'password' => Hash::make('nieveras123'),
             'role_id' => 8,
             'department_id' => 48,
