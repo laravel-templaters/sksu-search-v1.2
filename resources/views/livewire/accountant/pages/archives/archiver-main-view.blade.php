@@ -218,7 +218,7 @@
                                             Dec. 21, 2021
                                         </td>
                                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                            <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank"
+                                            <a href="{{  route('archive-detail', ['id'=>1, 'islegacy'=> 1])  }}" target="_blank"
                                                 class="inline-flex text-indigo-600 hover:text-indigo-900">
                                                 <span class="inline pr-3">View</span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5"

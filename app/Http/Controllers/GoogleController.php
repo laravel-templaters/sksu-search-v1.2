@@ -30,10 +30,10 @@ class GoogleController extends Controller
             
             $finduser = User::where('email', $user->email)->first();
             $str =  $user->email;
-            $pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@sksu\.edu\.ph$^";
-            $res = preg_match_all($pattern, $str);
+            //$pattern = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@(?gmail|sksu\.edu\.ph$)^";
+            //$res = preg_match_all($pattern, $str);
             
-            if($res >= 1){
+            //if($res >= 1){
                 if($finduser)
                 {
                     //dd($user);
@@ -55,22 +55,22 @@ class GoogleController extends Controller
                     
                 }else{
                     
-                    $newUser = new User;
-                    $newUser->name = $user->name;
-                    $newUser->email =$user->email;
-                    $newUser->provider_id = $user->id;
-                    $newUser->avatar = $user->avatar;
-                    $newUser->email_verified_at = $user->user['verified_email']  == true ? Carbon::now() : null;
-                    $newUser->role_id =3;
-                    $newUser->department_id =50;
-                    $newUser->position_id =10;
-                    $newUser->save();
-                    Auth::login($newUser);
-                    
+                    // $newUser = new User;
+                    // $newUser->name = $user->name;
+                    // $newUser->email =$user->email;
+                    // $newUser->provider_id = $user->id;
+                    // $newUser->avatar = $user->avatar;
+                    // $newUser->email_verified_at = $user->user['verified_email']  == true ? Carbon::now() : null;
+                    // $newUser->role_id =3;
+                    // $newUser->department_id =50;
+                    // $newUser->position_id =10;
+                    // $newUser->save();
+                    // Auth::login($newUser);
+                    return redirect()->route('401-error');
                 }
-            }else{
-                return redirect()->route('401-error');
-            }
+            // }else{
+            //     return redirect()->route('401-error');
+            // }
            
     
         } catch (Exception $e) {

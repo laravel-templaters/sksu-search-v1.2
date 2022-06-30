@@ -1,8 +1,9 @@
 <div class="block px-5 py-3 mt-3 bg-gray-100 rounded-lg "
-x-data="{legacy_added:@entangle('legacy_added'), copiedToClipboard:@entangle('copiedToClipboard')}"
+x-data="{legacy_added:@entangle('legacy_added'), copiedToClipboard:@entangle('copiedToClipboard'), showQr:false,}"
 x-init="$watch('legacy_added', value => {
     if(value == true){
         setTimeout(function(){ legacy_added = false; }, 10000);
+        setTimeout(function(){ showQr = true; }, 5000);
     } 
 }),$watch('copiedToClipboard', value => {
     if(value == true){
@@ -56,6 +57,43 @@ x-init="$watch('legacy_added', value => {
             </div>
         </div>
 
+        <!-- Small Modal -->
+        <div id="small-modal" tabindex="-1" class="top-0 left-0 right-0 z-0 w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"  x-show="showQr" x-cloak
+         x-transition-enter =  "transform ease-out duration-300 transition"
+            x-transition-enter-start =  "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            x-transition-enter-end =   "translate-y-0 opacity-100 sm:translate-x-0"
+            x-transition-leave =  "transition ease-in duration-100"
+            x-transition-leave-start =  "opacity-100"
+            x-transition-leave-end =  "opacity-0">
+            <div class="relative w-full h-full max-w-md p-4 md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                            Small modal
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="small-modal">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                        {!!QrCode::size(100)->format('svg')->generate($document_code)!!}
+                        
+                       
+                        
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button data-modal-toggle="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     {{-- Albert Einstein --}}
     <div class="block my-2 ml-2">
@@ -68,24 +106,37 @@ x-init="$watch('legacy_added', value => {
         <form wire:submit.prevent="store" enctype="multipart/form-data">
             <div class="grid grid-cols-1 gap-3 m-2 text-md">
                 
-               
+                
                 <div class="w-full form-group">
                     <label for="document_code" class="inline-block text-gray-700 form-label">Document Code</label>
-                    <input readonly type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
+                    <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
                     <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
                     <span class="text-sm italic text-primary-500" x-show="copiedToClipboard == false"><strong class="italic">Note:</strong> you may click <span x-on:click="copiedToClipboard=true;navigator.clipboard.writeText('{{ $document_code }}');" class="font-bold text-indigo-500 underline hover:cursor-pointer hover:text-indigo-700">this to copy document code to clipboard.</span></span>
                     <span class="text-sm italic font-extrabold text-indigo-700" x-show="copiedToClipboard">Copied!</span>
                 </div>
+                 
+                  <div class="w-full form-group">
+                    <label for="payee" class="inline-block text-gray-700 form-label">Payee Name</label>
+                    <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800 " id="payee" name="payee" placeholder="Full Name" wire:model.debounce.700ms="payee">
+                    <span class="text-sm italic text-red-500">{{ $errors->first('payee') }}</span>
+                </div>
 
                  <div class="w-full form-group">
-                    <label for="archive_date" class="inline-block text-gray-700 form-label">Date</label>
-                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Document Name" wire:model.debounce.700ms="date">
+                    <label for="particular" class="inline-block text-gray-700 form-label">Particular</label>
+                    <textarea cols="10" rows="5" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-lg form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="particular" name="particular" placeholder="Particular" wire:model.debounce.700ms="particular">
+                    </textarea>
+                    <span class="text-sm italic text-red-500">{{ $errors->first('particular') }}</span>
+                </div>
+
+                 <div class="w-full form-group">
+                    <label for="archive_date" class="inline-block text-gray-700 form-label">Archive Date</label>
+                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Archive Date" wire:model.debounce.700ms="date">
                     <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
                 </div>
                 
                 <div class="grid grid-cols-4 gap-3">
                     <div class="w-full col-span-1 form-group">
-                        <label for="Building" class="inline-block ml-3 text-gray-700 form-label">Building</label>
+                        <label for="Building" class="inline-block text-gray-700 form-label">Building</label>
                         <select wire:model.debounce.700ms="building_id" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="building_id" name="building_id">
                             <option value="">Select Building</option>
                             @foreach ($buildings as $building)

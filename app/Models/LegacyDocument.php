@@ -13,6 +13,8 @@ class LegacyDocument extends Model
         'name',
         'path',
         'date',
+        'payee' ,
+        'particular',
         'document_code',
         'building_id',
         'shelf_id',

@@ -29,7 +29,9 @@ class NewLegacyDocument extends Component
     // public $year;
     public $document_code;
     public $archived_year_id;
-    public $buildings;    
+    public $buildings;
+    public $particular;
+    public $payee;    
     public $shelves;
     public $drawers;
     public $folders;
@@ -61,6 +63,8 @@ class NewLegacyDocument extends Component
             'document_code' => 'required',
             'path' => 'required|mimes:pdf',
             'date' => 'required',
+            'payee' => 'required',
+            'particular' => 'required',
             'building_id' => 'required',
             'shelf_id' => 'required',
             'drawer_id' => 'required',
@@ -157,6 +161,8 @@ class NewLegacyDocument extends Component
             'path' => 'required|mimes:pdf',
             'date' => 'required|date',
             'building_id' => 'required',
+            'payee' => 'required',
+            'particular' => 'required',
             'shelf_id' => 'required',
             'drawer_id' => 'required',
             'folder_id' => 'required',
