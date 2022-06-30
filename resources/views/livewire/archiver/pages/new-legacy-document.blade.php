@@ -58,7 +58,7 @@ x-init="$watch('legacy_added', value => {
         </div>
 
         <!-- Small Modal -->
-        <div id="small-modal" tabindex="-1" class="top-0 left-0 right-0 z-0 w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"  x-show="showQr" x-cloak
+        <div id="small-modal" tabindex="-1" class="top-0 left-0 right-0 z-0 w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"   x-cloak
          x-transition-enter =  "transform ease-out duration-300 transition"
             x-transition-enter-start =  "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
             x-transition-enter-end =   "translate-y-0 opacity-100 sm:translate-x-0"
@@ -79,10 +79,7 @@ x-init="$watch('legacy_added', value => {
                     </div>
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
-                        {!!QrCode::size(100)->format('svg')->generate($document_code)!!}
-                        
-                       
-                        
+                        {!!QrCode::size(100)->format('png')->generate($document_code)!!}
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
