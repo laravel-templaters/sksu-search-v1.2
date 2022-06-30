@@ -2,8 +2,8 @@
     <div class="container mx-auto my-4">
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="min-w-full py-2 align-middle sm:px-6 lg:px-8 grid grid-cols-2 gap-4">
-                    <div class="grid col-span-1 overflow-hidden border-b border-gray-200 shadow-md shadow-primary-500/50 sm:rounded-lg bg-gray-50 ">
+                <div class="min-w-full py-2 align-middle sm:px-6 lg:px-8 ">
+                    <div class="overflow-hidden border-b border-gray-200 shadow-md shadow-primary-500/50 sm:rounded-lg bg-gray-50 ">
                         <div class="overflow-hidden bg-white shadow sm:rounded-lg">
                             <div class="sticky top-0 px-4 py-5 sm:px-6">
                                 <h3 class="text-lg font-medium leading-6 text-gray-900">Document Information</h3>
@@ -51,7 +51,7 @@
                                        <dt class="text-sm font-medium text-gray-500">Upload Date</dt>
                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $document->created_at->format('F d, Y') }}</dd>
                                     </div>
-                                    {{-- <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                        <dt class="text-sm font-medium text-gray-500">Attachments</dt>
                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                              <ul role="list"
@@ -70,7 +70,7 @@
                                                             {{ str_replace(' ','_',$document->name) }}.pdf </span>
                                                    </div>
                                                    <div class="flex-shrink-0 ml-4" x-cloak x-show="showPreview == false">
-                                                      <a x-on:click="showPreview = true"
+                                                      <a href="{{ asset( 'storage/'.$document->path ) }}" target="_blank" 
                                                          class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer">
                                                          Show Preview
                                                       </a>
@@ -94,7 +94,7 @@
                                                 </li>
                                              </ul>
                                        </dd>
-                                    </div> --}}
+                                    </div>
                                  </dl>
                               </div>
                             @endif                            
@@ -102,7 +102,7 @@
 
                     </div>
                     {{-- prieview --}}
-                     <div class="grid col-span-1 overflow-hidden border-b border-gray-200 shadow-md shadow-primary-500/50 sm:rounded-lg bg-gray-50 ">
+                     {{-- <div class="grid col-span-1 overflow-hidden border-b border-gray-200 shadow-md shadow-primary-500/50 sm:rounded-lg bg-gray-50 ">
                         <div class="overflow-hidden bg-white shadow sm:rounded-lg">
                             <div class="sticky top-0 px-4 py-5 sm:px-6">
                                 <h3 class="text-lg font-medium leading-6 text-gray-900">Attachments</h3>
@@ -115,13 +115,11 @@
                                  <dl class="sm:divide-y sm:divide-gray-200">
                                   
                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                       {{-- <dt class="text-sm font-medium text-gray-500">Attachments</dt> --}}
                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-3">
                                              <ul role="list"
                                                 class="border border-gray-200 divide-y divide-gray-200 rounded-md" x-data="{showPreview:false}">
                                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                                    <div class="flex items-center flex-1 w-0">
-                                                         <!-- Heroicon name: solid/paper-clip -->
                                                          <svg class="flex-shrink-0 w-5 h-5 text-gray-400"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                             fill="currentColor" aria-hidden="true">
@@ -132,18 +130,7 @@
                                                          <span class="flex-1 w-0 ml-2 truncate">
                                                             {{ str_replace(' ','_',$document->name) }}.pdf </span>
                                                    </div>
-                                                   {{-- <div class="flex-shrink-0 ml-4" x-cloak x-show="showPreview == false">
-                                                      <a x-on:click="showPreview = true"
-                                                         class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer">
-                                                         Show Preview
-                                                      </a>
-                                                   </div> --}}
-                                                   {{-- <div class="flex-shrink-0 ml-4" x-cloak x-show="showPreview">
-                                                      <a x-on:click="showPreview = false"
-                                                         class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer">
-                                                         Hide Preview
-                                                      </a>
-                                                   </div> --}}
+                                              
                                                    <div class="flex-shrink-0 ml-4">
                                                          <a wire:click.prevent="downloadLegacyDocument"
                                                             class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer">
@@ -163,7 +150,7 @@
                             @endif                            
                         </div>
 
-                    </div>
+                    </div> --}}
                     {{-- end preview --}}
                 </div>
             </div>
