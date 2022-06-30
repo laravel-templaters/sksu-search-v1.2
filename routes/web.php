@@ -112,6 +112,7 @@ Route::middleware(['auth:sanctum','verified'])->get('/archiver/buildings',App\Ht
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/shelves',App\Http\Livewire\Archiver\Pages\Newshelf::class)->name('manage-shelves');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/drawers',App\Http\Livewire\Archiver\Pages\NewDrawer::class)->name('manage-drawers');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/folders',App\Http\Livewire\Archiver\Pages\NewFolder::class)->name('manage-folders');
+Route::middleware(['auth:sanctum','verified'])->get('/archiver/fund-clusters',App\Http\Livewire\Archiver\Pages\ManageFundClusters::class)->name('manage-fclusters');
 Route::middleware(['auth:sanctum','verified'])->get('/testComp',App\Http\Livewire\TestComp::class)->name('test');
 
 //auditor

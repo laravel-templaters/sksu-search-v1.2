@@ -7,6 +7,7 @@ use App\Models\Building;
 use Carbon\Carbon;
 use App\Models\Drawer;
 use App\Models\FolderDocument;
+use App\Models\FundCluster;
 use App\Models\LegacyDocument;
 use App\Models\Shelf;
 use Illuminate\Support\Facades\Date;
@@ -33,6 +34,7 @@ class NewLegacyDocument extends Component
     public $particular;
     public $payee;    
     public $shelves;
+    public $fundcluster;
     public $drawers;
     public $folders;
     public $building_id;
@@ -57,7 +59,10 @@ class NewLegacyDocument extends Component
 
     public function updated($field)
     {
-        
+        if($field == 'fundcluster'){
+            $getclustertype = FundCluster::where('id',$this->fundcluster)->get('fund_cluster_type');
+            $this->document_code = $getclustertype[0]->fund_cluster_type."-0-0000";
+        }
         $this->validateOnly($field, [
             'name' => 'required',
             'document_code' => 'required',
@@ -144,13 +149,14 @@ class NewLegacyDocument extends Component
     public function render()
     {      
         if($this->document_code == null || !isset($this->document_code)){
-            $lg = LegacyDocument::count();
-            $ad = FolderDocument::count();
-            $sum = $lg + $ad;
-            $this->document_code = "ARDC".date('omd-Gi-s').$sum;
+            // $lg = LegacyDocument::count();
+            // $ad = FolderDocument::count();
+            // $sum = $lg + $ad;
+            // $this->document_code = "ARDC".date('omd-Gi-s').$sum;
+            $this->document_code= "000-0-0000";
         }
         $this->buildings = Building::all();
-        return view('livewire.archiver.pages.new-legacy-document');
+        return view('livewire.archiver.pages.new-legacy-document',['fundclusters'=>FundCluster::all()]);
     }
 
     public function store()
@@ -172,6 +178,9 @@ class NewLegacyDocument extends Component
             'document_code' => $this->document_code,
             'path' => $this->path->store('documents'),
             'date' => $this->date,
+            'payee_name'=>$this->payee,
+            'particulars'=>$this->particular,
+            'fund_cluster_id'=>$this->fundcluster,
             'building_id' => $this->building_id,
             'shelf_id' => $this->shelf_id,
             'drawer_id' => $this->drawer_id,
@@ -184,12 +193,13 @@ class NewLegacyDocument extends Component
     public function resetInput()
     {
         $this->name = null;
-        $this->document_code = null;
-        $this->path = null;
+        $this->document_code = $this->payee = null;
+        $this->path = $this->particular = null;
         $this->date = null;
         $this->building_id = null;
         $this->shelf_id = null;
         $this->drawer_id = null;
         $this->folder_id = null;
+        $this->fundcluster = 1;
     }
 }
