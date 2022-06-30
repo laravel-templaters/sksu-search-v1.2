@@ -15,7 +15,7 @@ class ViewDocumentDetails extends Component
     {
         
         if($this->islegacy == 1){
-            $document = LegacyDocument::where('id',$this->legacy_id)->with('folder')->with('drawer')->with('shelf')->with('building')->first();
+            $document = LegacyDocument::where('id',$this->legacy_id)->with('folder')->with('drawer')->with('shelf')->with('building')->with('fund_cluster')->first();
             
         }else{
             $document = FolderDocument::find($this->disbursement_id)->with('folder')->with('drawer')->with('shelf')->with('building')->first();

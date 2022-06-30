@@ -13,9 +13,10 @@ class LegacyDocument extends Model
         'name',
         'path',
         'date',
-        'payee' ,
-        'particular',
+        'payee_name' ,
+        'particulars',
         'document_code',
+        'fund_cluster_id',
         'building_id',
         'shelf_id',
         'drawer_id',
@@ -26,6 +27,10 @@ class LegacyDocument extends Model
     public function archivedYear()
     {
         return $this->belongsTo(ArchivedYear::class);
+    }
+    public function fund_cluster()
+    {
+        return $this->hasOne(FundCluster::class, 'id', 'fund_cluster_id');
     }
     public function building()
     {

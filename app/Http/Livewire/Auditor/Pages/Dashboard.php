@@ -12,26 +12,41 @@ use App\Models\LegacyDocument;
 class Dashboard extends Component
 {
     public $searchText;
-
+    public $filter;
+    
     
     protected $legacyDocs = [];
     public function updated($field)
     {
-        if ($field == 'searchText') {
-            $folders = ArchiveFolder::search('folder_name',$this->searchText)->searchOr('folder_code',$this->searchText)->searchOr('folder_tracking_no',$this->searchText)->get('id');
-            if(count($folders) > 0){
-                $this->legacyDocs = LegacyDocument::whereIn('folder_id',$folders)->paginate(10);                
-            }else{
-              
-                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('document_code',$this->searchText)->searchOr('name',$this->searchText)->paginate(10);
-            }
+        if ($field == 'searchText' || $field == 'filter') {
+           switch ($this->filter) {
+            case 'payee':
+                $this->legacyDocs = LegacyDocument::search('payee_name',$this->searchText)->paginate(10);
+                break;
+            case 'particular':
+                $this->legacyDocs = LegacyDocument::search('particulars',$this->searchText)->paginate(10);
+                break;
+            case 'document-code':
+                $this->legacyDocs = LegacyDocument::search('document_code',$this->searchText)->paginate(10);
+                break;
+            case 'date':
+                $this->legacyDocs = LegacyDocument::search('date',$this->searchText)->paginate(10);
+                break;
+            
+            default:
+                $this->legacyDocs = LegacyDocument::paginate(10);
+                break;
+           }
         }
     }
     public function render()
-    {      
-        if(!isset($this->searchText)){
-                $this->updated('searchText');
+    {     
+        if(!isset($this->filter)){
+            $this->filter="payee";
         }
+        if(!isset($this->searchText)){
+            $this->updated('searchText');
+        }        
         return view('livewire.auditor.pages.dashboard',[
             'title' => 'Dashboard',
             'subtitle' => 'Auditor Dashboard',

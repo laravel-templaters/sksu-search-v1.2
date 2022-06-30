@@ -21,31 +21,33 @@
                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                        <dt class="text-sm font-medium text-gray-500">Document Code</dt>
                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {{ $document->document_code }}</dd>
-                                       </dd>
+                                     
                                     </div>
 
                                      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                        <dt class="text-sm font-medium text-gray-500">Payee Name</dt>
-                                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {{ date('F d, Y', strtotime($document->date)) }}</dd>
-                                       </dd>
+                                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {{$document->payee_name }}</dd>
+                                     
                                     </div>
 
                                      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                        <dt class="text-sm font-medium text-gray-500">Particular</dt>
-                                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {{ date('F d, Y', strtotime($document->date)) }}</dd>
-                                       </dd>
+                                          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                             <p class="whitespace-pre">
+                                             {{ $document->particulars}}</p>
+                                          </dd>
                                     </div>
 
                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                        <dt class="text-sm font-medium text-gray-500">Archive Date</dt>
                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {{ date('F d, Y', strtotime($document->date)) }}</dd>
-                                       </dd>
+                                      
                                     </div>
                                     
                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                        <dt class="text-sm font-medium text-gray-500">Document Location <br/>( Building / Shelf / Drawer / Folder )</dt>
                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $document->building->building_name }} / {{ $document->shelf->shelf_name }} / {{ $document->drawer->drawer_name }} / {{ $document->folder->folder_name }}</dd>
-                                       </dd>
+                                       
                                     </div>
                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                        <dt class="text-sm font-medium text-gray-500">Upload Date</dt>

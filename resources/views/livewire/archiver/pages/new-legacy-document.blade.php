@@ -107,12 +107,18 @@ x-init="$watch('legacy_added', value => {
             <div class="grid grid-cols-1 gap-3 m-2 text-md">
                 
                 
-                <div class="w-full form-group">
-                    <label for="document_code" class="inline-block text-gray-700 form-label">Document Code</label>
-                    <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
-                    <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
-                    <span class="text-sm italic text-primary-500" x-show="copiedToClipboard == false"><strong class="italic">Note:</strong> you may click <span x-on:click="copiedToClipboard=true;navigator.clipboard.writeText('{{ $document_code }}');" class="font-bold text-indigo-500 underline hover:cursor-pointer hover:text-indigo-700">this to copy document code to clipboard.</span></span>
-                    <span class="text-sm italic font-extrabold text-indigo-700" x-show="copiedToClipboard">Copied!</span>
+                <div class="grid w-full grid-cols-7 form-group gap-x-2">
+                    <label for="fundcluster" class="inline-block col-span-7 text-gray-700 form-label">Document Code</label>
+                    <select wire:model="fundcluster" name="fundcluster" id="fundcluster" class="block w-full col-span-2 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800">
+                        <option value="" class="font-bold text-gray-500 text-md">Select Fund Cluster</option>
+                        @foreach ($fundclusters as $fc)
+                            <option value="{{ $fc->id }}" class="font-bold text-gray-500 text-md">{{ $fc->fund_cluster_type }}</option> 
+                        @endforeach
+                    </select>
+                    <input type="text" class="block w-full col-span-5 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
+                    <p class="col-span-7 text-sm italic text-red-500">{{ $errors->first('document_code') }}</p>
+                    <p class="col-span-7 text-sm italic text-primary-500" x-show="copiedToClipboard == false"><strong class="italic">Note:</strong> you may click <span x-on:click="copiedToClipboard=true;navigator.clipboard.writeText('{{ $document_code }}');" class="font-bold text-indigo-500 underline hover:cursor-pointer hover:text-indigo-700">this to copy document code to clipboard.</span></p>
+                    <p class="col-span-7 text-sm italic font-extrabold text-indigo-700" x-show="copiedToClipboard">Copied!</p>
                 </div>
                  
                   <div class="w-full form-group">
