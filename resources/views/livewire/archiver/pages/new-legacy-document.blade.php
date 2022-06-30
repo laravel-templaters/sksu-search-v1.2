@@ -79,7 +79,7 @@ x-init="$watch('legacy_added', value => {
                     </div>
                     <!-- Modal body -->
                     <div class="p-6 space-y-6">
-                        
+                        {!!QrCode::size(100)->format('svg')->generate($document_code)!!}
                         
                        
                         
@@ -109,7 +109,7 @@ x-init="$watch('legacy_added', value => {
                 
                 <div class="w-full form-group">
                     <label for="document_code" class="inline-block text-gray-700 form-label">Document Code</label>
-                    <input readonly type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
+                    <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_code" name="document_code" placeholder="Document Code" wire:model.debounce.700ms="document_code">
                     <span class="text-sm italic text-red-500">{{ $errors->first('document_code') }}</span>
                     <span class="text-sm italic text-primary-500" x-show="copiedToClipboard == false"><strong class="italic">Note:</strong> you may click <span x-on:click="copiedToClipboard=true;navigator.clipboard.writeText('{{ $document_code }}');" class="font-bold text-indigo-500 underline hover:cursor-pointer hover:text-indigo-700">this to copy document code to clipboard.</span></span>
                     <span class="text-sm italic font-extrabold text-indigo-700" x-show="copiedToClipboard">Copied!</span>
