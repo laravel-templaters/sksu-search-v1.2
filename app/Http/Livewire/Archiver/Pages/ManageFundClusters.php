@@ -22,7 +22,7 @@ class ManageFundClusters extends Component
             $this->fund_clusters = FundCluster::search('fund_cluster_type',$this->searchText )->orderBy('id','desc')->get();
         }
         $this->validateOnly($field, [
-            'fund_cluster_name' => 'required|string|max:255|unique:fund_clusters',
+            'fund_cluster_name' => 'required|string|max:255|unique:fund_clusters,fund_cluster_type',
             'edited_fund_cluster_name' => 'required|string|max:255',
         ]);
     }
@@ -46,7 +46,7 @@ class ManageFundClusters extends Component
     }
     public function store(){
         $this->validate([
-            'fund_cluster_name' => 'required|string|max:255|unique:fund_clusters',
+            'fund_cluster_name' => 'required|string|max:255|unique:fund_clusters,fund_cluster_type',
         ]);
         $building = FundCluster::create([
             'fund_cluster_type' => $this->fund_cluster_name,
