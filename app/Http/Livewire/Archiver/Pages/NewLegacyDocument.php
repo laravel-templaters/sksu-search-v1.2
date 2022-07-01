@@ -62,7 +62,7 @@ class NewLegacyDocument extends Component
     {
         if($field == 'fundcluster'){
             $getclustertype = FundCluster::where('id',$this->fundcluster)->get('fund_cluster_type');
-            $this->document_code = $getclustertype[0]->fund_cluster_type."-0-0000";
+            $this->document_code = $getclustertype[0]->fund_cluster_type."-00-00-0000";
         }
         $this->validateOnly($field, [
             'name' => 'required',

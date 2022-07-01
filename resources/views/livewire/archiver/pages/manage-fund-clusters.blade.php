@@ -1,5 +1,5 @@
 <div class="relative z-0 flex flex-1 w-full h-screen min-w-full mx-auto -mt-20 overflow-hidden bg-transparent max-w-screen"
-x-data="{fund_added:@entangle('fund_added'),show_fund_form:@entangle('show_fund_form')}"
+x-data="{fund_added:@entangle('fund_added'),show_fund_form:@entangle('show_fund_form'),show_edit_form:@entangle('show_edit_form')}"
 x-init="$watch('fund_added', value => {
     if(value == true){
         setTimeout(function(){ fund_added = false; }, 5000);
@@ -98,7 +98,7 @@ x-init="$watch('fund_added', value => {
                                                     <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $fc->created_at }}</td>
                                                     <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $fc->updated_at }}</td>
                                                     <td class="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-6">
-                                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, {{ $fc->fund_cluster_type }}</span></a>
+                                                        <a wire:click="showEditForm({{ $fc->id }})" class="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">Edit<span class="sr-only">, {{ $fc->fund_cluster_type }}</span></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -187,4 +187,67 @@ x-init="$watch('fund_added', value => {
 
   
     {{-- modal add end --}}
+    {{-- modal edit --}}
+    <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="show_edit_form" x-transition-enter = "ease-out duration-300"
+    x-transition-enter-start =  "opacity-0"
+    x-transition-enter-end =  "opacity-100"
+    x-transition-leave =  "ease-in duration-200"
+    x-transition-leave-start =  "opacity-100"
+    x-transition-leave-end = "opacity-0" >
+        <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" x-cloak x-show="show_edit_form" x-transition-enter = "ease-out duration-300"
+        x-transition-enter-start = "opacity-0" 
+        x-transition-enter-end =  "opacity-100"
+        x-transition-leave =  "ease-in duration-200"
+        x-transition-leave-start =  "opacity-100"
+        x-transition-leave-end =  "opacity-0"></div>
+    
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
+            
+            <div class="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6" x-cloak x-show="show_edit_form"
+            x-transition-enter = "ease-out duration-300"
+            x-transition-enter-start = "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+            x-transition-enter-end =  "opacity-100 translate-y-0 sm:scale-100"
+            x-transition-leave =  "ease-in duration-200"
+            x-transition-leave-start =  "opacity-100 translate-y-0 sm:scale-100"
+            x-transition-leave-end =  "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+             
+                <form class="space-y-8 divide-y divide-gray-200" wire:submit.prevent='updateFund'>
+                    <div class="space-y-8 divide-y divide-gray-200">
+                    
+                
+                        <div class="pt-4">
+                            <div>
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Edit Fund Cluster Information</h3>
+                            
+                            </div>
+                            <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                <label for="edited_fund_cluster_name" class="block text-sm font-medium tracking-wider text-gray-700"> Cluster name </label>
+                                <div class="mt-1">
+                                <input type="text" wire:model.debounce="edited_fund_cluster_name" name="edited_fund_cluster_name" id="edited_fund_cluster_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <span class="text-sm italic text-red-500">{{ $errors->first('edited_fund_cluster_name') }}</span>
+                                </div>
+                            </div>
+                    
+                            
+                            </div>
+                        </div>
+                
+                   
+                    </div>
+                
+                    <div class="pt-5">
+                    <div class="flex justify-end">
+                        <button type="button" wire:click="hidefundform" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                        <button type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                    </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        </div>
+    </div>
+    {{-- modal edit end --}}
 </div>
