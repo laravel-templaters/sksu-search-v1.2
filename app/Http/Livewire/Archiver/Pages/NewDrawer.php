@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Archiver\Pages;
 
-use App\Models\Building;
+use App\Models\Building; 
 use App\Models\Drawer;
 use App\Models\Shelf;
 use Livewire\Component;
@@ -18,6 +18,12 @@ class NewDrawer extends Component
     public $folder_slots;
     public $drawer_added = false;
     public $show_drawer_form = false;
+    public $show_edit_drawer = false;
+    public $selectedDrawer;
+    public $edited_drawer_name;
+    public $edited_drawer_code;
+    public $edited_shelf_id;
+    public $edited_folder_slots;
     public $building_id;    
     public function updated($field)
     {
@@ -72,6 +78,7 @@ class NewDrawer extends Component
         $this->drawer_name = null;
         $this->drawer_code = null;
         $this->folder_slots = null;
+        $this->building_id = null;
         $this->shelf_id = null;
         $this->searchText ="a";
         $this->searchText ="";
@@ -85,6 +92,40 @@ class NewDrawer extends Component
     public function hideDrawerForm(){
         $this->resetInput();
         $this->show_drawer_form = false;
+    }
+
+
+    public function showEditDrawerForm($id){
+        $this->show_edit_drawer = true;
+        $this->selectedDrawer = $id;
+        $this->edited_drawer_name = Drawer::find($id)->drawer_name;
+        $this->edited_drawer_code = Drawer::find($id)->drawer_code;
+        $this->edited_folder_slots = Drawer::find($id)->folder_slots;
+    }
+
+    public function hideEditDrawerForm(){
+        $this->show_edit_drawer = false;
+        $this->resetInput();
+    }
+
+    public function updateDrawer()
+    {
+        $this->validate([
+            'edited_drawer_name' => 'required|string|max:255',
+            'edited_drawer_code' => 'required|string|max:255',
+            'edited_folder_slots' => 'required|numeric|min:1',
+            'edited_shelf_id' => 'required',
+            'building_id' => 'required',
+        ]);
+        $drawer = Drawer::find($this->selectedDrawer);
+        $drawer->drawer_name = $this->edited_drawer_name;
+        $drawer->drawer_code = $this->edited_drawer_code;
+        $drawer->folder_slots = $this->edited_folder_slots;
+        $drawer->shelf_id = $this->edited_shelf_id;
+        $drawer->save();
+        $this->hideEditDrawerForm();
+        $this->drawer_added = true;
+        $this->resetInput();
     }
 
     protected $messages = [

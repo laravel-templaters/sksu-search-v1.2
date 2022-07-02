@@ -1,5 +1,5 @@
 <div class="relative z-0 flex flex-1 w-full h-screen min-w-full mx-auto -mt-20 overflow-hidden bg-transparent max-w-screen"
-x-data="{building_added:@entangle('building_added'),show_building_form:@entangle('show_building_form')}"
+x-data="{building_added:@entangle('building_added'),show_building_form:@entangle('show_building_form'),show_edit_building:@entangle('show_edit_building')}"
 x-init="$watch('building_added', value => {
     if(value == true){
         setTimeout(function(){ building_added = false; }, 5000);
@@ -67,7 +67,7 @@ x-init="$watch('building_added', value => {
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700">Search Here</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
-                                        <input wire:model.debounce.700ms='searchText' type="email" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Building name or code" value="adamwathan" aria-invalid="true" aria-describedby="email-error">
+                                        <input wire:model.debounce.700ms='searchText' type="email" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Building name or code" value="" aria-invalid="true" aria-describedby="email-error">
                                     </div>
                                     <p class="mt-1 text-sm text-transparent" id="email-error"><span>----</span></p>
                                 </div>
@@ -98,7 +98,7 @@ x-init="$watch('building_added', value => {
                                                     <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $building->building_code }}</td>
                                                     <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $building->shelf_slots }}</td>
                                                     <td class="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-6">
-                                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, {{  $building->building_name }}</span></a>
+                                                        <a wire:click="showEditBuildingForm({{$building->id}})" class="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">Edit<span class="sr-only">, {{  $building->building_name }}</span></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -219,4 +219,102 @@ x-init="$watch('building_added', value => {
         </div>
   
     {{-- modal add end --}}
+      {{-- modal edit --}}
+        
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="show_edit_building" x-transition-enter = "ease-out duration-300"
+        x-transition-enter-start =  "opacity-0"
+        x-transition-enter-end =  "opacity-100"
+        x-transition-leave =  "ease-in duration-200"
+        x-transition-leave-start =  "opacity-100"
+        x-transition-leave-end = "opacity-0" >
+            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" x-cloak x-show="show_edit_building" x-transition-enter = "ease-out duration-300"
+            x-transition-enter-start = "opacity-0" 
+            x-transition-enter-end =  "opacity-100"
+            x-transition-leave =  "ease-in duration-200"
+            x-transition-leave-start =  "opacity-100"
+            x-transition-leave-end =  "opacity-0"></div>
+        
+            <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
+                
+                <div class="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6" x-cloak x-show="show_edit_building"
+                x-transition-enter = "ease-out duration-300"
+                x-transition-enter-start = "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                x-transition-enter-end =  "opacity-100 translate-y-0 sm:scale-100"
+                x-transition-leave =  "ease-in duration-200"
+                x-transition-leave-start =  "opacity-100 translate-y-0 sm:scale-100"
+                x-transition-leave-end =  "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                 
+                    <form class="space-y-8 divide-y divide-gray-200" wire:submit.prevent='updateBuilding'>
+                        <div class="space-y-8 divide-y divide-gray-200">
+                        
+                    
+                            <div class="pt-8">
+                                <div>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Building Information</h3>
+                                <p class="mt-1 text-sm text-gray-500">Use complete building names and codes</p>
+                                </div>
+                                <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                                <div class="sm:col-span-6">
+                                    <label for="edited_building_name" class="block text-sm font-medium tracking-wider text-gray-700"> Building name </label>
+                                    <div class="mt-1">
+                                    <input type="text" wire:model.debounce="edited_building_name" name="edited_building_name" id="edited_building_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('edited_building_name') }}</span>
+                                    </div>
+                                </div>
+                        
+                                <div class="sm:col-span-6">
+                                    <label for="edited_building_code" class="block text-sm font-medium tracking-wider text-gray-700"> Building Code </label>
+                                    <div class="mt-1">
+                                    <input type="text" wire:model.debounce='edited_building_code' name="edited_building_code" id="edited_building_code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('edited_building_code') }}</span>
+                                    </div>
+                                </div>
+                        
+                                <div class="sm:col-span-6">
+                                    <label for="edited_shelf_slots" class="block text-sm font-medium tracking-wider text-gray-700"> Number of shelves in the building used for archiving </label>
+                                    <div class="mt-1">
+                                    <input id="shelf_count" wire:model.debounce='edited_shelf_slots' name="edited_shelf_slots" type="number" min="1" step="1" max="999"class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('edited_shelf_slots') }}</span>
+                                    </div>
+                                </div>
+{{--                         
+                                <div class="sm:col-span-3">
+                                    <label for="country" class="block text-sm font-medium text-gray-700"> Country </label>
+                                    <div class="mt-1">
+                                    <select id="country" name="country" autocomplete="country-name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option>United States</option>
+                                        <option>Canada</option>
+                                        <option>Mexico</option>
+                                    </select>
+                                    </div>
+                                </div> --}}
+                        
+                        
+                                {{-- <div class="sm:col-span-2">
+                                    <label for="postal-code" class="block text-sm font-medium text-gray-700"> ZIP / Postal code </label>
+                                    <div class="mt-1">
+                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    </div>
+                                </div> --}}
+                                </div>
+                            </div>
+                    
+                       
+                        </div>
+                    
+                        <div class="pt-5">
+                        <div class="flex justify-end">
+                            <button type="button" wire:click="hideEditBuildingForm" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                            <button type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                        </div>
+                        </div>
+                    </form>
+  
+                </div>
+            </div>
+            </div>
+        </div>
+  
+    {{-- modal edit end --}}
 </div>

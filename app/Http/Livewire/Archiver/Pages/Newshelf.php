@@ -16,6 +16,11 @@ class Newshelf extends Component
     public $shelf_added = false;
     public $drawer_slots;
     public $show_shelf_form = false;
+    public $show_edit_shelf = false;
+    public $selectedShelf;
+    public $edited_shelf_name;
+    public $edited_shelf_code;
+    public $edited_drawer_slots;
     public function updated($field)
     {
         if ($field == 'searchText') {
@@ -61,6 +66,7 @@ class Newshelf extends Component
         $this->shelf_name = null;
         $this->shelf_code = null;
         $this->drawer_slots = null;
+        $this->building_id = null;
         $this->searchText ="a";
         $this->searchText ="";
         $this->shelves = Shelf::orderBy('id','desc')->with('building')->get();
@@ -73,6 +79,38 @@ class Newshelf extends Component
     public function hideShelfForm(){
         $this->resetInput();
         $this->show_shelf_form = false;
+    }
+
+    public function showEditShelfForm($id){
+        $this->show_edit_shelf = true;
+        $this->selectedShelf=Shelf::where('id',$id)->get();
+        $this->edited_shelf_name = $this->selectedShelf[0]->shelf_name;
+        $this->edited_shelf_code = $this->selectedShelf[0]->shelf_code;
+        $this->edited_drawer_slots = $this->selectedShelf[0]->drawer_slots;
+    }
+
+    public function hideEditShelfForm(){
+        $this->resetInput();
+        $this->show_edit_shelf = false;
+    }
+
+    public function updateShelf()
+    {
+        $this->validate([
+            'building_id' => 'required',
+            'edited_shelf_name' => 'required|string|max:255',
+            'edited_shelf_code' => 'required|string|max:255',
+            'edited_drawer_slots' => 'required|numeric|min:4',
+        ]);
+        $shelf = Shelf::where('id',$this->selectedShelf[0]->id)->update([
+            'shelf_name' => $this->edited_shelf_name,
+            'shelf_code' => $this->edited_shelf_code,
+            'building_id' => $this->building_id,
+            'drawer_slots' => $this->edited_drawer_slots,
+        ]);
+        $this->hideEditShelfForm();
+        $this->shelf_added = true;
+        $this->resetInput();
     }
 
     protected $messages = [

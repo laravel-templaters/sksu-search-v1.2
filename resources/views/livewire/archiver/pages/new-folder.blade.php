@@ -1,5 +1,5 @@
 <div class="relative z-0 flex flex-1 w-full h-screen min-w-full mx-auto -mt-20 overflow-hidden bg-transparent max-w-screen"
-x-data="{folder_added:@entangle('folder_added'),show_folder_form:@entangle('show_folder_form')}"
+x-data="{folder_added:@entangle('folder_added'),show_folder_form:@entangle('show_folder_form'),show_edit_folder:@entangle('show_edit_folder')}"
 x-init="$watch('folder_added', value => {
     if(value == true){
         setTimeout(function(){ folder_added = false; }, 5000);
@@ -67,7 +67,7 @@ x-init="$watch('folder_added', value => {
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700">Search Here</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
-                                        <input wire:model.debounce.700ms='searchText' type="email" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Folder name or code" value="adamwathan" aria-invalid="true" aria-describedby="email-error">
+                                        <input wire:model.debounce.700ms='searchText' type="email" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Folder name or code" value="" aria-invalid="true" aria-describedby="email-error">
                                     </div>
                                     <p class="mt-1 text-sm text-transparent" id="email-error"><span>----</span></p>
                                 </div>
@@ -104,7 +104,7 @@ x-init="$watch('folder_added', value => {
                                                     <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $folder->drawer->shelf->shelf_name }}</td>
                                                     <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $folder->drawer->shelf->building->building_name }}</td>
                                                     <td class="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-6">
-                                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, {{ $folder->folder_name }}</span></a>
+                                                        <a wire:click="showEditFolderForm({{$folder->id}})" class="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">Edit<span class="sr-only">, {{ $folder->folder_name }}</span></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -183,8 +183,8 @@ x-init="$watch('folder_added', value => {
                                            @if ($building_id != null)
                                                @if (isset($shelves))
                                                 
-                                                    @foreach ($shelves as $shelves)
-                                                    <option value="{{ $shelves->id }}">{{ $shelves->shelf_name }}</option>
+                                                    @foreach ($shelves as $shelf)
+                                                    <option value="{{ $shelf->id }}">{{ $shelf->shelf_name }}</option>
                                                     @endforeach
                                                @endif
                                            @endif
@@ -271,4 +271,146 @@ x-init="$watch('folder_added', value => {
         </div>
   
     {{-- modal add end --}}
+    {{-- modal edit --}}
+          <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="show_edit_folder" x-transition-enter = "ease-out duration-300"
+        x-transition-enter-start =  "opacity-0"
+        x-transition-enter-end =  "opacity-100"
+        x-transition-leave =  "ease-in duration-200"
+        x-transition-leave-start =  "opacity-100"
+        x-transition-leave-end = "opacity-0" >
+            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" x-cloak x-show="show_edit_folder" x-transition-enter = "ease-out duration-300"
+            x-transition-enter-start = "opacity-0" 
+            x-transition-enter-end =  "opacity-100"
+            x-transition-leave =  "ease-in duration-200"
+            x-transition-leave-start =  "opacity-100"
+            x-transition-leave-end =  "opacity-0"></div>
+        
+            <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
+                
+            <div class="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6" x-cloak x-show="show_edit_folder"
+                x-transition-enter = "ease-out duration-300"
+                x-transition-enter-start = "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                x-transition-enter-end =  "opacity-100 translate-y-0 sm:scale-100"
+                x-transition-leave =  "ease-in duration-200"
+                x-transition-leave-start =  "opacity-100 translate-y-0 sm:scale-100"
+                x-transition-leave-end =  "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                 
+                    <form class="space-y-8 divide-y divide-gray-200" wire:submit.prevent='updateFolder'>
+                        <div class="space-y-8 divide-y divide-gray-200">
+                        
+                    
+                            <div class="pt-8">
+                                <div>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Drawer Information</h3>
+                                <p class="mt-1 text-sm text-gray-500">Use complete drawer names and codes</p>
+                                </div>
+                                <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                                    <div class="sm:col-span-2">
+                                        <label for="building_id" class="block text-sm font-medium text-gray-700">Select Building</label>
+                                        <div class="mt-1">
+                                        <select id="building_id" name="building_id" wire:model="building_id"  class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">---Select Building---</option>
+                                            @foreach ($buildings as $building)
+                                                <option value="{{ $building->id }}">{{ $building->building_name }}</option>
+                                           @endforeach
+                                        </select>
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('building_id') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label for="shelf_id" class="block text-sm font-medium text-gray-700">Select Shelf</label>
+                                        <div class="mt-1">
+                                        <select id="shelf_id" name="shelf_id" wire:model="shelf_id"  class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">---Select shelf---</option>
+                                           @if ($building_id != null)
+                                               @if (isset($shelves))
+                                                
+                                                    @foreach ($shelves as $shelves)
+                                                    <option value="{{ $shelves->id }}">{{ $shelves->shelf_name }}</option>
+                                                    @endforeach
+                                               @endif
+                                           @endif
+                                        </select>
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('shelf_id') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label for="drawer_id" class="block text-sm font-medium text-gray-700">Select Drawer</label>
+                                        <div class="mt-1">
+                                        <select id="drawer_id" name="drawer_id" wire:model="drawer_id"  class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">---Select shelf---</option>
+                                           @if ($shelf_id != null)
+                                               @if (isset($drawers))
+                                                
+                                                    @foreach ($drawers as $drawer)
+                                                    <option value="{{ $drawer->id }}">{{ $drawer->drawer_name }}</option>
+                                                    @endforeach
+                                               @endif
+                                           @endif
+                                        </select>
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('shelf_id') }}</span>
+                                        </div>
+                                    </div>
+                                <div class="sm:col-span-6">
+                                    <label for="edited_folder_name" class="block text-sm font-medium tracking-wider text-gray-700">Folder name </label>
+                                    <div class="mt-1">
+                                    <input type="text" wire:model.debounce="edited_folder_name" name="edited_folder_name" id="edited_folder_name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('edited_folder_name') }}</span>
+                                    </div>
+                                </div>
+                        
+                                <div class="sm:col-span-6">
+                                    <label for="edited_folder_code" class="block text-sm font-medium tracking-wider text-gray-700"> Folder Code </label>
+                                    <div class="mt-1">
+                                    <input type="text" wire:model.debounce='edited_folder_code' name="edited_folder_code" id="edited_folder_code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('edited_folder_code') }}</span>
+                                    </div>
+                                </div>
+                        
+                                <div class="sm:col-span-6">
+                                    <label for="slot_number" class="block text-sm font-medium tracking-wider text-gray-700"> Number of document slots in the folder</label>
+                                    <div class="mt-1">
+                                    <input id="edited_slot_number" wire:model.debounce='edited_slot_number' name="edited_slot_number" type="number" min="1" step="1" max="999"class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('edited_slot_number') }}</span>
+                                    </div>
+                                </div>
+{{--                         
+                                <div class="sm:col-span-3">
+                                    <label for="country" class="block text-sm font-medium text-gray-700"> Country </label>
+                                    <div class="mt-1">
+                                    <select id="country" name="country" autocomplete="country-name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option>United States</option>
+                                        <option>Canada</option>
+                                        <option>Mexico</option>
+                                    </select>
+                                    </div>
+                                </div> --}}
+                        
+                        
+                                {{-- <div class="sm:col-span-2">
+                                    <label for="postal-code" class="block text-sm font-medium text-gray-700"> ZIP / Postal code </label>
+                                    <div class="mt-1">
+                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    </div>
+                                </div> --}}
+                                </div>
+                            </div>
+                    
+                       
+                        </div>
+                    
+                        <div class="pt-5">
+                        <div class="flex justify-end">
+                            <button type="button" wire:click="hideEditFolderForm" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                            <button type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                        </div>
+                        </div>
+                    </form>
+  
+                </div>
+            </div>
+            </div>
+        </div>
+        {{-- modal edit end --}}
 </div>

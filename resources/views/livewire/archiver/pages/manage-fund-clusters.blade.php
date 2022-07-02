@@ -67,7 +67,7 @@ x-init="$watch('fund_added', value => {
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700">Search Here</label>
                                     <div class="relative mt-1 rounded-md shadow-sm">
-                                        <input wire:model.debounce.700ms='searchText' type="text" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Fund cluster name" value="adamwathan" aria-invalid="true" aria-describedby="email-error">
+                                        <input wire:model.debounce.700ms='searchText' type="text" name="email" id="email" class="block w-full pr-10 text-gray-900 placeholder-gray-300 border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Fund cluster name" value="" aria-invalid="true" aria-describedby="email-error">
                                     </div>
                                     <p class="mt-1 text-sm text-transparent" id="email-error"><span>----</span></p>
                                 </div>
@@ -215,7 +215,7 @@ x-init="$watch('fund_added', value => {
                 <form class="space-y-8 divide-y divide-gray-200" wire:submit.prevent='updateFund'>
                     <div class="space-y-8 divide-y divide-gray-200">
                     
-                
+                 
                         <div class="pt-4">
                             <div>
                             <h3 class="text-lg font-medium leading-6 text-gray-900">Edit Fund Cluster Information</h3>
@@ -239,7 +239,7 @@ x-init="$watch('fund_added', value => {
                 
                     <div class="pt-5">
                     <div class="flex justify-end">
-                        <button type="button" wire:click="hidefundform" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                        <button type="button" wire:click="hideEditForm" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
                         <button type="submit" class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
                     </div>
                     </div>

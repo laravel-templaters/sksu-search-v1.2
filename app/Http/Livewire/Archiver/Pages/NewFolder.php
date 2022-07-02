@@ -21,6 +21,12 @@ class NewFolder extends Component
     public $building_id; 
     public $folder_added = false;
     public $show_folder_form = false;
+    public $show_edit_folder = false;
+    public $selectedFolder;
+    public $edited_folder_name;
+    public $edited_folder_code;
+    public $edited_drawer_id;
+    public $edited_slot_number;
     public $slot_number;
 
     public function updated($field)
@@ -59,7 +65,7 @@ class NewFolder extends Component
         return view('livewire.archiver.pages.new-folder',['folders'=>$this->folders,'buildings'=>Building::all()])->layout('layouts.accountant');
     }
 
-    public function store(){
+    public function store(){ 
         $this->validate([
             'folder_name' => 'required|string|max:255',
             'folder_code' => 'required|string|max:255',
@@ -99,6 +105,43 @@ class NewFolder extends Component
     public function hideFolderForm(){
         $this->resetInput();
         $this->show_folder_form = false;
+    }
+
+    public function showEditFolderForm($id)
+    {
+        $this->show_edit_folder = true;
+        $this->selectedFolder = $id;
+        $this->edited_folder_name = ArchiveFolder::find($id)->folder_name;
+        $this->edited_folder_code = ArchiveFolder::find($id)->folder_code;
+        $this->edited_drawer_id = ArchiveFolder::find($id)->drawer_id;
+        $this->edited_shelf_id =   ArchiveFolder::find($id)->drawer->shelf_id;
+        $this->edited_building_id = ArchiveFolder::find($id)->drawer->shelf->building_id;
+        $this->edited_slot_number = ArchiveFolder::find($id)->slot_number;
+
+    }
+
+    public function hideEditFolderForm(){
+        $this->show_edit_folder = false;
+    }
+
+    public function updateFolder()
+    {
+        $this->validate([
+            'edited_folder_name' => 'required|string|max:255',
+            'edited_folder_code' => 'required|string|max:255',
+            'edited_drawer_id' => 'required',
+            'edited_shelf_id' => 'required',
+            'edited_building_id' => 'required',
+            'edited_slot_number' => 'required|numeric|min:1',
+        ]);
+        $folder = ArchiveFolder::find($this->selectedFolder);
+        $folder->folder_name = $this->edited_folder_name;
+        $folder->folder_code = $this->edited_folder_code;
+        $folder->drawer_id = $this->edited_drawer_id;
+        $folder->slot_number = $this->edited_slot_number;
+        $folder->save();
+        $this->show_edit_folder = false;
+        $this->resetInput();
     }
 
     protected $messages=[

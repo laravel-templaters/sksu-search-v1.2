@@ -62,7 +62,7 @@ class ManageFundClusters extends Component
         $fundcluster= FundCluster::find($this->selectedFundCluster[0]->id);
         $fundcluster->fund_cluster_type=$this->edited_fund_cluster_name;
         $fundcluster->save();
-        $this->hideEditForm();
+        $this->hideEditForm(); 
         $this->fund_added = true;
         $this->resetInput();
     }

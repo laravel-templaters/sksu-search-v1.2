@@ -14,6 +14,11 @@ class NewBuilding extends Component
     public $shelf_slots;
     public $building_added = false;
     public $show_building_form = false;
+    public $show_edit_building = false;
+    public $selectedBuilding;
+    public $edited_building_name;
+    public $edited_building_code;
+    public $edited_shelf_slots;
     public function updated($field)
     {
         if ($field == 'searchText') {
@@ -68,6 +73,36 @@ class NewBuilding extends Component
         $this->show_building_form = false;
     }
 
+    public function showEditBuildingForm($id){
+        $this->show_edit_building = true;
+        $this->selectedBuilding=Building::where('id',$id)->get();
+        
+        $this->edited_building_name = $this->selectedBuilding[0]->building_name;
+        $this->edited_building_code = $this->selectedBuilding[0]->building_code;
+        $this->edited_shelf_slots = $this->selectedBuilding[0]->shelf_slots;
+    }
+
+    public function hideEditBuildingForm(){
+        $this->resetInput();
+        $this->show_edit_building = false;
+    }
+
+    public function updateBuilding()
+    {
+        $this->validate([
+            'edited_building_name' => 'required|string|max:255',
+            'edited_building_code' => 'required|string|max:255',
+            'edited_shelf_slots' => 'required|numeric|min:4',
+        ]);
+        $building = Building::where('id',$this->selectedBuilding[0]->id)->update([
+            'building_name' => $this->edited_building_name,
+            'building_code' => $this->edited_building_code,
+            'shelf_slots' => $this->edited_shelf_slots,
+        ]);
+        $this->hideEditBuildingForm();
+        $this->building_added = true;
+        $this->resetInput();
+    }
 
     protected $messages=[
         'building_name.required'=>'Please enter a building name',
