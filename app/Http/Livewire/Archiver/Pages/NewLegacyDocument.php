@@ -11,10 +11,13 @@ use App\Models\FundCluster;
 use App\Models\LegacyDocument;
 use App\Models\Shelf;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Hash;
 
 class NewLegacyDocument extends Component
 {
@@ -30,6 +33,7 @@ class NewLegacyDocument extends Component
     public $date;
     // public $year;
     public $document_code;
+    public $document_code_for_download;
     public $archived_year_id;
     public $buildings;
     public $particular;
@@ -174,6 +178,15 @@ class NewLegacyDocument extends Component
             'drawer_id' => 'required',
             'folder_id' => 'required',
         ]);
+       
+        // $url = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=".$this->document_code;
+        // $contents = file_get_contents($url);
+        // $path = Storage::put('qrcodes', file_get_contents($url));
+        $url = "https://api.qrserver.com/v1/create-qr-code/?size=1080x1080&data=".$this->document_code;
+        $contents = file_get_contents($url);
+        $name = substr($url, strrpos($url, '/') + 1);
+        $randomPath = Hash::make($this->document_code);
+        Storage::put("/qrcodes/".$this->document_code.".png", $contents,['public']);
         $this->document = LegacyDocument::create([
             'name' => $this->name,
             'document_code' => $this->document_code,
@@ -186,9 +199,13 @@ class NewLegacyDocument extends Component
             'shelf_id' => $this->shelf_id,
             'drawer_id' => $this->drawer_id,
             'folder_id' => $this->folder_id, 
+            'qr_path' =>"/qrcodes/".$this->document_code.".png",
         ]);
+        
+        $this->document_code_for_download = $this->document->qr_path;
         $this->legacy_added = true;
         $this->resetInput();
+        //return Storage::download($this->document->qr_path);
     }
 
     public function resetInput()

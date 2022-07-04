@@ -22,6 +22,7 @@ class LegacyDocument extends Model
         'drawer_id',
         'folder_id',
         'archived_year_id',
+        'qr_path'
     ];
 
     public function archivedYear()

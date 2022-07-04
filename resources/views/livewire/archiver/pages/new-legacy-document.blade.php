@@ -2,8 +2,8 @@
 x-data="{legacy_added:@entangle('legacy_added'), copiedToClipboard:@entangle('copiedToClipboard'), showQr:false,}"
 x-init="$watch('legacy_added', value => {
     if(value == true){
+        showQr = true; 
         setTimeout(function(){ legacy_added = false; }, 10000);
-        setTimeout(function(){ showQr = true; }, 5000);
     } 
 }),$watch('copiedToClipboard', value => {
     if(value == true){
@@ -58,37 +58,7 @@ x-init="$watch('legacy_added', value => {
         </div>
 
         <!-- Small Modal -->
-        {{-- <div id="small-modal" tabindex="-1" class="top-0 left-0 right-0 z-0 w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"   x-cloak
-         x-transition-enter =  "transform ease-out duration-300 transition"
-            x-transition-enter-start =  "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-            x-transition-enter-end =   "translate-y-0 opacity-100 sm:translate-x-0"
-            x-transition-leave =  "transition ease-in duration-100"
-            x-transition-leave-start =  "opacity-100"
-            x-transition-leave-end =  "opacity-0">
-            <div class="relative w-full h-full max-w-md p-4 md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <!-- Modal header -->
-                    <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                            Small modal
-                        </h3>
-                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="small-modal">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="p-6 space-y-6">
-                        {!!QrCode::size(100)->format('png')->generate($document_code)!!}
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button data-modal-toggle="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Download</button>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
+        
 
 
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
@@ -133,7 +103,7 @@ x-init="$watch('legacy_added', value => {
 
                  <div class="w-full form-group">
                     <label for="archive_date" class="inline-block text-gray-700 form-label">Archive Date</label>
-                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="Archive Date" wire:model.debounce.700ms="date">
+                    <input type="date" class="block w-1/4 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="archive_date" name="archive_date" placeholder="mm/dd/yyyy" wire:model.debounce.700ms="date">
                     <span class="text-sm italic text-red-500">{{ $errors->first('date') }}</span>
                 </div>
                 
@@ -230,5 +200,69 @@ x-init="$watch('legacy_added', value => {
             
         </form>
     </div>
+
+    {{-- modal para sa qr --}}
+    <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="showQr" x-transition-enter = "ease-out duration-300"
+    x-transition-enter-start =  "opacity-0"
+    x-transition-enter-end =  "opacity-100"
+    x-transition-leave =  "ease-in duration-200"
+    x-transition-leave-start =  "opacity-100"
+    x-transition-leave-end = "opacity-0" >
+        <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" x-cloak x-show="showQr" x-transition-enter = "ease-out duration-300"
+        x-transition-enter-start = "opacity-0" 
+        x-transition-enter-end =  "opacity-100"
+        x-transition-leave =  "ease-in duration-200"
+        x-transition-leave-start =  "opacity-100"
+        x-transition-leave-end =  "opacity-0"></div>
+    
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
+            
+            <div class="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6" x-cloak x-show="showQr"
+            x-transition-enter = "ease-out duration-300"
+            x-transition-enter-start = "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+            x-transition-enter-end =  "opacity-100 translate-y-0 sm:scale-100"
+            x-transition-leave =  "ease-in duration-200"
+            x-transition-leave-start =  "opacity-100 translate-y-0 sm:scale-100"
+            x-transition-leave-end =  "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+             
+                <form class="space-y-8 divide-y divide-gray-200" wire:submit.prevent=''>
+                    <div class="space-y-8 divide-y divide-gray-200">
+                    
+                 
+                        <div class="pt-4">
+                            <div>
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Download Qr</h3>
+                            
+                            </div>
+                            <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                @if(isset($document))
+                                <img src="{{ asset( 'storage/'.$document->qr_path ) }}" alt="QRCODE" class="w-full h-full">                          
+                                @endif
+                            </div>
+                    
+                            
+                            </div>
+                        </div>
+                
+                   
+                    </div>
+                
+                    <div class="pt-5">
+                    <div class="flex justify-end">
+                        <button type="button" x-on:click="showQr=false" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+                        @if(isset($document))
+                        <a href ="{{ asset( 'storage/'.$document->qr_path ) }}" download class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Download QRCode</a>
+                        @endif
+                    </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        </div>
+    </div>
+    {{-- modal qr end --}}
     
 </div>
