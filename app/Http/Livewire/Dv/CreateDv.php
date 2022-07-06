@@ -18,7 +18,7 @@ use App\Models\Particular;
 use App\Models\DisbursementVoucher;
 use App\Models\Signatory;
 use App\Models\LastAction;
-use App\Models\DVProgress;
+use App\Models\DvProgress;
 use App\Models\TravelOrder;
 use App\Models\Milestone;
 use Illuminate\Support\Facades\Auth;
@@ -209,7 +209,7 @@ class CreateDv extends Component
 
         //insert progress table
         //$sig_id = (DB::table('signatories')->latest('id')->first())->id;
-        $dv_progress = new DVProgress;
+        $dv_progress = new DvProgress;
         $dv_progress->disbursement_voucher_id = $disbursement_voucher->id;
         // $dv_progress->signatory_id = $sig_id;
         $dv_progress->last_action_id = $last_action->id;
