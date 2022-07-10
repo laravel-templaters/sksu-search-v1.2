@@ -1117,6 +1117,9 @@ select {
 .pointer-events-auto {
 	pointer-events: auto;
 }
+.invisible {
+	visibility: hidden;
+}
 .fixed {
 	position: fixed;
 }
@@ -1869,6 +1872,11 @@ select {
 .list-disc {
 	list-style-type: disc;
 }
+.appearance-none {
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	        appearance: none;
+}
 .grid-cols-6 {
 	grid-template-columns: repeat(6, minmax(0, 1fr));
 }
@@ -1913,6 +1921,9 @@ select {
 }
 .grid-rows-5 {
 	grid-template-rows: repeat(5, minmax(0, 1fr));
+}
+.flex-row {
+	flex-direction: row;
 }
 .flex-col {
 	flex-direction: column;
@@ -2493,6 +2504,18 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
 }
+.bg-green-600 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(5, 150, 105, var(--tw-bg-opacity));
+}
+.bg-green-900 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(6, 78, 59, var(--tw-bg-opacity));
+}
+.bg-green-800 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(6, 95, 70, var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
@@ -2510,6 +2533,9 @@ select {
 }
 .bg-opacity-70 {
 	--tw-bg-opacity: 0.7;
+}
+.bg-opacity-90 {
+	--tw-bg-opacity: 0.9;
 }
 .bg-gradient-to-b {
 	background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
@@ -2616,6 +2642,9 @@ select {
 }
 .p-12 {
 	padding: 3rem;
+}
+.p-16 {
+	padding: 4rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -2814,6 +2843,9 @@ select {
 }
 .pb-12 {
 	padding-bottom: 3rem;
+}
+.pt-64 {
+	padding-top: 16rem;
 }
 .text-left {
 	text-align: left;

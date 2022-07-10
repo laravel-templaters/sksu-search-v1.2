@@ -193,17 +193,34 @@
                                        
                                     </form>
                                      <div x-data="{ open: false }">
-                                        <button x-on:click="open = ! open" class="inline-flex items-center px-3 py-2 mt-10 ml-2 font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm text-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <button wire:click.debounce.200ms="showValidate" x-on:click="open = ! open" class="inline-flex items-center px-3 py-2 mt-10 ml-2 font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm text-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             Update
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 -mr-0.5 h-6 w-7"viewBox="0 0 20 20" fill="currentColor">
                                                 <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
                                                 <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
                                             </svg>
                                         </button>
-
+<div class="fixed {{$isValidCode ? '' : 'hidden'}} bg-opacity-95 inset-0 w-full h-full z-50 flex bg-primary-700 items-center justify-center">
+    <div  class="bg-primary-200 rounded-lg shadow p-4" x-data="app()">
+        <div class="font-bold px-2 pb-1 text-xl">Enter pin code</div>
+        <div class="font-normal px-2 pb-2 text-sm">Updating this document need extra security</div>
+        <div class="flex">
+            <template x-for="(l,i) in pinlength" :key="`codefield_${i}`">
+                <input :autofocus="i == 0" :id="`codefield_${i}`" class="h-16 w-12 border mx-2 rounded-lg flex items-center text-center font-thin text-3xl" value="" maxlength="1" max="9" min="0" inputmode="decimal" type="password" @keyup="stepForward(i)" @keydown.backspace="stepBack(i)" @focus="resetValue(i)" wire:model="code"></input>
+            </template>
+        </div>
+        {{-- add button --}}
+        <div class="flex justify-center mt-4">
+            <button id="confirmCode" disabled class="bg-primary-500 text-white font-bold py-2 px-4 rounded-lg" wire:click="validateCode">
+                Confirm
+            </button>
+    </div>
+</div>
+   </div>
+                                        
                                           {{-- modal --}}
                     <!-- This example requires Tailwind CSS v2.0+ -->
-<div x-cloak x-show="open" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div x-cloak {{$isValid ? '' : 'hidden'}}  class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
   <!--
     Background backdrop, show/hide based on modal state.
 
@@ -247,14 +264,13 @@
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <button type="button" wire:click="updateDocument" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">Update</button>
-          <button x-on:click="open = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" >Cancel</button>
+          <button wire:click="closeModal" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" >Cancel</button>
         </div>
       </div>
     </div>
   </div>
 </div>
  {{-- modal end --}} 
-                                        </div>
                                 </div>
                               </div>
                             @endif                            
@@ -265,5 +281,53 @@
                 </div>
             </div>
         </div>
+           {{-- {{-- modal pin --}}
+    
+<script type="text/javascript">
+function app() {
+    return {
+        pinlength: 5,
+        resetValue(i) {
+            for (x = 0; x < this.pinlength; x++) {
+                if (x >= i) document.getElementById(`codefield_${x}`).value = ''
+            }
+        },
+        stepForward(i) {
+            if (document.getElementById(`codefield_${i}`).value && i != this.pinlength - 1) {
+                document.getElementById(`codefield_${i+1}`).focus()
+                document.getElementById(`codefield_${i+1}`).value = ''
+            }
+            this.checkPin()
+        },
+        stepBack(i) {
+            if (document.getElementById(`codefield_${i-1}`).value && i != 0) {
+                document.getElementById(`codefield_${i-1}`).focus()
+                document.getElementById(`codefield_${i-1}`).value = ''
+            }
+        },
+        checkPin() {
+            let code = ''
+            for (i = 0; i < this.pinlength; i++) {
+                code = code + document.getElementById(`codefield_${i}`).value
+            }
+            if (code.length == this.pinlength) {
+                //enable button
+                document.getElementById('confirmCode').disabled = false;
+                this.validatePin(code)
+            }
+        },
+        validatePin(code) {
+            // Check pin on server
+            if (code != '12345')
+            {
+                 alert('Invalid code');
+                  document.getElementById('confirmCode').disabled = true;
+            }  
+        }
+    }
+}
+</script> 
+    {{-- modal pin end --}}
     </div>
 </div>
+

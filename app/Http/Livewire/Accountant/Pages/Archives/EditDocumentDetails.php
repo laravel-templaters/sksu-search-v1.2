@@ -40,6 +40,9 @@ class EditDocumentDetails extends Component
     public $old_folder_id;
     public $name;
     public $path;
+    public $code;
+    public $isValidCode = false;
+    public $isValid = false;
     public function updated($field)
     {
         if($field == 'fundcluster'){
@@ -193,7 +196,7 @@ class EditDocumentDetails extends Component
             }
            
 
-
+            $this->isValidCode = false;
         }else{
             $this->disbursement_id = $id;
             $this->legacy_id = null;
@@ -263,8 +266,30 @@ class EditDocumentDetails extends Component
             //redirect to the previous page
             return redirect()->route('archiver-main');
         }
-            
+    }
 
+    public function showValidate()
+    {
+        $this->code = null;
+        $this->isValidCode = true;
+        
+    }
+
+    public function validateCode()
+    {
+        if($this->code != null || !isset($this->code)){
+            if($this->code = '12345')
+            {
             
+              $this->isValidCode = false;
+              $this->isValid = true;
+            }
+        }
+        
+    }
+
+    public function closeModal()
+    {
+        $this->isValid = false;
     }
 }

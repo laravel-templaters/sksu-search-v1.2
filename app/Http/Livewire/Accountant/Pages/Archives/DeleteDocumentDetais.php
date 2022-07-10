@@ -11,6 +11,8 @@ class DeleteDocumentDetais extends Component
     public $disbursement_id;
     public $legacy_id;
     public $islegacy;
+    public $isValidCode;
+    public $isValid;
 
     public function render()
     {
@@ -46,5 +48,30 @@ class DeleteDocumentDetais extends Component
             $document->delete();
         }
         return redirect()->route('archiver-main');
+    }
+
+    public function showValidate()
+    {
+        $this->code = null;
+        $this->isValidCode = true;
+        
+    }
+
+    public function validateCode()
+    {
+        if($this->code != null || !isset($this->code)){
+            if($this->code = '12345')
+            {
+            
+              $this->isValidCode = false;
+              $this->isValid = true;
+            }
+        }
+        
+    }
+
+    public function closeModal()
+    {
+        $this->isValid = false;
     }
 }
