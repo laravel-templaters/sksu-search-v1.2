@@ -129,15 +129,15 @@ class NewFolder extends Component
         $this->validate([
             'edited_folder_name' => 'required|string|max:255',
             'edited_folder_code' => 'required|string|max:255',
-            'edited_drawer_id' => 'required',
-            'edited_shelf_id' => 'required',
-            'edited_building_id' => 'required',
+            'drawer_id' => 'required',
+            'shelf_id' => 'required',
+            'building_id' => 'required',
             'edited_slot_number' => 'required|numeric|min:1',
         ]);
         $folder = ArchiveFolder::find($this->selectedFolder);
         $folder->folder_name = $this->edited_folder_name;
         $folder->folder_code = $this->edited_folder_code;
-        $folder->drawer_id = $this->edited_drawer_id;
+        $folder->drawer_id = $this->drawer_id;
         $folder->slot_number = $this->edited_slot_number;
         $folder->save();
         $this->show_edit_folder = false;

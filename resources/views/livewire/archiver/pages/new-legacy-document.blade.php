@@ -77,7 +77,7 @@ x-init="$watch('legacy_added', value => {
                 <div class="grid w-full grid-cols-7 form-group gap-x-2">
                     <label for="fundcluster" class="inline-block col-span-7 text-gray-700 form-label">Document Code</label>
                     <select wire:model="fundcluster" name="fundcluster" id="fundcluster" class="block w-full col-span-2 m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800">
-                        <option value="" class="font-bold text-gray-500 text-md">Select Fund Cluster</option>
+                        <option value="0" class="font-bold text-gray-500 text-md">Select Fund Cluster</option>
                         @foreach ($fundclusters as $fc)
                             <option value="{{ $fc->id }}" class="font-bold text-gray-500 text-md">{{ $fc->fund_cluster_type }}</option> 
                         @endforeach

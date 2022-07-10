@@ -6,21 +6,21 @@ use App\Models\FolderDocument;
 use App\Models\LegacyDocument;
 use Livewire\Component; 
 
-class ViewDocumentDetails extends Component
+class DeleteDocumentDetais extends Component
 {
     public $disbursement_id;
     public $legacy_id;
     public $islegacy;
+
     public function render()
     {
-        
         if($this->islegacy == 1){
             $document = LegacyDocument::where('id',$this->legacy_id)->with('folder')->with('drawer')->with('shelf')->with('building')->with('fund_cluster')->first();
             
         }else{
             $document = FolderDocument::find($this->disbursement_id)->with('folder')->with('drawer')->with('shelf')->with('building')->first();
         }
-            return view('livewire.accountant.pages.archives.view-document-details')->layout('layouts.accountant')->with('document',$document);
+        return view('livewire.accountant.pages.archives.delete-document-detais')->layout('layouts.accountant')->with('document',$document);
     }
     public function mount($id, $islegacy)
     {
@@ -34,12 +34,17 @@ class ViewDocumentDetails extends Component
         }
         $this->islegacy = $islegacy;
     }
-    public function downloadLegacyDocument()
+    public function deleteDocument()
     {
-        $document = LegacyDocument::find($this->legacy_id);
-        $path = $document->path;
-        return response()->download('storage/'.$path, str_replace(' ','_', $document->name), [
-            'Content-Type' => 'application/pdf',
-        ]);
+        //show alert before deleting
+
+        if($this->islegacy == 1){
+            $document = LegacyDocument::find($this->legacy_id);
+            $document->delete();
+        }else{
+            $document = FolderDocument::find($this->disbursement_id);
+            $document->delete();
+        }
+        return redirect()->route('archiver-main');
     }
 }

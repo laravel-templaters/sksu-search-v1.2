@@ -206,8 +206,8 @@
                                             {{ $disbursement_voucher->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">Construction</div>
-                                            <div class="text-sm text-gray-500">Holy fukcing noodles</div>
+                                            <div class="text-sm text-gray-900"></div>
+                                            <div class="text-sm text-gray-500"></div>
                                         </td>
                                         {{-- <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
@@ -255,11 +255,29 @@
                                             <a href="{{  route('archive-detail', ['id'=>$legacy_document->id, 'islegacy'=>1])  }}" target="_blank"
                                                 class="inline-flex text-indigo-600 hover:text-indigo-900">
                                                 <span class="inline pr-3">View</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                            {{-- <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank" --}}
+                                            <a href="{{  route('archive-detail-edit', ['id'=>$legacy_document->id, 'islegacy'=>1])  }}"
+                                                class="inline-flex text-blue-600 hover:text-blue-900">
+                                                <span class="inline pr-3">Edit</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                            </a>
+                                        </td>
+                                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                            {{-- <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank" --}}
+                                            <a href="{{  route('archive-detail-delete', ['id'=>$legacy_document->id, 'islegacy'=>1])  }}" 
+                                                class="inline-flex text-red-600 hover:text-red-900">
+                                                <span class="inline pr-3">Delete</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
                                             </a>
                                         </td>

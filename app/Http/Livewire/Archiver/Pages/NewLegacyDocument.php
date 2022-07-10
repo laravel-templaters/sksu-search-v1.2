@@ -53,6 +53,7 @@ class NewLegacyDocument extends Component
     public $legacy_added = false;
     public $copiedToClipboard = false;
     public $document;
+    public $test_input;
     //mount
     // public function mount($folder, $drawer, $shelf, $building)
     // {
@@ -66,7 +67,14 @@ class NewLegacyDocument extends Component
     {
         if($field == 'fundcluster'){
             $getclustertype = FundCluster::where('id',$this->fundcluster)->get('fund_cluster_type');
-            $this->document_code = $getclustertype[0]->fund_cluster_type."-00-00-0000";
+            if($this->fundcluster == "0"){
+             
+                $this->document_code = "000-00-00-0000";
+            }else{
+               
+                $this->document_code = $getclustertype[0]->fund_cluster_type."-00-00-0000";
+            }
+            
         }
         $this->validateOnly($field, [
             'name' => 'required',
@@ -158,7 +166,7 @@ class NewLegacyDocument extends Component
             // $ad = FolderDocument::count();
             // $sum = $lg + $ad;
             // $this->document_code = "ARDC".date('omd-Gi-s').$sum;
-            $this->document_code= "000-0-0000";
+            $this->document_code= "000-00-00-0000";
         }
         $this->buildings = Building::all();
         return view('livewire.archiver.pages.new-legacy-document',['fundclusters'=>FundCluster::all()]);

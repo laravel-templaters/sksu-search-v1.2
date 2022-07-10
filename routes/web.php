@@ -106,6 +106,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/budoff/dashboard', \App\H
 //archive
 Route::middleware(['auth:sanctum','verified'])->get('/archives/document/list',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentList::class)->name('archive-list');
 Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail/{id}016a69aa9d9{islegacy}d92e1ca8',App\Http\Livewire\Accountant\Pages\Archives\ViewDocumentDetails::class)->name('archive-detail');
+Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail/edit/{id}016a69aa9d9{islegacy}d92e1ca8',App\Http\Livewire\Accountant\Pages\Archives\EditDocumentDetails::class)->name('archive-detail-edit');
+Route::middleware(['auth:sanctum','verified'])->get('/archives/document/detail/delete/{id}016a69aa9d9{islegacy}d92e1ca8',App\Http\Livewire\Accountant\Pages\Archives\DeleteDocumentDetais::class)->name('archive-detail-delete');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/main',App\Http\Livewire\Accountant\Pages\Archives\ArchiverMainView::class)->name('archiver-main');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/new/archive',App\Http\Livewire\Accountant\Pages\Archives\ArchiverNew::class)->name('archive-new');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/buildings',App\Http\Livewire\Archiver\Pages\NewBuilding::class)->name('manage-buildings');
@@ -114,7 +116,7 @@ Route::middleware(['auth:sanctum','verified'])->get('/archiver/drawers',App\Http
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/folders',App\Http\Livewire\Archiver\Pages\NewFolder::class)->name('manage-folders');
 Route::middleware(['auth:sanctum','verified'])->get('/archiver/fund-clusters',App\Http\Livewire\Archiver\Pages\ManageFundClusters::class)->name('manage-fclusters');
 Route::middleware(['auth:sanctum','verified'])->get('/testComp',App\Http\Livewire\TestComp::class)->name('test');
-
+ 
 //auditor
 Route::middleware(['auth:sanctum','verified'])->get('/auditor/dashboard',App\Http\Livewire\Auditor\Pages\Dashboard::class)->name('auditor-dashboard');
 
