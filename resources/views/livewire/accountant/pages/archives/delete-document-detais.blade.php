@@ -277,8 +277,9 @@ function app() {
             }
             if (code.length == this.pinlength) {
                 //enable button
+                //s
                 document.getElementById('confirmCode').disabled = false;
-                this.validatePin(code)
+                this.validatePin(code) 
             }
         },
         validatePin(code) {
