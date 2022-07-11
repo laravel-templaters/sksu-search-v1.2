@@ -11,7 +11,7 @@ class ArchiverMainView extends Component
 {
     public $searchText;
     public $dateFilter;
-    public $legacy_documents;
+    // public $legacy_documents;
 
     public function render()
     {   $disbursement_vouchers = [];
@@ -57,9 +57,9 @@ class ArchiverMainView extends Component
             $disbursement_vouchers = DisbursementVoucher::search('dv_tracking_number',$this->searchText)->paginate(5);
         }
         //get legacy documents
-        $this->legacy_documents = LegacyDocument::get();
+         
 
        
-        return view('livewire.accountant.pages.archives.archiver-main-view')->with('disbursement_vouchers',$disbursement_vouchers)->with('legacy_documents',$this->legacy_documents)->layout('layouts.accountant');
+        return view('livewire.accountant.pages.archives.archiver-main-view')->with('disbursement_vouchers',$disbursement_vouchers)->with('legacy_documents',LegacyDocument::paginate(10))->layout('layouts.accountant');
     }
 }
