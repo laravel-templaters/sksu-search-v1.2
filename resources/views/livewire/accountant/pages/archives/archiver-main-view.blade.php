@@ -263,6 +263,7 @@
                                         </td>
                                          <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                             {{-- <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank" --}}
+                                            {{-- comment --}}
                                             <a href="{{  route('archive-detail-edit', ['id'=>$legacy_document->id, 'islegacy'=>1])  }}"
                                                 class="inline-flex text-blue-600 hover:text-blue-900">
                                                 <span class="inline pr-3">Edit</span>
