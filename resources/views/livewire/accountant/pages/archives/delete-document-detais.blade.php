@@ -277,7 +277,7 @@ function app() {
             }
             if (code.length == this.pinlength) {
                 //enable button
-                //s
+                //another comment
                 document.getElementById('confirmCode').disabled = false;
                 this.validatePin(code) 
             }
