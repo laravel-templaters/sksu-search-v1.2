@@ -13,6 +13,7 @@
             <li class="py-4 pl-3 text-xs rounded-md group hover:bg-primary-100" :class="read_status == false ? 'bg-gray-100' : ''">
                 <span class="text-black" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis, laudantium! Rerum necessitatibus quasi numquam similique vitae consequuntur veniam optio eius, impedit minima. Voluptatum corporis, nostrum laudantium inventore dolores quaerat veritatis!</span>
             </li>
+            {{-- wazza --}}
         </button>
     </ul>
     @push('scripts')
