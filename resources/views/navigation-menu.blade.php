@@ -33,35 +33,116 @@
                     <x-jet-application-mark class="block w-auto h-16" />
                 </a>
             </div>
-            <div class="hidden sm:block sm:ml-6">
+            <div class="hidden my-auto sm:block sm:ml-6">
               <div class="flex space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="#" class="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md" aria-current="page">Dashboard</a>
-    
-                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Team</a>
-    
-                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Projects</a>
-    
-                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Calendar</a>
+                @if(auth()->user()->role_id == 1)
+                <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-jet-nav-link>
+                @elseif(auth()->user()->role_id == 2)
+
+                <x-jet-nav-link href="{{ route('department-head') }}"
+                    :active="request()->routeIs('department-head')">
+                    {{ __('Dashboard') }}
+                </x-jet-nav-link>
+
+                @elseif(auth()->user()->role_id == 3)
+
+                <x-jet-nav-link href="{{ route('client-dash') }}" :active="request()->routeIs('client-dash')">
+                    {{ __('Dashboard') }}
+                </x-jet-nav-link>
+
+                @elseif(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
+
+                <x-jet-nav-link href="{{ route('accountant-dashboard') }}"
+                    :active="request()->routeIs('accountant-dashboard')">
+                    {{ __('Dashboard') }}
+                </x-jet-nav-link>
+
+
+                @elseif(auth()->user()->role_id == 5)
+
+                <x-jet-nav-link href="{{ route('budget-dashboard') }}"
+                    :active="request()->routeIs('budget-dashboard')">
+                    {{ __('Dashboard') }}
+                </x-jet-nav-link>
+
+                @elseif(auth()->user()->role_id == 6)
+
+                <x-jet-nav-link href="{{ route('department-head') }}"
+                    :active="request()->routeIs('department-head')">
+                    {{ __('Dashboard') }}
+                </x-jet-nav-link>
+
+
+                @endif
+                    @if (auth()->user()->role_id == 8)
+                    <x-jet-nav-link href="{{ route('auditor-dashboard') }}" :active="request()->routeIs('auditor-dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+                    @else
+                    <x-jet-nav-link href="{{ route('transactions') }}" :active="request()->routeIs('transactions')">
+                        {{ __('Transactions') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{route('travel-order', ['id'=>3,'isEdit'=>0,'travelOrderID'=>'|'])}}"
+                        :active="request()->routeIs('travel-order')">
+                        {{ __('Create Travel Order') }}
+                    </x-jet-nav-link>
+                    @if(auth()->user()->role_id == 4 || auth()->user()->role_id == 7)
+                    <x-jet-nav-link href="{{route('archive-list')}}" :active="request()->routeIs('archive-list')">
+                        {{ __('Archives') }}
+                    </x-jet-nav-link>
+                    @endif
+                    @if(auth()->user()->role_id == 7)
+                    <x-jet-nav-link href="{{route('archiver-main')}}" :active="request()->routeIs('archiver-main')">
+                        {{ __('Archiver') }}
+                    </x-jet-nav-link>
+                    @endif
+                @endif
               </div>
             </div>
           </div>
           <div class="absolute inset-y-0 right-0 flex items-center pr-2 space-x-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button type="button" class="p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-              <span class="sr-only">View notifications</span>
-              <!-- Heroicon name: outline/bell -->
-              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-            </button>
-    
+           <div class="hidden sm:flex">
+            <x-jet-dropdown align="right" width="96">
+           
+              <x-slot name="trigger">
+                <span class="inline-flex rounded-md">
+                    <button type="button" class="p-1 text-gray-400 rounded-full bg-primary-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-300 focus:ring-primary-100">
+                      <span class="sr-only">View notifications</span>
+                      <!-- Heroicon name: outline/bell -->
+                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                      </svg>
+                    </button>
+                </span>
+              </x-slot>
+              <x-slot name="content">
+                <!-- Account Management -->
+                <div class="block px-4 py-2 text-xs text-gray-400 scroll-smooth">
+                    <span class="text-lg font-bold tracking-widest uppercase text-primary-500">{{ __('Notifications') }}</span>
+                    @livewire('components.notifications')
+                </div>                     
+  
+  
+              </x-slot>
+            </x-jet-dropdown>
+           </div>
+           <a href="{{ route('notification-page') }}" type="button" class="p-1 text-gray-400 rounded-full bg-primary-600 sm:hidden hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <span class="sr-only">View notifications</span>
+            <!-- Heroicon name: outline/bell -->
+            <svg class="w-6 h-6 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            </a>
             <!-- Profile dropdown -->
-            <x-jet-dropdown class="relative">
+            <x-jet-dropdown class="relative" >
                 <x-slot name="trigger">
-                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-300 focus:ring-primary-100" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                    
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <button class="flex text-sm text-center bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                    <button class="flex text-sm text-center rounded-full bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-300 focus:ring-primary-100" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                         @if ( Auth::user()->avatar != null)
                         <img class="object-cover w-8 h-8 rounded-full" src="{{ Auth::user()->avatar}}" alt="" />
                         @elseif( Auth::user()->profile_photo_url != null)
@@ -70,9 +151,6 @@
                                 
                           
                         @endif
-                        <h1 class="hidden mx-2 my-auto text-sm text-white uppercase truncate md:inline-flex">
-                            {{ Auth::user()->name}}
-                        </h1>
                     </button>
                     @else
                     <span class="inline-flex rounded-md">
@@ -103,13 +181,32 @@
                   To: "transform opacity-0 scale-95"
               -->
               <x-slot name="content">
-                aaaaa
-              <div class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                <!-- Active: "bg-gray-100", Not Active: "" -->
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
-              </div>
+                <div class="block px-4 py-2 text-xs text-gray-400">
+                  {{ __('Manage Account') }}
+                </div>
+                <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                  {{ __('Profile') }}
+                </x-jet-dropdown-link>
+
+                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
+                    {{ __('API Tokens') }}
+                </x-jet-dropdown-link>
+                @endif
+
+                <div class="border-t border-gray-100"></div>
+
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-jet-dropdown-link>
+                </form>
+               
+              
               </x-slot>
             </x-jet-dropdown>
           </div>
@@ -187,4 +284,15 @@
           @endif
         </div>
       </div>
+      @push('scripts')
+<script>
+
+window.livewire.on('notify', () => {
+    var audio = new Audio('../ringtones/notif-pop.wav');
+    audio.play();
+})
+
+
+</script>
+@endpush
 </nav>
