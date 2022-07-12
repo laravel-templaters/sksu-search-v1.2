@@ -236,12 +236,17 @@ public $showError = false;
          }
     }
     public function checkFunding($dvID,$mID,$uID){
-        $fundC = DisbursementVoucher::find($dvID)->value('fund_cluster');
-        
-        if($fundC != null){
+        $step = Milestone::find($mID);
+        $fundC = DisbursementVoucher::find($dvID);
+ 
+        if($step->step_number == 1 || $step->step_number == "1"){
             $this->forwardDocument($dvID,$mID,$uID);
         }else{
-            $this->showError =true;
+            if($fundC->fund_cluster != null){
+                $this->forwardDocument($dvID,$mID,$uID);
+            }else{
+                $this->showError =true;
+            }
         }
     }
        
