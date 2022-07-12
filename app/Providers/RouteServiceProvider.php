@@ -66,7 +66,8 @@ class RouteServiceProvider extends ServiceProvider
         if (isset($_SERVER['HTTP_HOST'])) {
             $host     = $_SERVER['HTTP_HOST'];
             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443 ? "https://" : "http://";
-            config(['app.url' => $protocol . $host]);
+            dd($host);
+            config(['app.url' =>$host]);
         }
     }
 }
