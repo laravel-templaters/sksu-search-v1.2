@@ -137,7 +137,7 @@
             </svg>
             </a>
             <!-- Profile dropdown -->
-            <x-jet-dropdown class="relative" >
+            <x-jet-dropdown class="relative"   >
                 <x-slot name="trigger">
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-300 focus:ring-primary-100" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                    

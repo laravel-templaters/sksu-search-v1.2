@@ -7,7 +7,6 @@
             setTimeout(function(){ show_Banner = false; }, 5000);
         }
     })">
-
     {{-- notif --}}
     <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
         <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
@@ -128,6 +127,51 @@
             </div>
         </div>
 
+    </div>
+
+    {{-- mobile nav --}}
+    <div class="block sm:hidden" x-data="{ activethis:'myacc', openmobilenav:false}">
+        <nav class="grid grid-cols-1 gap-2">
+            <a href="#" class="px-1 py-4 text-sm font-medium text-center border-b-2 whitespace-nowrap"
+            x-on:click="active  = 'myacc'; personalClicked = true; activethis = 'myacc';"
+            x-bind:class="activethis == 'myacc' && openmobilenav == false ? 'flex':''"
+            x-bind:class="activethis != 'myacc' && openmobilenav == true ? 'flex':''"
+            x-bind:class="activethis != 'myacc' && openmobilenav == false ? 'hidden':''"
+            x-bind:class="active == 'myacc' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
+            My Account
+
+            @if (count($pending_dv)>0)
+            <span x-bind:class="personalClicked == false ? 'animate-pulse':'animate-none'" class="bg-gray-100 text-gray-900 ml-3 py-0.5 px-2.5 rounded-full items-center text-center
+                text-xs font-medium md:inline-block">{{count($pending_dv)}}</span>
+            @endif
+            </a>
+            <a href="#" class="px-1 py-4 text-sm font-medium text-center border-b-2 whitespace-nowrap"
+            x-on:click="active = activethis = 'notaa'; personalClicked = true;"
+            x-bind:class="activethis == 'notaa' && openmobilenav == false ? 'flex':''"
+            x-bind:class="activethis != 'notaa' && openmobilenav == true ? 'flex':''"
+            x-bind:class="activethis != 'notaa' && openmobilenav == false ? 'hidden':''"
+            x-bind:class="active == 'notaa' ? 'border-white text-primary-700 font-extrabold tracking-widest ' : ' border-transparent text-primary-400 hover:text-primary-bg hover:border-white'">
+            My Accountaaa
+
+            @if (count($pending_dv)>0)
+            <span x-bind:class="personalClicked == false ? 'animate-pulse':'animate-none'" class="bg-gray-100 text-gray-900 ml-3 py-0.5 px-2.5 rounded-full items-center text-center
+                text-xs font-medium md:inline-block">{{count($pending_dv)}}
+            </span>
+            @endif
+            </a>
+            <a href="#" class="flex h-5 text-center">
+                <span class="flex mx-auto" x-cloak x-show="openmobilenav==false" x-on:click="openmobilenav = !openmobilenav">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                </span>
+                <span class="flex mx-auto" x-cloak x-show="openmobilenav" x-on:click="openmobilenav = !openmobilenav">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+                      </svg>
+                </span>
+            </a>
+        </nav>
     </div>
 
 
