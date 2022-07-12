@@ -274,6 +274,7 @@ function app() {
             let code = ''
             for (i = 0; i < this.pinlength; i++) {
                 code = code + document.getElementById(`codefield_${i}`).value
+                //sa
             }
             if (code.length == this.pinlength) {
                 //enable button

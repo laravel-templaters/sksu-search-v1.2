@@ -244,12 +244,21 @@ class Dashboard extends Component
        
     }
     public function checkFunding($dvID,$mID,$uID){
-        $fundC = DisbursementVoucher::find($dvID)->value('dv_number');
+        $step = Milestone::find($mID);
+        $fundC = DisbursementVoucher::find($dvID);
         
-        if($fundC != null){
+        if($step->step_number == 1 || $step->step_number == "1"){
             $this->forwardDocument($dvID,$mID,$uID);
         }else{
-            $this->showError =true;
+            if($fundC->dv_number != null){
+                $this->forwardDocument($dvID,$mID,$uID);
+            }else{
+                $this->showError =true;
+            }
         }
+
+        
+        
+        
     }
 }

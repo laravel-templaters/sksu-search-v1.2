@@ -771,7 +771,7 @@
                                     </p>
                                     <div class="flex flex-shrink-0 ml-2 justify-items-start">
                                         <button x-on:click="$wire.showModal({{$milestone->disbursement_voucher->id}})"
-                                            class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full bg-primary-bg-alt text-primary-text hover:bg-green-800 active:bg-primary-bg active:text-secondary-bg">
+                                            class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full bg-primary-bg-alt text-primary-600 hover:text-primary-100 hover:bg-green-800 active:bg-primary-bg active:text-secondary-bg">
                                             View voucher info
                                         </button>
                                         @php

@@ -1,10 +1,10 @@
 <div class="p-5">
 
-    <div class="items-center mx-auto mb-5 text-center">
+    <div class="items-center mx-auto mb-5 text-left sm:text-center">
         <h3 class="font-sans text-4xl font-extrabold text-primary-bg drop-shadow-md">SELECT TRANSACTION</h3>
     </div>
 
-    <ul role="list" class="grid grid-cols-1 gap-3">
+    <ul role="list" class="grid grid-cols-1 sm:gap-3 ">
         {{-- loop here for type_sorter --}}
         @foreach ($typesorters as $typesorter)
 
@@ -12,10 +12,10 @@
 
         @if ($typesorter->id != 1 && $typesorter->sorter == 1)
         @if (strtoupper($typesorter->dv_type->dv_type)!="TRAVEL ORDER")
-        <li class="flex flex-col col-span-1 text-left bg-white rounded-md shadow-sm shadow-primary-500"
+        <li class="flex flex-col col-span-1 text-left bg-white sm:shadow-sm sm:rounded-md sm:shadow-primary-500"
             x-data="{showMe : false}">
             @if(strtoupper($typesorter->dv_type->dv_type)=="DISBURSEMENTS")
-            <div class="flex justify-between min-w-full p-3" x-on:click="showMe = !showMe ">
+            <div class="flex justify-between min-w-full p-3 break-words" x-on:click="showMe = !showMe ">
                 <h3 class="my-auto text-xl font-extrabold text-primary-bg">{{$typesorter->dv_type->dv_type}}</h3>
                 <div class="flex">
                     <button> <svg xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@
             @endif
             <div class="p-3 mt-1 mb-1 ml-3 mr-1 bg-white bg-opacity-75 rounded-md shadow-primary-500" x-cloak x-show="showMe">
                 @foreach ($categories as $category)
-                <div x-data="{openCA:false}">
+                <div x-data="{openCA:false}" class="break-words">
 
                     @if($category->id != 1)
                     @if($category->dv_type_id == 2 &&

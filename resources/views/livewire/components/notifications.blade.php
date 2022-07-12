@@ -3,12 +3,17 @@
         @if (count($notifs) >0)
             @foreach ($notifs as $notif)
             <button type="button" x-data="{read_status : {{ $notif->read_status }} }" class="w-full text-left group group-hover:cursor-pointer"  wire:click="readNotif('{{ $notif->route_url }}','{{ $notif->id }}')">
-                <li class="py-4 pl-3 rounded-md group hover:bg-primary-100" :class="read_status == false ? 'bg-gray-100' : ''">
+                <li class="py-4 pl-3 text-xs rounded-md group hover:bg-primary-100" :class="read_status == false ? 'bg-gray-100' : ''">
                     <span class="text-black" >{{ $notif->message }}</span>
                 </li>
             </button>
             @endforeach            
         @endif
+        <button type="button" x-data="{read_status : false }" class="w-full text-left group group-hover:cursor-pointer">
+            <li class="py-4 pl-3 text-xs rounded-md group hover:bg-primary-100" :class="read_status == false ? 'bg-gray-100' : ''">
+                <span class="text-black" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis, laudantium! Rerum necessitatibus quasi numquam similique vitae consequuntur veniam optio eius, impedit minima. Voluptatum corporis, nostrum laudantium inventore dolores quaerat veritatis!</span>
+            </li>
+        </button>
     </ul>
     @push('scripts')
         <script>

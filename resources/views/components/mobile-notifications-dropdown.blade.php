@@ -28,7 +28,7 @@ break;
 }
 @endphp
 
-<div class="relative" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false" x-transition-enter = "transition ease-out duration-100"
+<div class="relative sm:hidden" x-data="{ open: false }" @click.away="open = false" @close.stop="open = false" x-transition-enter = "transition ease-out duration-100"
 x-transition-enter-start =   "transform opacity-0 scale-95"
 x-transition-enter-end =  "transform opacity-100 scale-100" 
 x-transition-leave =  "transition ease-in duration-75"
