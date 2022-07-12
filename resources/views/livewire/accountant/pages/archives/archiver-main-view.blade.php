@@ -196,7 +196,7 @@
                                             <div class="text-sm font-medium text-gray-900">
                                                 Jane Cooper
                                             </div>
-                                            <div class="text-sm text-gray-500">
+                                        <div class="text-sm text-gray-500">
                                                 jane.cooper@example.com
                                             </div>
                                             </div>
