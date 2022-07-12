@@ -184,7 +184,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @if (count($disbursement_vouchers)>0 )
+                                    {{-- @if (count($disbursement_vouchers)>0 )
                                     @foreach ($disbursement_vouchers as $disbursement_voucher)
                                     <tr>
                                         {{-- <td class="px-6 py-4 whitespace-nowrap">
@@ -196,26 +196,26 @@
                                             <div class="text-sm font-medium text-gray-900">
                                                 Jane Cooper
                                             </div>
-                                            <div class="text-sm text-gray-500">
+                                        <div class="text-sm text-gray-500">
                                                 jane.cooper@example.com
                                             </div>
                                             </div>
                                         </div>
                                         </td> --}}
-                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                        {{-- <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                                             {{ $disbursement_voucher->name }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm text-gray-900"></div>
                                             <div class="text-sm text-gray-500"></div>
-                                        </td>
+                                        </td> --}}
                                         {{-- <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                             Active
                                         </span>
                                         </td> --}}
-                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                            Dec. 21, 2021
+                                        {{-- <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                            Dec. 21, 2021aaa
                                         </td>
                                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                             <a href="{{  route('archive-detail', ['id'=>1, 'islegacy'=> 1])  }}" target="_blank"
@@ -228,10 +228,11 @@
                                                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                 </svg>
                                             </a>
-                                        </td>
-                                    </tr>
+                                        </td> --}}
+                                    {{-- </tr>
                                     @endforeach
-                                    @elseif (count($legacy_documents)>0)
+                                    @endif --}}
+                                    @if (count($legacy_documents)>0)
                                      @foreach ($legacy_documents as $legacy_document)
                                        <tr>
                                         <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
@@ -263,6 +264,7 @@
                                         </td>
                                          <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                             {{-- <a href="{{  route('archive-detail', ['id'=>1])  }}" target="_blank" --}}
+                                            {{-- comment --}}
                                             <a href="{{  route('archive-detail-edit', ['id'=>$legacy_document->id, 'islegacy'=>1])  }}"
                                                 class="inline-flex text-blue-600 hover:text-blue-900">
                                                 <span class="inline pr-3">Edit</span>
@@ -296,7 +298,7 @@
                                 </tbody>
 
                             </table>
-                            {{ $disbursement_vouchers->onEachSide(1)->links() }}
+                            {{ $legacy_documents->onEachSide(1)->links() }}
                         </div>
                     </div>
                 </div>

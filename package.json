@@ -15,6 +15,8 @@
         "alpinejs": "^3.0.6",
         "autoprefixer": "^10.4.0",
         "axios": "^0.21",
+        "browser-sync": "^2.27.10",
+        "browser-sync-webpack-plugin": "^2.3.0",
         "laravel-echo": "^1.11.3",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",

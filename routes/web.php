@@ -23,62 +23,37 @@ Route::get('auth/google/callback', 'App\Http\Controllers\GoogleController@handle
 
 Route::get('/testing', 'App\Http\Controllers\HomeController@test')->name('testing');
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', function () {    return view('auth.login');});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', \App\Http\Livewire\AdminSide\DashMain::class)->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', function () {
-    return view('dashboard');
-})->name('transactions');
+Route::middleware(['auth:sanctum', 'verified'])->get('/transactions', function () {    return view('dashboard');})->name('transactions');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/client/dash', \App\Http\Livewire\Client\ClientDashboardMain::class)->name('client-dash');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/department-head/dash', \App\Http\Livewire\DeptHead\DepartmentHead::class)->name('department-head');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements', function () {
-    return view('disbursements');
-})->name('disbursements');
+Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements', function () {  return view('disbursements');})->name('disbursements');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/liquidations', function () {
-    return view('liquidations');
-})->name('liquidations');
+Route::middleware(['auth:sanctum', 'verified'])->get('/liquidations', function () {   return view('liquidations');})->name('liquidations');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/certificate-of-availability-of-funds', function () {
-    return view('coafs');
-})->name('coafs');
+Route::middleware(['auth:sanctum', 'verified'])->get('/certificate-of-availability-of-funds', function () {    return view('coafs');})->name('coafs');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/po-certification', function () {
-    return view('pocs');
-})->name('pocs');
+Route::middleware(['auth:sanctum', 'verified'])->get('/po-certification', function () {    return view('pocs');})->name('pocs');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/certification-on-personnel-records', function () {
-    return view('coprs');
-})->name('coprs');
+Route::middleware(['auth:sanctum', 'verified'])->get('/certification-on-personnel-records', function () {    return view('coprs');})->name('coprs');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/communications', function () {
-    return view('communications');
-})->name('communications');
+Route::middleware(['auth:sanctum', 'verified'])->get('/communications', function () {    return view('communications');})->name('communications');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/travel-order', function () {
-    return view('travel-orders');
-})->name('travel-orders');
+Route::middleware(['auth:sanctum', 'verified'])->get('/travel-order', function () {    return view('travel-orders');})->name('travel-orders');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/others', function () {
-    return view('others');
-})->name('others');
+Route::middleware(['auth:sanctum', 'verified'])->get('/others', function () {    return view('others');})->name('others');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements/cash-advance', function () {
-    return view('cash-advances');
-})->name('cash-advances');
+Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements/cash-advance', function () {    return view('cash-advances');})->name('cash-advances');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements/reimbursement', function () {
-    return view('reimbursements');
-})->name('reimbursements');
+Route::middleware(['auth:sanctum', 'verified'])->get('/disbursements/reimbursement', function () {    return view('reimbursements');})->name('reimbursements');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('redirects', 'App\Http\Controllers\HomeController@index')->name('redirect');
-
 //for create dv dont delete
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/cdv/2y10XGG0AJ7EyQj1tWaGwP4O-Jex{id}ZBpCtK8-{sorter}gCyDNDF8n-Nq3QVjN1BzzXS', [CreateDVWrapperController::class, 'show'])->name('cdv');
@@ -87,17 +62,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/travel-order/3z21YHH1BK8F
 Route::mediaLibrary();
 
 //delete lang karon
-Route::middleware(['auth:sanctum', 'verified'])->get('/to', function () {
-    return view('travelorder.travel-order-wrapper');
-});
+Route::middleware(['auth:sanctum', 'verified'])->get('/to', function () {    return view('travelorder.travel-order-wrapper');});
 
 
 
 //for emailing
-Route::middleware(['auth:sanctum', 'verified'])->get('/email',function(){
-    Mail::to('gicawalo@gmail.com')->send(new TravelOrderSaved());
-    return new TravelOrderSaved();
-});
+Route::middleware(['auth:sanctum', 'verified'])->get('/email',function(){    Mail::to('gicawalo@gmail.com')->send(new TravelOrderSaved());    return new TravelOrderSaved();});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/act/dashboard', \App\Http\Livewire\Accountant\Pages\Dashboard::class)->name('accountant-dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->get('/budoff/dashboard', \App\Http\Livewire\BudgetOffice\Pages\BudgetDash::class)->name('budget-dashboard');
@@ -120,8 +90,8 @@ Route::middleware(['auth:sanctum','verified'])->get('/testComp',App\Http\Livewir
 //auditor
 Route::middleware(['auth:sanctum','verified'])->get('/auditor/dashboard',App\Http\Livewire\Auditor\Pages\Dashboard::class)->name('auditor-dashboard');
 
-
-
+//notification for mobile
+Route::middleware(['auth:sanctum','verified'])->get('/notifications',App\Http\Livewire\NotificationsPages::class)->name('notification-page');
 //usermgt
 Route::middleware(['auth:sanctum','verified'])->get('/user/mgt/new',App\Http\Livewire\Client\Users\CreateNewUser::class)->name('create-new-user');
 
