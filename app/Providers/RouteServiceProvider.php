@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+        $this->setCorrectAppUrl();
     }
 
     /**
@@ -59,5 +60,13 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+    protected function setCorrectAppUrl()
+    {
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $host     = $_SERVER['HTTP_HOST'];
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443 ? "https://" : "http://";
+            config(['app.url' => $protocol . $host]);
+        }
     }
 }
