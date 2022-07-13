@@ -249,7 +249,7 @@
                             </tbody>
                             
                         </table>
-                        
+                        {{ $legacy_documents->links() }}
                     </div>
                 </div>
             </div>

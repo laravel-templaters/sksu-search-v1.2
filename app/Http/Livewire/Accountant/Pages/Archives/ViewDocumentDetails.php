@@ -16,11 +16,10 @@ class ViewDocumentDetails extends Component
         
         if($this->islegacy == 1){
             $document = LegacyDocument::where('id',$this->legacy_id)->with('folder')->with('drawer')->with('shelf')->with('building')->with('fund_cluster')->first();
-            
         }else{
             $document = FolderDocument::find($this->disbursement_id)->with('folder')->with('drawer')->with('shelf')->with('building')->first();
         }
-            return view('livewire.accountant.pages.archives.view-document-details')->layout('layouts.accountant')->with('document',$document);
+            return view('livewire.accountant.pages.archives.view-document-details')->with('document',$document)->layout('layouts.accountant');
     }
     public function mount($id, $islegacy)
     {

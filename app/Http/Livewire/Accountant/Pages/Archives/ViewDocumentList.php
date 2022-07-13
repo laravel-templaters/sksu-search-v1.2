@@ -13,7 +13,7 @@ class ViewDocumentList extends Component
     public $searchText;
 
     public $folderDocs;
-    public $legacyDocs;
+    protected $legacyDocs;
     public function updated($field)
     {
         if ($field == 'searchText') {
@@ -21,12 +21,12 @@ class ViewDocumentList extends Component
             if(count($folders) > 0){
                 
                 $this->folderDocs = FolderDocument::whereIn('archive_folder_id',$folders)->get();
-                $this->legacyDocs = LegacyDocument::whereIn('folder_id',$folders)->get();
+                $this->legacyDocs = LegacyDocument::whereIn('folder_id',$folders)->paginate(10);
             }else{
                 
                 //$this->folderDocs = FolderDocument::search('archive_folder_id',$folders)->paginate(5);
                 $this->folderDocs = [];
-                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('name',$this->searchText)->searchOr('document_code',$this->searchText)->get();
+                $this->legacyDocs = LegacyDocument::search('name',$this->searchText)->searchOr('name',$this->searchText)->searchOr('document_code',$this->searchText)->paginate(10);
             }
         }
     }

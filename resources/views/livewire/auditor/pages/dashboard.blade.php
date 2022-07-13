@@ -68,7 +68,7 @@
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
                
-                @if (count($documents)>0)
+                @if (count($documents)>0) 
                                
                                     @foreach ($documents as $legacy_document)
                                     <tr>
