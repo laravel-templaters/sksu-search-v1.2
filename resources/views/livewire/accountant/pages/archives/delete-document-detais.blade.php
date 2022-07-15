@@ -22,20 +22,58 @@
                                     </span>
 
 <div class="fixed {{$isValidCode ? '' : 'hidden'}} bg-opacity-95 inset-0 w-full h-full z-50 flex bg-primary-700 items-center justify-center">
-    <div  class="bg-primary-200 rounded-lg shadow p-4" x-data="app()">
-        <div class="font-bold px-2 pb-1 text-xl">Enter pin code</div>
-        <div class="font-normal px-2 pb-2 text-sm">Deleting this document need extra security</div>
-        <div class="flex">
-            <template x-for="(l,i) in pinlength" :key="`codefield_${i}`">
-                <input :autofocus="i == 0" :id="`codefield_${i}`" class="h-16 w-12 border mx-2 rounded-lg flex items-center text-center font-thin text-3xl" value="" maxlength="1" max="9" min="0" inputmode="decimal" type="password" @keyup="stepForward(i)" @keydown.backspace="stepBack(i)" @focus="resetValue(i)" wire:model="code"></input>
-            </template>
+    <div class="bg-primary-200 rounded-lg shadow p-4" x-data="{{$codeSent ? 'app()': ''}}">
+        <div class="font-bold px-2 pb-1 text-xl">Enter verification code</div>
+        @if($codeSent)
+            @if($isNotValid)
+             <div class="font-normal px-2 pb-2 text-sm text-red-600">Verification code is incorrect. Try again.</div>
+            @else
+        <div class="font-normal px-2 pb-2 text-sm">A verification code was sent to the authorized email.</div>
+        <div class="font-normal px-2 pb-2 text-sm">Didn't get the code? <button wire:click="sendEmailNotification" class="text-green-900 underline">Resend Code</button></div>
+            @endif
+         <div class="flex">
+          {{-- <input wire:model="code1" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0"></input>
+           <input wire:model="code2" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0"></input>
+            <input wire:model="code3" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0"></input>
+             <input wire:model="code4" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0"></input>
+              <input wire:model="code5" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0"></input> --}}
+            
+            {{-- <template x-for="(l,i) in pinlength" :key="`codefield_${i}`"> --}}
+            {{-- <template :key="`codefield_${0}`"> --}}
+                <input wire:model.defer="code1" wire:key="code1" :autofocus="0 == 0" :id="`codefield_${0}`" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0" value="" maxlength="1" max="9" min="0" inputmode="decimal" type="password" @keyup="stepForward(0)" @keydown.backspace="stepBack(0)" @focus="resetValue(0)" ></input>
+                <input wire:model.defer="code2" wire:key="code2" :autofocus="1 == 0" :id="`codefield_${1}`" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0" value="" maxlength="1" max="9" min="0" inputmode="decimal" type="password" @keyup="stepForward(1)" @keydown.backspace="stepBack(1)" @focus="resetValue(1)" ></input>
+                <input wire:model.defer="code3" wire:key="code3" :autofocus="2 == 0" :id="`codefield_${2}`" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0" value="" maxlength="1" max="9" min="0" inputmode="decimal" type="password" @keyup="stepForward(2)" @keydown.backspace="stepBack(2)" @focus="resetValue(2)" ></input>
+                <input wire:model.defer="code4" wire:key="code4" :autofocus="3 == 0" :id="`codefield_${3}`" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0" value="" maxlength="1" max="9" min="0" inputmode="decimal" type="password" @keyup="stepForward(3)" @keydown.backspace="stepBack(3)" @focus="resetValue(3)" ></input>
+                <input wire:model.defer="code5" wire:key="code5" :autofocus="4 == 0" :id="`codefield_${4}`" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0" value="" maxlength="1" max="9" min="0" inputmode="decimal" type="password" @keyup="stepForward(4)" @keydown.backspace="stepBack(4)" @focus="resetValue(4)" ></input>
+               {{-- <input wire:model="code" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0"></input> --}}
+              
+            {{-- </template> --}}
         </div>
-        {{-- add button --}}
-        <div class="flex justify-center mt-4">
-            <button id="confirmCode" disabled class="bg-primary-500 text-white font-bold py-2 px-4 rounded-lg" wire:click="validateCode">
+        
+        <div class="flex mt-6 justify-between">
+          
+            <button wire:click="reloadPage" id="cancel" class="bg-red-800 text-white font-bold py-2 px-4 rounded-lg disabled:opacity-50">
+                Cancel
+            </button>
+            <button id="confirmCode" disabled class="bg-primary-500 text-white font-bold py-2 px-4 rounded-lg disabled:opacity-50" wire:click="validateCode">
                 Confirm
             </button>
-    </div>
+            </div>
+        @elseif(!$codeSent)
+        
+        <div class="font-normal px-2 pb-2 text-sm">Updating this document needs extra security</div>
+         <div class="flex mt-6 justify-between">
+            <button wire:click="reloadPage" id="cancel" class="bg-red-800 text-white font-bold py-2 px-4 rounded-lg disabled:opacity-50">
+                Cancel
+            </button>
+            <button id="sendEmail" wire.loading.attr="disabled" wire.loading.text="Loading..." class="bg-primary-500 text-white font-bold py-2 px-4 rounded-lg" wire:click="sendEmailNotification">
+                Send Code
+            </button>
+            </div>
+        @endif
+       
+        {{-- add button --}}
+        
 </div>
    </div>
                                                         {{-- modal --}}
@@ -250,11 +288,22 @@
     
 <script type="text/javascript">
 function app() {
+    var code1 = document.getElementById(`codefield_${0}`).value;
+    var code2 = document.getElementById(`codefield_${1}`).value;
+    var code3 = document.getElementById(`codefield_${2}`).value;
+    var code4 = document.getElementById(`codefield_${3}`).value;
+    var code5 = document.getElementById(`codefield_${4}`).value;
     return {
+        
         pinlength: 5,
         resetValue(i) {
             for (x = 0; x < this.pinlength; x++) {
-                if (x >= i) document.getElementById(`codefield_${x}`).value = ''
+                if (x >= i)
+                {
+                document.getElementById(`codefield_${x}`).value = '';
+                 document.getElementById('confirmCode').disabled = true;
+                } 
+
             }
         },
         stepForward(i) {
@@ -273,23 +322,26 @@ function app() {
         checkPin() {
             let code = ''
             for (i = 0; i < this.pinlength; i++) {
-                code = code + document.getElementById(`codefield_${i}`).value
-                //sa
+                code = code + document.getElementById(`codefield_${i}`).value            
             }
             if (code.length == this.pinlength) {
-                //enable button
-                //another comment
                 document.getElementById('confirmCode').disabled = false;
-                this.validatePin(code) 
+                this.validatePin(code)
+            }else{
+
+                document.getElementById('confirmCode').disabled = true;
             }
+            //if code1 is focused
+
         },
         validatePin(code) {
             // Check pin on server
-            if (code != '12345')
-            {
-                 alert('Invalid code');
-                  document.getElementById('confirmCode').disabled = true;
-            }  
+            //if (code != '12345')
+           // {
+           //      alert('Invalid code');
+           //       document.getElementById('confirmCode').disabled = true;
+           // }   
+
         }
     }
 }

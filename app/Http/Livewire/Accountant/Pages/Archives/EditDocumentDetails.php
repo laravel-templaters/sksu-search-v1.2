@@ -12,6 +12,8 @@ use Livewire\Component;
 use App\Models\FundCluster;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Notification;
+use App\Notifications\SendUpdateDeleteCode;
 
 class EditDocumentDetails extends Component
 {
@@ -40,9 +42,16 @@ class EditDocumentDetails extends Component
     public $old_folder_id;
     public $name;
     public $path;
-    public $code;
+    public $code1;
+    public $code2;
+    public $code3;
+    public $code4;
+    public $code5;
     public $isValidCode = false;
     public $isValid = false;
+    public $isNotValid = false;
+    public $codeSent = false;
+    public $randomCode;
     public function updated($field)
     {
         if($field == 'fundcluster'){
@@ -271,25 +280,49 @@ class EditDocumentDetails extends Component
     public function showValidate()
     {
         $this->code = null;
-        $this->isValidCode = true;
-        
+        $this->isValidCode = true;       
     }
 
     public function validateCode()
     {
-        if($this->code != null || !isset($this->code)){
-            if($this->code = '12345')
+        $this->code = $this->code1.$this->code2.$this->code3.$this->code4.$this->code5;
+        if($this->code != null || isset($this->code)){
+            if($this->code == $this->randomCode)
             {
-            
               $this->isValidCode = false;
+              $this->isNotValid = false;
               $this->isValid = true;
+              
+            }else{
+                $this->isNotValid = true;
             }
         }
         
     }
 
+    public function sendEmailNotification()
+    {
+        $this->randomCode =  rand(10000,99999);
+        $this->codeSent = true;
+        //dd( $this->randomCode);
+        $email = 'smurfgab66@gmail.com';
+        $data = [
+            'code' => $this->randomCode,
+        ];
+        // Notification::send($email, new SendUpdateDeleteCode($data));
+        Notification::route('mail', $email)->notify(new SendUpdateDeleteCode($data));
+        
+
+    }
+
     public function closeModal()
     {
         $this->isValid = false;
+        $this->isNotValid = false;
+    }
+
+    public function reloadPage()
+    {
+        return redirect()->route('archiver-main');
     }
 }
