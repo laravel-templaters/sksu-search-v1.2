@@ -14,9 +14,12 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Notification;
 use App\Notifications\SendUpdateDeleteCode;
+use Livewire\WithFileUploads;
 
 class EditDocumentDetails extends Component
 {
+    use WithFileUploads;
+    
     public $disbursement_id;
     public $legacy_id;
     public $islegacy;
@@ -52,6 +55,7 @@ class EditDocumentDetails extends Component
     public $isNotValid = false;
     public $codeSent = false;
     public $randomCode;
+    public $legacy_updated = false;
     public function updated($field)
     {
         if($field == 'fundcluster'){
@@ -63,11 +67,10 @@ class EditDocumentDetails extends Component
                 $this->document_code = "000-00-00-0000";
             }   
         }
-
+        
         $this->validateOnly($field, [
-            'name' => 'required',
             'document_code' => 'required',
-            'path' => 'required|mimes:pdf',
+            'path' => 'nullable|mimes:pdf',
             'date' => 'required',
             'payee' => 'required',
             'particular' => 'required',
@@ -259,8 +262,29 @@ class EditDocumentDetails extends Component
             'shelf_id' => 'required',
             'drawer_id' => 'required',
             'folder_id' => 'required',
+            'path' => 'nullable|mimes:pdf',
         ]);
         if($this->islegacy == 1){
+           if($this->path != null || isset($this->path)){
+            $document = LegacyDocument::find($this->legacy_id);
+            $document->document_code = $this->document_code;
+            $document->path=$this->path->store('documents');
+            $document->name=$this->name;
+            $document->payee_name = $this->payee;
+            $document->particulars = $this->particular;
+            $document->date = $this->date;
+            $document->building_id = $this->building_id;
+            $document->shelf_id = $this->shelf_id;
+            $document->drawer_id = $this->drawer_id;
+            $document->folder_id = $this->folder_id;
+            $document->fund_cluster_id = $this->fundcluster;
+            $document->save();
+            //redirect to the previous page
+            $this->isValid = false;
+            $this->isNotValid = false;
+            $this->legacy_updated = true;
+            //return redirect()->route('archiver-main');
+        }else{
             $document = LegacyDocument::find($this->legacy_id);
             $document->document_code = $this->document_code;
             $document->payee_name = $this->payee;
@@ -273,9 +297,14 @@ class EditDocumentDetails extends Component
             $document->fund_cluster_id = $this->fundcluster;
             $document->save();
             //redirect to the previous page
-            return redirect()->route('archiver-main');
+            $this->isValid = false;
+            $this->isNotValid = false;
+            $this->legacy_updated = true;
+
+            // return redirect()->route('archiver-main');
         }
     }
+}
 
     public function showValidate()
     {

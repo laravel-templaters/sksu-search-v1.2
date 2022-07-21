@@ -1,4 +1,58 @@
-<div class="w-full h-screen min-w-full px-4 mx-auto max-w-screen">
+<div class="w-full h-screen min-w-full px-4 mx-auto max-w-screen"
+x-data="{legacy_updated:@entangle('legacy_updated'), copiedToClipboard:@entangle('copiedToClipboard'), showQr:false,}"
+x-init="$watch('legacy_updated', value => {
+    if(value == true){
+        showQr = true;
+        setTimeout(function(){ legacy_updated = false; }, 10000); 
+    } 
+})"
+>
+
+  <div aria-live="assertive" class="fixed inset-x-0 bottom-0 flex items-end px-4 py-10 pointer-events-none sm:items-start" x-show="legacy_updated" x-cloak
+            x-transition-enter =  "transform ease-out duration-300 transition"
+            x-transition-enter-start =  "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            x-transition-enter-end =   "translate-y-0 opacity-100 sm:translate-x-0"
+            x-transition-leave =  "transition ease-in duration-100"
+            x-transition-leave-start =  "opacity-100"
+            x-transition-leave-end =  "opacity-0" >
+            <div class="flex flex-col items-center w-full space-y-4 sm:items-end">
+          
+            <div class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5" x-show="legacy_updated" x-cloak
+            x-transition-enter =  "transform ease-out duration-300 transition"
+            x-transition-enter-start ="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"  
+            x-transition-enter-end =  "translate-y-0 opacity-100 sm:translate-x-0" 
+            x-transition-leave =  "transition ease-in duration-100"
+            x-transition-leave-start = "opacity-100" 
+            x-transition-leave-end =  "opacity-0" >
+                <div class="p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                    <!-- Heroicon name: outline/check-circle -->
+                    <svg class="w-6 h-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    </div>
+                    <div class="ml-3 w-0 flex-1 pt-0.5">
+                    <p class="text-sm font-medium text-gray-900">Successfully updated!</p>
+                    <p class="mt-1 text-sm text-gray-500">You can check the archived documents on the dashboard.</p>
+                    </div>
+                    <div class="flex flex-shrink-0 ml-4">
+                    <button type="button" x-on:click="building_added = false" class="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span class="sr-only">Close</span>
+                        <!-- Heroicon name: solid/x -->
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+
     <div class="container mx-auto my-4">
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -114,9 +168,13 @@
                                                 </div>
                                                 @endif
                                         </div>
-                                       <div class="w-full form-group">
-                                       <label for="attatchments" class="inline-block text-gray-700 form-label">Attatchments</label>
-                                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                       <div class="w-full form-group" x-data="{update:false}">
+                                        <div class="block relative mb-2">
+                                            <label for="attatchments" class="inline-block text-gray-700 form-label">Attatchments</label>
+                                            <button type="button" x-on:click="update = true" x-cloak x-show="update==false" class="absolute right-0 ml-2 p-1 rounded-lg text-primary-500 hover:underline hover:italic hover:text-blue-500">Update</button>
+                                            <button type="button" x-on:click="update = false" x-cloak x-show="update" class="absolute right-0 ml-2 p-1 rounded-lg text-primary-500 hover:underline hover:italic hover:text-blue-500">Cancel</button>
+                                        </div>
+                                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" x-cloak x-show="update == false">
                                              <ul role="list"
                                                 class="border border-gray-200 divide-y divide-gray-200 rounded-md" x-data="{showPreview:false}">
                                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
@@ -157,7 +215,102 @@
                                                 </li>
                                              </ul>
                                        </dd>
+                                       <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" x-cloak x-show="update">
+                                            <div class="w-full form-group">
+                                                
+                                                <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 file:shadow-md file:shadow-green-900 py-1.5 pl-1" id="upload_doc" name="upload_doc" placeholder="Document" wire:model.debounce.700ms="path">
+                                                <div wire:loading wire:target="path" class="italic">
+                                                Uploading...
+                                                </div>
+                                                <span class="text-sm italic text-red-500">{{ $errors->first('path') }}</span>
+                                                @if ($path && $errors->first('path') == "")
+                                                <div class="relative inline-block mt-3" x-data="{showPreview:false}">
+                                                    <div x-cloak x-show="showPreview"> 
+                                                        <label for="preview" class="inline-block mb-2 text-gray-700 form-label">Document Preview</label>
+                                                        <iframe id="preview" name="preview" src="{{ $path->temporaryUrl() }}" class="mx-auto shadow-md h-screen-80 w-screen-80 rounded-xl shadow-green-800"  frameborder="0"></iframe>    
+                                                    </div>
+                                                    <div class="" x-cloak x-show="showPreview==false">
+                                                        <button type="button" class="inline-flex items-center p-1 text-sm font-medium tracking-wide text-indigo-700 bg-indigo-100 border border-transparent rounded hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" x-on:click="showPreview = !showPreview">Show Preview</button>
+                                                    </div>
+                                                    <div class="absolute bottom-0 right-0 flex mt-3" x-cloak x-show="showPreview">
+                                                        <button type="button" class="inline-flex items-center px-3 py-1.5  border border-transparent text-md tracking-wide font-medium rounded-lg text-white drop-shadow-sm bg-transparent hover:bg-red-200 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" x-on:click="showPreview = !showPreview">Hide Preview</button>
+                                                    </div>
+                                                
+                                                </div>                
+                                                @endif
+                                            </div>
+                                              <div class="w-full form-group">
+                                        <label for="document_name" class="inline-block text-gray-700 form-label">Document Name</label>
+                                        <input type="text" class="block w-full m-0 text-sm font-normal transition ease-in-out bg-white border border-gray-300 border-solid rounded-full form-control bg-clip-padding focus:text-gray-700 focus:bg-white focus:outline-none focus:border-blue-800" id="document_name" name="document_name" placeholder="Document Name" wire:model.debounce.700ms="name">
+                                        <span class="text-sm italic text-red-500">{{ $errors->first('name') }}</span>
+                                        </div>
+                                       </dd>
+                                      
                                     </div>
+
+                                        {{-- modal para sa qr --}}
+                                            <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-cloak x-show="showQr" x-transition-enter = "ease-out duration-300"
+                                            x-transition-enter-start =  "opacity-0"
+                                            x-transition-enter-end =  "opacity-100"
+                                            x-transition-leave =  "ease-in duration-200"
+                                            x-transition-leave-start =  "opacity-100"
+                                            x-transition-leave-end = "opacity-0" >
+                                                <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" x-cloak x-show="showQr" x-transition-enter = "ease-out duration-300"
+                                                x-transition-enter-start = "opacity-0" 
+                                                x-transition-enter-end =  "opacity-100"
+                                                x-transition-leave =  "ease-in duration-200"
+                                                x-transition-leave-start =  "opacity-100"
+                                                x-transition-leave-end =  "opacity-0"></div>
+                                            
+                                                <div class="fixed inset-0 z-10 overflow-y-auto">
+                                                <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
+                                                    
+                                                    <div class="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:max-w-lg sm:w-full sm:p-6" x-cloak x-show="showQr"
+                                                    x-transition-enter = "ease-out duration-300"
+                                                    x-transition-enter-start = "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                                                    x-transition-enter-end =  "opacity-100 translate-y-0 sm:scale-100"
+                                                    x-transition-leave =  "ease-in duration-200"
+                                                    x-transition-leave-start =  "opacity-100 translate-y-0 sm:scale-100"
+                                                    x-transition-leave-end =  "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                                                    
+                                                        <form class="space-y-8 divide-y divide-gray-200" wire:submit.prevent=''>
+                                                            <div class="space-y-8 divide-y divide-gray-200">
+                                                            
+                                                        
+                                                                <div class="pt-4">
+                                                                    <div>
+                                                                    <h3 class="text-lg font-medium leading-6 text-gray-900">Download Qr</h3>
+                                                                    
+                                                                    </div>
+                                                                    <div class="grid grid-cols-1 mt-6 gap-y-6 gap-x-4 sm:grid-cols-6">
+                                                                    <div class="sm:col-span-6">
+                                                                        @if(isset($document))
+                                                                        <img src="{{ asset( 'storage/'.$document->qr_path ) }}" alt="QRCODE" class="w-full h-full">                          
+                                                                        @endif
+                                                                    </div>
+                                                            
+                                                                    
+                                                                    </div>
+                                                                </div>
+                                                        
+                                                        
+                                                            </div>
+                                                        
+                                                            <div class="pt-5">
+                                                            <div class="flex justify-end">
+                                                                <button type="button" wire:click="reloadPage()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Back</button>
+                                                                @if(isset($document))
+                                                                <a href ="{{ asset( 'storage/'.$document->qr_path ) }}" download class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Download QRCode</a>
+                                                                @endif
+                                                            </div>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            {{-- modal qr end --}}
                                             {{-- <div class="w-full form-group">
                                                 <label for="upload_doc" class="inline-block text-gray-700 form-label">Upload Document</label>
                                                 <input type="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 file:shadow-md file:shadow-green-900 py-1.5 pl-1" id="upload_doc" name="upload_doc" placeholder="Document" wire:model.debounce.700ms="path">
@@ -208,7 +361,7 @@
              <div class="font-normal px-2 pb-2 text-sm text-red-600">Verification code is incorrect. Try again.</div>
             @else
         <div class="font-normal px-2 pb-2 text-sm">A verification code was sent to the authorized email.</div>
-        <div class="font-normal px-2 pb-2 text-sm">Didn't get the code? <button wire:click="sendEmailNotification" class="text-green-900 underline">Resend Code</button></div>
+        <div class="font-normal px-2 pb-2 text-sm">Didn't get the code? <button wire:click="sendEmailNotification" class="text-green-900 underline">Send New Code</button></div>
             @endif
          <div class="flex">
           {{-- <input wire:model="code1" class="h-16 w-12 border-b-2 border-t-0 border-x-0 border-primary-700 bg-transparent mx-2 flex items-center text-center font-thin text-3xl focus:ring-0"></input>
